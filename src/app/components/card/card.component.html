@@ -1,0 +1,30 @@
+<div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+    <div class="flex-grow-1">
+        <h3 class="mb-0">{{experience.primaryInfo}}</h3>
+        <div class="subheading mb-3">
+            {{experience.secondaryInfo}}
+            <span> / </span>
+            {{experience.date}}
+<!--             <span class="text-primary" class="softLight">{{experience.date}}</span> -->
+        </div>
+        <p>{{experience.description}}</p>
+    </div>
+    <div class="flex-shrink-0">
+        <div class="icon-edit">
+            <fa-icon 
+                [icon]="faPenToSquare"
+                class="icon-style" 
+                size="lg"
+                (click)="editExperience(experience)"
+                >
+            </fa-icon>
+            <fa-icon 
+                [icon]="faTrashCan" 
+                class="icon-style" 
+                size="lg"
+                (click)="deleteExperience(experience)"
+                >
+            </fa-icon>
+        </div>
+    </div>
+</div>

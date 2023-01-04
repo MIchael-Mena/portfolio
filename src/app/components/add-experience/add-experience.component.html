@@ -1,0 +1,73 @@
+<div class="container" *ngIf="showForm">
+    <div class="row" >
+        <div class="col-md-12">
+
+            <form class="form-horizontal" [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="form-group margin">
+                    <label for="primaryInfo" class="form-label">{{typeOfForm.primaryInfo}}</label>
+                    <input 
+                        type="text" 
+                        name="primaryInfo" 
+                        #primaryInfo
+                        placeholder="{{'Agregar '+typeOfForm.primaryInfo}}"
+                        formControlName="primaryInfo"
+                        class="form-control" 
+                    />
+<!--                     <input 
+                        type="text" 
+                        name="primaryInfo" 
+                        id="primaryInfo"
+                        placeholder="{{'Agregar '+typeOfForm.primaryInfo}}" 
+                        [formControl]="primaryInfoControl"
+                        class="form-control" 
+                        [value]="experienceToEdit?.primaryInfo"
+                        /> -->
+
+                </div>
+
+                <div class="form-group margin">
+                    <label for="secondaryInfo" class="form-label ">{{typeOfForm.secondaryInfo}}</label>
+                    <input 
+                        type="text" 
+                        name="secondaryInfo"
+                        #secondaryInfo
+                        placeholder="{{'Agregar '+typeOfForm.secondaryInfo}}" 
+                        formControlName="secondaryInfo"
+                        class="form-control" 
+                        />
+                </div>
+
+                <div class="form-group margin">
+                    <label for="date" class="form-label">Fecha</label>
+                    <input 
+                        type="date" 
+                        name="date" 
+                        #date
+                        placeholder="Agregar fecha" 
+                        formControlName="date"
+                        class="form-control" 
+                        />
+                </div>
+
+                <div class="form-group margin">
+                    <label for="description" class="form-label">Descripcion</label>
+                    <textarea 
+                        name="description" 
+                        #description
+                        placeholder="Agregar descripcion"
+                        class="form-control"
+                        formControlName="description"
+                        >
+        </textarea>
+                </div>
+
+                <div class="form-group col-md-12 text-center margin">
+                    <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+                </div>
+
+
+            </form>
+
+        </div>
+    </div>
+</div>

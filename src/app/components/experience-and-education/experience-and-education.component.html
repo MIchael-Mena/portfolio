@@ -1,0 +1,41 @@
+<section class="resume-section" id="experience">
+    <div class="resume-section-content">
+        <div class="section-tittle">
+            <h2 class="mb-5">Experience  </h2>
+            <div>
+                <fa-icon 
+                    [icon]="faSquarePlus" 
+                    [ngStyle]="{color:'rgb(71, 33, 131)'}" 
+                    size="xl" 
+                    (click)="showForm()"
+                    >
+                </fa-icon>
+
+            </div>
+        </div>
+
+        <app-add-experience 
+            (onAddExperience)="addExperience($event)"
+            [showForm]="showAddExperience"
+            [formForTypeOfExperience]="typeExperience"
+            >
+        </app-add-experience>
+
+<!--         <app-add-experience 
+            *ngIf="showForm"
+            (onAddExperience)="addExperience($event)"
+            [showForm]="showAddExperience"
+            [formForTypeOfExperience]="typeExperience"
+            [experenceToEdit]="anExperenceToEdit"
+            >
+        </app-add-experience> -->
+
+        <app-card
+            *ngFor="let experience of experiences"
+            [experience]="experience"
+            (onEditExperience)="editExperience($event)"
+            (onDeleteExperience)="deleteExperience($event)"
+            >
+        </app-card>
+    </div>
+</section>
