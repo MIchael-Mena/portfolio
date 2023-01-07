@@ -1,3 +1,23 @@
+.icon{
+  filter:drop-shadow(3px 3px 1.5px #6c757d);
+  border-radius: 30%;
+  cursor: pointer;
+}
+
+.color-icon-active{
+  color: rgb(241, 246, 245); 
+  background: rgb(36, 55, 99)
+}
+
+.color-icon-deactive{
+  background: rgb(241, 246, 245); 
+  color: rgb(36, 55, 99)
+}
+
+.icon:hover{
+  color: rgb(173, 142, 112);
+}
+
 .section-tittle {
   display: flex;
   justify-content: space-between;

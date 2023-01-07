@@ -4,19 +4,21 @@
             <h2 class="mb-5">Experience  </h2>
             <div>
                 <fa-icon 
+                    class="icon"
                     [icon]="faSquarePlus" 
-                    [ngStyle]="{color:'rgb(71, 33, 131)'}" 
-                    size="xl" 
+                    [ngClass]="{'color-icon-deactive': !showAddExperience, 'color-icon-active': showAddExperience}"
                     (click)="showForm()"
+                    title="Agregar"
+                    size="xl"
                     >
                 </fa-icon>
 
             </div>
         </div>
 
-        <app-add-experience 
-            (onAddExperience)="addExperience($event)"
+        <app-add-experience
             [showForm]="showAddExperience"
+            (onAddExperience)="addExperience($event)"
             [formForTypeOfExperience]="typeExperience"
             >
         </app-add-experience>

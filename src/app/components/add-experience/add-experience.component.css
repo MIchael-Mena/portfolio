@@ -1,3 +1,13 @@
-.margin{
-    margin: 10px 0 10px 0;
+.sectionDate{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+@media(min-width: 992px){
+    .sectionDate{
+        flex-direction: row;
+        justify-content: space-around;
+    }
 }

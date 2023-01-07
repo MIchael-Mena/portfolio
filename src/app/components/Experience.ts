@@ -2,7 +2,8 @@ export interface Experience {
     id?: number;
     primaryInfo: string;
     secondaryInfo: string;
-    date: string;
+    initialDate: string;
+    finalDate: string;
     description: string;
     link: string;
 }

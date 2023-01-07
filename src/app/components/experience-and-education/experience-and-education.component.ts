@@ -46,6 +46,8 @@ export class ExperienceAndEducationComponent implements OnInit {
   editExperience(experience: Experience) {
     this.showAddExperience = true;
     this.uiEditFormService.toggleEdit(experience);
+
+    window.scrollTo(0, 0);
     /* this.anExperenceToEdit = experience; */
   }
 

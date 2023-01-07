@@ -34,3 +34,5 @@ p.lead {
   font-size: 1.15rem !important;
   font-weight: 400 !important;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

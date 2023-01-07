@@ -33,15 +33,17 @@ export class AddExperienceComponent implements OnInit {
 
   constructor(private uiEditFormService: UiEditFormService, private fb : FormBuilder) {
     this.form = this.fb.group({
+      id: [''],
       primaryInfo: ['', Validators.required],
       secondaryInfo: ['', Validators.required],
-      date: ['', Validators.required],
+      initialDate: ['', Validators.required],
+      finalDate: [''],
       description: ['', Validators.required],
       link: ['']
     });
+    this.uiEditFormService.onToggle().subscribe(experience => this.form.setValue(experience));
 
-    this.uiEditFormService.onToggle().subscribe(experience => this.form.get('primaryInfo')?.setValue(experience.primaryInfo));
-
+/*     this.uiEditFormService.onToggle().subscribe(experience => this.form.get('primaryInfo')?.setValue(experience.primaryInfo)); */
     /* this.uiEditFormService.onToggle().subscribe(experience => this.experienceToEdit = experience); */
   }
 
@@ -78,9 +80,11 @@ export class AddExperienceComponent implements OnInit {
     } */
 
     const experience = {
+      id: this.form.value.id,
       primaryInfo: this.form.value.primaryInfo,
       secondaryInfo: this.form.value.secondaryInfo,
-      date: this.form.value.date,
+      initialDate: this.form.value.date,
+      finalDate: this.form.value.finalDate,
       description: this.form.value.description,
       link: this.form.value.link
     }
