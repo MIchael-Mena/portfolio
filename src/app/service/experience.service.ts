@@ -32,6 +32,11 @@ export class ExperienceService {
     return this.http.delete<Experience>(url)
   }
 
+  updateExperience(experience: Experience): Observable<Experience> {
+    const url = `${this.apiUrl}/${experience.id}`;
+    return this.http.put<Experience>(url, experience, httpOptions);
+  }
+
 /*   updateTaskReminder(task: Experience): Observable<Experience> {
     const url = `${this.apiUrl}/${task.id}`;
     return this.http.put<Experience>(url, task, httpOptions);

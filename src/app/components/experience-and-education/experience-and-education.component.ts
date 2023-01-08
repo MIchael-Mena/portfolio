@@ -12,9 +12,8 @@ import { UiEditFormService } from 'src/app/service/uiEditForm.service';
 })  
 export class ExperienceAndEducationComponent implements OnInit {
   faSquarePlus = faSquarePlus;
-/*   anExperenceToEdit: Experience = {primaryInfo: '', secondaryInfo: '', date: '', description: '', link: ''}; */
   experiences: Experience[] = [];
-  showAddExperience: boolean = false;
+  formExperienceConfig : {showForm: boolean, experienceIsNew: boolean} = {showForm: false, experienceIsNew: true};
   typeExperience: string = 'work';
 
   constructor(private experienceService: ExperienceService, private uiEditFormService : UiEditFormService) {
@@ -28,12 +27,27 @@ export class ExperienceAndEducationComponent implements OnInit {
   }
 
   showForm() {
-    this.showAddExperience = !this.showAddExperience;
+    this.formExperienceConfig.showForm = !this.formExperienceConfig.showForm;
   }
 
   addExperience(experience: Experience) {
+    // Check if new experience or update existing experience
+    // If experience.id is null, then it is a new experience
+    // Uso != ya que null != undefined es false
     this.experienceService.addExperience(experience).subscribe(experience => {
       this.experiences.push(experience);
+    });
+  }
+
+  updateExperience(experience: Experience) {
+    this.experienceService.updateExperience(experience).subscribe(() => {
+      this.experiences = this.experiences.map(
+        currentExperience => {
+          if (experience.id === currentExperience.id) {
+          currentExperience = {...experience};
+          }
+          return currentExperience;
+      });
     });
   }
 
@@ -44,11 +58,22 @@ export class ExperienceAndEducationComponent implements OnInit {
   }
 
   editExperience(experience: Experience) {
-    this.showAddExperience = true;
+    // Envio el objeto experience al servicio para que lo pueda editar
+    // y lo muestre en el formulario
+    this.formExperienceConfig = {showForm: true, experienceIsNew: false};
     this.uiEditFormService.toggleEdit(experience);
+/*     this.experienceService.editExperience(experience).subscribe(() => {
+      console.log('editExperience');
+      this.experiences = this.experiences.map(
+        currentExperience => {
+          if (experience.id === currentExperience.id) {
+          currentExperience = {...experience};
+          }
+          return currentExperience;
+      });
+    }); */
 
     window.scrollTo(0, 0);
-    /* this.anExperenceToEdit = experience; */
   }
 
 }

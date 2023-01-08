@@ -6,7 +6,7 @@
                 <fa-icon 
                     class="icon"
                     [icon]="faSquarePlus" 
-                    [ngClass]="{'color-icon-deactive': !showAddExperience, 'color-icon-active': showAddExperience}"
+                    [ngClass]="{'color-icon-deactive': !formExperienceConfig.showForm, 'color-icon-active': formExperienceConfig.showForm}"
                     (click)="showForm()"
                     title="Agregar"
                     size="xl"
@@ -17,20 +17,12 @@
         </div>
 
         <app-add-experience
-            [showForm]="showAddExperience"
+            [formConfig]="formExperienceConfig"
             (onAddExperience)="addExperience($event)"
+            (onUpdateExperience)="updateExperience($event)"
             [formForTypeOfExperience]="typeExperience"
             >
         </app-add-experience>
-
-<!--         <app-add-experience 
-            *ngIf="showForm"
-            (onAddExperience)="addExperience($event)"
-            [showForm]="showAddExperience"
-            [formForTypeOfExperience]="typeExperience"
-            [experenceToEdit]="anExperenceToEdit"
-            >
-        </app-add-experience> -->
 
         <app-card
             *ngFor="let experience of experiences"

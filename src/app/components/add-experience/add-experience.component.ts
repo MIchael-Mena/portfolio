@@ -10,26 +10,15 @@ import { UiEditFormService } from 'src/app/service/uiEditForm.service';
   styleUrls: ['./add-experience.component.css']
 })
 export class AddExperienceComponent implements OnInit {
-  @Input() showForm: boolean = false;
-  /*   @Input() experenceToEdit?: Experience; */
-  /* @Input() experenceToEdit = {primaryInfo: '', secondaryInfo: '', date: '', description: '', link: ''} as Experience; */
-  
+  @Input() formConfig: {showForm: boolean, experienceIsNew: boolean} = {showForm: false, experienceIsNew: true};
   @Input() formForTypeOfExperience: string = '';
   @Output() onAddExperience: EventEmitter<Experience> = new EventEmitter();
+  @Output() onUpdateExperience: EventEmitter<Experience> = new EventEmitter();
 
-  experienceToEdit?: Experience;
-
+  initialDateSettings: {dateToSet: string, minDate: string, maxDate: string} = {dateToSet: '', minDate: '', maxDate: ''};
+  finalDateSettings: {dateToSet: string, minDate: string, maxDate: string} = {dateToSet: '', minDate: '', maxDate: ''};
   typeOfForm = { primaryInfo: 'Informacion primaria', secondaryInfo: 'informacion secundaria' };
-
   form: FormGroup;
-
-/*   primaryInfoControl: FormControl = new FormControl('', Validators.required);
-  secondaryInfoControl: FormControl = new FormControl('', Validators.required);
-  dateControl: FormControl = new FormControl('', Validators.required);
-  descriptionControl: FormControl = new FormControl('', Validators.required);
-  linkControl: string = ''; */
-
-  
 
   constructor(private uiEditFormService: UiEditFormService, private fb : FormBuilder) {
     this.form = this.fb.group({
@@ -37,14 +26,19 @@ export class AddExperienceComponent implements OnInit {
       primaryInfo: ['', Validators.required],
       secondaryInfo: ['', Validators.required],
       initialDate: ['', Validators.required],
-      finalDate: [''],
+      finalDate: ['', Validators.required],
       description: ['', Validators.required],
       link: ['']
     });
-    this.uiEditFormService.onToggle().subscribe(experience => this.form.setValue(experience));
 
-/*     this.uiEditFormService.onToggle().subscribe(experience => this.form.get('primaryInfo')?.setValue(experience.primaryInfo)); */
-    /* this.uiEditFormService.onToggle().subscribe(experience => this.experienceToEdit = experience); */
+    this.uiEditFormService.onToggle().subscribe(experience => {
+      // Se ejecuta cuando se hace click en el boton de editar 
+      // y carga los datos del objeto experience en el formulario
+      this.form.setValue(experience);
+      this.finalDateSettings = {...this.finalDateSettings, dateToSet: experience.finalDate};
+      this.initialDateSettings = {...this.initialDateSettings, dateToSet: experience.initialDate};
+/*       this.datePickerSettings = {initialDate: experience.initialDate, finalDate: experience.finalDate}; */
+    });
   }
 
   ngOnInit(): void {
@@ -61,35 +55,39 @@ export class AddExperienceComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-/*     if (!this.primaryInfoControl.valid || !this.secondaryInfoControl.valid || !this.dateControl.valid || !this.descriptionControl.valid) {
-      alert('Por favor, llenar todos los campos');
-      return;
-    } */
+  onSubmit(): void {
     if(!this.form.valid) {
       alert('Por favor, llenar todos los campos');
       return;
     }
-
-/*     const experience = {
-      primaryInfo: this.primaryInfoControl.value,
-      secondaryInfo: this.secondaryInfoControl.value,
-      date: this.dateControl.value,
-      description: this.descriptionControl.value,
-      link: this.linkControl
-    } */
-
-    const experience = {
+    
+    const experience = <Experience> {
+      // El id se envia un string vacio que queda como undefined ya que deberia ser un numero
+      // despues el backend le asigna un id automaticamente
       id: this.form.value.id,
       primaryInfo: this.form.value.primaryInfo,
       secondaryInfo: this.form.value.secondaryInfo,
-      initialDate: this.form.value.date,
-      finalDate: this.form.value.finalDate,
+      initialDate: this.form.value.initialDate.format('YYYY-MM-DD'),
+      finalDate: this.form.value.finalDate.format('YYYY-MM-DD'),
       description: this.form.value.description,
       link: this.form.value.link
     }
+    // Se envia en el formato YYYY-MM para que la pipe date lo pueda interpretar
 
-    this.onAddExperience.emit(experience);
+    if (!this.formConfig.experienceIsNew) {
+      this.onUpdateExperience.emit(experience);
+      // Emite el evento onUpdateExperience al componente padre (experience-and-education.component.ts)
+    } else {
+      this.onAddExperience.emit(experience);
+      // Emite el evento onAddExperience al componente padre (experience-and-education.component.ts)
+    }
+
+    this.form.reset();
+  }
+
+  setControlDate( controlDate: FormControl<any>, dateName : string): void {
+    this.form.setControl(dateName, controlDate);
+    console.log(this.form.value[dateName].format('MM-YYYY'));
   }
 
 

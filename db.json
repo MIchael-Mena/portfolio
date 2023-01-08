@@ -5,34 +5,34 @@
       "primaryInfo": "Senior Web Developer",
       "secondaryInfo": "Intelitec Solutions",
       "initialDate": "2013-03",
-      "finalDate": "Present",
+      "finalDate": "Presente",
       "description": "Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.",
       "link": "Link 1"
     },
     {
+      "id": 2,
       "primaryInfo": "adasd",
-      "secondaryInfo": "",
-      "initialDate": "",
-      "finalDate": "",
-      "description": "",
-      "link": "",
-      "id": 2
+      "secondaryInfo": "ads",
+      "initialDate": "2018-11",
+      "finalDate": "2022-11",
+      "description": "erer",
+      "link": ""
     },
     {
+      "id": 3,
       "primaryInfo": "asd",
       "secondaryInfo": "ad",
-      "initialDate": "",
-      "finalDate": "",
+      "initialDate": "1990-06-08",
+      "finalDate": "2010-06-08",
       "description": "asd",
-      "link": "",
-      "id": 3
+      "link": ""
     },
     {
       "id": 4,
       "primaryInfo": "Un cargo",
       "secondaryInfo": "ad",
-      "initialDate": "2023-01",
-      "finalDate": "",
+      "initialDate": "2022-12",
+      "finalDate": "2023-01",
       "description": "asd",
       "link": ""
     },
@@ -41,7 +41,7 @@
       "primaryInfo": "Un cargo",
       "secondaryInfo": "Una empresa",
       "initialDate": "2018-05",
-      "finalDate": "",
+      "finalDate": "2022-10",
       "description": "trabajo",
       "link": ""
     }

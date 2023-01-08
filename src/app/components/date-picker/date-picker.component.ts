@@ -1,7 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
 
@@ -36,22 +34,28 @@ export const MY_FORMATS = {
   ],
 })
 
-export class DatePickerComponent implements OnInit {
-  @Input() initialDate?: string;
+export class DatePickerComponent {
+  @Input() dateSettings?: {dateToSet: string, minDate: string, maxDate: string};
   @Output() onDateChange: EventEmitter<FormControl> = new EventEmitter();
+
   minDate?: Moment;
   maxDate?: Moment;
-  dateValidators = [Validators.required, this.datePickerRangeValidator()];
-
-  date = new FormControl({value: moment(), disabled: false}, this.dateValidators);
+  private dateValidators = [Validators.required, this.datePickerRangeValidator()];
+  date: FormControl<any> = new FormControl('', this.dateValidators);
 
   constructor() {
-  }
-
-  ngOnInit() {
     const currentYear = moment().year();
     this.minDate = moment([currentYear - 50, 0, 1]);
     this.maxDate = moment([currentYear + 0, 0, 31]);
+  }
+
+  ngOnChanges(): void {
+    // Se ejecuta cuando se cambia el valor de un input
+    if(this.dateSettings?.dateToSet){
+      const [year, month] = this.dateSettings.dateToSet.split('-');
+      this.date.setValue(moment([parseInt(year), parseInt(month) - 1 , 1]));
+      // moment tambien acepta string como parametro
+    }
   }
 
   setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
@@ -63,6 +67,8 @@ export class DatePickerComponent implements OnInit {
     ctrlValue.year(normalizedMonthAndYear.year());
     this.date.setValue(ctrlValue);
     datepicker.close();
+
+    this.onDateChange.emit(this.date);
   }
 
   private datePickerRangeValidator() {
