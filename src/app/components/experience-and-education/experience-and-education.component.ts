@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ExperienceService } from 'src/app/service/experience.service';
 import { faSquarePlus } from '@fortawesome/free-regular-svg-icons';
-import { Experience } from 'src/app/components/Experience';
+import { Experience } from 'src/app/components/interfaces/Experience';
 
 import { UiEditFormService } from 'src/app/service/uiEditForm.service';
 

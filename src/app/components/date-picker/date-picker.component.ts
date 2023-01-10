@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
@@ -9,6 +9,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
 // the `default as` syntax.
 import * as _moment from 'moment';
 import { default as _rollupMoment, Moment } from 'moment';
+import { DatePicker } from '../interfaces/DatePicker';
 
 const moment = _rollupMoment || _moment;
 
@@ -35,59 +36,158 @@ export const MY_FORMATS = {
 })
 
 export class DatePickerComponent {
-  @Input() dateSettings?: {dateToSet: string, minDate: string, maxDate: string};
+  @Input() dateSettings?: DatePicker;
   @Output() onDateChange: EventEmitter<FormControl> = new EventEmitter();
-
+  
   minDate?: Moment;
   maxDate?: Moment;
-  private dateValidators = [Validators.required, this.datePickerRangeValidator()];
-  date: FormControl<any> = new FormControl('', this.dateValidators);
+  minDateValid?: Moment;
+  maxDateValid?: Moment;
+
+  private currentYear: any;
+  private dateValidators = [Validators.required, this.minDateValidator(), this.maxDateValidator()];
+  date: FormControl<any>;
+/*   date: FormControl<any> = new FormControl('', this.dateValidators); */
+/*   date: FormControl<any> = new FormControl({value:'', disabled: false}, this.dateValidators); */
 
   constructor() {
-    const currentYear = moment().year();
-    this.minDate = moment([currentYear - 50, 0, 1]);
-    this.maxDate = moment([currentYear + 0, 0, 31]);
+    this.date = new FormControl({value:'', disabled: false}, this.dateValidators);
+    this.currentYear = moment().year();
+    this.setMinDate();
+    this.setMaxDate();
   }
 
   ngOnChanges(): void {
-    // Se ejecuta cuando se cambia el valor de un input
+    // Se ejecuta cuando se cambia el valor con el decorador Input()
+    if(this.dateSettings?.disabled){
+      this.date.disable();
+    } else {
+      this.date.enable();
+    }
+
     if(this.dateSettings?.dateToSet){
-      const [year, month] = this.dateSettings.dateToSet.split('-');
-      this.date.setValue(moment([parseInt(year), parseInt(month) - 1 , 1]));
-      // moment tambien acepta string como parametro
+      if(typeof this.dateSettings.dateToSet === 'string'){
+        this.date.setValue(this.stringToMoment(this.dateSettings.dateToSet));
+      }else{
+        this.date.setValue(this.dateSettings.dateToSet);
+      }
+    } else{
+      this.date.setValue('');
+    }
+
+    if(this.dateSettings?.minDate){
+      if(typeof this.dateSettings.minDate === 'string'){
+        this.minDateValid = this.stringToMoment(this.dateSettings.minDate);
+      }else{
+        // Si es un objeto moment
+        this.minDateValid = this.dateSettings.minDate;
+        if(this.dateSettings.disableRangeSelector){
+          // Se desactiva el rango de fechas seleccionables si esta en true
+          this.setMinDate();
+        }    
+      }
+    }else{
+      this.setMinDate();
+    }
+
+    if(this.dateSettings?.maxDate){
+      if(typeof this.dateSettings.maxDate === 'string'){
+        this.maxDateValid = this.stringToMoment(this.dateSettings.maxDate);
+      }else{
+        // Si es un objeto moment
+        this.maxDateValid = this.dateSettings.maxDate;
+        if(this.dateSettings.disableRangeSelector){
+          // Se desactiva el rango de fechas seleccionables si esta en true
+          this.setMaxDate();
+        }    
+      }
+    }else{
+      this.setMaxDate();
+    }
+
+  }
+
+  changeDateInput(aDate: any){
+    // Se ejecuta cuando se cambia el valor del input, aDate.value es un moment
+/*     console.log(aDate.value); */
+    console.log('changeDateInput');
+    if(aDate.value){
+      // Si aDate.value tiene un valor (no es null)
+      this.emitDate(aDate.value);
     }
   }
 
   setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
     if(this.date.invalid) {
+      // Si date no tiene un momento le asigno el moment actual
       this.date.setValue(moment());
     }
-    const ctrlValue = this.date.value!;
+    const ctrlValue = this.date.value;
     ctrlValue.month(normalizedMonthAndYear.month());
     ctrlValue.year(normalizedMonthAndYear.year());
-    this.date.setValue(ctrlValue);
     datepicker.close();
 
+    this.emitDate(ctrlValue);
+  }
+
+  private emitDate(aDate: Moment) {
+    this.date.setValue(aDate);
     this.onDateChange.emit(this.date);
   }
 
-  private datePickerRangeValidator() {
+  private minDateValidator() {
+    // Si es undefined, no se valida
     return (control: FormControl): {[key: string]: any} | null => {
       const date = control.value;
-      if (date) {
+      if (date && this.minDateValid) {
+        // Entra si tengo algo en date y tengo una fecha minima valida
         const dateMoment = moment(date);
-        if (dateMoment.isBefore(this.minDate) || dateMoment.isAfter(this.maxDate)) {
-          return { 'matDatepickerRange': true };
+        if (dateMoment.isBefore(this.minDateValid)) {
+          // Si entra es porque la fecha es menor a la fecha minima
+          return { 'matDatepickerMinInvalid': true };
         }
       }
       return null;
-    };
+    }
+  }
+
+  private maxDateValidator() {
+    return (control: FormControl): {[key: string]: any} | null => {
+      const date = control.value;
+      if (date && this.maxDateValid) {
+        const dateMoment = moment(date);
+        if (dateMoment.isAfter(this.maxDateValid)) {
+          return { 'matDatepickerMaxInvalid': true };
+        }
+      }
+      return null;
+    }
+  }
+
+  private setMinDate() {
+    this.minDate = moment([this.currentYear - 50, 0, 1]);
+  }
+
+  private setMaxDate() {
+    this.maxDate = moment([this.currentYear + 0, 0, 31]);
+  }
+
+  private stringToMoment(aDate: string): Moment {
+    // Se espera un string con formato YYYY-MM
+    const [year, month] = aDate.split('-');
+    // moment tambien acepta string como parametro
+    return moment([parseInt(year), parseInt(month) - 1 , 1]);
   }
 
   onClickeable() {
 /*     console.log(this.date.value!.format('YYYY-MM')); */
     console.log(this.date.valid);
-    console.log("Rango de fecha es invalido: " + this.date.getError('matDatepickerRange'));
+/*     console.log("Rango de fecha es invalido: " + this.date.getError('matDatepickerRange')); */
+    console.log(this.minDateValid);
+    console.log(this.maxDateValid);
+    console.log(this.date.errors)
+    console.log("Fecha min es invalida: " + this.date.hasError('matDatepickerMinInvalid'));
+    console.log("Fecha max es invalida:" + this.date.hasError('matDatepickerMaxInvalid'));
 /*     console.log("Fecha min es invalida: " + this.date.hasError('matDatepickerMin'));
     console.log("Fecha max es invalida:" + this.date.hasError('matDatepickerMax'));
     console.log("Formato de fecha es invalido: " + this.date.hasError('matDatepickerParse')); */

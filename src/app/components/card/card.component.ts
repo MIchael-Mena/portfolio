@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { Experience } from '../Experience';
+import { Experience } from '../interfaces/Experience';
 
 import { Input } from '@angular/core';
 

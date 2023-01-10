@@ -8,7 +8,7 @@
                     [icon]="faSquarePlus" 
                     [ngClass]="{'color-icon-deactive': !formExperienceConfig.showForm, 'color-icon-active': formExperienceConfig.showForm}"
                     (click)="showForm()"
-                    title="Agregar"
+                    title="{{!formExperienceConfig.showForm ? 'Agregar' : 'Cancelar'}}"
                     size="xl"
                     >
                 </fa-icon>

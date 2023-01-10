@@ -18,7 +18,6 @@ export class UpdateDirective implements OnChanges {
     {
       this.viewContainer.clear();
       this.viewContainer.createEmbeddedView(this.templateRef);
-
     }
   }
 
