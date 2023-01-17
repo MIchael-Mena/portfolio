@@ -4,7 +4,7 @@
         <div class="subheading mb-3">
             {{experience.secondaryInfo}}
             <span> / </span>
-            {{experience.initialDate | date: 'MMMM y'}} - {{experience.finalDate === 'Presente' ? 'Presente' : (experience.finalDate | date: 'MMMM y')}}
+            {{experience.initialDate | date: 'MMMM y'}} - {{experience.finalDate === null ? 'Presente' : (experience.finalDate | date: 'MMMM y')}}
 <!--             <span class="text-primary" class="softLight">{{experience.date}}</span> -->
         </div>
         <p>{{experience.description}}</p>

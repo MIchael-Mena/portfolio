@@ -1,11 +1,12 @@
 export interface DatePicker{
-    disabled: boolean,
-    dateToSet: string, 
+    disable: boolean,
+    dateToSet: any,
     // disableRangeSelector si esta en true desactiva el rango de fechas
     // seleccionables del datepicker
     disableRangeSelector: boolean,
-        // maxi y min valor que se puede seleccionar en el datepicker
-    // debe ser del tipo moment
+    // si disableRangeSelector: true, max y min son el rango de fecha permitido para mostrar 
+    // en el datepicker y para los validadores.
+    // si disableRangeSelector: false, max y min son solo el rango de fecha permitido para los validadores
     minDate: any, 
     maxDate: any,
 }

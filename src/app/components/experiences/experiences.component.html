@@ -20,16 +20,16 @@
             [formConfig]="formExperienceConfig"
             (onAddExperience)="addExperience($event)"
             (onUpdateExperience)="updateExperience($event)"
-            [formForTypeOfExperience]="typeExperience"
+            [formExperience]="formWork"
             >
         </app-add-experience>
 
-        <app-card
+        <app-card-experience
             *ngFor="let experience of experiences"
             [experience]="experience"
             (onEditExperience)="editExperience($event)"
             (onDeleteExperience)="deleteExperience($event)"
             >
-        </app-card>
+        </app-card-experience>
     </div>
 </section>

@@ -41,6 +41,7 @@ export class DatePickerComponent {
   
   minDate?: Moment;
   maxDate?: Moment;
+  // minDateValid y maxDateValid son las fechas que se le asignan a los validadores
   minDateValid?: Moment;
   maxDateValid?: Moment;
 
@@ -59,7 +60,7 @@ export class DatePickerComponent {
 
   ngOnChanges(): void {
     // Se ejecuta cuando se cambia el valor con el decorador Input()
-    if(this.dateSettings?.disabled){
+    if(this.dateSettings?.disable){
       this.date.disable();
     } else {
       this.date.enable();
@@ -69,9 +70,11 @@ export class DatePickerComponent {
       if(typeof this.dateSettings.dateToSet === 'string'){
         this.date.setValue(this.stringToMoment(this.dateSettings.dateToSet));
       }else{
+        // Si es un objeto moment
         this.date.setValue(this.dateSettings.dateToSet);
       }
     } else{
+      // si es un null o undefined o ''
       this.date.setValue('');
     }
 
@@ -128,6 +131,8 @@ export class DatePickerComponent {
     datepicker.close();
 
     this.emitDate(ctrlValue);
+/*     console.log('setMonthAndYear');
+    console.log(this.date); */
   }
 
   private emitDate(aDate: Moment) {

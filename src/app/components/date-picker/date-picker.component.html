@@ -9,8 +9,9 @@
     [max]="maxDate"
     (dateChange)="changeDateInput($event)"
     placeholder="Seleccionar una fecha"
+    title="MM-YYYY"
     >
-  <mat-hint>MM-YYYY</mat-hint>
+<!--   <mat-hint>MM-YYYY</mat-hint> -->
   <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
   <mat-datepicker #dp
                   startView="multi-year"

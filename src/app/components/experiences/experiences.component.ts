@@ -4,17 +4,18 @@ import { faSquarePlus } from '@fortawesome/free-regular-svg-icons';
 import { Experience } from 'src/app/components/interfaces/Experience';
 
 import { UiEditFormService } from 'src/app/service/uiEditForm.service';
+import { FormWork } from '../interfaces/FormWork';
 
 @Component({
-  selector: 'app-experience-and-education',
-  templateUrl: './experience-and-education.component.html',
-  styleUrls: ['./experience-and-education.component.css']
+  selector: 'app-experiences',
+  templateUrl: './experiences.component.html',
+  styleUrls: ['./experiences.component.css']
 })  
-export class ExperienceAndEducationComponent implements OnInit {
+export class Experiences implements OnInit {
   faSquarePlus = faSquarePlus;
   experiences: Experience[] = [];
   formExperienceConfig : {showForm: boolean, experienceIsNew: boolean} = {showForm: false, experienceIsNew: true};
-  typeExperience: string = 'work';
+  formWork: FormWork = new FormWork();
 
   constructor(private experienceService: ExperienceService, private uiEditFormService : UiEditFormService) {
   }
@@ -62,17 +63,7 @@ export class ExperienceAndEducationComponent implements OnInit {
     // y lo muestre en el formulario
     this.formExperienceConfig = {showForm: true, experienceIsNew: false};
     this.uiEditFormService.toggleEdit(experience);
-/*     this.experienceService.editExperience(experience).subscribe(() => {
-      console.log('editExperience');
-      this.experiences = this.experiences.map(
-        currentExperience => {
-          if (experience.id === currentExperience.id) {
-          currentExperience = {...experience};
-          }
-          return currentExperience;
-      });
-    }); */
-
+    
     window.scrollTo(0, 0);
   }
 

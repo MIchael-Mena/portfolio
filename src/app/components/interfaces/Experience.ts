@@ -3,7 +3,7 @@ export interface Experience {
     primaryInfo: string;
     secondaryInfo: string;
     initialDate: string;
-    finalDate: string;
+    finalDate: string | null;
     description: string;
     link: string;
 }

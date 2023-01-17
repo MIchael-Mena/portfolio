@@ -6,11 +6,11 @@ import { Experience } from '../interfaces/Experience';
 import { Input } from '@angular/core';
 
 @Component({
-  selector: 'app-card',
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css']
+  selector: 'app-card-experience',
+  templateUrl: './cardExperience.component.html',
+  styleUrls: ['./cardExperience.component.css']
 })
-export class CardComponent {
+export class CardExperienceComponent {
   @Input() experience!: Experience;
   @Output() onDeleteExperience: EventEmitter<Experience> = new EventEmitter();
   @Output() onEditExperience: EventEmitter<Experience> = new EventEmitter();
