@@ -1,9 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { Experience } from '../interfaces/Experience';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {faPenToSquare} from '@fortawesome/free-solid-svg-icons';
+import {faTrashCan} from '@fortawesome/free-regular-svg-icons';
+import {ExperienceData} from '../interfaces/ExperienceData';
+import {MatDialog} from "@angular/material/dialog";
 
-import { Input } from '@angular/core';
+import {Input} from '@angular/core';
+import {DialogDeleteCardComponent} from "../dialog-delete-card/dialog-delete-card.component";
 
 @Component({
   selector: 'app-card-experience',
@@ -11,19 +13,37 @@ import { Input } from '@angular/core';
   styleUrls: ['./cardExperience.component.css']
 })
 export class CardExperienceComponent {
-  @Input() experience!: Experience;
-  @Output() onDeleteExperience: EventEmitter<Experience> = new EventEmitter();
-  @Output() onEditExperience: EventEmitter<Experience> = new EventEmitter();
+  @Input() experience!: ExperienceData;
+  @Output() onDeleteExperience: EventEmitter<ExperienceData> = new EventEmitter();
+  @Output() onEditExperience: EventEmitter<ExperienceData> = new EventEmitter();
   faPenToSquare = faPenToSquare;
   faTrashCan = faTrashCan;
 
-  constructor() { }
-
-  deleteExperience(experience: Experience) {
-    this.onDeleteExperience.emit(experience);
+  constructor(public dialog: MatDialog) {
   }
 
-  editExperience(experience: Experience) {
+  deleteExperience() {
+    this.onDeleteExperience.emit(this.experience);
+  }
+
+  editExperience(experience: ExperienceData) {
     this.onEditExperience.emit(experience);
+  }
+
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    const dialogRef = this.dialog.open(DialogDeleteCardComponent, {
+      data: {deleteExperience: false},
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if (result) {
+        this.deleteExperience();
+      }
+    });
+
   }
 }

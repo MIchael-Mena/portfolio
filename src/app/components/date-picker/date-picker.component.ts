@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDatepicker } from '@angular/material/datepicker';
@@ -8,6 +8,7 @@ import { MatDatepicker } from '@angular/material/datepicker';
 // syntax. However, rollup creates a synthetic default module and we thus need to import it using
 // the `default as` syntax.
 import * as _moment from 'moment';
+// @ts-ignore
 import { default as _rollupMoment, Moment } from 'moment';
 import { DatePicker } from '../interfaces/DatePicker';
 
@@ -38,7 +39,7 @@ export const MY_FORMATS = {
 export class DatePickerComponent {
   @Input() dateSettings?: DatePicker;
   @Output() onDateChange: EventEmitter<FormControl> = new EventEmitter();
-  
+
   minDate?: Moment;
   maxDate?: Moment;
   // minDateValid y maxDateValid son las fechas que se le asignan a los validadores
@@ -87,7 +88,7 @@ export class DatePickerComponent {
         if(this.dateSettings.disableRangeSelector){
           // Se desactiva el rango de fechas seleccionables si esta en true
           this.setMinDate();
-        }    
+        }
       }
     }else{
       this.setMinDate();
@@ -102,7 +103,7 @@ export class DatePickerComponent {
         if(this.dateSettings.disableRangeSelector){
           // Se desactiva el rango de fechas seleccionables si esta en true
           this.setMaxDate();
-        }    
+        }
       }
     }else{
       this.setMaxDate();
@@ -184,17 +185,12 @@ export class DatePickerComponent {
     return moment([parseInt(year), parseInt(month) - 1 , 1]);
   }
 
-  onClickeable() {
-/*     console.log(this.date.value!.format('YYYY-MM')); */
+/*  onClickeable() {
     console.log(this.date.valid);
-/*     console.log("Rango de fecha es invalido: " + this.date.getError('matDatepickerRange')); */
     console.log(this.minDateValid);
     console.log(this.maxDateValid);
     console.log(this.date.errors)
     console.log("Fecha min es invalida: " + this.date.hasError('matDatepickerMinInvalid'));
     console.log("Fecha max es invalida:" + this.date.hasError('matDatepickerMaxInvalid'));
-/*     console.log("Fecha min es invalida: " + this.date.hasError('matDatepickerMin'));
-    console.log("Fecha max es invalida:" + this.date.hasError('matDatepickerMax'));
-    console.log("Formato de fecha es invalido: " + this.date.hasError('matDatepickerParse')); */
-  }
+  }*/
 }

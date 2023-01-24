@@ -1,35 +1,37 @@
 <section class="resume-section" id="experience">
-    <div class="resume-section-content">
-        <div class="section-tittle">
-            <h2 class="mb-5">Experience  </h2>
-            <div>
-                <fa-icon 
-                    class="icon"
-                    [icon]="faSquarePlus" 
-                    [ngClass]="{'color-icon-deactive': !formExperienceConfig.showForm, 'color-icon-active': formExperienceConfig.showForm}"
-                    (click)="showForm()"
-                    title="{{!formExperienceConfig.showForm ? 'Agregar' : 'Cancelar'}}"
-                    size="xl"
-                    >
-                </fa-icon>
+  <div class="resume-section-content">
+    <div class="section-tittle ">
+      <div class="mx-auto">
+        <h2 class="mb-5 ">{{experience?.title}}</h2>
+      </div>
+      <div>
+        <fa-icon
+          class="icon"
+          [icon]="faSquarePlus"
+          [ngClass]="{'color-icon-deactivate': !formExperienceConfig.showForm, 'color-icon-active': formExperienceConfig.showForm}"
+          (click)="showForm()"
+          title="{{!formExperienceConfig.showForm ? 'Agregar' : 'Cancelar'}}"
+          size="xl"
+        >
+        </fa-icon>
 
-            </div>
-        </div>
-
-        <app-add-experience
-            [formConfig]="formExperienceConfig"
-            (onAddExperience)="addExperience($event)"
-            (onUpdateExperience)="updateExperience($event)"
-            [formExperience]="formWork"
-            >
-        </app-add-experience>
-
-        <app-card-experience
-            *ngFor="let experience of experiences"
-            [experience]="experience"
-            (onEditExperience)="editExperience($event)"
-            (onDeleteExperience)="deleteExperience($event)"
-            >
-        </app-card-experience>
+      </div>
     </div>
+
+    <app-add-experience
+      [formConfig]="formExperienceConfig"
+      (onAddExperience)="addExperience($event)"
+      (onUpdateExperience)="updateExperience($event)"
+      [formExperience]="formExperience"
+    >
+    </app-add-experience>
+
+    <app-card-experience
+      *ngFor="let experience of experiences"
+      [experience]="experience"
+      (onEditExperience)="editExperience($event)"
+      (onDeleteExperience)="deleteExperience($event)"
+    >
+    </app-card-experience>
+  </div>
 </section>

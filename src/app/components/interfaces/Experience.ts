@@ -1,9 +1,11 @@
+import { ExperienceService } from "src/app/service/experience.service";
+import { FormExperience } from "./FormExperience";
+
 export interface Experience {
-    id?: number;
-    primaryInfo: string;
-    secondaryInfo: string;
-    initialDate: string;
-    finalDate: string | null;
-    description: string;
-    link: string;
+
+    title: string;
+
+    serviceToUse(service: ExperienceService): void;
+    
+    formToUse(): FormExperience;
 }

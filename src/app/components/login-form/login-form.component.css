@@ -1,0 +1,35 @@
+
+.container-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 8rem 0rem 0rem 0rem;
+}
+
+
+mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: #0b37ff;
+}
+
+.input-field {
+  width: 100%;
+  min-width: 300px;
+}
+
+
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  padding: 16px;
+  width: 300px;
+  color: white;
+  background-color: red;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+}

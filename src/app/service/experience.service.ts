@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Experience } from '../components/interfaces/Experience';
+import { ExperienceData } from '../components/interfaces/ExperienceData';
 import { Observable } from 'rxjs';
 
 const httpOptions = {
@@ -15,35 +15,34 @@ const httpOptions = {
 export class ExperienceService {
 
   // Experiences is the name of the controller in the backend or fake backend
-  private apiUrl = 'http://localhost:5000/Experiences';
-  
+  private apiUrl = 'http://localhost:5000/Works';
+
   constructor(private http: HttpClient) { }
 
-  getExperiences(): Observable<Experience[]> {
-    return this.http.get<Experience[]>(this.apiUrl);
+  getExperiences(): Observable<ExperienceData[]> {
+    return this.http.get<ExperienceData[]>(this.apiUrl);
   }
 
-  addExperience(experience: Experience): Observable<Experience> {
-    return this.http.post<Experience>(this.apiUrl, experience, httpOptions);
+  addExperience(experience: ExperienceData): Observable<ExperienceData> {
+    return this.http.post<ExperienceData>(this.apiUrl, experience, httpOptions);
   }
 
-  deleteExperience(experience: Experience): Observable<Experience> {
+  deleteExperience(experience: ExperienceData): Observable<ExperienceData> {
     const url = `${this.apiUrl}/${experience.id}`;
-    return this.http.delete<Experience>(url)
+    return this.http.delete<ExperienceData>(url)
   }
 
-  updateExperience(experience: Experience): Observable<Experience> {
+  updateExperience(experience: ExperienceData): Observable<ExperienceData> {
     const url = `${this.apiUrl}/${experience.id}`;
-    return this.http.put<Experience>(url, experience, httpOptions);
+    return this.http.put<ExperienceData>(url, experience, httpOptions);
   }
 
-/*   updateTaskReminder(task: Experience): Observable<Experience> {
-    const url = `${this.apiUrl}/${task.id}`;
-    return this.http.put<Experience>(url, task, httpOptions);
-  } */
+  useWorkingDatabase() {
+    this.apiUrl = 'http://localhost:5000/Works';
+  }
 
-/*   addTask(experience: Experience): Observable<Experience> {
-    return this.http.post<Experience>(this.apiUrl, experience, httpOptions);
-  } */
+  useEducationDatabase() {
+    this.apiUrl = 'http://localhost:5000/Educations';
+  }
 
 }

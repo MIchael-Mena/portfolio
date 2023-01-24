@@ -1,5 +1,5 @@
 {
-  "Experiences": [
+  "Works": [
     {
       "id": 1,
       "primaryInfo": "Senior Web Developer",
@@ -53,6 +53,35 @@
       "finalDate": null,
       "description": "martillo",
       "link": ""
+    },
+    {
+      "id": 7,
+      "primaryInfo": "gdfgfdg",
+      "secondaryInfo": "ytryt",
+      "initialDate": "2006-07-18T00:20:23.323Z",
+      "finalDate": null,
+      "description": "rtytry",
+      "link": null
+    }
+  ],
+  "Educations": [
+    {
+      "id": 1,
+      "primaryInfo": "Master in Computer Science",
+      "secondaryInfo": "University of San Francisco",
+      "initialDate": "2011-06-01",
+      "finalDate": "2014-01-01",
+      "description": "Computer Science",
+      "link": "Link 1"
+    },
+    {
+      "id": 2,
+      "primaryInfo": "Bachelor in Computer Science",
+      "secondaryInfo": "University of San Francisco",
+      "initialDate": "2007-06-01",
+      "finalDate": "2011-01-01",
+      "description": "Computer Science",
+      "link": "Link 2"
     }
   ]
 }

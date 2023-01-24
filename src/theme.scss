@@ -1,0 +1,119 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+
+$custom-primary-map: (
+  50 : #e5e7ec,
+  100 : #bdc3d0,
+  200 : #929bb1,
+  300 : #667392,
+  400 : #45557a,
+  500 : #243763,
+  600 : #20315b,
+  700 : #1b2a51,
+  800 : #162347,
+  900 : #0d1635,
+  A100 : #718bff,
+  A200 : #3e61ff,
+  A400 : #0b37ff,
+  A700 : #002cf1,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+$custom-accent-map: (
+  50 : #f5f1ee,
+  100 : #e6ddd4,
+  200 : #d6c7b8,
+  300 : #c6b09b,
+  400 : #b99f85,
+  500 : #ad8e70,
+  600 : #a68668,
+  700 : #9c7b5d,
+  800 : #937153,
+  900 : #835f41,
+  A100 : #ffeada,
+  A200 : #ffcea7,
+  A400 : #ffb174,
+  A700 : #ffa35a,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$custom-warm-map: (
+  50 : #ffeee6,
+  100 : #ffd4c1,
+  200 : #ffb798,
+  300 : #ff9a6f,
+  400 : #ff8450,
+  500 : #ff6e31,
+  600 : #ff662c,
+  700 : #ff5b25,
+  800 : #ff511f,
+  900 : #ff3f13,
+  A100 : #ffffff,
+  A200 : #fffbfa,
+  A400 : #ffd0c7,
+  A700 : #ffbaad,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+// Definimos las paletas basadas en los mapas de colores personalizados
+$primary-palette: mat.define-palette($custom-primary-map);
+$accent-palette: mat.define-palette($custom-accent-map);
+$warm-palette: mat.define-palette($custom-warm-map);
+
+// Creamos el objeto del tema personalizado claro (podríamos crear otro para el modo oscuro)
+$custom-theme: mat.define-light-theme((
+  color: (
+    primary: $primary-palette,
+    accent: $accent-palette,
+  )
+));
+
+// Y finalmente incluimos los estilos del tema en todos nuestros componentes
+@include mat.all-component-themes($custom-theme);

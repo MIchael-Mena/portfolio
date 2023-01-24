@@ -1,27 +1,34 @@
-.section-date{
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: center;
+
+mat-form-field {
+  width: 100%;
 }
 
-.contariner-label{
-    display: flex;
-    overflow: hidden;
-    align-items: center;
-/*     text-align: center; */
-    padding: 0;
-    margin: 0;
-    max-width: 248px;
-    height: 38px;
-    background-color: #e9ecef;
-/*     border: 1px solid #ced4da; */
-    border-radius: 0.4rem 0.4rem 0 0;
+
+.section-date {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
 }
 
-@media(min-width: 992px){
-    .section-date{
-        flex-direction: row;
-        justify-content: space-around;
-    }
+.container-label {
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  /*     text-align: center; */
+  padding: 0 0 0 0.5rem;
+  margin: 0;
+  max-width: 248px;
+  height: 38px;
+  background-color: rgb(241, 246, 245);
+  /*border: 1px solid #243763;*/
+  border-radius: 0 0.6rem 0 0;
+
+}
+
+@media (min-width: 992px) {
+  .section-date {
+    flex-direction: row;
+    justify-content: space-around;
+  }
 }

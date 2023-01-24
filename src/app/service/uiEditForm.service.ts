@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { Experience } from '../components/interfaces/Experience';
+import { ExperienceData } from '../components/interfaces/ExperienceData';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UiEditFormService {
 
-  private subject = new Subject<Experience>();
+  private subject = new Subject<ExperienceData>();
  
   constructor() { }
 
-  toggleEdit( experience : Experience  ): void {
+  toggleEdit( experience : ExperienceData  ): void {
     this.subject.next(experience);
   }
 

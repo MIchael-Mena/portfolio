@@ -1,24 +1,24 @@
-
-<mat-form-field appearance="fill" class="mt-0">
+<mat-form-field appearance="outline" [hideRequiredMarker]="true" class="mt-0">
   <mat-label>Mes y Año</mat-label>
-  <input 
-    matInput 
-    [matDatepicker]="dp" 
-    [formControl]="date" 
-    [min]="minDate" 
+  <input
+    matInput
+    [matDatepicker]="dp"
+    [formControl]="date"
+    [min]="minDate"
     [max]="maxDate"
     (dateChange)="changeDateInput($event)"
-    placeholder="Seleccionar una fecha"
+    placeholder="Ingresar una fecha"
     title="MM-YYYY"
-    >
-<!--   <mat-hint>MM-YYYY</mat-hint> -->
+  >
+  <!--   <mat-hint>MM-YYYY</mat-hint> -->
   <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
   <mat-datepicker #dp
                   startView="multi-year"
                   (monthSelected)="setMonthAndYear($event, dp)"
                   panelClass="example-month-picker"
-                  >
+                  color="accent"
+  >
   </mat-datepicker>
 </mat-form-field>
-  
+
 <!-- <button (click)="onClickeable()">Imprimir</button> -->

@@ -1,32 +1,44 @@
-<div class="d-flex flex-column flex-md-row justify-content-between mb-5">
-    <div class="flex-grow-1">
-        <h3 class="mb-0">{{experience.primaryInfo}}</h3>
+<mat-card class="d-flex flex-column flex-md-row justify-content-between mb-5 p-4 card-style">
+  <div class="flex-grow-1">
+    <mat-card-title-group>
+      <mat-card-title class="h4">{{experience.primaryInfo}}</mat-card-title>
+      <mat-card-subtitle class="mb-2 subheading">
+        {{experience.secondaryInfo}}
+        <span class="text-uppercase"> /
+          {{experience.initialDate | date: 'MMMM y'}}
+          - {{experience.finalDate === null ? 'Presente' : (experience.finalDate | date: 'MMMM y')}}
+        </span>
+      </mat-card-subtitle>
+    </mat-card-title-group>
+    <!--    <h3>{{experience.primaryInfo}}</h3>
         <div class="subheading mb-3">
-            {{experience.secondaryInfo}}
-            <span> / </span>
-            {{experience.initialDate | date: 'MMMM y'}} - {{experience.finalDate === null ? 'Presente' : (experience.finalDate | date: 'MMMM y')}}
-<!--             <span class="text-primary" class="softLight">{{experience.date}}</span> -->
-        </div>
-        <p>{{experience.description}}</p>
+          {{experience.secondaryInfo}}
+          <span> / </span>
+          {{experience.initialDate | date: 'MMMM y'}}
+          - {{experience.finalDate === null ? 'Presente' : (experience.finalDate | date: 'MMMM y')}}
+        </div>-->
+    <mat-card-content>
+      <p>{{experience.description}}</p>
+    </mat-card-content>
+  </div>
+  <div class="flex-shrink-0">
+    <div class="icon-edit">
+      <fa-icon
+        [icon]="faPenToSquare"
+        class="icon-style ms-4"
+        size="lg"
+        (click)="editExperience(experience)"
+        title="Editar"
+      >
+      </fa-icon>
+      <fa-icon
+        [icon]="faTrashCan"
+        class="icon-style ms-4"
+        size="lg"
+        (click)="openDialog('100ms','50ms')"
+        title="Eliminar"
+      >
+      </fa-icon>
     </div>
-    <div class="flex-shrink-0">
-        <div class="icon-edit">
-            <fa-icon 
-                [icon]="faPenToSquare"
-                class="icon-style ms-4" 
-                size="lg"
-                (click)="editExperience(experience)"
-                title="Editar"
-                >
-            </fa-icon>
-            <fa-icon 
-                [icon]="faTrashCan" 
-                class="icon-style ms-4" 
-                size="lg"
-                (click)="deleteExperience(experience)"
-                title="Eliminar"
-                >
-            </fa-icon>
-        </div>
-    </div>
-</div>
+  </div>
+</mat-card>
