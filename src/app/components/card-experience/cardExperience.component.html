@@ -1,10 +1,10 @@
 <mat-card class="d-flex flex-column flex-md-row justify-content-between mb-5 p-4 card-style">
   <div class="flex-grow-1">
     <mat-card-title-group>
-      <mat-card-title class="h4">{{experience.primaryInfo}}</mat-card-title>
-      <mat-card-subtitle class="mb-2 subheading">
+      <mat-card-title>{{experience.primaryInfo}}</mat-card-title>
+      <mat-card-subtitle class="mb-2">
         {{experience.secondaryInfo}}
-        <span class="text-uppercase"> /
+        <span class="text-capitalize"> /
           {{experience.initialDate | date: 'MMMM y'}}
           - {{experience.finalDate === null ? 'Presente' : (experience.finalDate | date: 'MMMM y')}}
         </span>

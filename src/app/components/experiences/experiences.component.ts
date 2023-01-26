@@ -1,35 +1,38 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ExperienceService } from 'src/app/service/experience.service';
-import { faSquarePlus } from '@fortawesome/free-regular-svg-icons';
-import { ExperienceData } from 'src/app/components/interfaces/ExperienceData';
+import {Component, Input, OnInit} from '@angular/core';
+import {ExperienceService} from 'src/app/service/experience.service';
+import {faSquarePlus} from '@fortawesome/free-regular-svg-icons';
+import {ExperienceData} from 'src/app/components/interfaces/ExperienceData';
 
-import { UiEditFormService } from 'src/app/service/uiEditForm.service';
-import { Experience } from '../interfaces/Experience';
-import { FormExperience } from '../interfaces/FormExperience';
+import {UiEditFormService} from 'src/app/service/uiEditForm.service';
+import {Experience} from '../interfaces/Experience';
+import {FormExperience} from '../interfaces/FormExperience';
 
 @Component({
   selector: 'app-experiences',
   templateUrl: './experiences.component.html',
-  styleUrls: ['./experiences.component.css']
+  styleUrls: ['./experiences.component.css'],
+  // Cada instancia de este componente tendrá su propio servicio
+  providers: [UiEditFormService]
 })
 export class ExperiencesComponent implements OnInit {
   faSquarePlus = faSquarePlus;
   experiences: ExperienceData[] = [];
-  formExperienceConfig : {showForm: boolean, experienceIsNew: boolean} = {showForm: false, experienceIsNew: true};
+  formExperienceConfig: { showForm: boolean, experienceIsNew: boolean } = {showForm: false, experienceIsNew: true};
 
   formExperience?: FormExperience;
   @Input() experience?: Experience;
 
-  constructor(private experienceService: ExperienceService, private uiEditFormService : UiEditFormService) { }
+  constructor(private experienceService: ExperienceService, private uiEditFormService: UiEditFormService) {
+  }
 
   ngOnInit(): void {
     this.experience?.serviceToUse(this.experienceService);
     this.formExperience = this.experience?.formToUse();
 
     this.experienceService.getExperiences().subscribe(experiences => {
-          this.experiences = experiences;
-        }
-      );
+        this.experiences = experiences;
+      }
+    );
   }
 
   showForm() {
@@ -50,10 +53,10 @@ export class ExperiencesComponent implements OnInit {
       this.experiences = this.experiences.map(
         currentExperience => {
           if (experience.id === currentExperience.id) {
-          currentExperience = {...experience};
+            currentExperience = {...experience};
           }
           return currentExperience;
-      });
+        });
     });
   }
 

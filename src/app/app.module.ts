@@ -1,26 +1,14 @@
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {RouterModule, Routes} from '@angular/router';
-import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
-
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MomentDateModule} from '@angular/material-moment-adapter';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatCardModule} from '@angular/material/card';
-import {MatButtonModule} from "@angular/material/button";
-import {MatIconModule} from "@angular/material/icon";
-
-// Necesario para usar la fecha en español
-import {registerLocaleData} from '@angular/common';
-import localeEs from '@angular/common/locales/es';
 
 // Necesario para usar [formControl] en los inputs
 import {ReactiveFormsModule} from '@angular/forms';
+
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {AppRoutingModule} from "./app-routing.module";
+import {MaterialModule} from "./material.module";
+import {DateLanguageModule} from "./date-language.module";
 
 import {AppComponent} from './app.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
@@ -31,22 +19,14 @@ import {AddExperienceComponent} from './components/add-experience/add-experience
 import {UpdateDirective} from './directives/update.directive';
 import {DatePickerComponent} from './components/date-picker/date-picker.component';
 import {HomeComponent} from './components/home/home.component';
-import {EducationComponent} from './components/education/education.component';
-import {WorkComponent} from './components/work/work.component';
 import {ExperienceService} from "./service/experience.service";
 import {LoginFormComponent} from './components/login-form/login-form.component';
 import {DialogDeleteCardComponent} from './components/dialog-delete-card/dialog-delete-card.component';
-import {MatDialogModule} from "@angular/material/dialog";
-
-
-registerLocaleData(localeEs, 'es');
-
-const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'education', component: EducationComponent},
-  {path: 'work', component: WorkComponent},
-  {path: 'login', component: LoginFormComponent},
-]
+import {AboutComponent} from './components/about/about.component';
+import {
+  ExperienceAndEducationComponent
+} from './components/experience-and-education/experience-and-education.component';
+import {AuthService} from "./service/auth.service";
 
 @NgModule({
   declarations: [
@@ -57,32 +37,22 @@ const appRoutes: Routes = [
     AddExperienceComponent,
     UpdateDirective,
     DatePickerComponent,
-    EducationComponent,
-    WorkComponent,
     LoginFormComponent,
     DialogDeleteCardComponent,
+    AboutComponent,
+    ExperienceAndEducationComponent,
   ],
   imports: [
     BrowserModule,
     FontAwesomeModule,
     FormsModule,
-    RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatIconModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule,
-    MatButtonModule,
-    MomentDateModule,
-    BrowserAnimationsModule,
-    MatCheckboxModule,
-    RouterModule.forRoot(appRoutes, {enableTracing: false}),
-    MatDialogModule
+    AppRoutingModule,
+    MaterialModule,
+    DateLanguageModule,
   ],
-  providers: [{provide: LOCALE_ID, useValue: 'es'}, ExperienceService],
+  providers: [ExperienceService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

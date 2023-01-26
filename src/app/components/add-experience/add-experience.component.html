@@ -1,10 +1,12 @@
 <div *ngIf="formConfig.showForm">
   <div class="row justify-content-md-center">
     <div class="col-lg-8">
-      <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <form class="form mat-typography" [formGroup]="form" (ngSubmit)="onSubmit()">
 
+        <div>
 
-        <label class="container-label ">{{ formExperience?.getPrimaryInfoLabel() }}</label>
+          <label class="container-label ">{{ formExperience?.getPrimaryInfoLabel() }}</label>
+        </div>
         <mat-form-field appearance="outline" [hideRequiredMarker]="true">
           <mat-label>{{'Agregar un ' + formExperience?.getPrimaryInfoLabel() }}</mat-label>
           <input
@@ -30,7 +32,7 @@
               />
             </div>-->
 
-        <label class="container-label">{{ formExperience?.getSecondaryInfoLabel() }}</label>
+        <label class="container-label mat-body-2">{{ formExperience?.getSecondaryInfoLabel() }}</label>
         <mat-form-field appearance="outline" [hideRequiredMarker]="true">
           <mat-label>{{'Agregar una ' + formExperience?.getSecondaryInfoLabel()}}</mat-label>
           <input
@@ -44,7 +46,7 @@
 
         <div class="form-group mt-2 section-date">
           <div class="input-group-prepend">
-            <span class="container-label">Fecha inicial:</span>
+            <span class="container-label mat-body-2">Fecha inicial:</span>
             <app-date-picker
               [dateSettings]="initialDateSettings"
               (onDateChange)="setInitialControlDate($event)"
@@ -52,7 +54,7 @@
           </div>
           <div class="input-group-prepend">
             <span class="container-label row">
-              <span class="col">Fecha final:</span>
+              <span class="col mat-body-2">Fecha final:</span>
               <mat-checkbox
                 class="col"
                 formControlName="presentDate"
@@ -68,7 +70,7 @@
           </div>
         </div>
 
-        <label class="container-label">Descripción</label>
+        <label class="container-label mat-body-2">Descripción</label>
         <mat-form-field appearance="outline" [hideRequiredMarker]="true">
           <mat-label>Agregar una descripción</mat-label>
           <textarea

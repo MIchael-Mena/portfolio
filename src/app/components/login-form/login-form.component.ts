@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-login-form',
@@ -8,14 +9,21 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 export class LoginFormComponent {
   hide = true;
-  form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-  });
+  form: FormGroup;
 
-  submit() {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
+    this.form = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
+    });
+  }
+
+  OnSubmit() {
+    /*    if (this.form.valid) {
+          this.submitEM.emit(this.form.value);
+        }*/
     if (this.form.valid) {
-      this.submitEM.emit(this.form.value);
+      this.authService.login(this.form.value.email, this.form.value.password);
     }
   }
 
