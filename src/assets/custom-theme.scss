@@ -179,16 +179,3 @@ $portfolio-theme: mat.define-light-theme((
 // that you are using.
 
 @include mat.all-component-themes($portfolio-theme);
-
-/*.typography-style {
-  $al-typography: mat.define-typography-config(
-    $font-family: 'Roboto, monospace',
-    $headline-1: mat.define-typography-level(32px, 48px, 700),
-    $body-1: mat.define-typography-level(16px, 24px, 400),
-    $caption: mat.define-typography-level(10px, 16px, 400),
-  );
-  $al-theme: mat.define-dark-theme((
-    typography: $al-typography,
-  ));
-  @include mat.all-component-themes($al-theme);
-}*/

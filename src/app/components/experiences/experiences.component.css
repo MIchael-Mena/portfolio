@@ -1,5 +1,5 @@
 .icon {
-  filter: drop-shadow(3px 3px 1.5px #6c757d);
+  filter: drop-shadow(3px 3px 2px #6c757d);
   border-radius: 30%;
   cursor: pointer;
 }
@@ -15,7 +15,7 @@
 }
 
 .icon:hover {
-  color: rgb(173, 142, 112);
+  color: #FF6E31;
 }
 
 .section-tittle {

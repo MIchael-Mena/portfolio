@@ -4,8 +4,7 @@
       <form class="form mat-typography" [formGroup]="form" (ngSubmit)="onSubmit()">
 
         <div>
-
-          <label class="container-label ">{{ formExperience?.getPrimaryInfoLabel() }}</label>
+          <label class="container-label">{{ formExperience?.getPrimaryInfoLabel() }}</label>
         </div>
         <mat-form-field appearance="outline" [hideRequiredMarker]="true">
           <mat-label>{{'Agregar un ' + formExperience?.getPrimaryInfoLabel() }}</mat-label>
@@ -17,20 +16,6 @@
             maxlength="40"
           />
         </mat-form-field>
-
-
-        <!--    <div class="form-group mt-2">
-              <label class="form-label">{{ formExperience?.getPrimaryInfoLabel() }}</label>
-              <input
-                matInput
-                type="text"
-                name="primaryInfo"
-                placeholder="{{'Agregar '+ formExperience?.getPrimaryInfoLabel() }}"
-                formControlName="primaryInfo"
-                class="form-control"
-                maxlength="30"
-              />
-            </div>-->
 
         <label class="container-label mat-body-2">{{ formExperience?.getSecondaryInfoLabel() }}</label>
         <mat-form-field appearance="outline" [hideRequiredMarker]="true">

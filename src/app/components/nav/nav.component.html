@@ -1,13 +1,16 @@
-<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+<nav class="navbar navbar-shrink navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
   <div class="container px-4 px-lg-5">
     <a
       class="navbar-brand"
-      href="#page-top">
+      routerLink="home"
+      routerLinkActive="active"
+    >
       <span class="mat-subtitle-1">
       Portfolio
       </span>
     </a>
-    <!--    button visible en media < 996px-->
+
+    <!--    button visible cuando media < 996px-->
     <button class="navbar-toggler navbar-toggler-right"
             type="button"
             data-bs-toggle="collapse"
@@ -18,57 +21,70 @@
       <span class="navbar-toggler-icon">
       </span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ms-auto my-2 my-lg-0">
-        <!--                 <li class="nav-item"><a class="nav-link" href="#about">Acerca de</a></li> -->
         <li class="nav-item">
-          <a class="nav-link" routerLink="/">
+          <a class="nav-link"
+             routerLink="/about"
+             routerLinkActive #rlaAbout="routerLinkActive"
+          >
             <span class="mat-subtitle-2">
-              About</span>
+              About
+            </span>
+            <div [ngClass]="{'active-link mt-1':rlaAbout.isActive ,'':!rlaAbout.isActive }"></div>
           </a>
         </li>
-        <!--                 <li class="nav-item"><a class="nav-link" href="#services">Experiencia</a></li> -->
-
         <li class="nav-item">
-          <a class="nav-link" routerLink="/experience&education">
+          <a class="nav-link"
+             routerLink="/experience&education"
+             routerLinkActive #rlaEyE="routerLinkActive"
+          >
             <span class="mat-subtitle-2">
             Experiencia & Educación
             </span>
+            <div [ngClass]="{'active-link mt-1':rlaEyE.isActive ,'':!rlaEyE.isActive }"></div>
           </a>
         </li>
-        <!--        <li class="nav-item"><a class="nav-link" routerLink="/work">Experiencia</a></li>
-                <li class="nav-item"><a class="nav-link" routerLink="/education">Educación</a></li>-->
         <li class="nav-item">
           <a class="nav-link"
-             routerLink="/skills">
+             routerLink="/skills"
+             routerLinkActive #rlaSkills="routerLinkActive"
+          >
             <span class="mat-subtitle-2">
             Habilidades
             </span>
+            <div [ngClass]="{'active-link mt-1':rlaSkills.isActive ,'':!rlaSkills.isActive }"></div>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link"
-             routerLink="/projects">
+             routerLink="/projects"
+             routerLinkActive #rlaProjects="routerLinkActive"
+          >
             <span class="mat-subtitle-2">
             Proyectos
             </span>
+            <div [ngClass]="{'active-link mt-1':rlaProjects.isActive ,'':!rlaProjects.isActive }"></div>
           </a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!authService.isLogged">
           <a class="nav-link"
              routerLink="/login"
-             *ngIf="!authService.logIn">
+             routerLinkActive #rlaLogin="routerLinkActive"
+          >
             <span class="mat-subtitle-2">
             Login
             </span>
+            <div [ngClass]="{'active-link mt-1':rlaLogin.isActive ,'':!rlaLogin.isActive }"></div>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link"
              href=""
              (click)="logOut()"
-             *ngIf="authService.logIn">
+             *ngIf="authService.isLogged">
             <span class="mat-subtitle-2">
             Logout
             </span>
@@ -79,4 +95,4 @@
     </div>
   </div>
 </nav>
-<!-- <script src="scripts.js"></script> -->
+

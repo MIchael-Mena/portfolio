@@ -10,24 +10,17 @@
         </span>
       </mat-card-subtitle>
     </mat-card-title-group>
-    <!--    <h3>{{experience.primaryInfo}}</h3>
-        <div class="subheading mb-3">
-          {{experience.secondaryInfo}}
-          <span> / </span>
-          {{experience.initialDate | date: 'MMMM y'}}
-          - {{experience.finalDate === null ? 'Presente' : (experience.finalDate | date: 'MMMM y')}}
-        </div>-->
     <mat-card-content>
       <p>{{experience.description}}</p>
     </mat-card-content>
   </div>
   <div class="flex-shrink-0">
-    <div class="icon-edit">
+    <div class="icon-edit" *ngIf="auth.isLogged">
       <fa-icon
         [icon]="faPenToSquare"
         class="icon-style ms-4"
         size="lg"
-        (click)="editExperience(experience)"
+        (click)="editExperience()"
         title="Editar"
       >
       </fa-icon>
@@ -35,7 +28,7 @@
         [icon]="faTrashCan"
         class="icon-style ms-4"
         size="lg"
-        (click)="openDialog('100ms','50ms')"
+        (click)="openDeleteDialog('100ms','50ms')"
         title="Eliminar"
       >
       </fa-icon>

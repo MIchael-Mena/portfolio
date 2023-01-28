@@ -4,7 +4,7 @@
       <div class="mx-auto">
         <h1 class="mb-5 mat-h1">{{experience?.title}}</h1>
       </div>
-      <div>
+      <div *ngIf="auth.isLogged">
         <fa-icon
           class="icon"
           [icon]="faSquarePlus"
@@ -14,7 +14,6 @@
           size="xl"
         >
         </fa-icon>
-
       </div>
     </div>
 

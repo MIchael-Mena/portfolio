@@ -7,8 +7,8 @@ import {Router} from "@angular/router";
 })
 export class AuthService {
 
-  uri = 'http://localhost:5000';
-  token: string = ''
+  private uri = 'http://localhost:5000';
+  private token: string = ''
 
   constructor(private http: HttpClient, private router: Router) {
   }
@@ -19,7 +19,6 @@ export class AuthService {
         this.token = res['accessToken'];
         localStorage.setItem('token', this.token);
         this.router.navigate(['/']).then(r => console.log(r));
-        console.log(this.logIn);
       });
   }
 
@@ -30,8 +29,11 @@ export class AuthService {
     this.router.navigate(['/login']).then(r => console.log(r));
   }
 
-  public get logIn(): boolean {
-    console.log(localStorage.getItem('token'));
+  public get isLogged(): boolean {
     return (localStorage.getItem('token') !== '');
+  }
+
+  public get tokenValue(): string {
+    return localStorage.getItem('token') || '';
   }
 }

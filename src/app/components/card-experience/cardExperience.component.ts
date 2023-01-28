@@ -6,6 +6,7 @@ import {MatDialog} from "@angular/material/dialog";
 
 import {Input} from '@angular/core';
 import {DialogDeleteCardComponent} from "../dialog-delete-card/dialog-delete-card.component";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-card-experience',
@@ -19,18 +20,18 @@ export class CardExperienceComponent {
   faPenToSquare = faPenToSquare;
   faTrashCan = faTrashCan;
 
-  constructor(public dialog: MatDialog) {
+  constructor(private dialog: MatDialog, public auth: AuthService) {
   }
 
   deleteExperience() {
     this.onDeleteExperience.emit(this.experience);
   }
 
-  editExperience(experience: ExperienceData) {
-    this.onEditExperience.emit(experience);
+  editExperience() {
+    this.onEditExperience.emit(this.experience);
   }
 
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  openDeleteDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     const dialogRef = this.dialog.open(DialogDeleteCardComponent, {
       data: {deleteExperience: false},
       width: '250px',
@@ -39,7 +40,7 @@ export class CardExperienceComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      // result es el valor de la propiedad data del dialog
       if (result) {
         this.deleteExperience();
       }

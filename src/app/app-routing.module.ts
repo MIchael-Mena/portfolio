@@ -5,11 +5,17 @@ import {
   ExperienceAndEducationComponent
 } from "./components/experience-and-education/experience-and-education.component";
 import {LoginFormComponent} from "./components/login-form/login-form.component";
+import {HomeComponent} from "./components/home/home.component";
+import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
 
 const appRoutes: Routes = [
-  {path: '', component: AboutComponent},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'home', component: HomeComponent},
+  {path: 'about', component: AboutComponent},
   {path: 'experience&education', component: ExperienceAndEducationComponent},
   {path: 'login', component: LoginFormComponent},
+  {path: '**', component: PageNotFoundComponent}
+
 ]
 
 @NgModule({

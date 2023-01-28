@@ -8,7 +8,7 @@ import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from "@angular/material/dialog
 })
 export class DialogDeleteCardComponent {
 
-  constructor(public dialogRef: MatDialogRef<DialogDeleteCardComponent>, @Inject(MAT_DIALOG_DATA) public xxx: { deleteExperience: boolean }) {
+  constructor(public dialogRef: MatDialogRef<DialogDeleteCardComponent>, @Inject(MAT_DIALOG_DATA) public dialog: { deleteExperience: boolean }) {
   }
 
   onNoClick(): void {

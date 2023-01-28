@@ -1,4 +1,4 @@
-import {LOCALE_ID, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 // Necesario para usar [formControl] en los inputs
@@ -18,8 +18,6 @@ import {CardExperienceComponent} from './components/card-experience/cardExperien
 import {AddExperienceComponent} from './components/add-experience/add-experience.component';
 import {UpdateDirective} from './directives/update.directive';
 import {DatePickerComponent} from './components/date-picker/date-picker.component';
-import {HomeComponent} from './components/home/home.component';
-import {ExperienceService} from "./service/experience.service";
 import {LoginFormComponent} from './components/login-form/login-form.component';
 import {DialogDeleteCardComponent} from './components/dialog-delete-card/dialog-delete-card.component';
 import {AboutComponent} from './components/about/about.component';
@@ -27,6 +25,7 @@ import {
   ExperienceAndEducationComponent
 } from './components/experience-and-education/experience-and-education.component';
 import {AuthService} from "./service/auth.service";
+import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +40,7 @@ import {AuthService} from "./service/auth.service";
     DialogDeleteCardComponent,
     AboutComponent,
     ExperienceAndEducationComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +52,7 @@ import {AuthService} from "./service/auth.service";
     MaterialModule,
     DateLanguageModule,
   ],
-  providers: [ExperienceService, AuthService],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

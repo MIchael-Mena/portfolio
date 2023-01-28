@@ -84,13 +84,6 @@ export class AddExperienceComponent {
   setPresentDate(checkBox: any): void {
     if (checkBox.checked) {
       this.finalDateSettings = {...this.finalDateSettings, disable: true};
-      // EL get me devuelve el form control de finalDate, quedando el campo finalDate undefined.
-      // mas adelante en onSubmit() el finalDate vuelve a tomar el valor que tenia antes de ser undefined
-      // no se porque pasa esto, genera error si envia en el string onSubmit() ya que tiene los validadores
-      // del datepicker que lo toman como invalido
-      // genera un warinig en la consola de las dos formas
-      /*       this.form.get('finalDate')?.setValue('0000-00-00'); */
-      /*       this.form.controls['finalDate'].setValue('0000-00-00'); */
       return;
     }
     this.finalDateSettings = {...this.finalDateSettings, disable: false};
