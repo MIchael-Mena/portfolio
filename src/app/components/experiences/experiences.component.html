@@ -4,7 +4,7 @@
       <div class="mx-auto">
         <h1 class="mb-5 mat-h1">{{experience?.title}}</h1>
       </div>
-      <div *ngIf="auth.isLogged">
+      <div *ngIf="storageService.isLogged">
         <fa-icon
           class="icon"
           [icon]="faSquarePlus"

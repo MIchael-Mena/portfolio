@@ -6,7 +6,7 @@ import {MatDialog} from "@angular/material/dialog";
 
 import {Input} from '@angular/core';
 import {DialogDeleteCardComponent} from "../dialog-delete-card/dialog-delete-card.component";
-import {AuthService} from "../../service/auth.service";
+import {StorageService} from "../../service/storage.service";
 
 @Component({
   selector: 'app-card-experience',
@@ -20,7 +20,7 @@ export class CardExperienceComponent {
   faPenToSquare = faPenToSquare;
   faTrashCan = faTrashCan;
 
-  constructor(private dialog: MatDialog, public auth: AuthService) {
+  constructor(private dialog: MatDialog, public storageService: StorageService) {
   }
 
   deleteExperience() {

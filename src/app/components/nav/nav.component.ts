@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-
+import {StorageService} from "../../service/storage.service";
 import {AuthService} from "../../service/auth.service";
 
 @Component({
@@ -10,11 +10,12 @@ import {AuthService} from "../../service/auth.service";
 })
 export class NavComponent {
 
-  constructor(public authService: AuthService) {
+  constructor(public storageService: StorageService, private authService: AuthService) {
   }
 
   logOut() {
     this.authService.logout();
+    this.storageService.cleanUser();
   }
 
 }

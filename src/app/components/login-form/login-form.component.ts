@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../service/auth.service";
+import {StorageService} from "../../service/storage.service";
 
 @Component({
   selector: 'app-login-form',
@@ -8,26 +9,50 @@ import {AuthService} from "../../service/auth.service";
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent {
-  hide = true;
-  form: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  public error = false;
+  public hide = true;
+  public form: FormGroup;
+
+  constructor(private fb: FormBuilder, private authService: AuthService, private storageService: StorageService) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
   }
 
-  OnSubmit() {
-    /*    if (this.form.valid) {
-          this.submitEM.emit(this.form.value);
-        }*/
-    if (this.form.valid) {
-      this.authService.login(this.form.value.email, this.form.value.password);
-    }
+  public get controlEmail(): any {
+    return this.form.controls['email'];
   }
 
-  @Input() error: string | null = null;
+  public get controlPassword(): any {
+    return this.form.controls['password'];
+  }
 
-  @Output() submitEM = new EventEmitter();
+  OnSubmit() {
+    if (this.form.invalid) {
+      return;
+    }
+    const {email, password} = this.form.value;
+    this.authService.login(email, password).subscribe({
+        next: (data: any) => {
+          this.storageService.saveUser(data);
+          this.reloadPage();
+        },
+        error: (error) => {
+          if (error.status === 400) {
+            this.error = true;
+          } else {
+            console.log(error.message);
+          }
+        }
+      }
+    );
+
+  }
+
+  private reloadPage(): void {
+    window.location.reload();
+  }
+
 }
