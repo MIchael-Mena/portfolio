@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
 
@@ -9,12 +9,17 @@ import {Observable} from "rxjs";
 export class AuthService {
 
   private uri = 'http://localhost:5000';
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
 
   constructor(private http: HttpClient, private router: Router) {
   }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.uri}/login`, {email, password});
+    return this.http.post(`${this.uri}/login`, {email, password}, this.httpOptions);
   }
 
   register(email: string, password: string): Observable<any> {

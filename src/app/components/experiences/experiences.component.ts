@@ -6,7 +6,7 @@ import {ExperienceData} from 'src/app/components/interfaces/ExperienceData';
 import {UiEditFormService} from 'src/app/service/uiEditForm.service';
 import {Experience} from '../interfaces/Experience';
 import {FormExperience} from '../interfaces/FormExperience';
-import {StorageService} from "../../service/storage.service";
+import {StorageSessionService} from "../../service/storage-session.service";
 
 @Component({
   selector: 'app-experiences',
@@ -17,13 +17,20 @@ import {StorageService} from "../../service/storage.service";
 })
 export class ExperiencesComponent implements OnInit {
   faSquarePlus = faSquarePlus;
-  experiences: ExperienceData[] = [];
-  formExperienceConfig: { showForm: boolean, experienceIsNew: boolean } = {showForm: false, experienceIsNew: true};
+  public isLoggedIn: boolean = false;
+  public experiences: ExperienceData[] = [];
+  public formExperienceConfig: { showForm: boolean, experienceIsNew: boolean } = {
+    showForm: false,
+    experienceIsNew: true
+  };
 
-  formExperience?: FormExperience;
+  public formExperience?: FormExperience;
   @Input() experience?: Experience;
 
-  constructor(private experienceService: ExperienceService, private uiEditFormService: UiEditFormService, public storageService: StorageService) {
+  constructor(private experienceService: ExperienceService, private uiEditFormService: UiEditFormService, public storageService: StorageSessionService) {
+    this.storageService.onToggleSignUp().subscribe((data: boolean) => {
+      this.isLoggedIn = data;
+    });
   }
 
   ngOnInit(): void {

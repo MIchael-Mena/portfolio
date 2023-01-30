@@ -6,7 +6,7 @@ import {MatDialog} from "@angular/material/dialog";
 
 import {Input} from '@angular/core';
 import {DialogDeleteCardComponent} from "../dialog-delete-card/dialog-delete-card.component";
-import {StorageService} from "../../service/storage.service";
+import {StorageSessionService} from "../../service/storage-session.service";
 
 @Component({
   selector: 'app-card-experience',
@@ -17,10 +17,15 @@ export class CardExperienceComponent {
   @Input() experience!: ExperienceData;
   @Output() onDeleteExperience: EventEmitter<ExperienceData> = new EventEmitter();
   @Output() onEditExperience: EventEmitter<ExperienceData> = new EventEmitter();
+
+  public isLoggedIn: boolean = false;
   faPenToSquare = faPenToSquare;
   faTrashCan = faTrashCan;
 
-  constructor(private dialog: MatDialog, public storageService: StorageService) {
+  constructor(private dialog: MatDialog, public storageService: StorageSessionService) {
+    this.storageService.onToggleSignUp().subscribe((data: boolean) => {
+      this.isLoggedIn = data;
+    });
   }
 
   deleteExperience() {

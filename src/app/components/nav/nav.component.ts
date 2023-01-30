@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {StorageService} from "../../service/storage.service";
+import {StorageSessionService} from "../../service/storage-session.service";
 import {AuthService} from "../../service/auth.service";
 
 @Component({
@@ -10,7 +10,12 @@ import {AuthService} from "../../service/auth.service";
 })
 export class NavComponent {
 
-  constructor(public storageService: StorageService, private authService: AuthService) {
+  public isLoggedIn: boolean = false;
+
+  constructor(public storageService: StorageSessionService, private authService: AuthService) {
+    this.storageService.onToggleSignUp().subscribe((data: boolean) => {
+      this.isLoggedIn = data;
+    });
   }
 
   logOut() {

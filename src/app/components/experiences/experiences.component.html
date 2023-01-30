@@ -4,7 +4,7 @@
       <div class="mx-auto">
         <h1 class="mb-5 mat-h1">{{experience?.title}}</h1>
       </div>
-      <div *ngIf="storageService.isLogged">
+      <div *ngIf="isLoggedIn">
         <fa-icon
           class="icon"
           [icon]="faSquarePlus"
@@ -24,6 +24,9 @@
       [formExperience]="formExperience"
     >
     </app-add-experience>
+
+    <app-spinner class="d-flex justify-content-center">
+    </app-spinner>
 
     <app-card-experience
       *ngFor="let experience of experiences"

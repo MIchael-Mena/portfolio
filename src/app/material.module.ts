@@ -10,6 +10,7 @@ import {MomentDateModule} from "@angular/material-moment-adapter";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 const myMaterialModules = [
   MatIconModule,
@@ -22,7 +23,8 @@ const myMaterialModules = [
   MomentDateModule,
   BrowserAnimationsModule,
   MatCheckboxModule,
-  MatDialogModule
+  MatDialogModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule(

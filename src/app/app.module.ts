@@ -26,6 +26,9 @@ import {
 } from './components/experience-and-education/experience-and-education.component';
 import {AuthService} from "./service/auth.service";
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
+import {SpinnerComponent} from './components/spinner/spinner.component';
+import {StorageSessionService} from "./service/storage-session.service";
+import {httpInterceptorProviders} from "./interceptors/loading.interceptor";
 
 @NgModule({
   declarations: [
@@ -41,6 +44,7 @@ import {PageNotFoundComponent} from './components/page-not-found/page-not-found.
     AboutComponent,
     ExperienceAndEducationComponent,
     PageNotFoundComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +56,7 @@ import {PageNotFoundComponent} from './components/page-not-found/page-not-found.
     MaterialModule,
     DateLanguageModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, StorageSessionService, httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -49,8 +49,14 @@
           Password or email invalid.
         </label>
 
+
         <div class="button">
-          <button type="SUBMIT" mat-raised-button color="primary">Login</button>
+          <button mat-raised-button color="primary" disabled *ngIf="isLoading">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Loading...
+          </button>
+
+          <button type="SUBMIT" mat-raised-button color="primary" *ngIf="!isLoading">Login</button>
         </div>
 
       </form>
