@@ -27,7 +27,9 @@ export class ExperiencesComponent implements OnInit {
   public formExperience?: FormExperience;
   @Input() experience?: Experience;
 
-  constructor(private experienceService: ExperienceService, private uiEditFormService: UiEditFormService, public storageService: StorageSessionService) {
+  constructor(private experienceService: ExperienceService,
+              private uiEditFormService: UiEditFormService,
+              public storageService: StorageSessionService) {
     this.storageService.onToggleSignUp().subscribe((data: boolean) => {
       this.isLoggedIn = data;
     });
@@ -74,13 +76,23 @@ export class ExperiencesComponent implements OnInit {
     });
   }
 
-  editExperience(experience: ExperienceData) {
+  editExperience(experience: ExperienceData, element: HTMLElement) {
     // Envío el objeto experience al servicio, y es recibido por add-experience
     // que está subscrito al servicio. Para que lo pueda carga en el formulario
     this.formExperienceConfig = {showForm: true, experienceIsNew: false};
     this.uiEditFormService.toggleEdit(experience);
 
-    window.scrollTo(0, 0);
+    element.scrollIntoView({behavior: "smooth"});
+
+    /*    const routerOption: ExtraOptions = {
+          scrollPositionRestoration: 'enabled',
+          anchorScrolling: 'enabled',
+          onSameUrlNavigation: 'reload',
+        }
+
+        this.router.navigate([], {fragment: element.id, ...routerOption});*/
+
+    // window.scrollTo(0, 0);
   }
 
 }

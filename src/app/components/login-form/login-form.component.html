@@ -1,10 +1,18 @@
 <div class="container-login">
   <mat-card class="card-style">
-    <mat-card-title class="text-center py-4 h5">Login</mat-card-title>
+    <div class="container-title">
+      <mat-card-title class="text-center py-4 text-color">Inicio Sesión</mat-card-title>
+
+    </div>
+    <mat-card-subtitle class="text-center mb-4">
+      <div class="container-subtitle py-2 ">
+        Registrate para activar modo edición
+      </div>
+    </mat-card-subtitle>
     <mat-card-content>
       <form [formGroup]="form" (ngSubmit)="OnSubmit(  )">
         <p>
-          <mat-form-field class="input-field" appearance="outline">
+          <mat-form-field class="input-field prueba" appearance="outline">
             <mat-label>Email</mat-label>
             <input
               type="text"
@@ -13,10 +21,12 @@
               formControlName="email"
               maxlength="50"
             >
-            <mat-error *ngIf="controlEmail.hasError('email') && !controlEmail.hasError('required')">
+            <!--suppress TypeScriptUnresolvedFunction -->
+            <mat-error *ngIf="this.controlEmail.hasError('email') && !this.controlEmail.hasError('required')">
               Please enter a valid email address
             </mat-error>
-            <mat-error *ngIf="controlEmail.hasError('required')">
+            <!--suppress TypeScriptUnresolvedFunction -->
+            <mat-error *ngIf="this.controlEmail.hasError('required')">
               Email is <strong>required</strong>
             </mat-error>
           </mat-form-field>
@@ -36,7 +46,8 @@
                     [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-            <mat-error *ngIf="controlPassword.hasError('required')">
+            <!--suppress TypeScriptUnresolvedFunction -->
+            <mat-error *ngIf="this.controlPassword.hasError('required')">
               Password is <strong>required</strong>
             </mat-error>
           </mat-form-field>
@@ -44,7 +55,7 @@
 
         <label
           *ngIf="error"
-          class="error mat-caption my-3"
+          class="error mat-caption my-2"
           [ngStyle]="{'borderRadius':'5px'}">
           Password or email invalid.
         </label>
@@ -56,7 +67,9 @@
             Loading...
           </button>
 
-          <button type="SUBMIT" mat-raised-button color="primary" *ngIf="!isLoading">Login</button>
+          <button type="SUBMIT" mat-raised-button color="primary" *ngIf="!isLoading">
+            Ingresar
+          </button>
         </div>
 
       </form>

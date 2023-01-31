@@ -1,3 +1,22 @@
+/* Para cambiar el background del input solo en este componente */
+/*:host ::ng-deep .mdc-text-field {
+  background-color: #FFEBB7
+}*/
+
+.container-title {
+  background-color: #243763;
+}
+
+.text-color {
+  color: white;
+  /*color: #243763;*/
+}
+
+.container-subtitle {
+  /*background-color: #FF6E31;*/
+  border-radius: 0 0 0.5rem 0.5rem;
+  background-color: #AD8E70;
+}
 
 .container-login {
   display: flex;
@@ -6,16 +25,10 @@
   margin: 8rem 0rem 0rem 0rem;
 }
 
-
-mat-form-field-appearance-fill .mat-form-field-flex {
-  background-color: #0b37ff;
-}
-
 .input-field {
   width: 100%;
   min-width: 300px;
 }
-
 
 mat-card-content {
   display: flex;

@@ -2,7 +2,7 @@
   <div class="resume-section-content">
     <div class="section-tittle ">
       <div class="mx-auto">
-        <h1 class="mb-5 mat-h1">{{experience?.title}}</h1>
+        <h1 class="mb-5 mat-h1" #target>{{experience?.title}}</h1>
       </div>
       <div *ngIf="isLoggedIn">
         <fa-icon
@@ -31,9 +31,10 @@
     <app-card-experience
       *ngFor="let experience of experiences"
       [experience]="experience"
-      (onEditExperience)="editExperience($event)"
+      (onEditExperience)="editExperience($event, target)"
       (onDeleteExperience)="deleteExperience($event)"
     >
     </app-card-experience>
+
   </div>
 </section>

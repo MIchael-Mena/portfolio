@@ -20,12 +20,4 @@ export class LoaderService {
   public toggleLoad(statusLoading: boolean) {
     this.behaviorSubject.next(statusLoading);
   }
-
-  setLoading(loading: boolean) {
-    this.loading = loading;
-  }
-
-  getLoading(): boolean {
-    return this.loading;
-  }
 }

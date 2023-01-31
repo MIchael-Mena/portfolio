@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Router} from "@angular/router";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -15,7 +14,7 @@ export class AuthService {
     })
   }
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
   }
 
   login(email: string, password: string): Observable<any> {

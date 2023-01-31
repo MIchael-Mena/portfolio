@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../service/auth.service";
 import {StorageSessionService} from "../../service/storage-session.service";
@@ -10,7 +10,7 @@ import {LoaderService} from "../../service/loader.service";
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit {
 
   public error = false;
   public hide = true;
@@ -20,7 +20,8 @@ export class LoginFormComponent {
   constructor(private fb: FormBuilder,
               private authService: AuthService,
               private storageService: StorageSessionService,
-              private router: Router, private loadingService: LoaderService) {
+              private router: Router,
+              private loadingService: LoaderService) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
@@ -28,9 +29,9 @@ export class LoginFormComponent {
   }
 
   ngOnInit(): void {
-    this.loadingService.onToggleLoading().subscribe((status: boolean) => {
-      this.isLoading = status;
-    });
+    /*    this.loadingService.onToggleLoading().subscribe((status: boolean) => {
+          this.isLoading = status;
+        });*/
   }
 
   public get controlEmail(): any {
@@ -43,6 +44,7 @@ export class LoginFormComponent {
 
 
   OnSubmit() {
+    this.isLoading = true;
     if (this.form.invalid) {
       return;
     }
@@ -51,6 +53,7 @@ export class LoginFormComponent {
         next: (data: any) => {
           this.storageService.saveUser(data);
           this.form.reset();
+          this.isLoading = false;
           this.router.navigate(['/home']);
           // this.reloadPage();
         },
@@ -63,6 +66,7 @@ export class LoginFormComponent {
           } else {
             console.log(error.message);
           }
+          this.isLoading = false;
         }
       }
     );

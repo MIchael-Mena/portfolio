@@ -75,18 +75,18 @@
              routerLinkActive #rlaLogin="routerLinkActive"
           >
             <span class="mat-subtitle-2">
-            Login
+            Ingresar
             </span>
             <div [ngClass]="{'active-link mt-1':rlaLogin.isActive ,'':!rlaLogin.isActive }"></div>
           </a>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn">
           <a class="nav-link"
-             href=""
+             [ngStyle]="{'cursor':'pointer'}"
              (click)="logOut()"
           >
             <span class="mat-subtitle-2">
-            Logout
+            Salir
             </span>
           </a>
         </li>
