@@ -11,6 +11,12 @@ import {Router} from "@angular/router";
 })
 export class NavComponent {
 
+  public routeAboutActive: boolean = false;
+  public routeExpAndEduActive: boolean = false;
+  public routeSkillsActive: boolean = false;
+  public routeProjectsActive: boolean = false;
+  public routeLoginActive: boolean = false;
+
   public isLoggedIn: boolean = false;
 
   constructor(public storageService: StorageSessionService,
@@ -21,7 +27,28 @@ export class NavComponent {
     });
   }
 
-  logOut() {
+  public routerActive(state: boolean, route: string): void {
+    // this.routeLoginActive = state;
+    switch (route) {
+      case 'about':
+        this.routeAboutActive = state;
+        break;
+      case 'expAndEdu':
+        this.routeExpAndEduActive = state;
+        break;
+      case 'skills':
+        this.routeSkillsActive = state;
+        break;
+      case 'projects':
+        this.routeProjectsActive = state;
+        break;
+      case 'login':
+        this.routeLoginActive = state;
+        break;
+    }
+  }
+
+  public logOut(): void {
     this.authService.logout();
     this.storageService.cleanUser();
     this.router.navigate(['/login']);

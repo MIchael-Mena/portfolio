@@ -1,12 +1,11 @@
 <div class="container-login">
   <mat-card class="card-style">
     <div class="container-title">
-      <mat-card-title class="text-center py-4 text-color">Inicio Sesión</mat-card-title>
-
+      <mat-card-title class="text-center py-4 text-color">Bienvenido</mat-card-title>
     </div>
     <mat-card-subtitle class="text-center mb-4">
       <div class="container-subtitle py-2 ">
-        Registrate para activar modo edición
+        Inicia sesión para activar modo edición
       </div>
     </mat-card-subtitle>
     <mat-card-content>
@@ -23,11 +22,11 @@
             >
             <!--suppress TypeScriptUnresolvedFunction -->
             <mat-error *ngIf="this.controlEmail.hasError('email') && !this.controlEmail.hasError('required')">
-              Please enter a valid email address
+              Por favor ingrese un email valido
             </mat-error>
             <!--suppress TypeScriptUnresolvedFunction -->
             <mat-error *ngIf="this.controlEmail.hasError('required')">
-              Email is <strong>required</strong>
+              Email es <strong>requerido</strong>
             </mat-error>
           </mat-form-field>
         </p>
@@ -48,7 +47,7 @@
             </button>
             <!--suppress TypeScriptUnresolvedFunction -->
             <mat-error *ngIf="this.controlPassword.hasError('required')">
-              Password is <strong>required</strong>
+              Contraseña es <strong>requerida</strong>
             </mat-error>
           </mat-form-field>
         </p>
@@ -57,17 +56,18 @@
           *ngIf="error"
           class="error mat-caption my-2"
           [ngStyle]="{'borderRadius':'5px'}">
-          Password or email invalid.
+          Contraseña o email invalido.
         </label>
 
 
         <div class="button">
-          <button mat-raised-button color="primary" disabled *ngIf="isLoading">
+          <button mat-fab extended color="primary" disabled *ngIf="this.isLoading">
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            Loading...
+            Cargando...
           </button>
 
-          <button type="SUBMIT" mat-raised-button color="primary" *ngIf="!isLoading">
+          <button type="SUBMIT" mat-fab extended color="primary" *ngIf="!this.isLoading">
+            <mat-icon svgIcon="start" aria-hidden="false" aria-label="start"></mat-icon>
             Ingresar
           </button>
         </div>

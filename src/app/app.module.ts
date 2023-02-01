@@ -29,6 +29,7 @@ import {PageNotFoundComponent} from './components/page-not-found/page-not-found.
 import {SpinnerComponent} from './components/spinner/spinner.component';
 import {StorageSessionService} from "./service/storage-session.service";
 import {httpInterceptorProviders} from "./interceptors/loading.interceptor";
+import {IconsComponent} from './components/icons/icons.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {httpInterceptorProviders} from "./interceptors/loading.interceptor";
     ExperienceAndEducationComponent,
     PageNotFoundComponent,
     SpinnerComponent,
+    IconsComponent,
   ],
   imports: [
     BrowserModule,

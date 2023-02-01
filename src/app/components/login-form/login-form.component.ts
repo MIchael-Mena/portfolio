@@ -20,8 +20,7 @@ export class LoginFormComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private authService: AuthService,
               private storageService: StorageSessionService,
-              private router: Router,
-              private loadingService: LoaderService) {
+              private router: Router) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
@@ -29,9 +28,6 @@ export class LoginFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    /*    this.loadingService.onToggleLoading().subscribe((status: boolean) => {
-          this.isLoading = status;
-        });*/
   }
 
   public get controlEmail(): any {
@@ -42,10 +38,10 @@ export class LoginFormComponent implements OnInit {
     return this.form.controls['password'];
   }
 
-
   OnSubmit() {
     this.isLoading = true;
     if (this.form.invalid) {
+      this.isLoading = false;
       return;
     }
     const {email, password} = this.form.value;
