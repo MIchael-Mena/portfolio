@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ExperienceData} from '../components/interfaces/ExperienceData';
+import {ExperienceData} from '../components/shared/ExperienceData';
 import {Observable} from 'rxjs';
 
 const httpOptions = {

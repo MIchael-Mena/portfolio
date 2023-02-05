@@ -1,12 +1,13 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {faPenToSquare} from '@fortawesome/free-solid-svg-icons';
 import {faTrashCan} from '@fortawesome/free-regular-svg-icons';
-import {ExperienceData} from '../interfaces/ExperienceData';
+import {ExperienceData} from '../shared/ExperienceData';
 import {MatDialog} from "@angular/material/dialog";
 
 import {Input} from '@angular/core';
-import {DialogDeleteCardComponent} from "../dialog-delete-card/dialog-delete-card.component";
 import {StorageSessionService} from "../../service/storage-session.service";
+import {DialogCardComponent} from "../dialog-card/dialog-card.component";
+import {DialogContent} from "../shared/DialogContent";
 
 @Component({
   selector: 'app-card-experience',
@@ -37,15 +38,20 @@ export class CardExperienceComponent {
   }
 
   openDeleteDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    const dialogRef = this.dialog.open(DialogDeleteCardComponent, {
-      data: {deleteExperience: false},
+    const data = <DialogContent>{
+      title: 'Eliminar tarjeta',
+      content: '¿Estás seguro de que quieres eliminar esta tarjeta?',
+    }
+
+    const dialogRef = this.dialog.open(DialogCardComponent, {
+      data,
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // result es el valor de la propiedad data del dialog
+      // result es el valor que nos devuelve el dialog
       if (result) {
         this.deleteExperience();
       }

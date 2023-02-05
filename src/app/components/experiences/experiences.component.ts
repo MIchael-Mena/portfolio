@@ -1,18 +1,19 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ExperienceService} from 'src/app/service/experience.service';
 import {faSquarePlus} from '@fortawesome/free-regular-svg-icons';
-import {ExperienceData} from 'src/app/components/interfaces/ExperienceData';
+import {ExperienceData} from 'src/app/components/shared/ExperienceData';
 
 import {UiEditFormService} from 'src/app/service/uiEditForm.service';
-import {Experience} from '../interfaces/Experience';
-import {FormExperience} from '../interfaces/FormExperience';
+import {Experience} from '../shared/Experience';
+import {FormExperience} from '../shared/FormExperience';
 import {StorageSessionService} from "../../service/storage-session.service";
 
 @Component({
   selector: 'app-experiences',
   templateUrl: './experiences.component.html',
   styleUrls: ['./experiences.component.css'],
-  // Cada instancia de este componente tendrá su propio servicio
+  // Cada instancia de este componente tendrá su propio servicio y los componentes hijos
+  // tendrán acceso a este servicio
   providers: [UiEditFormService, ExperienceService]
 })
 export class ExperiencesComponent implements OnInit {
@@ -21,7 +22,7 @@ export class ExperiencesComponent implements OnInit {
   public experiences: ExperienceData[] = [];
   public formExperienceConfig: { showForm: boolean, experienceIsNew: boolean } = {
     showForm: false,
-    experienceIsNew: true
+    experienceIsNew: true,
   };
 
   public formExperience?: FormExperience;
@@ -46,7 +47,7 @@ export class ExperiencesComponent implements OnInit {
   }
 
   showForm() {
-    this.formExperienceConfig.showForm = !this.formExperienceConfig.showForm;
+    this.formExperienceConfig = {...this.formExperienceConfig, showForm: !this.formExperienceConfig.showForm};
   }
 
   addExperience(experience: ExperienceData) {

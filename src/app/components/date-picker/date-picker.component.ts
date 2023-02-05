@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { MAT_DATE_FORMATS } from '@angular/material/core';
-import { MatDatepicker } from '@angular/material/datepicker';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
+import {MAT_DATE_FORMATS} from '@angular/material/core';
+import {MatDatepicker} from '@angular/material/datepicker';
 
 // Depending on whether rollup is used, moment needs to be imported differently.
 // Since Moment.js doesn't have a default export, we normally need to import using the `* as`
@@ -9,8 +9,8 @@ import { MatDatepicker } from '@angular/material/datepicker';
 // the `default as` syntax.
 import * as _moment from 'moment';
 // @ts-ignore
-import { default as _rollupMoment, Moment } from 'moment';
-import { DatePicker } from '../interfaces/DatePicker';
+import {default as _rollupMoment, Moment} from 'moment';
+import {DatePicker} from '../shared/DatePicker';
 
 const moment = _rollupMoment || _moment;
 
@@ -32,7 +32,7 @@ export const MY_FORMATS = {
   selector: 'app-date-picker',
   templateUrl: './date-picker.component.html',
   styleUrls: ['./date-picker.component.css'],
-  providers: [ { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+  providers: [{provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ],
 })
 
@@ -49,11 +49,12 @@ export class DatePickerComponent {
   private currentYear: any;
   private dateValidators = [Validators.required, this.minDateValidator(), this.maxDateValidator()];
   date: FormControl<any>;
-/*   date: FormControl<any> = new FormControl('', this.dateValidators); */
-/*   date: FormControl<any> = new FormControl({value:'', disabled: false}, this.dateValidators); */
+  /*   date: FormControl<any> = new FormControl('', this.dateValidators); */
+
+  /*   date: FormControl<any> = new FormControl({value:'', disabled: false}, this.dateValidators); */
 
   constructor() {
-    this.date = new FormControl({value:'', disabled: false}, this.dateValidators);
+    this.date = new FormControl({value: '', disabled: false}, this.dateValidators);
     this.currentYear = moment().year();
     this.setMinDate();
     this.setMaxDate();
@@ -61,68 +62,67 @@ export class DatePickerComponent {
 
   ngOnChanges(): void {
     // Se ejecuta cuando se cambia el valor con el decorador Input()
-    if(this.dateSettings?.disable){
+    if (this.dateSettings?.disable) {
       this.date.disable();
     } else {
       this.date.enable();
     }
 
-    if(this.dateSettings?.dateToSet){
-      if(typeof this.dateSettings.dateToSet === 'string'){
+    if (this.dateSettings?.dateToSet) {
+      if (typeof this.dateSettings.dateToSet === 'string') {
         this.date.setValue(this.stringToMoment(this.dateSettings.dateToSet));
-      }else{
+      } else {
         // Si es un objeto moment
         this.date.setValue(this.dateSettings.dateToSet);
       }
-    } else{
+    } else {
       // si es un null o undefined o ''
       this.date.setValue('');
     }
 
-    if(this.dateSettings?.minDate){
-      if(typeof this.dateSettings.minDate === 'string'){
+    if (this.dateSettings?.minDate) {
+      if (typeof this.dateSettings.minDate === 'string') {
         this.minDateValid = this.stringToMoment(this.dateSettings.minDate);
-      }else{
+      } else {
         // Si es un objeto moment
         this.minDateValid = this.dateSettings.minDate;
-        if(this.dateSettings.disableRangeSelector){
+        if (this.dateSettings.disableRangeSelector) {
           // Se desactiva el rango de fechas seleccionables si esta en true
           this.setMinDate();
         }
       }
-    }else{
+    } else {
       this.setMinDate();
     }
 
-    if(this.dateSettings?.maxDate){
-      if(typeof this.dateSettings.maxDate === 'string'){
+    if (this.dateSettings?.maxDate) {
+      if (typeof this.dateSettings.maxDate === 'string') {
         this.maxDateValid = this.stringToMoment(this.dateSettings.maxDate);
-      }else{
+      } else {
         // Si es un objeto moment
         this.maxDateValid = this.dateSettings.maxDate;
-        if(this.dateSettings.disableRangeSelector){
+        if (this.dateSettings.disableRangeSelector) {
           // Se desactiva el rango de fechas seleccionables si esta en true
           this.setMaxDate();
         }
       }
-    }else{
+    } else {
       this.setMaxDate();
     }
 
   }
 
-  changeDateInput(aDate: any){
+  changeDateInput(aDate: any) {
     // Se ejecuta cuando se cambia el valor del input, aDate.value es un moment
-/*     console.log(aDate.value); */
-    console.log('changeDateInput');
-    if(aDate.value){
+    /*     console.log(aDate.value); */
+    if (aDate.value) {
       // Si aDate.value tiene un valor (no es null)
       this.emitDate(aDate.value);
     }
   }
 
   setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
-    if(this.date.invalid) {
+    if (this.date.invalid) {
       // Si date no tiene un momento le asigno el moment actual
       this.date.setValue(moment());
     }
@@ -132,8 +132,6 @@ export class DatePickerComponent {
     datepicker.close();
 
     this.emitDate(ctrlValue);
-/*     console.log('setMonthAndYear');
-    console.log(this.date); */
   }
 
   private emitDate(aDate: Moment) {
@@ -143,14 +141,14 @@ export class DatePickerComponent {
 
   private minDateValidator() {
     // Si es undefined, no se valida
-    return (control: FormControl): {[key: string]: any} | null => {
+    return (control: FormControl): { [key: string]: any } | null => {
       const date = control.value;
       if (date && this.minDateValid) {
         // Entra si tengo algo en date y tengo una fecha minima valida
         const dateMoment = moment(date);
         if (dateMoment.isBefore(this.minDateValid)) {
           // Si entra es porque la fecha es menor a la fecha minima
-          return { 'matDatepickerMinInvalid': true };
+          return {'matDatepickerMinInvalid': true};
         }
       }
       return null;
@@ -158,12 +156,12 @@ export class DatePickerComponent {
   }
 
   private maxDateValidator() {
-    return (control: FormControl): {[key: string]: any} | null => {
+    return (control: FormControl): { [key: string]: any } | null => {
       const date = control.value;
       if (date && this.maxDateValid) {
         const dateMoment = moment(date);
         if (dateMoment.isAfter(this.maxDateValid)) {
-          return { 'matDatepickerMaxInvalid': true };
+          return {'matDatepickerMaxInvalid': true};
         }
       }
       return null;
@@ -182,15 +180,15 @@ export class DatePickerComponent {
     // Se espera un string con formato YYYY-MM
     const [year, month] = aDate.split('-');
     // moment tambien acepta string como parametro
-    return moment([parseInt(year), parseInt(month) - 1 , 1]);
+    return moment([parseInt(year), parseInt(month) - 1, 1]);
   }
 
-/*  onClickeable() {
-    console.log(this.date.valid);
-    console.log(this.minDateValid);
-    console.log(this.maxDateValid);
-    console.log(this.date.errors)
-    console.log("Fecha min es invalida: " + this.date.hasError('matDatepickerMinInvalid'));
-    console.log("Fecha max es invalida:" + this.date.hasError('matDatepickerMaxInvalid'));
-  }*/
+  /*  onClickeable() {
+      console.log(this.date.valid);
+      console.log(this.minDateValid);
+      console.log(this.maxDateValid);
+      console.log(this.date.errors)
+      console.log("Fecha min es invalida: " + this.date.hasError('matDatepickerMinInvalid'));
+      console.log("Fecha max es invalida:" + this.date.hasError('matDatepickerMaxInvalid'));
+    }*/
 }

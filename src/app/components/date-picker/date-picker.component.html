@@ -1,5 +1,5 @@
 <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="mt-0">
-  <mat-label>Mes y Año</mat-label>
+  <mat-label>MM-YYYY</mat-label>
   <input
     matInput
     [matDatepicker]="dp"
@@ -8,9 +8,7 @@
     [max]="maxDate"
     (dateChange)="changeDateInput($event)"
     placeholder="Ingresar una fecha"
-    title="MM-YYYY"
   >
-  <!--   <mat-hint>MM-YYYY</mat-hint> -->
   <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
   <mat-datepicker #dp
                   startView="multi-year"

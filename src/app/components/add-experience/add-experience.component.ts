@@ -1,10 +1,14 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ExperienceData} from '../interfaces/ExperienceData';
-import {DatePicker} from '../interfaces/DatePicker';
+import {ExperienceData} from '../shared/ExperienceData';
+import {DatePicker} from '../shared/DatePicker';
+import {MatDialog} from '@angular/material/dialog';
 
 import {UiEditFormService} from 'src/app/service/uiEditForm.service';
-import {FormExperience} from '../interfaces/FormExperience';
+import {FormExperience} from '../shared/FormExperience';
+import {DialogCardComponent} from "../dialog-card/dialog-card.component";
+import {DialogContent} from "../shared/DialogContent";
+import {UnsavedChangesService} from "../../service/unsaved-changes.service";
 
 
 const datePickerClear = <DatePicker>{
@@ -20,17 +24,24 @@ const datePickerClear = <DatePicker>{
   templateUrl: './add-experience.component.html',
   styleUrls: ['./add-experience.component.css']
 })
-export class AddExperienceComponent {
-  @Input() formConfig: { showForm: boolean, experienceIsNew: boolean } = {showForm: false, experienceIsNew: true};
+export class AddExperienceComponent implements OnChanges {
+  @Input() formConfig: { showForm: boolean, experienceIsNew: boolean } = {
+    showForm: false,
+    experienceIsNew: true,
+  };
   @Input() formExperience?: FormExperience;
   @Output() onAddExperience: EventEmitter<ExperienceData> = new EventEmitter();
   @Output() onUpdateExperience: EventEmitter<ExperienceData> = new EventEmitter();
+  formIsAvailable: boolean = false;
 
   initialDateSettings: DatePicker = datePickerClear;
   finalDateSettings: DatePicker = datePickerClear;
   form: FormGroup;
 
-  constructor(private uiEditFormService: UiEditFormService, private fb: FormBuilder) {
+  constructor(private uiEditFormService: UiEditFormService,
+              private fb: FormBuilder,
+              private dialog: MatDialog,
+              private unsavedChangesService: UnsavedChangesService) {
     this.form = this.fb.group({
       id: [''],
       primaryInfo: ['', Validators.required],
@@ -41,17 +52,77 @@ export class AddExperienceComponent {
       description: ['', Validators.required],
       link: ['']
     });
-    this.uiEditFormService.onToggle().subscribe(experience => {
+    this.uiEditFormService.onToggle().subscribe((experience: ExperienceData) => {
       // Se ejecuta cuando se hace click en el boton de editar
       // y carga los datos del objeto experience en el formulario
       // se puede usar setvalue si experience tuviera todos los campos del formulario
       this.form.patchValue(experience);
+      this.form.markAsDirty()
       this.setUpDate(experience);
-
+    });
+    this.unsavedChangesService.onDismissChanges().subscribe(setFormState => {
+      setFormState(this.formIsEmpty(), this.formExperience?.name);
     });
   }
 
-  private setUpDate(experience: any) {
+  ngOnChanges(changes: SimpleChanges) {
+    // Se ejecuta cuando cambia el valor de un input (si hace click en el boton de agregar)
+    // solo si se cambia el objeto del input al que hace tiene como referencia por otro
+    const {showForm} = changes['formConfig'].currentValue;
+    this.verifyFormVisibility(showForm);
+  }
+
+  private verifyFormVisibility(showForm: boolean) {
+    if (!showForm && this.form.dirty) {
+      if (this.formIsEmpty()) {
+        this.formIsAvailable = showForm;
+      } else {
+        // Aca no cambien el objeto del input al que hace referencia el componente
+        // solo cambien el valor de una de sus propiedades, por lo tanto no se ejecuta ngOnChanges
+        // lo coloco en true ya que todabia no se la eleccion del usuario y la ngClass en el componente
+        // padre hace referencia a este valor para cambiar el estilo del boton agregar
+        this.formConfig.showForm = true;
+        this.OpenDiscardChangesDialog();
+      }
+    } else {
+      this.formIsAvailable = showForm;
+    }
+  }
+
+  private OpenDiscardChangesDialog(): void {
+    const [enterAnimationDuration, exitAnimationDuration] = [200, 100];
+    const data = <DialogContent>{
+      title: 'Descartar cambios',
+      content: 'Perderás todos los cambios realizados en el formulario.\n' +
+        '¿Estás seguro de que quieres descartar los cambios?',
+    }
+    const dialogRef = this.dialog.open(DialogCardComponent, {
+      width: '400px',
+      data,
+      enterAnimationDuration,
+      exitAnimationDuration
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.formIsAvailable = false;
+        this.formConfig.showForm = false;
+        this.resetForm();
+      } else {
+        this.formIsAvailable = true;
+      }
+    });
+  }
+
+  private formIsEmpty(): boolean {
+    return this.form.value.primaryInfo === '' &&
+      this.form.value.secondaryInfo === '' &&
+      (this.form.value.initialDate === '' || this.form.value.initialDate === null) &&
+      (this.form.value.finalDate === '' || this.form.value.finalDate === null) &&
+      this.form.value.description === '' &&
+      this.form.value.link === '';
+  }
+
+  private setUpDate(experience: any): void {
     if (experience.finalDate === null) {
       this.finalDateSettings = {
         ...datePickerClear,
@@ -68,20 +139,20 @@ export class AddExperienceComponent {
     this.initialDateSettings = {...datePickerClear, dateToSet: experience.initialDate, maxDate: experience.finalDate};
   }
 
-  setInitialControlDate(controlDate: FormControl<any>): void {
+  public setInitialControlDate(controlDate: FormControl<any>): void {
     // El dato emitido por el date picker es un objeto de tipo FormControl
     this.form.setControl('initialDate', controlDate);
     this.initialDateSettings = {...this.initialDateSettings, dateToSet: controlDate.value};
     this.finalDateSettings = {...this.finalDateSettings, minDate: controlDate.value};
   }
 
-  setFinalControlDate(controlDate: FormControl<any>): void {
+  public setFinalControlDate(controlDate: FormControl<any>): void {
     this.form.setControl('finalDate', controlDate);
     this.initialDateSettings = {...this.initialDateSettings, maxDate: controlDate.value};
     this.finalDateSettings = {...this.finalDateSettings, dateToSet: controlDate.value};
   }
 
-  setPresentDate(checkBox: any): void {
+  public setPresentDate(checkBox: any): void {
     if (checkBox.checked) {
       this.finalDateSettings = {...this.finalDateSettings, disable: true};
       return;
@@ -89,20 +160,17 @@ export class AddExperienceComponent {
     this.finalDateSettings = {...this.finalDateSettings, disable: false};
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     if (this.validateForm()) {
       alert('Por favor, llenar todos los campos');
       return;
     }
-
     const experience = this.setUpExperience()
-
     this.emitExperience(experience);
-
     this.resetForm();
   }
 
-  private emitExperience(experience: ExperienceData) {
+  private emitExperience(experience: ExperienceData): void {
     if (!this.formConfig.experienceIsNew) {
       this.onUpdateExperience.emit(experience);
       // Emite el evento onUpdateExperience al componente padre (experience-and-education.component.ts)
@@ -118,13 +186,9 @@ export class AddExperienceComponent {
       this.form.controls['finalDate'].setErrors(null);
     }
     return !this.form.valid;
-    /*    if (!this.form.valid) {
-          alert('Por favor, llenar todos los campos');
-          return;
-        }*/
   }
 
-  private setUpExperience() {
+  private setUpExperience(): ExperienceData {
     return <ExperienceData>{
       // El id se envia un string vacio que queda como undefined ya que deberia ser un numero
       // despues el backend le asigna un id automaticamente
@@ -143,14 +207,13 @@ export class AddExperienceComponent {
     return (typeof (aDate === 'string' || aDate === null) ? aDate : aDate.format('YYYY-MM-DD'));
   }
 
-  private resetForm() {
+  private resetForm(): void {
     // Se resetea el formulario y los date picker
     this.formConfig.experienceIsNew = true;
     this.finalDateSettings = datePickerClear;
     this.initialDateSettings = datePickerClear;
     // this.form.setControl('finalDate', new FormControl('', Validators.required));
     this.form.reset();
-
   }
 
 }

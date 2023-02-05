@@ -1,21 +1,21 @@
-<mat-card class="d-flex flex-column flex-md-row justify-content-between mb-5 p-4 card-style">
+<mat-card class="d-flex flex-column flex-md-row justify-content-between my-4 p-4 card-style">
   <div class="flex-grow-1">
     <mat-card-title-group>
-      <mat-card-title>{{experience.primaryInfo}}</mat-card-title>
+      <mat-card-title>{{this.experience.primaryInfo}}</mat-card-title>
       <mat-card-subtitle class="mb-2">
-        {{experience.secondaryInfo}}
+        {{this.experience.secondaryInfo}}
         <span class="text-capitalize"> /
-          {{experience.initialDate | date: 'MMMM y'}}
-          - {{experience.finalDate === null ? 'Presente' : (experience.finalDate | date: 'MMMM y')}}
+          {{this.experience.initialDate | date: 'MMMM y'}}
+          - {{this.experience.finalDate === null ? 'Presente' : (experience.finalDate | date: 'MMMM y')}}
         </span>
       </mat-card-subtitle>
     </mat-card-title-group>
     <mat-card-content>
-      <p>{{experience.description}}</p>
+      <p>{{this.experience.description}}</p>
     </mat-card-content>
   </div>
   <div class="flex-shrink-0">
-    <div class="icon-edit" *ngIf="isLoggedIn">
+    <div class="d-flex justify-content-md-end justify-content-start" *ngIf="this.isLoggedIn">
       <fa-icon
         [icon]="faPenToSquare"
         class="icon-style ms-4"
@@ -28,7 +28,7 @@
         [icon]="faTrashCan"
         class="icon-style ms-4"
         size="lg"
-        (click)="openDeleteDialog('100ms','50ms')"
+        (click)="openDeleteDialog('200ms','100ms')"
         title="Eliminar"
       >
       </fa-icon>

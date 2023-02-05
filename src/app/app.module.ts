@@ -19,7 +19,6 @@ import {AddExperienceComponent} from './components/add-experience/add-experience
 import {UpdateDirective} from './directives/update.directive';
 import {DatePickerComponent} from './components/date-picker/date-picker.component';
 import {LoginFormComponent} from './components/login-form/login-form.component';
-import {DialogDeleteCardComponent} from './components/dialog-delete-card/dialog-delete-card.component';
 import {AboutComponent} from './components/about/about.component';
 import {
   ExperienceAndEducationComponent
@@ -30,6 +29,8 @@ import {SpinnerComponent} from './components/spinner/spinner.component';
 import {StorageSessionService} from "./service/storage-session.service";
 import {httpInterceptorProviders} from "./interceptors/loading.interceptor";
 import {IconsComponent} from './components/icons/icons.component';
+import {DialogCardComponent} from './components/dialog-card/dialog-card.component';
+import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
   declarations: [
@@ -41,12 +42,13 @@ import {IconsComponent} from './components/icons/icons.component';
     UpdateDirective,
     DatePickerComponent,
     LoginFormComponent,
-    DialogDeleteCardComponent,
     AboutComponent,
     ExperienceAndEducationComponent,
     PageNotFoundComponent,
     SpinnerComponent,
     IconsComponent,
+    DialogCardComponent,
+    SafePipe,
   ],
   imports: [
     BrowserModule,

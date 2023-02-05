@@ -124,7 +124,7 @@ $body-1-level: mat.define-typography-level(
 $body-2-level: mat.define-typography-level(
   $font-family: 'Oswald, monospace, Roboto',
   $font-weight: 400,
-  $font-size: 16px,
+  $font-size: 18px,
   $line-height: 1,
   $letter-spacing: normal,
 );
@@ -137,6 +137,13 @@ $caption-level: mat.define-typography-level(
   $letter-spacing: normal,
 );
 
+$button-level: mat.define-typography-level(
+  $font-family: 'Oswald, monospace, Roboto',
+  $font-weight: 400,
+  $font-size: 18px,
+  $line-height: 1,
+  $letter-spacing: 0.001em,
+);
 
 $my-typography: mat.define-typography-config(
   //$headline-5: $my-custom-level,
@@ -148,6 +155,7 @@ $my-typography: mat.define-typography-config(
   $body-1: $body-1-level,
   $body-2: $body-2-level,
   $caption: $caption-level,
+  $button: $button-level,
 );
 //$headline-5: mat.define-typography-level(32px, 48px, 700),
 //$headline-6: mat.define-typography-level(26px, 32px, 700),
@@ -159,44 +167,10 @@ $my-typography: mat.define-typography-config(
 
 @include mat.all-component-typographies($my-typography);
 
-$custom-background-map: (
-  50 : #ffffff,
-  100 : #ffffff,
-  200 : #ffffff,
-  300 : #ffffff,
-  400 : #ffffff,
-  500 : #ffffff,
-  600 : #ffffff,
-  700 : #ffffff,
-  800 : #ffffff,
-  900 : #ffffff,
-  A100 : #ffffff,
-  A200 : #ffffff,
-  A400 : #ffffff,
-  A700 : #ffffff,
-  contrast: (
-    50 : #000000,
-    100 : #000000,
-    200 : #000000,
-    300 : #000000,
-    400 : #000000,
-    500 : #000000,
-    600 : #000000,
-    700 : #000000,
-    800 : #000000,
-    900 : #000000,
-    A100 : #000000,
-    A200 : #000000,
-    A400 : #000000,
-    A700 : #000000,
-  )
-);
-
 // The warn palette is optional (defaults to red).
 $portfolio-warn: mat.define-palette(mat.$red-palette);
 $portfolio-primary: mat.define-palette($custom-primary-map);
 $portfolio-accent: mat.define-palette($custom-accent-map);
-$portfolio-background: mat.define-palette($custom-background-map);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
@@ -205,7 +179,6 @@ $portfolio-theme: mat.define-light-theme((
     primary: $portfolio-primary,
     accent: $portfolio-accent,
     warn: $portfolio-warn,
-    background: $portfolio-background,
   )
 ));
 

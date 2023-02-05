@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{this.dialog.title}}</h1>
+<div mat-dialog-content>
+  <span [innerHTML]="dialog.content | safe: 'html'"></span>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()">
+    {{this.dialog.buttonCancel ? this.dialog.buttonCancel : 'No'}}
+  </button>
+  <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial color="accent">
+    {{this.dialog.buttonAccept ? this.dialog.buttonAccept : 'Ok'}}
+  </button>
+</div>

@@ -46,3 +46,10 @@ mat-card-content {
   display: flex;
   justify-content: flex-end;
 }
+
+.card-login {
+  overflow: hidden;
+  /*background-color: rgb(241, 246, 245) !important;*/
+  border-radius: 10%;
+  box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}

@@ -1,28 +1,27 @@
 <div class="container-login">
-  <mat-card class="card-style">
-    <div class="container-title">
+  <mat-card class="card-login">
+    <div class="container-title mb-4">
       <mat-card-title class="text-center py-4 text-color">Bienvenido</mat-card-title>
     </div>
-    <mat-card-subtitle class="text-center mb-4">
-      <div class="container-subtitle py-2 ">
-        Inicia sesión para activar modo edición
-      </div>
-    </mat-card-subtitle>
+    <!--    <mat-card-subtitle class="text-center mb-4">
+          <div class="container-subtitle py-2 ">
+            Inicia sesión para activar modo edición
+          </div>
+        </mat-card-subtitle>-->
     <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="OnSubmit(  )">
+      <form [formGroup]="form" (ngSubmit)="OnSubmit()">
         <p>
-          <mat-form-field class="input-field prueba" appearance="outline">
+          <mat-form-field class="input-field prueba" appearance="outline" [hideRequiredMarker]="true">
             <mat-label>Email</mat-label>
             <input
               type="text"
               matInput
-              placeholder="Email"
               formControlName="email"
               maxlength="50"
             >
             <!--suppress TypeScriptUnresolvedFunction -->
             <mat-error *ngIf="this.controlEmail.hasError('email') && !this.controlEmail.hasError('required')">
-              Por favor ingrese un email valido
+              Por favor ingrese un Email valido
             </mat-error>
             <!--suppress TypeScriptUnresolvedFunction -->
             <mat-error *ngIf="this.controlEmail.hasError('required')">
@@ -32,19 +31,22 @@
         </p>
 
         <p>
-          <mat-form-field class="input-field" appearance="outline">
+          <mat-form-field class="input-field" appearance="outline" [hideRequiredMarker]="true">
             <mat-label>Password</mat-label>
             <input
               [type]="hide ? 'password' : 'text'"
               matInput
-              placeholder="Password"
               formControlName="password"
               maxlength="50"
             >
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide">
+            <span matSuffix (click)="hide = !hide"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide"
+                  type="button"
+                  class="mx-2"
+            >
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
+            </span>
             <!--suppress TypeScriptUnresolvedFunction -->
             <mat-error *ngIf="this.controlPassword.hasError('required')">
               Contraseña es <strong>requerida</strong>
@@ -56,7 +58,7 @@
           *ngIf="error"
           class="error mat-caption my-2"
           [ngStyle]="{'borderRadius':'5px'}">
-          Contraseña o email invalido.
+          Contraseña o Email invalido.
         </label>
 
 

@@ -1,32 +1,30 @@
-.icon {
-  filter: drop-shadow(3px 3px 2px #6c757d);
+.icon-style-active {
+  filter: drop-shadow(1px 1px 2px #6c757d);
   border-radius: 30%;
   cursor: pointer;
-}
-
-.color-icon-active {
   color: rgb(241, 246, 245);
-  background: rgb(36, 55, 99)
+  background: rgb(36, 55, 99);
 }
 
-.color-icon-deactivate {
+.icon-style-deactivate {
+  filter: drop-shadow(1px 1px 2px #6c757d);
+  border-radius: 30%;
+  cursor: pointer;
   background: rgb(241, 246, 245);
-  color: rgb(36, 55, 99)
+  color: rgb(36, 55, 99);
 }
 
-.icon:hover {
+/* TODO: repetido en css de cardExperience */
+.icon-style-active:hover, .icon-style-deactivate:hover {
   color: #FF6E31;
-}
-
-.section-tittle {
-  display: flex;
-  justify-content: space-between;
+  transform: scale(1.1);
+  filter: drop-shadow(4px 4px 4px #6c757d);
 }
 
 section.resume-section {
   display: flex;
   align-items: center;
-  padding: 5rem 1rem;
+  padding: 2rem 1rem;
   max-width: 75rem;
   margin-right: auto;
   margin-left: auto;
@@ -36,11 +34,11 @@ section.resume-section .resume-section-content {
   width: 100%;
 }
 
-/* Puedo controlar la posicion vertical de resume section */
+/* Puedo controlar la posición vertical de resume section */
 @media (min-width: 768px) {
   section.resume-section {
     /*min-height: 75vh;*/
-    margin-top: 4rem;
+    /*margin-top: 2rem;*/
   }
 }
 

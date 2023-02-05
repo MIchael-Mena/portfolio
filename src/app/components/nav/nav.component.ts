@@ -54,4 +54,8 @@ export class NavComponent {
     this.router.navigate(['/login']);
   }
 
+  prueba() {
+    console.log('prueba');
+  }
+
 }

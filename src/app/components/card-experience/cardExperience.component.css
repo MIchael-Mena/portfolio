@@ -4,11 +4,24 @@
   background-color: rgb(241, 246, 245);
   border-radius: 30%;
   cursor: pointer;
-  filter: drop-shadow(3px 3px 1.5px #6c757d);
+  filter: drop-shadow(1px 1px 2px #6c757d);
 }
 
 .icon-style:hover {
   color: #FF6E31;
+  transform: scale(1.1);
+  filter: drop-shadow(4px 4px 4px #6c757d);
+}
+
+.card-style {
+  border-left: 4px solid #243763;
+  border-top: 4px solid #243763;
+  border-radius: 20px 0 60%;
+  overflow: hidden;
+}
+
+.card-style:hover {
+  box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.5);
 }
 
 .icon-edit {

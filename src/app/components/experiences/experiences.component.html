@@ -1,14 +1,13 @@
 <section class="resume-section" id="experience">
   <div class="resume-section-content">
-    <div class="section-tittle ">
+    <div class="d-flex justify-content-between">
       <div class="mx-auto">
-        <h1 class="mb-5 mat-h1" #target>{{experience?.title}}</h1>
+        <h1 class="my-3 mat-h1" #target>{{experience?.title}}</h1>
       </div>
-      <div *ngIf="isLoggedIn">
+      <div *ngIf="isLoggedIn" class="d-flex my-auto">
         <fa-icon
-          class="icon"
           [icon]="faSquarePlus"
-          [ngClass]="{'color-icon-deactivate': !formExperienceConfig.showForm, 'color-icon-active': formExperienceConfig.showForm}"
+          [ngClass]="{'icon-style-deactivate': !formExperienceConfig.showForm, 'icon-style-active': formExperienceConfig.showForm}"
           (click)="showForm()"
           title="{{!formExperienceConfig.showForm ? 'Agregar' : 'Cancelar'}}"
           size="xl"

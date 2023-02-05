@@ -91,11 +91,10 @@
 
         <li class="nav-item ms-lg-3">
           <div [matMenuTriggerFor]="menu">
-            <mat-icon svgIcon="owl" aria-hidden="false"
-                      aria-label="owl"
-                      color="primary"
+            <mat-icon svgIcon="{{this.isLoggedIn ? 'account':'no-account'}}" aria-hidden="false"
+                      aria-label="account"
+                      color="accent"
                       class="icon-display"
-                      [ngClass]="{'icon-display-logged':this.isLoggedIn,'':!this.isLoggedIn}"
             >
             </mat-icon>
             <div [ngClass]="{'active-link mt-2':routeLoginActive ,'':!routeLoginActive }"></div>

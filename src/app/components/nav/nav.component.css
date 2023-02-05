@@ -1,19 +1,12 @@
 .icon-display {
   transform: scale(1.8);
   cursor: pointer;
+  color: #AD8E70;
 }
 
 /*Le asigno un tamaño para evitar que se desplace*/
 .nav-item {
   height: 48px;
-}
-
-.icon-display-logged {
-  color: #AD8E70;
-}
-
-.z-index-nav {
-  z-index: 1000 !important;
 }
 
 /*.icon-display:hover {
@@ -26,7 +19,6 @@
   /*background-color: transparent;*/
   transition: 0.4s ease;
   z-index: 1000 !important;
-  height: 80px;
 }
 
 .nav-link, .navbar-brand {
@@ -48,26 +40,13 @@
 }*/
 
 .active-link {
+  /*margin-top: 0.5rem;*/
   position: relative;
   margin: 0 auto;
-  background: #FF6E31;
   width: 100%;
-  height: 4px;
-  /*height: 0.5vh;*/
-  border-radius: 50%;
-}
-
-.active-link::before {
-  position: absolute;
-  content: '';
-  left: 36%;
-  z-index: 10;
-  width: 75%;
-  height: 8px;
-  border-radius: 50%;
-  background: inherit;
-  transform: translateX(-50%) translateY(25%);
-  bottom: 0;
+  height: 5px;
+  border-radius: 0 0 100% 100%;
+  background-color: #FF6E31;
 }
 
 @media (max-width: 992px) {
@@ -81,13 +60,6 @@
     /*margin-top: 0.5rem;*/
   }
 
-  .active-link {
-    width: 100px;
-  }
-
-  .active-link::before {
-    left: 50%;
-  }
 
 }
 

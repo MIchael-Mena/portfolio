@@ -21,7 +21,7 @@ export class StorageSessionService {
     localStorage.setItem('token', data.accessToken);
   }
 
-  private get isLogged(): boolean {
+  public get isLogged(): boolean {
     return (localStorage.getItem('token') !== null);
   }
 
