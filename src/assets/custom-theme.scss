@@ -114,18 +114,18 @@ $subtitle-1-level: mat.define-typography-level(
 );
 
 $body-1-level: mat.define-typography-level(
-  $font-family: 'Oswald, monospace, Roboto',
+  $font-family: 'Roboto, Oswald, sans-serif',
   $font-weight: 400,
   $font-size: 16px,
-  $line-height: 1,
+  $line-height: 1.3,
   $letter-spacing: normal,
 );
 
 $body-2-level: mat.define-typography-level(
-  $font-family: 'Oswald, monospace, Roboto',
+  $font-family: 'Roboto, Oswald, sans-serif',
   $font-weight: 400,
-  $font-size: 18px,
-  $line-height: 1,
+  $font-size: 17px,
+  $line-height: 1.3,
   $letter-spacing: normal,
 );
 

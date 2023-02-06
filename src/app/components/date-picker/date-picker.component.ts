@@ -119,6 +119,7 @@ export class DatePickerComponent {
       // Si aDate.value tiene un valor (no es null)
       this.emitDate(aDate.value);
     }
+    // console.log(aDate.value);
   }
 
   setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {

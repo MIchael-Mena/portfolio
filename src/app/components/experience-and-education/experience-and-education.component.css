@@ -3,9 +3,14 @@
   height: 3px;
   text-align: center;
   background-image: linear-gradient(to left, #fff, #000, #fff);
-  /*margin: auto;*/
-  /*background-color: rgb(255, 110, 49);*/
-  /*width: 300px;*/
-  /*border: none;*/
-  /*box-shadow: 10px 10px 6px 5px rgb(255, 110, 49);*/
+}
+
+.fill-nav {
+  padding-top: 1.8rem;
+}
+
+@media (min-width: 992px) {
+  .fill-nav {
+    padding-top: 4rem;
+  }
 }

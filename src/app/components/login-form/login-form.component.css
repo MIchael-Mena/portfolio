@@ -7,17 +7,6 @@
   background-color: #243763;
 }
 
-.text-color {
-  color: white;
-  /*color: #243763;*/
-}
-
-.container-subtitle {
-  /*background-color: #FF6E31;*/
-  /*border-radius: 0 0 0.5rem 0.5rem;*/
-  background-color: #AD8E70;
-}
-
 .container-login {
   display: flex;
   justify-content: center;
@@ -49,7 +38,6 @@ mat-card-content {
 
 .card-login {
   overflow: hidden;
-  /*background-color: rgb(241, 246, 245) !important;*/
   border-radius: 10%;
   box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }

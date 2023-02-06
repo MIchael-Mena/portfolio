@@ -24,7 +24,8 @@
 section.resume-section {
   display: flex;
   align-items: center;
-  padding: 2rem 1rem;
+  padding: 0 1rem;
+  /*padding: 2rem 1rem;*/
   max-width: 75rem;
   margin-right: auto;
   margin-left: auto;
@@ -34,16 +35,9 @@ section.resume-section .resume-section-content {
   width: 100%;
 }
 
-/* Puedo controlar la posición vertical de resume section */
-@media (min-width: 768px) {
-  section.resume-section {
-    /*min-height: 75vh;*/
-    /*margin-top: 2rem;*/
-  }
-}
-
 @media (min-width: 992px) {
   section.resume-section {
-    padding: 5rem 3rem;
+    /*padding: 5rem 3rem;*/
+    padding: 0 3rem;
   }
 }

@@ -17,6 +17,7 @@
                   color="accent"
   >
   </mat-datepicker>
+  <mat-error *ngIf="date.touched && date.invalid">Fecha requerida.</mat-error>
 </mat-form-field>
 
 <!-- <button (click)="onClickeable()">Imprimir</button> -->

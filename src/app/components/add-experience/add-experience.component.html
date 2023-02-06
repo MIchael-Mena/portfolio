@@ -14,6 +14,9 @@
             formControlName="primaryInfo"
             maxlength="40"
           />
+          <mat-error *ngIf="form.get('primaryInfo')?.hasError('required')">
+            {{'El campo ' + this.formExperience?.getPrimaryInfoLabel() + ' es requerido'}}
+          </mat-error>
         </mat-form-field>
 
         <label class="container-label mat-body-2">{{ this.formExperience?.getSecondaryInfoLabel() }}</label>
@@ -25,6 +28,9 @@
             formControlName="secondaryInfo"
             maxlength="40"
           />
+          <mat-error *ngIf="form.get('secondaryInfo')?.hasError('required')">
+            {{'El campo ' + this.formExperience?.getSecondaryInfoLabel() + ' es requerido'}}
+          </mat-error>
         </mat-form-field>
 
         <div
@@ -65,6 +71,9 @@
             [ngStyle]="{resize: 'none'}"
           >
           </textarea>
+          <mat-error *ngIf="form.get('description')?.hasError('required')">
+            El campo descripción es requerido
+          </mat-error>
         </mat-form-field>
 
         <div class="form-group col-md-12 text-center my-2">

@@ -72,7 +72,7 @@ export class AddExperienceComponent implements OnChanges {
     this.verifyFormVisibility(showForm);
   }
 
-  private verifyFormVisibility(showForm: boolean) {
+  private verifyFormVisibility(showForm: boolean): void {
     if (!showForm && this.form.dirty) {
       if (this.formIsEmpty()) {
         this.formIsAvailable = showForm;
