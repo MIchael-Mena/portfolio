@@ -60,10 +60,13 @@
   color: rgb(105, 100, 109);
 }
 
+a {
+  display: flex;
+}
+
 .icons {
   margin-top: 2rem;
   display: flex;
-  /*justify-content: center;*/
 }
 
 .icons .icon-style {

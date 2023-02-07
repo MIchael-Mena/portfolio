@@ -6,11 +6,11 @@
 }
 
 .fill-nav {
-  padding-top: 1.8rem;
+  /*padding-top: 3rem;*/
 }
 
 @media (min-width: 992px) {
   .fill-nav {
-    padding-top: 4rem;
+    padding-top: 3rem;
   }
 }

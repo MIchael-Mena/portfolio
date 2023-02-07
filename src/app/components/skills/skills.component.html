@@ -1,0 +1,24 @@
+<div class="container mat-typography">
+  <h1>Habilidades</h1>
+  <span class="mat-subtitle-2">HTML</span>
+  <div class="container-skill">
+    <div class="skills html" #htmlTarget>{{htmlSkill ? htmlSkill : '0%' }}</div>
+  </div>
+
+  <span class="mat-subtitle-2">CSS</span>
+  <div class="container-skill">
+    <div class="skills css">80%</div>
+  </div>
+
+  <span class="mat-subtitle-2">JavaScript</span>
+  <div class="container-skill">
+    <div class="skills js">65%</div>
+  </div>
+
+  <span class="mat-subtitle-2">PHP</span>
+  <div class="container-skill">
+    <div class="skills php">60%</div>
+  </div>
+
+  <button (click)="test(htmlTarget)">Prueba</button>
+</div>

@@ -1,0 +1,8 @@
+/* Para que el scroll no se superponga al navbar */
+main {
+  width: -moz-available;
+  position: absolute;
+  top: 72px;
+  bottom: 0;
+  overflow-y: auto;
+}

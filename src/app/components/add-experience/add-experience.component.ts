@@ -97,7 +97,7 @@ export class AddExperienceComponent implements OnChanges {
         '¿Estás seguro de que quieres descartar los cambios?',
     }
     const dialogRef = this.dialog.open(DialogCardComponent, {
-      width: '400px',
+      width: '450px',
       data,
       enterAnimationDuration,
       exitAnimationDuration

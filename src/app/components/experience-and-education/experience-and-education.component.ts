@@ -33,17 +33,17 @@ export class ExperienceAndEducationComponent {
   }
 
   private async OpenDiscardChangesDialog(): Promise<boolean> {
-    const formWithSavedChanges = !this.formEducationIsEmpty ? 'Educación' : 'Experiencia laboral';
+    const formWithUnsavedChanges = this.checkFormsState();
     const [enterAnimationDuration, exitAnimationDuration] = [200, 100];
     const data = <DialogContent>{
       title: 'Cambios sin guardar',
-      content: `Tienes cambios sin guardar en el formulario de <strong>${formWithSavedChanges}</strong>.\n` +
+      content: `Tienes cambios sin guardar en el formulario de <strong>${formWithUnsavedChanges}</strong>.\n` +
         `Si continúas perderás los cambios.`,
       buttonCancel: 'Cancelar',
       buttonAccept: 'Continuar',
     }
     const dialogRef = this.dialog.open(DialogCardComponent, {
-      width: '400px',
+      width: '500px',
       data,
       disableClose: true,
       autoFocus: false,
@@ -53,6 +53,18 @@ export class ExperienceAndEducationComponent {
     const test = await firstValueFrom(dialogRef.afterClosed());
     // result puede ser undefined
     return test ? true : false;
+  }
+
+  private checkFormsState() {
+    let formWithUnsavedChanges;
+    if (!this.formEducationIsEmpty && !this.formWorkIsEmpty) {
+      formWithUnsavedChanges = 'Educación y Experiencia laboral';
+    } else if (!this.formEducationIsEmpty) {
+      formWithUnsavedChanges = 'Educación';
+    } else if (!this.formWorkIsEmpty) {
+      formWithUnsavedChanges = 'Experiencia laboral';
+    }
+    return formWithUnsavedChanges;
   }
 
   private setFormIsEmpty(state: boolean, formName: string): void {

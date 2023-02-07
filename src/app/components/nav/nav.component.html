@@ -1,126 +1,126 @@
-<nav class="navbar navbar-shrink navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
-  <div class="container px-4 px-lg-5">
-    <a
-      class="navbar-brand"
-      routerLink="home"
-      routerLinkActive="home-button-active"
-    >
+<header>
+  <nav class="navbar mb-0 navbar-shrink navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+    <div class="container px-4 px-lg-5">
+      <a
+        class="navbar-brand"
+        routerLink="home"
+        routerLinkActive="home-button-active"
+      >
       <span class="mat-subtitle-1">
       Portfolio
       </span>
-    </a>
+      </a>
 
-    <!--    button visible cuando media < 996px-->
-    <button class="navbar-toggler navbar-toggler-right"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarResponsive"
-            aria-controls="navbarResponsive"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
+      <!--    button visible cuando media < 996px-->
+      <button class="navbar-toggler navbar-toggler-right"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarResponsive"
+              aria-controls="navbarResponsive"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
       <span class="navbar-toggler-icon">
       </span>
-    </button>
+      </button>
 
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav ms-auto my-2 my-lg-0">
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto my-2 my-lg-0">
 
-        <!--        <li class="nav-item">
-                  <a class="nav-link"
-                     routerLink="/about"
-                     routerLinkActive #rlaAbout="routerLinkActive"
-                  >
-                    <span class="mat-subtitle-2">
-                      About
-                    </span>
-                    <div [ngClass]="{'active-link mt-1':rlaAbout.isActive ,'':!rlaAbout.isActive }"></div>
-                  </a>
-                </li>-->
+          <!--        <li class="nav-item">
+                    <a class="nav-link"
+                       routerLink="/about"
+                       routerLinkActive #rlaAbout="routerLinkActive"
+                    >
+                      <span class="mat-subtitle-2">
+                        About
+                      </span>
+                      <div [ngClass]="{'active-link mt-1':rlaAbout.isActive ,'':!rlaAbout.isActive }"></div>
+                    </a>
+                  </li>-->
 
-        <li class="nav-item">
-          <a class="nav-link"
-             routerLink="/about"
-             routerLinkActive
-             (isActiveChange)="this.routerActive($event, 'about')"
-          >
+          <li class="nav-item">
+            <a class="nav-link"
+               routerLink="/about"
+               routerLinkActive
+               (isActiveChange)="this.routerActive($event, 'about')"
+            >
             <span class="mat-subtitle-2">
             Acerca de mí
             </span>
-            <div [ngClass]="{'active-link mt-1': this.routeAboutActive, '': !this.routeAboutActive }"></div>
-          </a>
-        </li>
+              <div [ngClass]="{'active-link mt-1': this.routeAboutActive, '': !this.routeAboutActive }"></div>
+            </a>
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link"
-             routerLink="/experience&education"
-             routerLinkActive
-             (isActiveChange)="this.routerActive($event, 'expAndEdu')"
-          >
+          <li class="nav-item">
+            <a class="nav-link"
+               routerLink="/experience&education"
+               routerLinkActive
+               (isActiveChange)="this.routerActive($event, 'expAndEdu')"
+            >
             <span class="mat-subtitle-2">
             Experiencia & Educación
             </span>
-            <div [ngClass]="{'active-link mt-1': this.routeExpAndEduActive, '': !this.routeExpAndEduActive }"></div>
-          </a>
-        </li>
+              <div [ngClass]="{'active-link mt-1': this.routeExpAndEduActive, '': !this.routeExpAndEduActive }"></div>
+            </a>
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link"
-             routerLink="/skills"
-             routerLinkActive
-             (isActiveChange)="this.routerActive($event, 'skills')"
-          >
+          <li class="nav-item">
+            <a class="nav-link"
+               routerLink="/skills"
+               routerLinkActive
+               (isActiveChange)="this.routerActive($event, 'skills')"
+            >
             <span class="mat-subtitle-2">
             Habilidades
             </span>
-            <div [ngClass]="{'active-link mt-1': routeSkillsActive, '': !routeSkillsActive}"></div>
-          </a>
-        </li>
+              <div [ngClass]="{'active-link mt-1': routeSkillsActive, '': !routeSkillsActive}"></div>
+            </a>
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link"
-             routerLink="/projects"
-             routerLinkActive
-             (isActiveChange)="this.routerActive($event, 'projects')"
-          >
+          <li class="nav-item">
+            <a class="nav-link"
+               routerLink="/projects"
+               routerLinkActive
+               (isActiveChange)="this.routerActive($event, 'projects')"
+            >
             <span class="mat-subtitle-2">
             Proyectos
             </span>
-            <div [ngClass]="{'active-link mt-1': routeProjectsActive, '': !routeProjectsActive}"></div>
-          </a>
-        </li>
-
-        <li class="nav-item ms-lg-3">
-          <div [matMenuTriggerFor]="menu">
-            <mat-icon svgIcon="{{this.isLoggedIn ? 'account':'no-account'}}" aria-hidden="false"
-                      aria-label="account"
-                      color="accent"
-                      class="icon-display"
-            >
-            </mat-icon>
-            <div [ngClass]="{'active-link mt-2':routeLoginActive ,'':!routeLoginActive }"></div>
-          </div>
-          <mat-menu #menu="matMenu">
-            <a class="nav-link"
-               routerLink="/login"
-               routerLinkActive
-               (isActiveChange)="this.routerActive($event, 'login')"
-               mat-menu-item *ngIf="!this.isLoggedIn">
-              Iniciar Sesión
+              <div [ngClass]="{'active-link mt-1': routeProjectsActive, '': !routeProjectsActive}"></div>
             </a>
-            <button mat-menu-item
-                    *ngIf="this.isLoggedIn"
-                    (click)="this.logOut()"
-            >
-              Cerrar Sesión
-            </button>
+          </li>
 
-          </mat-menu>
-        </li>
+          <li class="nav-item ms-lg-3">
+            <div [matMenuTriggerFor]="menu">
+              <mat-icon svgIcon="{{this.isLoggedIn ? 'account':'no-account'}}" aria-hidden="false"
+                        aria-label="account"
+                        color="accent"
+                        class="icon-display"
+              >
+              </mat-icon>
+              <div [ngClass]="{'active-link mt-2':routeLoginActive ,'':!routeLoginActive }"></div>
+            </div>
+            <mat-menu #menu="matMenu">
+              <a class="nav-link"
+                 routerLink="/login"
+                 routerLinkActive
+                 (isActiveChange)="this.routerActive($event, 'login')"
+                 mat-menu-item *ngIf="!this.isLoggedIn">
+                Iniciar Sesión
+              </a>
+              <button mat-menu-item
+                      *ngIf="this.isLoggedIn"
+                      (click)="this.logOut()"
+              >
+                Cerrar Sesión
+              </button>
 
-      </ul>
+            </mat-menu>
+          </li>
+
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-
-w
+</header>

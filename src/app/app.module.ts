@@ -31,6 +31,7 @@ import {httpInterceptorProviders} from "./interceptors/loading.interceptor";
 import {IconsComponent} from './components/icons/icons.component';
 import {DialogCardComponent} from './components/dialog-card/dialog-card.component';
 import { SafePipe } from './pipes/safe.pipe';
+import { SkillsComponent } from './components/skills/skills.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { SafePipe } from './pipes/safe.pipe';
     IconsComponent,
     DialogCardComponent,
     SafePipe,
+    SkillsComponent,
   ],
   imports: [
     BrowserModule,
