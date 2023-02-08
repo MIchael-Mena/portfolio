@@ -32,6 +32,7 @@ import {IconsComponent} from './components/icons/icons.component';
 import {DialogCardComponent} from './components/dialog-card/dialog-card.component';
 import { SafePipe } from './pipes/safe.pipe';
 import { SkillsComponent } from './components/skills/skills.component';
+import { SkillBarComponent } from './components/skill-bar/skill-bar.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { SkillsComponent } from './components/skills/skills.component';
     DialogCardComponent,
     SafePipe,
     SkillsComponent,
+    SkillBarComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,35 @@
+<div class="d-flex my-4 flex-lg-row flex-column">
+  <div class=" d-flex flex-column justify-content-center align-items-center">
+    <span class="mat-subtitle-2">{{skillName}}</span>
+    <fa-icon [icon]="iconSkill" size="3x"></fa-icon>
+  </div>
+
+  <div class="my-auto">
+  <span class="circle mx-2">
+    <div class="fill skill-animation animation-delay-1"
+         [ngClass]="{'active': skillLevel[0],'deactivate': !skillLevel[0]}">
+    </div>
+  </span>
+    <span class="circle mx-2">
+      <div class="fill skill-animation animation-delay-2"
+           [ngClass]="{'active': skillLevel[1],'deactivate': !skillLevel[1]}">
+      </div>
+  </span>
+    <span class="circle mx-2">
+      <div class="fill skill-animation animation-delay-3"
+           [ngClass]="{'active': skillLevel[2],'deactivate': !skillLevel[2]}">
+      </div>
+  </span>
+    <span class="circle mx-2">
+      <div class="fill skill-animation animation-delay-4"
+           [ngClass]="{'active': skillLevel[3],'deactivate': !skillLevel[3]}">
+      </div>
+  </span>
+    <span class="circle mx-2">
+      <div class="fill skill-animation animation-delay-5"
+           [ngClass]="{'active': skillLevel[4],'deactivate': !skillLevel[4]}">
+      </div>
+  </span>
+    <!--  <button (click)="upSkillLevel()">Probando</button>-->
+  </div>
+</div>

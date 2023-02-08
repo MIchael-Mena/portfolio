@@ -1,6 +1,6 @@
 /* Para que el scroll no se superponga al navbar */
 main {
-  width: -moz-available;
+  width: 100%;
   position: absolute;
   top: 72px;
   bottom: 0;

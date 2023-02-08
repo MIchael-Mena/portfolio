@@ -45,7 +45,7 @@ export class CardExperienceComponent {
 
     const dialogRef = this.dialog.open(DialogCardComponent, {
       data,
-      width: '300px',
+      width: '350px',
       enterAnimationDuration,
       exitAnimationDuration,
     });

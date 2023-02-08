@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
-import {faGithub} from "@fortawesome/free-brands-svg-icons/faGithub";
-import {faLinkedin} from "@fortawesome/free-brands-svg-icons/faLinkedin";
-import {faEnvelope} from "@fortawesome/free-solid-svg-icons/faEnvelope";
+import {faGithub, faLinkedin} from "@fortawesome/free-brands-svg-icons";
+import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-about',

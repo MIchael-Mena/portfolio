@@ -4,7 +4,7 @@
 
 /* Make sure that padding behaves as expected */
 * {
-  box-sizing: border-box
+  box-sizing: border-box;
 }
 
 /* Container for skill bars */
@@ -12,6 +12,8 @@
   width: 100%; /* Full width */
   background-color: #ddd; /* Grey background */
   margin-bottom: 2rem;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .skills {
@@ -28,7 +30,7 @@
 
 /* Green */
 .css {
-  width: 80%;
+  width: 100%;
   background-color: #2196F3;
 }
 
@@ -46,6 +48,12 @@
 
 /* Dark Grey */
 
-.container {
+.margin {
   margin-top: 8rem;
+}
+
+@keyframes fillbar {
+  to {
+    transform: scaleX(1);
+  }
 }

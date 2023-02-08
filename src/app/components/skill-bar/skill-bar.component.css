@@ -1,0 +1,55 @@
+.animation-delay-1 {
+  --delay: 0s;
+}
+
+.animation-delay-2 {
+  --delay: 0.5s;
+}
+
+.animation-delay-3 {
+  --delay: 1s;
+}
+
+.animation-delay-4 {
+  --delay: 1.5s;
+}
+
+.animation-delay-5 {
+  --delay: 2s;
+}
+
+@keyframes fillbar {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.circle {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  background-color: #dddddd;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.skill-animation {
+  animation: fillbar 0.4s forwards;
+  animation-delay: var(--delay);
+  transform: scaleX(0);
+  transform-origin: 0 0;
+}
+
+.fill {
+  height: 40px;
+  width: 40px;
+  border-radius: 0 50% 50% 0;
+}
+
+.active {
+  background-color: #243763;
+}
+
+.deactivate {
+  background-color: transparent;
+}

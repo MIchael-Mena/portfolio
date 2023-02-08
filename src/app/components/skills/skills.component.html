@@ -1,24 +1,29 @@
-<div class="container mat-typography">
+<div class="container mat-typography margin">
   <h1>Habilidades</h1>
-  <span class="mat-subtitle-2">HTML</span>
-  <div class="container-skill">
-    <div class="skills html" #htmlTarget>{{htmlSkill ? htmlSkill : '0%' }}</div>
+  <div>
+
+
+    <span class="mat-subtitle-2">HTML</span>
+    <div class="container-skill">
+      <div class="skills html skill-animation" #htmlTarget>{{htmlSkill ? htmlSkill : '0%' }}</div>
+    </div>
+
+    <app-skill-bar [skill]="SkillHTML" [skillName]="'HTML'" [iconSkill]="faHtml5"></app-skill-bar>
+    <app-skill-bar [skill]="SkillCSS" [skillName]="'CSS'" [iconSkill]="faCss3"></app-skill-bar>
+    <app-skill-bar [skill]="SkillPython" [skillName]="'Python'" [iconSkill]="faPython"></app-skill-bar>
+    <app-skill-bar [skill]="SkillJava" [skillName]="'JAVA'" [iconSkill]="faJava"></app-skill-bar>
+    <app-skill-bar [skill]="SkillJS" [skillName]="'JavaScript'" [iconSkill]="faJs"></app-skill-bar>
+    <!--    <app-skill-bar [skill]="SkillTS" [skillName]="'TypeScript'" [iconSkill]="faJs"></app-skill-bar>-->
+    <app-skill-bar [skill]="SkillAngular" [skillName]="'Angular'" [iconSkill]="faAngular"></app-skill-bar>
+    <app-skill-bar [skill]="SkillReact" [skillName]="'React'" [iconSkill]="faReact"></app-skill-bar>
+    <app-skill-bar [skill]="SkillNodeJS" [skillName]="'NodeJS'" [iconSkill]="faNodeJs"></app-skill-bar>
+    <app-skill-bar [skill]="SkillDatabase" [skillName]="'SQL'" [iconSkill]="faDatabase"></app-skill-bar>
+
+
   </div>
 
-  <span class="mat-subtitle-2">CSS</span>
-  <div class="container-skill">
-    <div class="skills css">80%</div>
+  <div class="d-flex justify-content-around">
+    <button (click)="test(htmlTarget)">Prueba</button>
   </div>
-
-  <span class="mat-subtitle-2">JavaScript</span>
-  <div class="container-skill">
-    <div class="skills js">65%</div>
-  </div>
-
-  <span class="mat-subtitle-2">PHP</span>
-  <div class="container-skill">
-    <div class="skills php">60%</div>
-  </div>
-
-  <button (click)="test(htmlTarget)">Prueba</button>
 </div>
+
