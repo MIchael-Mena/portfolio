@@ -53,3 +53,13 @@
 .deactivate {
   background-color: transparent;
 }
+
+:host .mat-icon {
+  height: 48px;
+  width: 48px;
+}
+
+.container-figure {
+  height: 75px;
+  width: 83px;
+}

@@ -9,15 +9,16 @@ import {faDatabase} from "@fortawesome/free-solid-svg-icons";
   styleUrls: ['./skills.component.css']
 })
 export class SkillsComponent {
-  public faHtml5 = faHtml5;
-  public faCss3 = faCss3;
-  public faJs = faJs;
-  public faAngular = faAngular;
-  public faReact = faReact;
-  public faNodeJs = faNodeJs;
-  public faPython = faPython;
-  public faJava = faJava;
-  public faDatabase = faDatabase;
+  /*  public faHtml5 = faHtml5;
+    public faCss3 = faCss3;
+    public faJs = faJs;
+    public faAngular = faAngular;
+    public faReact = faReact;
+    public faNodeJs = faNodeJs;
+    public faPython = faPython;
+    public faJava = faJava;
+    public faDatabase = faDatabase;*/
+
   public SkillCSS: number = 5;
   public SkillHTML: number = 5;
   public SkillJS: number = 5;
@@ -26,6 +27,10 @@ export class SkillsComponent {
   public SkillNodeJS: number = 5;
   public SkillPython: number = 5;
   public SkillJava: number = 5;
+  public SkillTS: number = 5;
+  public SkillC: number = 5;
+  public SkillBootstrap: number = 5;
+  public SkillSpring: number = 5;
 
   public SkillDatabase: number = 5;
 

@@ -77,5 +77,20 @@
       "description": "Computer Science",
       "link": "Link 2"
     }
+  ],
+  "Skills": [
+    {
+      "Angular": 3,
+      "React": 3,
+      "HTML": 3,
+      "CSS": 3,
+      "Bootstrap": 3,
+      "JavaScript": 3,
+      "NodeJS": 3,
+      "MySQL": 3,
+      "Java": 3,
+      "Python": 3,
+      "C++": 3
+    }
   ]
 }

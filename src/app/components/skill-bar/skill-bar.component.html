@@ -1,7 +1,13 @@
-<div class="d-flex my-4 flex-lg-row flex-column">
-  <div class=" d-flex flex-column justify-content-center align-items-center">
-    <span class="mat-subtitle-2">{{skillName}}</span>
-    <fa-icon [icon]="iconSkill" size="3x"></fa-icon>
+<div class="d-flex my-4 flex-lg-row flex-column align-items-center">
+  <div class=" d-flex flex-column justify-content-center align-items-center container-figure">
+    <span class="mat-subtitle-2 mb-1">{{skillName}}</span>
+    <!--    <fa-icon [icon]="iconSkill" size="3x" [ngStyle]="{'color':'#AD8E70'}"></fa-icon>-->
+    <mat-icon svgIcon="{{iconSkill}}" aria-hidden="false"
+              aria-label="Example home icon"
+              color="accent"
+              class="mb-1"
+    >
+    </mat-icon>
   </div>
 
   <div class="my-auto">
