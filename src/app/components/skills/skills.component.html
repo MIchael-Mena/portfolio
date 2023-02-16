@@ -1,32 +1,27 @@
 <div class="container mat-typography margin">
-  <h1>Habilidades</h1>
-  <div>
-    <!--    <app-skill-bar [skill]="SkillHTML" [skillName]="'HTML'" [iconSkill]="faHtml5"></app-skill-bar>
-        <app-skill-bar [skill]="SkillCSS" [skillName]="'CSS'" [iconSkill]="faCss3"></app-skill-bar>
-        <app-skill-bar [skill]="SkillPython" [skillName]="'Python'" [iconSkill]="faPython"></app-skill-bar>
-        <app-skill-bar [skill]="SkillJava" [skillName]="'JAVA'" [iconSkill]="faJava"></app-skill-bar>
-        <app-skill-bar [skill]="SkillJS" [skillName]="'JavaScript'" [iconSkill]="faJs"></app-skill-bar>
-        &lt;!&ndash;    <app-skill-bar [skill]="SkillTS" [skillName]="'TypeScript'" [iconSkill]="faJs"></app-skill-bar>&ndash;&gt;
-        <app-skill-bar [skill]="SkillAngular" [skillName]="'Angular'" [iconSkill]="faAngular"></app-skill-bar>
-        <app-skill-bar [skill]="SkillReact" [skillName]="'React'" [iconSkill]="faReact"></app-skill-bar>
-        <app-skill-bar [skill]="SkillNodeJS" [skillName]="'NodeJS'" [iconSkill]="faNodeJs"></app-skill-bar>
-        <app-skill-bar [skill]="SkillDatabase" [skillName]="'SQL'" [iconSkill]="faDatabase"></app-skill-bar>-->
+  <div class="d-flex justify-content-between">
+    <div class="mx-auto">
+      <h1 class="my-3">Habilidades</h1>
+    </div>
+    <div *ngIf="'true'" class="d-flex my-auto container-icon-add">
+      <fa-icon
+        [icon]="faSquarePlus"
+        (click)="addSkill()"
+        class="icon-style"
+        title="Agregar"
+        size="xl"
+      >
+      </fa-icon>
+    </div>
+  </div>
+  <div class="row">
 
-    <app-skill-bar [skill]="SkillHTML" [skillName]="'HTML'" [iconSkill]="'html'"></app-skill-bar>
-    <app-skill-bar [skill]="SkillCSS" [skillName]="'CSS'" [iconSkill]="'css'"></app-skill-bar>
-    <app-skill-bar [skill]="SkillBootstrap" [skillName]="'Bootstrap'" [iconSkill]="'bootstrap'"></app-skill-bar>
-    <app-skill-bar [skill]="SkillAngular" [skillName]="'Angular'" [iconSkill]="'angular'"></app-skill-bar>
-    <app-skill-bar [skill]="SkillReact" [skillName]="'React'" [iconSkill]="'react'"></app-skill-bar>
-
-    <app-skill-bar [skill]="SkillPython" [skillName]="'Python'" [iconSkill]="'python'"></app-skill-bar>
-    <app-skill-bar [skill]="SkillJava" [skillName]="'Java'" [iconSkill]="'java'"></app-skill-bar>
-    <app-skill-bar [skill]="SkillJS" [skillName]="'JavaScript'" [iconSkill]="'js'"></app-skill-bar>
-    <app-skill-bar [skill]="SkillTS" [skillName]="'TypeScript'" [iconSkill]="'typescript'"></app-skill-bar>
-    <app-skill-bar [skill]="SkillC" [skillName]="''" [iconSkill]="'c++'"></app-skill-bar>
-
-    <app-skill-bar [skill]="SkillNodeJS" [skillName]="'NodeJS'" [iconSkill]="'node'"></app-skill-bar>
-    <app-skill-bar [skill]="SkillDatabase" [skillName]="'MySQL'" [iconSkill]="'mysql'"></app-skill-bar>
-    <app-skill-bar [skill]="SkillSpring" [skillName]="'Spring Boot'" [iconSkill]="'spring-boot'"></app-skill-bar>
+    <app-skill-bar
+      *ngFor="let skill of skills"
+      [skill]="skill" class="col"
+      
+    >
+    </app-skill-bar>
 
   </div>
 </div>

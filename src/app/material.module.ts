@@ -12,6 +12,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatMenuModule} from "@angular/material/menu";
+import {MatSliderModule} from "@angular/material/slider";
 
 const myMaterialModules = [
   MatIconModule,
@@ -26,7 +27,8 @@ const myMaterialModules = [
   MatCheckboxModule,
   MatDialogModule,
   MatProgressSpinnerModule,
-  MatMenuModule
+  MatMenuModule,
+  MatSliderModule
 ];
 
 @NgModule(

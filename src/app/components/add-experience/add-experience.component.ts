@@ -61,7 +61,9 @@ export class AddExperienceComponent implements OnChanges {
       this.setUpDate(experience);
     });
     this.unsavedChangesService.onDismissChanges().subscribe(setFormState => {
-      setFormState(this.formIsEmpty(), this.formExperience?.name);
+      setFormState(this.form.pristine, this.formExperience?.name);
+      /*      console.log(this.formExperience?.name + ' formIsEmpty: ' + this.formIsEmpty());
+            console.log(this.form.controls);*/
     });
   }
 
@@ -74,7 +76,7 @@ export class AddExperienceComponent implements OnChanges {
 
   private verifyFormVisibility(showForm: boolean): void {
     if (!showForm && this.form.dirty) {
-      if (this.formIsEmpty()) {
+      if (this.form.pristine) {
         this.formIsAvailable = showForm;
       } else {
         // Aca no cambien el objeto del input al que hace referencia el componente
@@ -93,7 +95,7 @@ export class AddExperienceComponent implements OnChanges {
     const [enterAnimationDuration, exitAnimationDuration] = [200, 100];
     const data = <DialogContent>{
       title: 'Descartar cambios',
-      content: 'Perderás todos los cambios realizados en el formulario.\n' +
+      message: 'Perderás todos los cambios realizados en el formulario.\n' +
         '¿Estás seguro de que quieres descartar los cambios?',
     }
     const dialogRef = this.dialog.open(DialogCardComponent, {
@@ -111,15 +113,6 @@ export class AddExperienceComponent implements OnChanges {
         this.formIsAvailable = true;
       }
     });
-  }
-
-  private formIsEmpty(): boolean {
-    return this.form.value.primaryInfo === '' &&
-      this.form.value.secondaryInfo === '' &&
-      (this.form.value.initialDate === '' || this.form.value.initialDate === null) &&
-      (this.form.value.finalDate === '' || this.form.value.finalDate === null) &&
-      this.form.value.description === '' &&
-      this.form.value.link === '';
   }
 
   private setUpDate(experience: any): void {

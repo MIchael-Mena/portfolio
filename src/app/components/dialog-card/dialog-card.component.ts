@@ -12,8 +12,20 @@ export class DialogCardComponent {
   constructor(public dialogRef: MatDialogRef<DialogCardComponent>, @Inject(MAT_DIALOG_DATA) public dialog: DialogContent) {
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  onClose(): void {
+    if (this.dialog.payload !== undefined) {
+      this.dialog.payload().subscribe({
+        next: (result) => {
+          this.dialogRef.close(true);
+        },
+        error: (err) => {
+          console.log(err);
+          this.dialogRef.close(false);
+        }
+      });
+    } else {
+      this.dialogRef.close(true);
+    }
   }
 
 }

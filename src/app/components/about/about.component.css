@@ -69,14 +69,14 @@ a {
   display: flex;
 }
 
-.icons .icon-style {
+.icons .icon {
   margin: 0 1rem;
   font-size: 20px;
   transition: 0.3s;
   color: rgb(36, 55, 99);
 }
 
-.icons .icon-style:hover {
+.icons .icon:hover {
   transform: scale(1.1);
   color: rgb(255, 110, 49);
 }

@@ -1,0 +1,68 @@
+<!--Los botones dentro de un formulario deben ser del type=button, de lo contrario-->
+<!--se envia el formulario al dar click en el boton, y se pierde el evento click del boton -->
+
+<form class="form mat-typography  px-lg-5 px-1 container-modal d-flex flex-column justify-content-evenly "
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()">
+
+  <h2 class="text-center py-3 text-light">
+    {{isEditing ? 'Editar habilidad' : 'Agregar habilidad'}}
+  </h2>
+
+  <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+    <input matInput
+           type="text"
+           formControlName="name"
+           placeholder="Ingrese el nombre de la habilidad"
+    />
+    <mat-error *ngIf="form.get('name')?.hasError('required')">
+      El nombre es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <div class="d-flex flex-column">
+    <input
+      style="display: none"
+      type="file"
+      (change)="onFileSelected($event)"
+      accept="image/svg+xml"
+      #fileInput
+    />
+    <div class="py-2 d-flex flex-rows justify-content-around align-items-center">
+      <button type='button' mat-fab (click)="fileInput.click()"
+              [ngStyle]="{backgroundColor: '#fff'}"
+              title="Agregar imagen">
+        <mat-icon>add_photo_alternate</mat-icon>
+      </button>
+      <img
+        [src]="(previewFileUrl ?  previewFileUrl: '/assets/icon/png/preview.jpg') | safe: 'url'"
+        alt=alt class="img-fluid" width="56" height="56"
+      />
+    </div>
+    <mat-error class="mat-caption mt-1" [hidden]="isSvgError">El archivo debe ser un svg</mat-error>
+    <mat-error class="mat-caption mt-1" [hidden]="isThereAnIconError">El icono es requerido</mat-error>
+  </div>
+
+  <div class="d-flex flex-column">
+    <span class="mat-subtitle-2 text-light">Seleccione el nivel de la habilidad</span>
+    <mat-slider
+      color="primary"
+      [max]="5"
+      [min]="0"
+      [step]="1"
+      [discrete]="true"
+      [showTickMarks]="true">
+      <input matSliderThumb formControlName="level">
+    </mat-slider>
+  </div>
+  <div class="d-flex flex-column">
+    <button type='button' mat-fab extended (click)="onNoClick()" [ngStyle]="{backgroundColor: '#fff'}">
+      Cancelar
+    </button>
+    <button mat-fab extended color="primary" type="submit">
+      {{isEditing ? 'Actualizar' : 'Agregar'}}
+    </button>
+  </div>
+
+</form>
+

@@ -4,10 +4,10 @@
       <div class="mx-auto">
         <h1 class="my-3 mat-h1" #target>{{experience?.title}}</h1>
       </div>
-      <div *ngIf="isLoggedIn" class="d-flex my-auto">
+      <div *ngIf="isLoggedIn" class="d-flex my-auto container-icon-add">
         <fa-icon
           [icon]="faSquarePlus"
-          [ngClass]="{'icon-style-deactivate': !formExperienceConfig.showForm, 'icon-style-active': formExperienceConfig.showForm}"
+          [ngClass]="{'icon-add-deactivate': !formExperienceConfig.showForm, 'icon-add-active': formExperienceConfig.showForm}"
           (click)="showForm()"
           title="{{!formExperienceConfig.showForm ? 'Agregar' : 'Cancelar'}}"
           size="xl"

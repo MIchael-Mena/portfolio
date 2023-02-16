@@ -40,7 +40,7 @@ export class CardExperienceComponent {
   openDeleteDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     const data = <DialogContent>{
       title: 'Eliminar tarjeta',
-      content: '¿Estás seguro de que quieres eliminar esta tarjeta?',
+      message: '¿Estás seguro de que quieres eliminar esta tarjeta?',
     }
 
     const dialogRef = this.dialog.open(DialogCardComponent, {

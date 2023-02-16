@@ -34,10 +34,9 @@ export class ExperienceAndEducationComponent {
 
   private async OpenDiscardChangesDialog(): Promise<boolean> {
     const formWithUnsavedChanges = this.checkFormsState();
-    const [enterAnimationDuration, exitAnimationDuration] = [200, 100];
     const data = <DialogContent>{
       title: 'Cambios sin guardar',
-      content: `Tienes cambios sin guardar en el formulario de <strong>${formWithUnsavedChanges}</strong>.\n` +
+      message: `Tienes cambios sin guardar en el formulario de <strong>${formWithUnsavedChanges}</strong>.\n` +
         `Si continúas perderás los cambios.`,
       buttonCancel: 'Cancelar',
       buttonAccept: 'Continuar',
@@ -47,12 +46,12 @@ export class ExperienceAndEducationComponent {
       data,
       disableClose: true,
       autoFocus: false,
-      enterAnimationDuration,
-      exitAnimationDuration,
+      enterAnimationDuration: '200ms',
+      exitAnimationDuration: '100ms'
     });
     const test = await firstValueFrom(dialogRef.afterClosed());
     // result puede ser undefined
-    return test ? true : false;
+    return test;
   }
 
   private checkFormsState() {

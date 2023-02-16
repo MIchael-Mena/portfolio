@@ -1,6 +1,9 @@
+import {Observable} from "rxjs";
+
 export interface DialogContent {
+  payload?: () => Observable<any>;
   title: string;
-  content: string;
+  message: string;
 
   buttonCancel?: string;
 

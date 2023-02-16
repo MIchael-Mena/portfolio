@@ -33,6 +33,7 @@ import {DialogCardComponent} from './components/dialog-card/dialog-card.componen
 import {SafePipe} from './pipes/safe.pipe';
 import {SkillsComponent} from './components/skills/skills.component';
 import {SkillBarComponent} from './components/skill-bar/skill-bar.component';
+import {ModalSkillComponent} from './components/modal-skill/modal-skill.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import {SkillBarComponent} from './components/skill-bar/skill-bar.component';
     SafePipe,
     SkillsComponent,
     SkillBarComponent,
+    ModalSkillComponent,
   ],
   imports: [
     BrowserModule,
