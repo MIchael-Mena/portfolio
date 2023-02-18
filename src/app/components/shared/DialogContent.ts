@@ -7,6 +7,6 @@ export interface DialogContent {
 
   buttonCancel?: string;
 
-  buttonAccept?: string;
-  buttonAcceptLoading?: string;
+  buttonConfirm?: string;
+  buttonConfirmLoading?: string;
 }

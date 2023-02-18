@@ -39,7 +39,7 @@ export class ExperienceAndEducationComponent {
       message: `Tienes cambios sin guardar en el formulario de <strong>${formWithUnsavedChanges}</strong>.\n` +
         `Si continúas perderás los cambios.`,
       buttonCancel: 'Cancelar',
-      buttonAccept: 'Continuar',
+      buttonConfirm: 'Continuar',
     }
     const dialogRef = this.dialog.open(DialogCardComponent, {
       width: '500px',

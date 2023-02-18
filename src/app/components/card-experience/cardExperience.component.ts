@@ -8,6 +8,8 @@ import {Input} from '@angular/core';
 import {StorageSessionService} from "../../service/storage-session.service";
 import {DialogCardComponent} from "../dialog-card/dialog-card.component";
 import {DialogContent} from "../shared/DialogContent";
+import {Observable} from "rxjs";
+import {ExperienceService} from "../../service/experience.service";
 
 @Component({
   selector: 'app-card-experience',
@@ -23,14 +25,16 @@ export class CardExperienceComponent {
   faPenToSquare = faPenToSquare;
   faTrashCan = faTrashCan;
 
-  constructor(private dialog: MatDialog, public storageService: StorageSessionService) {
+  constructor(private dialog: MatDialog, public storageService: StorageSessionService,
+              private experienceService: ExperienceService) {
     this.storageService.onToggleSignUp().subscribe((data: boolean) => {
       this.isLoggedIn = data;
     });
   }
 
-  deleteExperience() {
-    this.onDeleteExperience.emit(this.experience);
+  public deleteExperience(): Observable<ExperienceData> {
+    // this.onDeleteExperience.emit(this.experience);
+    return this.experienceService.deleteExperience(this.experience, this.storageService.tokenValue);
   }
 
   editExperience() {
@@ -39,10 +43,13 @@ export class CardExperienceComponent {
 
   openDeleteDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     const data = <DialogContent>{
+      payload: () => this.deleteExperience(),
       title: 'Eliminar tarjeta',
       message: '¿Estás seguro de que quieres eliminar esta tarjeta?',
+      buttonCancel: 'Cancelar',
+      buttonConfirm: 'Eliminar',
+      buttonConfirmLoading: 'Eliminando...',
     }
-
     const dialogRef = this.dialog.open(DialogCardComponent, {
       data,
       width: '350px',
@@ -52,8 +59,11 @@ export class CardExperienceComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       // result es el valor que nos devuelve el dialog
-      if (result) {
-        this.deleteExperience();
+      if (result === true) {
+        this.onDeleteExperience.emit(this.experience);
+        // this.deleteExperience();
+      } else if (result.error) {
+        alert('Error al eliminar la tarjeta');
       }
     });
 

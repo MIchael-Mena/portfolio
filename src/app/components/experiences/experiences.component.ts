@@ -81,14 +81,15 @@ export class ExperiencesComponent implements OnInit {
   }
 
   deleteExperience(experience: ExperienceData) {
-    this.experienceService.deleteExperience(experience, this.storageService.tokenValue).subscribe({
-      next: (experience: ExperienceData) => {
-        this.experiences = this.experiences.filter((t: ExperienceData) => t.id !== experience.id);
-      },
-      error: (error: any) => {
-        alert('Error al eliminar la experiencia');
-      }
-    });
+    this.experiences = this.experiences.filter((t: ExperienceData) => t.id !== experience.id);
+    /*    this.experienceService.deleteExperience(experience, this.storageService.tokenValue).subscribe({
+          next: (experience: ExperienceData) => {
+            this.experiences = this.experiences.filter((t: ExperienceData) => t.id !== experience.id);
+          },
+          error: (error: any) => {
+            alert('Error al eliminar la experiencia');
+          }
+        });*/
   }
 
   editExperience(experience: ExperienceData, element: HTMLElement) {

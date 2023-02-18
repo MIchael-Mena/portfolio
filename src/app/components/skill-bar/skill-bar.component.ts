@@ -70,9 +70,9 @@ export class SkillBarComponent implements OnChanges, OnInit {
     const data = <DialogContent>{
       title: 'Eliminar habilidad ' + this.skill.name,
       message: '¿Estás seguro de que quieres eliminar esta habilidad?',
-      buttonAccept: 'Eliminar',
+      buttonConfirm: 'Eliminar',
       buttonCancel: 'Cancelar',
-      buttonAcceptLoading: 'Eliminando...',
+      buttonConfirmLoading: 'Eliminando...',
       payload: () => this.deleteExperience(),
     }
     const dialogRef = this.dialog.open(DialogCardComponent, {
@@ -87,7 +87,7 @@ export class SkillBarComponent implements OnChanges, OnInit {
         this.onDeleteSkill.emit(this.skill);
       } else if (result.error) {
         // si ocurre un error
-        alert('Base de datos no disponible. Inténtelo más tarde.');
+        alert('Error al eliminar la habilidad');
       }
     });
   }

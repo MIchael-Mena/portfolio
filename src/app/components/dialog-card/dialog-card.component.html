@@ -12,11 +12,11 @@
     </button>
     <span [ngSwitch]="isLoading" class="ms-2">
           <button *ngSwitchCase="false" mat-raised-button (click)="onClose()" cdkFocusInitial color="warn">
-            {{this.dialog.buttonAccept ? this.dialog.buttonAccept : 'Ok'}}
+            {{this.dialog.buttonConfirm ? this.dialog.buttonConfirm : 'Ok'}}
           </button>
           <button *ngSwitchCase="true" mat-raised-button disabled="true">
             <mat-spinner [diameter]="20" [strokeWidth]="3" class="d-inline-block" color="warn"></mat-spinner>
-            {{this.dialog.buttonAcceptLoading ? this.dialog.buttonAcceptLoading : 'Cargando...'}}
+            {{this.dialog.buttonConfirmLoading ? this.dialog.buttonConfirmLoading : 'Cargando...'}}
           </button>
         </span>
   </div>

@@ -67,15 +67,6 @@
       "finalDate": "2011-01-01",
       "description": "Computer Science",
       "link": "Link 2"
-    },
-    {
-      "id": 3,
-      "primaryInfo": "asdda",
-      "secondaryInfo": "asdasd",
-      "initialDate": "2015-03-17T23:44:17.866Z",
-      "finalDate": null,
-      "description": "dsad",
-      "link": ""
     }
   ],
   "Skills": [
