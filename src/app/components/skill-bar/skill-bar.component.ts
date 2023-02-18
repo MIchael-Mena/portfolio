@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {faPenToSquare} from '@fortawesome/free-solid-svg-icons';
 import {faTrashCan} from '@fortawesome/free-regular-svg-icons';
 import {DialogContent} from "../shared/DialogContent";
@@ -20,6 +20,8 @@ import {Observable} from "rxjs";
 })
 export class SkillBarComponent implements OnChanges, OnInit {
   @Input() skill: SkillData = <SkillData>{id: 0, name: 'Skill', level: 0, icon: {name: '', content: ''}};
+  @Output() onDeleteSkill = new EventEmitter<SkillData>();
+  @Output() onUpdateSkill = new EventEmitter<SkillData>();
   public faPenToSquare = faPenToSquare;
   public faTrashCan = faTrashCan;
 
@@ -28,19 +30,19 @@ export class SkillBarComponent implements OnChanges, OnInit {
   constructor(private dialog: MatDialog, private iconRegistry: MatIconRegistry,
               private domSanitizer: DomSanitizer, private storageSession: StorageSessionService,
               private skillService: SkillService) {
-    this.setSkill();
+    this.setLevelSkill();
   }
 
   // ngOnChanges se ejecuta antes que ngOnInit
   ngOnChanges() {
-    this.setSkill();
+    this.setLevelSkill();
   }
 
   ngOnInit() {
     this.iconRegistry.addSvgIconLiteral(this.skill.icon.name, this.domSanitizer.bypassSecurityTrustHtml(this.skill.icon.content));
   }
 
-  private setSkill() {
+  private setLevelSkill() {
     for (let i = 0; i < this.skill.level; i++) {
       this.skillLevel[i] = true;
     }
@@ -56,9 +58,10 @@ export class SkillBarComponent implements OnChanges, OnInit {
       enterAnimationDuration: '200ms',
       exitAnimationDuration: '100ms',
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: SkillData) => {
+      // Si el backend acepta la modificación (el modal maneja los errores a diferencia del dialog)
       if (result) {
-        console.log('edit');
+        this.onUpdateSkill.emit(result);
       }
     });
   }
@@ -67,6 +70,9 @@ export class SkillBarComponent implements OnChanges, OnInit {
     const data = <DialogContent>{
       title: 'Eliminar habilidad ' + this.skill.name,
       message: '¿Estás seguro de que quieres eliminar esta habilidad?',
+      buttonAccept: 'Eliminar',
+      buttonCancel: 'Cancelar',
+      buttonAcceptLoading: 'Eliminando...',
       payload: () => this.deleteExperience(),
     }
     const dialogRef = this.dialog.open(DialogCardComponent, {
@@ -75,23 +81,19 @@ export class SkillBarComponent implements OnChanges, OnInit {
       enterAnimationDuration,
       exitAnimationDuration,
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log('result true');
+      if (result === true) {
+        // si se acepta
+        this.onDeleteSkill.emit(this.skill);
+      } else if (result.error) {
+        // si ocurre un error
+        alert('Base de datos no disponible. Inténtelo más tarde.');
       }
-      alert('Base de datos no disponible. Inténtelo más tarde.');
     });
   }
 
   private deleteExperience(): Observable<any> {
-    console.log('delete');
     return this.skillService.deleteSkill(this.skill, this.storageSession.tokenValue);
-    /*    this.skillService.deleteSkill(this.skill, this.storageSession.tokenValue).subscribe(
-          (response) => {
-            console.log(response);
-          }
-        )*/
   }
 
 }

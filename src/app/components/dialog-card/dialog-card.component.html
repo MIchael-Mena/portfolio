@@ -1,4 +1,4 @@
-<div [ngStyle]="{'background-color': '#0000007F'}"
+<div style="background-color: #0000007F;"
      class="mat-dialog-container" role="dialog"
      aria-modal="true" tabindex="-1"
      aria-labelledby="mat-dialog-0-label">
@@ -10,9 +10,15 @@
     <button mat-raised-button [mat-dialog-close]="false">
       {{this.dialog.buttonCancel ? this.dialog.buttonCancel : 'No'}}
     </button>
-    <button mat-raised-button (click)="onClose()" cdkFocusInitial color="warn">
-      {{this.dialog.buttonAccept ? this.dialog.buttonAccept : 'Ok'}}
-    </button>
+    <span [ngSwitch]="isLoading" class="ms-2">
+          <button *ngSwitchCase="false" mat-raised-button (click)="onClose()" cdkFocusInitial color="warn">
+            {{this.dialog.buttonAccept ? this.dialog.buttonAccept : 'Ok'}}
+          </button>
+          <button *ngSwitchCase="true" mat-raised-button disabled="true">
+            <mat-spinner [diameter]="20" [strokeWidth]="3" class="d-inline-block" color="warn"></mat-spinner>
+            {{this.dialog.buttonAcceptLoading ? this.dialog.buttonAcceptLoading : 'Cargando...'}}
+          </button>
+        </span>
   </div>
 
 </div>

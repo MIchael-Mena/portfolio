@@ -19,7 +19,8 @@
     <app-skill-bar
       *ngFor="let skill of skills"
       [skill]="skill" class="col"
-      
+      (onDeleteSkill)="deleteSkill($event)"
+      (onUpdateSkill)="updateSkill($event)"
     >
     </app-skill-bar>
 

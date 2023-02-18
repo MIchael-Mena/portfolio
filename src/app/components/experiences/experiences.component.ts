@@ -54,26 +54,40 @@ export class ExperiencesComponent implements OnInit {
     // Check if new experience or update existing experience
     // If experience.id is null, then it is a new experience
     // Uso != ya que null != undefined es false
-    this.experienceService.addExperience(experience, this.storageService.tokenValue).subscribe(experience => {
-      this.experiences.push(experience);
+    this.experienceService.addExperience(experience, this.storageService.tokenValue).subscribe({
+      next: (experience: ExperienceData) => {
+        this.experiences.push(experience);
+      },
+      error: (error: any) => {
+        alert('Error al crear la experiencia');
+      }
     });
   }
 
   updateExperience(experience: ExperienceData) {
-    this.experienceService.updateExperience(experience, this.storageService.tokenValue).subscribe(() => {
-      this.experiences = this.experiences.map(
-        currentExperience => {
-          if (experience.id === currentExperience.id) {
-            currentExperience = {...experience};
+    this.experienceService.updateExperience(experience, this.storageService.tokenValue).subscribe({
+      next: (experience: ExperienceData) => {
+        this.experiences = this.experiences.map((t: ExperienceData) => {
+          if (t.id === experience.id) {
+            return experience;
           }
-          return currentExperience;
+          return t;
         });
+      },
+      error: (error: any) => {
+        alert('Error al actualizar la experiencia');
+      }
     });
   }
 
   deleteExperience(experience: ExperienceData) {
-    this.experienceService.deleteExperience(experience, this.storageService.tokenValue).subscribe(() => {
-      this.experiences = this.experiences.filter(t => t.id !== experience.id);
+    this.experienceService.deleteExperience(experience, this.storageService.tokenValue).subscribe({
+      next: (experience: ExperienceData) => {
+        this.experiences = this.experiences.filter((t: ExperienceData) => t.id !== experience.id);
+      },
+      error: (error: any) => {
+        alert('Error al eliminar la experiencia');
+      }
     });
   }
 

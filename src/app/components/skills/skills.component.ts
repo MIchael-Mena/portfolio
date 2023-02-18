@@ -33,10 +33,26 @@ export class SkillsComponent {
       enterAnimationDuration: '200ms',
       exitAnimationDuration: '100ms',
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result: SkillData) => {
+      // El usuario ha pulsado el botón de agregar, y el backend ha devuelto el skill creado
       if (result) {
-        // this.skillService.addSkill(result);
+        this.skills?.push(result);
       }
+    });
+  }
+
+  public deleteSkill(skill: SkillData): void {
+    // Elimino el skill de la lista de skills
+    this.skills = this.skills?.filter((s: SkillData) => s.id !== skill.id);
+  }
+
+  public updateSkill(skill: SkillData): void {
+    // Actualizo el skill de la lista de skills
+    this.skills = this.skills?.map((s: SkillData) => {
+      if (s.id === skill.id) {
+        return skill;
+      }
+      return s;
     });
   }
 

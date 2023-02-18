@@ -20,6 +20,7 @@ export class ModalSkillComponent {
   public isSvgError: boolean = true;
   public isEditing: boolean = false;
   public isThereAnIconError: boolean = true;
+  public isLoading: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<ModalSkillComponent>,
               @Inject(MAT_DIALOG_DATA) public skill: SkillData,
@@ -65,7 +66,9 @@ export class ModalSkillComponent {
 
   private setUpFile(fileReader: FileReader, file: File): void {
     const result = fileReader.result as string;
-    this.checkMaliciousSvg(result);
+    if (this.checkMaliciousSvg(result)) {
+      return;
+    }
     this.svg = {
       name: file.name,
       content: result
@@ -75,20 +78,23 @@ export class ModalSkillComponent {
     this.isSvgError = true;
   }
 
-  private checkMaliciousSvg(svg: string): void {
+  private checkMaliciousSvg(svg: string): boolean {
     const parser = new DOMParser();
     const doc = parser.parseFromString(svg, 'image/svg+xml');
     const script = doc.getElementsByTagName('script');
     if (script.length > 0) {
-      throw new Error('Malicious SVG');
+      // throw new Error('Malicious SVG');
+      console.error('Malicious SVG');
+      return true;
     }
+    return false;
   }
 
   set previewSvgInBase64(svg: string) {
     this.previewFileUrl = 'data:image/svg+xml;base64,' + window.btoa(svg);
   }
 
-  public onNoClick(): void {
+  public onClose(): void {
     this.dialogRef.close(false);
   }
 
@@ -113,27 +119,34 @@ export class ModalSkillComponent {
   }
 
   private addSkill(skillData: SkillData): void {
+    this.isLoading = true;
     this.skillService.addSkill(skillData, this.storageSession.tokenValue).subscribe({
-      next: (data) => {
-        console.log(data);
-        this.dialogRef.close(true);
+      next: (data: SkillData) => {
+        // console.log(data);
+        this.isLoading = false;
+        this.dialogRef.close(data);
       },
       error: (error) => {
-        console.log(error);
+        // console.log(error);
+        this.isLoading = false;
         this.dialogRef.close(false);
+        alert('Error al añadir la skill');
       }
     });
   }
 
   private updateSkill(skillData: SkillData): void {
+    this.isLoading = true;
     this.skillService.updateSkill(skillData, this.storageSession.tokenValue).subscribe({
-      next: (data) => {
-        console.log(data);
-        this.dialogRef.close(true);
+      next: (data: SkillData) => {
+        this.isLoading = false;
+        this.dialogRef.close(data);
       },
       error: (error) => {
-        console.log(error);
+        // console.log(error);
+        this.isLoading = false;
         this.dialogRef.close(false);
+        alert('Error al actualizar la skill');
       }
     });
   }

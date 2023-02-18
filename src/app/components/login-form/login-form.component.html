@@ -20,7 +20,7 @@
             </mat-error>
             <!--suppress TypeScriptUnresolvedFunction -->
             <mat-error *ngIf="this.controlEmail.hasError('required')">
-              Email es <strong>requerido</strong>
+              Email es requerido
             </mat-error>
           </mat-form-field>
         </p>
@@ -44,7 +44,7 @@
             </span>
             <!--suppress TypeScriptUnresolvedFunction -->
             <mat-error *ngIf="this.controlPassword.hasError('required')">
-              Contraseña es <strong>requerida</strong>
+              Contraseña es requerida
             </mat-error>
           </mat-form-field>
         </p>
@@ -56,14 +56,12 @@
           Contraseña o Email invalido.
         </label>
 
-
-        <div class="button">
-          <button mat-fab extended color="primary" disabled *ngIf="this.isLoading">
-            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <div class="button" [ngSwitch]="isLoading">
+          <button mat-fab extended color="primary" disabled *ngSwitchCase="true">
+            <mat-spinner [diameter]="20" [strokeWidth]="3" class="d-inline-block" color="warn"></mat-spinner>
             Cargando...
           </button>
-
-          <button type="SUBMIT" mat-fab extended color="primary" *ngIf="!this.isLoading">
+          <button type="SUBMIT" mat-fab extended color="primary" *ngSwitchCase="false">
             <mat-icon svgIcon="start" aria-hidden="false" aria-label="start"></mat-icon>
             Ingresar
           </button>

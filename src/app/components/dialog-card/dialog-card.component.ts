@@ -9,18 +9,23 @@ import {DialogContent} from "../shared/DialogContent";
 })
 export class DialogCardComponent {
 
+  public isLoading: boolean = false;
+
   constructor(public dialogRef: MatDialogRef<DialogCardComponent>, @Inject(MAT_DIALOG_DATA) public dialog: DialogContent) {
   }
 
   onClose(): void {
     if (this.dialog.payload !== undefined) {
+      this.isLoading = true;
       this.dialog.payload().subscribe({
         next: (result) => {
+          this.isLoading = false;
           this.dialogRef.close(true);
         },
         error: (err) => {
-          console.log(err);
-          this.dialogRef.close(false);
+          this.isLoading = false;
+          // Delego la gestión de errores al componente que llama al dialogo
+          this.dialogRef.close(err);
         }
       });
     } else {

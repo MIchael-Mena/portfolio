@@ -30,7 +30,7 @@
     />
     <div class="py-2 d-flex flex-rows justify-content-around align-items-center">
       <button type='button' mat-fab (click)="fileInput.click()"
-              [ngStyle]="{backgroundColor: '#fff'}"
+              style="background-color:#fff"
               title="Agregar imagen">
         <mat-icon>add_photo_alternate</mat-icon>
       </button>
@@ -56,12 +56,18 @@
     </mat-slider>
   </div>
   <div class="d-flex flex-column">
-    <button type='button' mat-fab extended (click)="onNoClick()" [ngStyle]="{backgroundColor: '#fff'}">
+    <button type='button' mat-fab extended (click)="onClose()" style="background-color:#fff">
       Cancelar
     </button>
-    <button mat-fab extended color="primary" type="submit">
-      {{isEditing ? 'Actualizar' : 'Agregar'}}
-    </button>
+    <span [ngSwitch]="isLoading">
+      <button mat-fab extended color="primary" type="submit" *ngSwitchCase="false" class="w-100">
+        {{isEditing ? 'Actualizar' : 'Agregar'}}
+      </button>
+      <button mat-fab extended color="primary" disabled="true" type="submit" *ngSwitchCase="true" class=" w-100">
+        <mat-spinner [diameter]="20" [strokeWidth]="3" class="d-inline-block" color="warn"></mat-spinner>
+        {{isEditing ? 'Actualizando' : 'Agregando'}}
+      </button>
+    </span>
   </div>
 
 </form>
