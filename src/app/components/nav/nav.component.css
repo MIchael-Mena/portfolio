@@ -1,9 +1,3 @@
-header {
-  position: fixed;
-  width: 100%;
-  z-index: 1000 !important;
-}
-
 .icon-display {
   transform: scale(1.8);
   cursor: pointer;
@@ -15,17 +9,13 @@ header {
   height: 48px;
 }
 
-/*.icon-display:hover {
-  color: #FF6E31;
-}*/
-
 #mainNav {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   background-color: rgb(241, 246, 245);
   /*background-color: transparent;*/
   transition: 0.4s ease;
+  z-index: 1000 !important;
   height: 72px;
-  /*z-index: 1000 !important;*/
 }
 
 .nav-link, .navbar-brand {
@@ -38,13 +28,6 @@ header {
   color: #FF6E31;
 }
 
-/*.navbar-brand:hover {
-  color: #FF6E31;
-}*/
-
-/*.home-button-active {
-  color: #FF6E31;
-}*/
 
 .active-link {
   /*margin-top: 0.5rem;*/

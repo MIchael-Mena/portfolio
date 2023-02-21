@@ -18,6 +18,7 @@ import {StorageSessionService} from "../../service/storage-session.service";
 })
 export class ExperiencesComponent implements OnInit {
   faSquarePlus = faSquarePlus;
+  public isLoading: boolean = false;
   public isLoggedIn: boolean = false;
   public experiences: ExperienceData[] = [];
   public formExperienceConfig: { showForm: boolean, experienceIsNew: boolean } = {
@@ -28,11 +29,11 @@ export class ExperiencesComponent implements OnInit {
   public formExperience?: FormExperience;
   @Input() experience?: Experience;
 
-  constructor(private experienceService: ExperienceService,
-              private uiEditFormService: UiEditFormService,
-              public storageService: StorageSessionService) {
-    this.storageService.onToggleSignUp().subscribe((data: boolean) => {
-      this.isLoggedIn = data;
+  constructor(private uiEditFormService: UiEditFormService,
+              private storageService: StorageSessionService,
+              private experienceService: ExperienceService) {
+    this.storageService.onToggleSignUp().subscribe((result: boolean) => {
+      this.isLoggedIn = result;
     });
   }
 
@@ -40,65 +41,46 @@ export class ExperiencesComponent implements OnInit {
     this.experience?.serviceToUse(this.experienceService);
     this.formExperience = this.experience?.formToUse();
 
+    this.isLoading = true;
     this.experienceService.getExperiences().subscribe(experiences => {
+        this.isLoading = false;
         this.experiences = experiences;
       }
     );
   }
 
-  showForm() {
+  public showForm(): void {
     this.formExperienceConfig = {...this.formExperienceConfig, showForm: !this.formExperienceConfig.showForm};
   }
 
-  addExperience(experience: ExperienceData) {
-    // Check if new experience or update existing experience
-    // If experience.id is null, then it is a new experience
-    // Uso != ya que null != undefined es false
-    this.experienceService.addExperience(experience, this.storageService.tokenValue).subscribe({
-      next: (experience: ExperienceData) => {
-        this.experiences.push(experience);
-      },
-      error: (error: any) => {
-        alert('Error al crear la experiencia');
+  public addExperience(experience: ExperienceData): void {
+    this.experiences.push(experience);
+  }
+
+  public updateExperience(experience: ExperienceData): void {
+    this.experiences = this.experiences.map((t: ExperienceData) => {
+      if (t.id === experience.id) {
+        return experience;
       }
+      return t;
     });
   }
 
-  updateExperience(experience: ExperienceData) {
-    this.experienceService.updateExperience(experience, this.storageService.tokenValue).subscribe({
-      next: (experience: ExperienceData) => {
-        this.experiences = this.experiences.map((t: ExperienceData) => {
-          if (t.id === experience.id) {
-            return experience;
-          }
-          return t;
-        });
-      },
-      error: (error: any) => {
-        alert('Error al actualizar la experiencia');
-      }
-    });
-  }
-
-  deleteExperience(experience: ExperienceData) {
+  public deleteExperience(experience: ExperienceData): void {
     this.experiences = this.experiences.filter((t: ExperienceData) => t.id !== experience.id);
-    /*    this.experienceService.deleteExperience(experience, this.storageService.tokenValue).subscribe({
-          next: (experience: ExperienceData) => {
-            this.experiences = this.experiences.filter((t: ExperienceData) => t.id !== experience.id);
-          },
-          error: (error: any) => {
-            alert('Error al eliminar la experiencia');
-          }
-        });*/
   }
 
-  editExperience(experience: ExperienceData, element: HTMLElement) {
+  public editExperience(experience: ExperienceData, element: HTMLElement): void {
     // Envío el objeto experience al servicio, y es recibido por add-experience
-    // que está subscrito al servicio. Para que lo pueda carga en el formulario
-    this.formExperienceConfig = {showForm: true, experienceIsNew: false};
-    this.uiEditFormService.toggleEdit(experience);
+    // que está subscrito al servicio. Para que lo pueda mostrar en el formulario
 
-    element.scrollIntoView({behavior: "smooth"});
+    element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+    // TODO: EL scroll no sube de forma suave cuando el formulario está oculto, pero si cuando está visible
+    // por lo que se hace un pequeño retraso para que el scroll se haga cuando el formulario está visible
+    setTimeout(() => {
+      this.formExperienceConfig = {showForm: true, experienceIsNew: false};
+      this.uiEditFormService.toggleEdit(experience);
+    }, 1000);
 
     /*    const routerOption: ExtraOptions = {
           scrollPositionRestoration: 'enabled',

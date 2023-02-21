@@ -47,7 +47,6 @@ export class ExperienceService {
     const url = `${this.apiUrl}/${experience.id}`;
     httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
     return this.http.put<ExperienceData>(url, experience, httpOptions);
-    // return this.http.put<ExperienceData>(url, experience, httpOptions);
   }
 
   useWorkingDatabase() {

@@ -33,7 +33,6 @@ export class CardExperienceComponent {
   }
 
   public deleteExperience(): Observable<ExperienceData> {
-    // this.onDeleteExperience.emit(this.experience);
     return this.experienceService.deleteExperience(this.experience, this.storageService.tokenValue);
   }
 
@@ -56,12 +55,9 @@ export class CardExperienceComponent {
       enterAnimationDuration,
       exitAnimationDuration,
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      // result es el valor que nos devuelve el dialog
       if (result === true) {
         this.onDeleteExperience.emit(this.experience);
-        // this.deleteExperience();
       } else if (result.error) {
         alert('Error al eliminar la tarjeta');
       }

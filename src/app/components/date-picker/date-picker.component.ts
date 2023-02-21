@@ -116,10 +116,11 @@ export class DatePickerComponent {
     // Se ejecuta cuando se cambia el valor del input, aDate.value es un moment
     /*     console.log(aDate.value); */
     if (aDate.value) {
-      // Si aDate.value tiene un valor (no es null)
       this.emitDate(aDate.value);
+    } else {
+      // Si aDate.value es null
+      this.emitDate('');
     }
-    // console.log(aDate.value);
   }
 
   setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
@@ -135,7 +136,7 @@ export class DatePickerComponent {
     this.emitDate(ctrlValue);
   }
 
-  private emitDate(aDate: Moment) {
+  private emitDate(aDate: Moment | string) {
     this.date.setValue(aDate);
     this.onDateChange.emit(this.date);
   }

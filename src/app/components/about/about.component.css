@@ -2,7 +2,8 @@
 .semicircle {
   position: relative;
   background: #AD8E70;
-  height: 0px;
+  height: 0;
+  margin-bottom: 6rem;
 }
 
 .semicircle::before {
@@ -23,26 +24,13 @@
 }
 
 .container-profile {
-  height: 450px;
   box-shadow: 0 2px 4px #243763;
-  border-radius: 0 0 20px 20px;
+  border-radius: 0 0 15px 15px;
   background-size: cover;
   overflow: visible;
-  /*border: 1px solid #243763;*/
 }
 
-.content-profile {
-  height: 70%;
-  margin-top: 7rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  /*align-content: space-between;*/
-}
-
-.container-profile .image {
+.image {
   height: 130px;
   width: 130px;
   /*background-image: url('https://xp.io/storage/15pewlWA.jpg');*/
@@ -60,47 +48,28 @@
   color: rgb(105, 100, 109);
 }
 
+/* Para que funcione transform del icono */
 a {
+  text-decoration: none;
   display: flex;
 }
 
-.icons {
-  margin-top: 2rem;
-  display: flex;
-}
 
-.icons .icon {
+.icon {
   margin: 0 1rem;
   font-size: 20px;
   transition: 0.3s;
   color: rgb(36, 55, 99);
 }
 
-.icons .icon:hover {
+.icon:hover {
   transform: scale(1.1);
   color: rgb(255, 110, 49);
 }
 
-.content {
-  line-height: 2;
-}
-
-
-@media (min-width: 768px) {
-  .content {
-    margin: 0 10rem;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .content {
-    margin: 0 5rem;
-  }
-}
-
-@media screen and (max-width: 576px) {
-  .content {
-    margin: 0 1rem;
+@media (max-width: 768px) {
+  .container {
+    margin-top: 4rem;
   }
 }
 

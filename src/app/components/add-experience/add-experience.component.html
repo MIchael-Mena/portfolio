@@ -1,6 +1,6 @@
-<div *ngIf="this.formIsAvailable">
-  <div class="row justify-content-md-center px-sm-5 px-lg-0">
-    <div class="col-lg-8 container-form">
+<div *ngIf="this.formIsVisible">
+  <div class="row justify-content-md-center px-sm-5 px-lg-0 px-1">
+    <div class="col-lg-6 container-form">
       <form class="mat-typography" [formGroup]="form" (ngSubmit)="onSubmit()">
 
         <label class="p-2">{{ formExperience?.getPrimaryInfoLabel() }}</label>
@@ -74,9 +74,13 @@
           </mat-error>
         </mat-form-field>
 
-        <div class="text-center my-3">
-          <button mat-fab extended color="primary" type="submit">
-            {{formConfig.experienceIsNew ? 'Agregar' : 'Actualizar'}}
+        <div class="row justify-content-center my-3" [ngSwitch]="this.isLoading">
+          <button mat-fab extended color="primary" type="submit" *ngSwitchCase="false">
+            {{formSettings.experienceIsNew ? 'Agregar' : 'Actualizar'}}
+          </button>
+          <button mat-fab extended color="primary" disabled="true" *ngSwitchCase="true">
+            <mat-spinner [diameter]="20" [strokeWidth]="3" class="d-inline-block" color="warn"></mat-spinner>
+            {{formSettings.experienceIsNew ? 'Agregando' : 'Actualizando'}}
           </button>
         </div>
 

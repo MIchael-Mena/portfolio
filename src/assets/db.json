@@ -23,7 +23,7 @@
     },
     {
       "id": 5,
-      "primaryInfo": "Un cargo",
+      "primaryInfo": "Parrille",
       "secondaryInfo": "Una empresa",
       "initialDate": "2018-05-01",
       "finalDate": "2022-10-01",
@@ -67,6 +67,15 @@
       "finalDate": "2011-01-01",
       "description": "Computer Science",
       "link": "Link 2"
+    },
+    {
+      "id": 3,
+      "primaryInfo": "jardin",
+      "secondaryInfo": "aaaaa",
+      "initialDate": "2022-08-20T19:54:52.371Z",
+      "finalDate": null,
+      "description": "a",
+      "link": ""
     }
   ],
   "Skills": [

@@ -3,6 +3,14 @@ main {
   width: 100%;
   position: absolute;
   top: 72px;
+  height: calc(100% - 72px);
   bottom: 0;
   overflow-y: auto;
+  padding-top: 0;
+}
+
+@media (min-width: 992px) {
+  main {
+    padding-top: 3rem;
+  }
 }

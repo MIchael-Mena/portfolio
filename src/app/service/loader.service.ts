@@ -5,7 +5,6 @@ import {BehaviorSubject, Observable} from "rxjs";
   providedIn: 'root'
 })
 export class LoaderService {
-  // TODO: Si tuviera muchos spinner lo mejor sería crear más servicios para cada uno de ellos
 
   private behaviorSubject = new BehaviorSubject<boolean>(false);
   private loading: boolean = false;

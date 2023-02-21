@@ -1,6 +1,6 @@
-<div class="container-login">
+<div class="d-flex justify-content-center align-items-center mx-2 login">
   <mat-card class="card-login">
-    <div class="container-title mb-4">
+    <div class="container-title mb-5">
       <mat-card-title class="text-center py-4 text-light">Bienvenido</mat-card-title>
     </div>
     <mat-card-content>
@@ -56,7 +56,7 @@
           Contraseña o Email invalido.
         </label>
 
-        <div class="button" [ngSwitch]="isLoading">
+        <div class="d-flex justify-content-end" [ngSwitch]="isLoading">
           <button mat-fab extended color="primary" disabled *ngSwitchCase="true">
             <mat-spinner [diameter]="20" [strokeWidth]="3" class="d-inline-block" color="warn"></mat-spinner>
             Cargando...

@@ -13,6 +13,7 @@ import {ModalSkillComponent} from "../modal-skill/modal-skill.component";
 })
 export class SkillsComponent {
   faSquarePlus = faSquarePlus;
+  public isLoggedIn: boolean = false;
   public skills?: SkillData[]
 
   constructor(private skillService: SkillService,
@@ -20,6 +21,9 @@ export class SkillsComponent {
               private dialog: MatDialog) {
     this.skillService.skills.subscribe((skills: SkillData[]) => {
       this.skills = skills;
+    });
+    this.storageSession.onToggleSignUp().subscribe((result: boolean) => {
+      this.isLoggedIn = result;
     });
   }
 

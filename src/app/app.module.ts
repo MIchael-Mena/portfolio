@@ -9,6 +9,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from "./app-routing.module";
 import {MaterialModule} from "./material.module";
 import {DateLanguageModule} from "./date-language.module";
+import {httpInterceptorProviders} from "./interceptors/loading.interceptor";
+import {StorageSessionService} from "./service/storage-session.service";
 
 import {AppComponent} from './app.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
@@ -26,8 +28,6 @@ import {
 import {AuthService} from "./service/auth.service";
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {SpinnerComponent} from './components/spinner/spinner.component';
-import {StorageSessionService} from "./service/storage-session.service";
-import {httpInterceptorProviders} from "./interceptors/loading.interceptor";
 import {IconsComponent} from './components/icons/icons.component';
 import {DialogCardComponent} from './components/dialog-card/dialog-card.component';
 import {SafePipe} from './pipes/safe.pipe';

@@ -3,24 +3,17 @@
   background-color: #FFEBB7
 }*/
 
+.login {
+  margin-top: 14vh;
+}
+
+
 .container-title {
   background-color: #243763;
 }
 
-.container-login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 8rem 0rem 0rem 0rem;
-}
-
 .input-field {
-  min-width: 300px;
-}
-
-mat-card-content {
-  display: flex;
-  justify-content: center;
+  width: 260px;
 }
 
 .error {
@@ -30,13 +23,14 @@ mat-card-content {
   background-color: red;
 }
 
-.button {
-  display: flex;
-  justify-content: flex-end;
-}
-
 .card-login {
   overflow: hidden;
-  border-radius: 10%;
+  border-radius: 15px;
   box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+@media (min-width: 600px) {
+  .input-field {
+    width: 300px;
+  }
 }

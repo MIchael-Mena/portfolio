@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output} from '@angular/core';
 import {faPenToSquare} from '@fortawesome/free-solid-svg-icons';
 import {faTrashCan} from '@fortawesome/free-regular-svg-icons';
 import {DialogContent} from "../shared/DialogContent";
@@ -11,25 +11,33 @@ import {MatIconRegistry} from "@angular/material/icon";
 import {DomSanitizer} from "@angular/platform-browser";
 import {StorageSessionService} from "../../service/storage-session.service";
 import {SkillService} from "../../service/skill.service";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-skill-bar',
   templateUrl: './skill-bar.component.html',
   styleUrls: ['./skill-bar.component.css']
 })
-export class SkillBarComponent implements OnChanges, OnInit {
+export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
   @Input() skill: SkillData = <SkillData>{id: 0, name: 'Skill', level: 0, icon: {name: '', content: ''}};
   @Output() onDeleteSkill = new EventEmitter<SkillData>();
   @Output() onUpdateSkill = new EventEmitter<SkillData>();
+  public isLoggedIn: boolean = false;
   public faPenToSquare = faPenToSquare;
   public faTrashCan = faTrashCan;
+  private subscription: Subscription = new Subscription();
 
   public skillLevel: [boolean, boolean, boolean, boolean, boolean] = [false, false, false, false, false];
 
   constructor(private dialog: MatDialog, private iconRegistry: MatIconRegistry,
               private domSanitizer: DomSanitizer, private storageSession: StorageSessionService,
               private skillService: SkillService) {
+    this.subscription.add(this.storageSession.onToggleSignUp().subscribe((result: boolean) => {
+      this.isLoggedIn = result;
+    }));
+    /*    this.storageSession.onToggleSignUp().subscribe((result: boolean) => {
+          this.isLoggedIn = result;
+        });*/
     this.setLevelSkill();
   }
 
@@ -59,7 +67,7 @@ export class SkillBarComponent implements OnChanges, OnInit {
       exitAnimationDuration: '100ms',
     });
     dialogRef.afterClosed().subscribe((result: SkillData) => {
-      // Si el backend acepta la modificación (el modal maneja los errores a diferencia del dialog)
+      // Si el backend acepta la modificación (el modal está manejando los errores a diferencia del dialog)
       if (result) {
         this.onUpdateSkill.emit(result);
       }
@@ -94,6 +102,10 @@ export class SkillBarComponent implements OnChanges, OnInit {
 
   private deleteExperience(): Observable<any> {
     return this.skillService.deleteSkill(this.skill, this.storageSession.tokenValue);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }
