@@ -35,9 +35,6 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
     this.subscription.add(this.storageSession.onToggleSignUp().subscribe((result: boolean) => {
       this.isLoggedIn = result;
     }));
-    /*    this.storageSession.onToggleSignUp().subscribe((result: boolean) => {
-          this.isLoggedIn = result;
-        });*/
     this.setLevelSkill();
   }
 
@@ -93,7 +90,7 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
       if (result === true) {
         // si se acepta
         this.onDeleteSkill.emit(this.skill);
-      } else if (result.error) {
+      } else if (result?.error) {
         // si ocurre un error
         alert('Error al eliminar la habilidad');
       }
@@ -106,6 +103,7 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.iconRegistry.ngOnDestroy();
   }
 
 }

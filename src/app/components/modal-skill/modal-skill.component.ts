@@ -145,8 +145,8 @@ export class ModalSkillComponent {
       error: (error) => {
         // console.log(error);
         this.isLoading = false;
-        this.dialogRef.close(false);
         alert('Error al actualizar la skill');
+        // this.dialogRef.close(false);
       }
     });
   }

@@ -1,0 +1,51 @@
+<!-- hay que usar m-x-auto para centrar objetos si uso la opcion solo con d-flex-->
+<!--<div class="d-flex align-items-center justify-content-center w-auto position-relative"-->
+<div class="d-flex align-items-center"
+     [ngClass]="{'container-edit':this.activeEditData, '':!this.activeEditData}">
+  <div [ngSwitch]="this.activeEditData" class="w-100">
+
+    <div *ngSwitchCase="false" [innerHTML]="html | safe: 'html'" class="d-inline-flex justify-content-center">
+      <!--      <h2 class="">{{this.data}}</h2>-->
+    </div>
+
+    <div *ngSwitchCase="true"
+         class="d-inline-flex flex-lg-row flex-column justify-content-around align-items-center w-100 ">
+      <mat-form-field appearance="outline" [hideRequiredMarker]="true" class="px-1">
+        <mat-label>{{this.label}}</mat-label>
+        <div [ngSwitch]="this.inputType">
+          <input matInput *ngSwitchCase="'text'" type="text" class="form-control"
+                 [formControl]="this.newData" maxlength="40">
+          <textarea matInput *ngSwitchCase="'textarea'" class="form-control"
+                    [formControl]="this.newData"
+                    rows="5"
+                    maxlength="371"></textarea>
+        </div>
+        <mat-error *ngIf="this.newData.hasError('required')">
+          {{'El campo es requerido'}}
+        </mat-error>
+      </mat-form-field>
+
+
+      <div>
+        <button mat-fab extended color="primary" (click)="saveData()"
+                class="mx-1 my-1">
+          Guardar
+        </button>
+        <!--        <button class="btn btn-primary" (click)="saveData()">Guardar</button>-->
+      </div>
+    </div>
+
+  </div>
+
+  <div class="float-end me-1" *ngIf="isLoggedIn">
+    <!--  <div class="position-absolute end-0 me-1" *ngIf="this.isLoggedIn">-->
+    <fa-icon
+      [icon]="faSquareCaretDown"
+      class="icon-style d-flex"
+      size="lg"
+      (click)="editData()"
+      title="Editar"
+    ></fa-icon>
+  </div>
+
+</div>

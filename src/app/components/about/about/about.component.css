@@ -1,9 +1,20 @@
+/*.image-url {
+  --image-url: url('https://xp.io/storage/15pewlWA.jpg');
+}*/
+
+.position-portrait {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+}
 
 .semicircle {
   position: relative;
   background: #AD8E70;
   height: 0;
   margin-bottom: 6rem;
+  width: 100%;
 }
 
 .semicircle::before {
@@ -33,7 +44,8 @@
 .image {
   height: 130px;
   width: 130px;
-  /*background-image: url('https://xp.io/storage/15pewlWA.jpg');*/
+  background-image: var(--image-url, url('/assets/icon/png/profile preview alt.jpg'));
+  /*background-image: image-set();*/
   background-size: cover;
   border-radius: 50%;
   border: 8px solid #FFEBB7;
@@ -44,27 +56,21 @@
   z-index: 20;
 }
 
-.highlight {
-  color: rgb(105, 100, 109);
-}
-
-/* Para que funcione transform del icono */
-a {
-  text-decoration: none;
-  display: flex;
-}
-
-
 .icon {
   margin: 0 1rem;
-  font-size: 20px;
-  transition: 0.3s;
-  color: rgb(36, 55, 99);
+  /*font-size: 20px;*/
+  transition: 0.1s;
+  /*color: rgb(36, 55, 99);*/
 }
 
 .icon:hover {
   transform: scale(1.1);
   color: rgb(255, 110, 49);
+}
+
+:host .mat-icon {
+  height: 25px;
+  width: 25px;
 }
 
 @media (max-width: 768px) {

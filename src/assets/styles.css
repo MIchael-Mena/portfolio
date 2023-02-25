@@ -30,10 +30,31 @@ body {
 
 .icon-style {
   color: rgb(36, 55, 99);
-  background-color: rgb(241, 246, 245);
-  border-radius: 30%;
+  /*  height: 25px;
+    width: 25px;*/
+  /*background-color: rgb(241, 246, 245);*/
+  /*border-radius: 30%;*/
+  /*margin: auto auto;*/
+  height: auto;
+  width: auto;
   cursor: pointer;
   filter: drop-shadow(1px 1px 2px #6c757d);
+
+}
+
+.icon-style::before {
+  position: absolute;
+  content: '';
+  bottom: -5%;
+  left: -5%;
+  top: -5%;
+  right: -5%;
+  height: 110%;
+  width: 110%;
+  border-radius: 20%;
+  background-color: rgb(241, 246, 245);
+  z-index: -1;
+
 }
 
 .icon-style:hover {
@@ -43,7 +64,7 @@ body {
 }
 
 .icon-style:active {
-  transform: translateY(2px);
+  transform: translateY(1px);
 }
 
 
@@ -77,7 +98,7 @@ body {
 }
 
 .icon-add-active:active, .icon-add-deactivate:active {
-  transform: translateY(2px);
+  transform: translateY(1px);
 }
 
 /*.mat-icon {

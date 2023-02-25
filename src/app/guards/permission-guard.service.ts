@@ -15,7 +15,7 @@ export class PermissionGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (this.storageSessionService.isLogged) {
+    if (this.storageSessionService.isLoggedIn) {
       this.router.navigate(['/home']);
       alert('Debes cerrar sesión para acceder a esta página');
       return false;

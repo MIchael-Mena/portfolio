@@ -6,7 +6,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 })
 export class StorageSessionService {
 
-  private behaviorSubject = new BehaviorSubject<boolean>(this.isLogged);
+  private behaviorSubject = new BehaviorSubject<boolean>(this.isLoggedIn);
 
   constructor() {
   }
@@ -21,7 +21,7 @@ export class StorageSessionService {
     localStorage.setItem('token', data.accessToken);
   }
 
-  public get isLogged(): boolean {
+  public get isLoggedIn(): boolean {
     return (localStorage.getItem('token') !== null);
   }
 
