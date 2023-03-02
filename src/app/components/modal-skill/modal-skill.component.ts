@@ -4,6 +4,7 @@ import {SkillData, IconData} from "../shared/SkillData";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SkillService} from "../../service/skill.service";
 import {StorageSessionService} from "../../service/storage-session.service";
+import {ModalResponse} from "../shared/ModalResponse";
 
 @Component({
   selector: 'app-modal-skill',
@@ -16,10 +17,10 @@ export class ModalSkillComponent {
   public form: FormGroup;
   private svg: IconData | null = null;
   // private fileSelected: File | null = null;
-  public previewFileUrl: string | null = null;
+  public previewFileUrl: string = '/assets/icon/png/preview.jpg';
   public isSvgError: boolean = true;
   public isEditing: boolean = false;
-  public isThereAnIconError: boolean = true;
+  public iconRequiredError: boolean = true;
   public isLoading: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<ModalSkillComponent>,
@@ -48,7 +49,9 @@ export class ModalSkillComponent {
 
   public onFileSelected(event: any) {
     // TODO: SVG sin viewBox no se visualiza bien en mat-icon
+    // Contiene los binarios del archivo, el nombre y el tipo
     const file = <File>event.target.files[0];
+
     if (file.type === 'image/svg+xml') {
       const fileReader = new FileReader();
       fileReader.readAsText(file);
@@ -74,7 +77,7 @@ export class ModalSkillComponent {
       content: result
     }
     this.previewSvgInBase64 = result;
-    this.isThereAnIconError = true;
+    this.iconRequiredError = true;
     this.isSvgError = true;
   }
 
@@ -95,12 +98,13 @@ export class ModalSkillComponent {
   }
 
   public onClose(): void {
-    this.dialogRef.close(false);
+    // this.dialogRef.close(false);
+    this.dialogRef.close(<ModalResponse>{state: false});
   }
 
   public onSubmit(): void {
     if (this.form.invalid || this.svg === null) {
-      if (this.svg === null) this.isThereAnIconError = false;
+      if (this.svg === null) this.iconRequiredError = false;
       return;
     }
     // Usar FormData para enviar archivos y datos en un solo request (multipart/form-data)
@@ -120,16 +124,13 @@ export class ModalSkillComponent {
 
   private addSkill(skillData: SkillData): void {
     this.isLoading = true;
-    this.skillService.addSkill(skillData, this.storageSession.tokenValue).subscribe({
-      next: (data: SkillData) => {
-        // console.log(data);
+    this.skillService.addSkill(skillData, this.storageSession.token).subscribe({
+      next: (response: SkillData) => {
         this.isLoading = false;
-        this.dialogRef.close(data);
+        this.dialogRef.close(<ModalResponse>{state: true, content: response});
       },
       error: (error) => {
-        // console.log(error);
         this.isLoading = false;
-        this.dialogRef.close(false);
         alert('Error al añadir la skill');
       }
     });
@@ -137,13 +138,12 @@ export class ModalSkillComponent {
 
   private updateSkill(skillData: SkillData): void {
     this.isLoading = true;
-    this.skillService.updateSkill(skillData, this.storageSession.tokenValue).subscribe({
-      next: (data: SkillData) => {
+    this.skillService.updateSkill(skillData, this.storageSession.token).subscribe({
+      next: (response: SkillData) => {
         this.isLoading = false;
-        this.dialogRef.close(data);
+        this.dialogRef.close({state: true, content: response} as ModalResponse);
       },
       error: (error) => {
-        // console.log(error);
         this.isLoading = false;
         alert('Error al actualizar la skill');
         // this.dialogRef.close(false);
@@ -162,8 +162,8 @@ export class ModalSkillComponent {
 
   public deleteIcon(): void {
     this.svg = null;
-    this.previewFileUrl = null;
-    this.isThereAnIconError = false;
+    this.previewFileUrl = '/assets/icon/png/preview.jpg';
+    this.iconRequiredError = false;
   }
 
 }

@@ -25,7 +25,7 @@ export class StorageSessionService {
     return (localStorage.getItem('token') !== null);
   }
 
-  public get tokenValue(): string {
+  public get token(): string {
     return localStorage.getItem('token') || '';
   }
 

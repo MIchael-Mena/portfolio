@@ -114,14 +114,15 @@ export class AddExperienceComponent implements OnChanges {
   }
 
   private OpenDiscardChangesDialog(): void {
-    const [enterAnimationDuration, exitAnimationDuration] = [200, 100];
+    const [enterAnimationDuration, exitAnimationDuration] = [200, 200];
     const data = <DialogContent>{
       title: 'Descartar cambios',
-      message: 'Perderás todos los cambios realizados en el formulario.\n' +
-        '¿Estás seguro de que quieres descartar los cambios?',
+      message: `Tienes cambios sin guardar en el formulario.
+                <br>
+                ¿Quieres descartar los cambios?`,
     }
     const dialogRef = this.dialog.open(DialogCardComponent, {
-      width: '450px',
+      width: '400px',
       data,
       enterAnimationDuration,
       exitAnimationDuration
@@ -195,7 +196,7 @@ export class AddExperienceComponent implements OnChanges {
   }
 
   private updateExperience(experience: ExperienceData): void {
-    this.experienceService.updateExperience(experience, this.storageService.tokenValue).subscribe({
+    this.experienceService.updateExperience(experience, this.storageService.token).subscribe({
       next: (response: ExperienceData) => {
         // Emite el evento onUpdateExperience al componente padre (experience-and-education.component.ts)
         this.isLoading = false;
@@ -210,7 +211,7 @@ export class AddExperienceComponent implements OnChanges {
   }
 
   private addExperience(experience: ExperienceData): void {
-    this.experienceService.addExperience(experience, this.storageService.tokenValue).subscribe({
+    this.experienceService.addExperience(experience, this.storageService.token).subscribe({
       next: (response: ExperienceData) => {
         // Emite el evento onAddExperience al componente padre (experience-and-education.component.ts)
         this.isLoading = false;

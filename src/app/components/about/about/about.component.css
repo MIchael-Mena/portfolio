@@ -44,7 +44,7 @@
 .image {
   height: 130px;
   width: 130px;
-  background-image: var(--image-url, url('/assets/icon/png/profile preview alt.jpg'));
+  background-image: var(--image-url, url('/assets/icon/png/profile-preview-alt.jpg'));
   /*background-image: image-set();*/
   background-size: cover;
   border-radius: 50%;

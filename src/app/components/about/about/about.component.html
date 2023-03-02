@@ -22,17 +22,16 @@
         </div>
 
         <div *ngSwitchCase="false">
-          <app-name [data]="this.name" [html]="this.nameHTML" [inputType]="'text'" [label]="'Nombre'">
-          </app-name>
+          <app-data [data]="this.nameData" (dataChange)="updateName($event)">
+          </app-data>
 
-          <app-name [data]="this.title" [html]="this.titleHTML" [inputType]="'text'" [label]="'Título'">
-          </app-name>
+          <app-data [data]="this.titleData" (dataChange)="updateTitle($event)">
+          </app-data>
 
-          <app-name [data]="this.description" [html]="this.descriptionHTML" [inputType]="'textarea'"
-                    [label]="'Descripción'">
-          </app-name>
+          <app-data [data]="this.descriptionData" (dataChange)="updateDescription($event)">
+          </app-data>
 
-          <!--        <button (click)="test(imageURL)">test</button>-->
+          <button (click)="test(imageURL)">test</button>
 
           <div class="d-flex my-4 justify-content-center position-relative">
             <div *ngFor="let social of this.aboutMe?.social">
@@ -46,7 +45,7 @@
                 [icon]="faPenToSquare"
                 class="icon-style"
                 size="lg"
-                (click)="editProfileImage()"
+                (click)="editSocialMedia()"
                 title="Editar"
               ></fa-icon>
             </div>

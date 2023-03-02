@@ -5,6 +5,7 @@ import {faSquarePlus} from '@fortawesome/free-regular-svg-icons';
 import {MatDialog} from "@angular/material/dialog";
 import {StorageSessionService} from "../../service/storage-session.service";
 import {ModalSkillComponent} from "../modal-skill/modal-skill.component";
+import {ModalResponse} from "../shared/ModalResponse";
 
 @Component({
   selector: 'app-skills',
@@ -35,12 +36,12 @@ export class SkillsComponent {
       width: '450px',
       height: '500px',
       enterAnimationDuration: '200ms',
-      exitAnimationDuration: '100ms',
+      exitAnimationDuration: '200ms',
     });
-    dialogRef.afterClosed().subscribe((result: SkillData) => {
+    dialogRef.afterClosed().subscribe((result: ModalResponse) => {
       // El usuario ha pulsado el botón de agregar, y el backend ha devuelto el skill creado
-      if (result) {
-        this.skills?.push(result);
+      if (result.state) {
+        this.skills?.push(result.content as SkillData);
       }
     });
   }

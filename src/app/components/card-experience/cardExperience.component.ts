@@ -33,7 +33,7 @@ export class CardExperienceComponent {
   }
 
   public deleteExperience(): Observable<ExperienceData> {
-    return this.experienceService.deleteExperience(this.experience, this.storageService.tokenValue);
+    return this.experienceService.deleteExperience(this.experience, this.storageService.token);
   }
 
   editExperience() {

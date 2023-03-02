@@ -12,6 +12,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {StorageSessionService} from "../../service/storage-session.service";
 import {SkillService} from "../../service/skill.service";
 import {Observable, Subscription} from "rxjs";
+import {ModalResponse} from "../shared/ModalResponse";
 
 @Component({
   selector: 'app-skill-bar',
@@ -58,15 +59,16 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
       data: this.skill,
       disableClose: true,
       autoFocus: true,
+      restoreFocus: true,
       width: '450px',
       height: '500px',
       enterAnimationDuration: '200ms',
-      exitAnimationDuration: '100ms',
+      exitAnimationDuration: '200ms',
     });
-    dialogRef.afterClosed().subscribe((result: SkillData) => {
+    dialogRef.afterClosed().subscribe((response: ModalResponse) => {
       // Si el backend acepta la modificación (el modal está manejando los errores a diferencia del dialog)
-      if (result) {
-        this.onUpdateSkill.emit(result);
+      if (response.state) {
+        this.onUpdateSkill.emit(response.content as SkillData);
       }
     });
   }
@@ -87,6 +89,7 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
       exitAnimationDuration,
     });
     dialogRef.afterClosed().subscribe(result => {
+      // TODO: castear result a ModalResponse
       if (result === true) {
         // si se acepta
         this.onDeleteSkill.emit(this.skill);
@@ -98,7 +101,7 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   private deleteExperience(): Observable<any> {
-    return this.skillService.deleteSkill(this.skill, this.storageSession.tokenValue);
+    return this.skillService.deleteSkill(this.skill, this.storageSession.token);
   }
 
   ngOnDestroy() {

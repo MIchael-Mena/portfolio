@@ -34,13 +34,14 @@
               title="Agregar imagen">
         <mat-icon>add_photo_alternate</mat-icon>
       </button>
+      <!-- No es necesario sanitizar url -->
       <img
-        [src]="(previewFileUrl ?  previewFileUrl: '/assets/icon/png/preview.jpg') | safe: 'url'"
+        [src]="previewFileUrl | safe: 'url'"
         alt=alt class="img-fluid" width="56" height="56"
       />
     </div>
-    <mat-error class="mat-caption mt-1" [hidden]="isSvgError">El archivo debe ser un svg</mat-error>
-    <mat-error class="mat-caption mt-1" [hidden]="isThereAnIconError">El icono es requerido</mat-error>
+    <mat-error class="mat-caption mt-1" [hidden]="this.isSvgError">El archivo debe ser un svg</mat-error>
+    <mat-error class="mat-caption mt-1" [hidden]="this.iconRequiredError">El icono es requerido</mat-error>
   </div>
 
   <div class="d-flex flex-column">

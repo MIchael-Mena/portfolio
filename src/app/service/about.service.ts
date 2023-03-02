@@ -24,8 +24,14 @@ export class AboutService {
   }
 
   public update(aboutMe: AboutMeData, token: String): Observable<AboutMeData> {
-    const url = `${this.apiUrl}/${aboutMe.id}`;
+    // const url = `${this.apiUrl}/${aboutMe.id}`;
     httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
-    return this.http.put<AboutMeData>(url, aboutMe, httpOptions);
+    return this.http.put<AboutMeData>(this.apiUrl, aboutMe, httpOptions);
   }
+
+  public saveImg(img: string, token: String): Observable<string> {
+    httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
+    return this.http.post<string>(this.apiUrl + '/img', img, httpOptions);
+  }
+
 }
