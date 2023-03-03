@@ -1,0 +1,30 @@
+<div class="container mat-typography">
+  <div class="d-flex justify-content-between">
+    <div class="mx-auto">
+      <h1 class="my-3">Habilidades</h1>
+    </div>
+
+    <div *ngIf="isLoggedIn" class="d-flex my-auto container-icon-add">
+      <fa-icon
+        [icon]="faSquarePlus"
+        (click)="addSkill()"
+        class="icon-add-deactivate"
+        title="Agregar"
+        size="xl"
+      >
+      </fa-icon>
+    </div>
+
+  </div>
+  <div class="row">
+    <app-skill-bar
+      *ngFor="let skill of skills"
+      [skill]="skill" class="col"
+      (onDeleteSkill)="deleteSkill($event)"
+      (onUpdateSkill)="updateSkill($event)"
+    >
+    </app-skill-bar>
+
+  </div>
+</div>
+

@@ -4,13 +4,13 @@ import {Routes, RouterModule} from '@angular/router';
 import {AboutComponent} from "../components/about/about/about.component";
 import {
   ExperienceAndEducationComponent
-} from "../components/experience-and-education/experience-and-education.component";
+} from "../components/experience/experience-and-education/experience-and-education.component";
 import {LoginFormComponent} from "../components/login-form/login-form.component";
 import {HomeComponent} from "../components/home/home.component";
 import {PageNotFoundComponent} from "../components/page-not-found/page-not-found.component";
 import {PermissionGuard} from "../guards/permission-guard.service";
 import {UnsavedChangesGuard} from "../guards/unsaved-changes.guard";
-import {SkillsComponent} from "../components/skills/skills.component";
+import {SkillsComponent} from "../components/skill/skills/skills.component";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},

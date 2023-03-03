@@ -1,0 +1,86 @@
+<div *ngIf="this.formIsVisible">
+  <div class="row justify-content-md-center px-sm-5 px-lg-0 px-1">
+    <div class="col-lg-6 style-container-form">
+      <form class="mat-typography" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <label class="p-2">{{ formExperience?.getPrimaryInfoLabel() }}</label>
+        <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+          <input
+            matInput
+            type="text"
+            placeholder="{{'Agregar un ' + this.formExperience?.getPrimaryInfoLabel()}}"
+            formControlName="primaryInfo"
+            maxlength="40"
+          />
+          <mat-error *ngIf="form.get('primaryInfo')?.hasError('required')">
+            {{'El campo ' + this.formExperience?.getPrimaryInfoLabel() + ' es requerido'}}
+          </mat-error>
+        </mat-form-field>
+
+        <label class="p-2">{{ this.formExperience?.getSecondaryInfoLabel() }}</label>
+        <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+          <input
+            matInput
+            type="text"
+            placeholder="{{'Agregar una ' + this.formExperience?.getSecondaryInfoLabel()}}"
+            formControlName="secondaryInfo"
+            maxlength="40"
+          />
+          <mat-error *ngIf="form.get('secondaryInfo')?.hasError('required')">
+            {{'El campo ' + this.formExperience?.getSecondaryInfoLabel() + ' es requerido'}}
+          </mat-error>
+        </mat-form-field>
+
+        <div
+          class="mt-2 d-flex flex-wrap align-content-center flex-column flex-lg-row justify-content-lg-around">
+          <div>
+            <label class="d-flex p-2">Fecha inicial:</label>
+            <app-date-picker
+              [dateSettings]="initialDateSettings"
+              (onDateChange)="setInitialControlDate($event)"
+            ></app-date-picker>
+          </div>
+          <div>
+            <span class="d-flex align-items-center">
+              <label class="position-static ps-2">Fecha final:</label>
+              <mat-checkbox
+                class="position-static ms-4"
+                formControlName="presentDate"
+                (change)="setPresentDate($event)"
+              >
+                Presente
+              </mat-checkbox>
+            </span>
+            <app-date-picker
+              [dateSettings]="finalDateSettings"
+              (onDateChange)="setFinalControlDate($event)"
+            ></app-date-picker>
+          </div>
+        </div>
+
+        <label class="p-2">Descripción</label>
+        <mat-form-field appearance="outline" [hideRequiredMarker]="true">
+          <textarea
+            matInput
+            placeholder="Agregar una descripción"
+            formControlName="description"
+            rows="5"
+            maxlength="371"
+            [ngStyle]="{resize: 'none'}"
+          >
+          </textarea>
+          <mat-error *ngIf="form.get('description')?.hasError('required')">
+            El campo descripción es requerido
+          </mat-error>
+        </mat-form-field>
+
+        <app-button-confirm
+          [buttonSettings]="this.buttonSettings"
+          [isWaiting]="this.isLoading"
+          class="row justify-content-center my-3">
+        </app-button-confirm>
+
+      </form>
+    </div>
+  </div>
+</div>

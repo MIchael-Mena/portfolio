@@ -1,8 +1,8 @@
 <!-- hay que usar m-x-auto para centrar objetos si uso la opcion solo con d-flex-->
 <!--<div class="d-flex align-items-center justify-content-center w-auto position-relative"-->
-<div class="d-flex align-items-center"
-     [ngClass]="{'style-container-form py-3':this.activeEditData, '':!this.activeEditData}">
-  <div [ngSwitch]="this.activeEditData" class="w-100">
+<div class="d-flex align-items-center "
+     [ngClass]="{'style-container-form py-3':this.activeEdit}">
+  <div [ngSwitch]="this.activeEdit" class="w-100">
 
     <div *ngSwitchCase="false" [innerHTML]="this.data.html | safe: 'html'" class="d-inline-flex justify-content-center">
     </div>
@@ -44,7 +44,7 @@
       class="icon-style d-flex"
       size="lg"
       (click)="editData()"
-      title="Editar"
+      title="{{this.activeEdit ? 'Cancelar' : 'Editar'}}"
     ></fa-icon>
   </div>
 

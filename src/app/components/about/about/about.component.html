@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mb-3">
   <div class="container-profile mat-typography">
 
     <div class="semicircle">
@@ -31,25 +31,9 @@
           <app-data [data]="this.descriptionData" (dataChange)="updateDescription($event)">
           </app-data>
 
-          <button (click)="test(imageURL)">test</button>
+          <!--          <button (click)="test(imageURL)">test</button>-->
 
-          <div class="d-flex my-4 justify-content-center position-relative">
-            <div *ngFor="let social of this.aboutMe?.social">
-              <a href="{{social.url}}" class="d-flex text-decoration-none">
-                <mat-icon svgIcon="{{social.name}}" aria-hidden="false" aria-label="SVG icon"
-                          color="primary" class="icon"></mat-icon>
-              </a>
-            </div>
-            <div class="d-flex position-absolute end-0 me-1" *ngIf="isLoggedIn">
-              <fa-icon
-                [icon]="faPenToSquare"
-                class="icon-style"
-                size="lg"
-                (click)="editSocialMedia()"
-                title="Editar"
-              ></fa-icon>
-            </div>
-          </div>
+          <app-social-media [socialMedia]="this.aboutMe.socialMedia"></app-social-media>
 
         </div>
 

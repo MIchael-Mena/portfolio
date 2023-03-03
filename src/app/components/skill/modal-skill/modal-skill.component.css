@@ -1,0 +1,17 @@
+.container-modal {
+  width: 100%;
+  height: 100%;
+  /*background-color: rgba(0, 0, 0, 0.5);*/
+  background-color: #0000007F;
+  overflow: hidden;
+}
+
+.mat-mdc-slider {
+  --mat-mdc-slider-value-indicator-opacity: 1;
+  /*opacity: 1;*/
+}
+
+/*tambien .mdc-text-field*/
+:host ::ng-deep .mdc-text-field--filled {
+  background-color: #FFEBB7
+}

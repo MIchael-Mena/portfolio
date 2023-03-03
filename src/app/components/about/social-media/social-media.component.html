@@ -1,0 +1,52 @@
+<div class="d-flex align-items-center py-2 mb-3"
+     [ngClass]="{'style-container-form py-3':this.activeEdit}">
+
+  <div class="float-start ms-1" *ngIf="this.activeEdit">
+    <fa-icon
+      [icon]="this.icons.faSquarePlus"
+      class="icon-style d-flex"
+      size="lg"
+      (click)="openAddModal()"
+      title="Agregar"
+    ></fa-icon>
+  </div>
+
+  <div class="w-100 d-inline-flex justify-content-center align-items-center gap-1 flex-wrap">
+    <div *ngFor="let social of this.socialMedia" class="mx-3">
+      <a href="{{social.url}}" class=" text-decoration-none">
+        <mat-icon svgIcon="{{social.name}}" aria-hidden="false" aria-label="SVG icon"
+                  color="primary" class="social-icon "></mat-icon>
+      </a>
+
+      <div class="d-flex" *ngIf="this.activeEdit">
+        <fa-icon
+          [icon]="this.icons.faPenToSquare"
+          class="icon-style my-1 mx-1"
+          size="lg"
+          (click)="openEditModal()"
+          title="Editar">
+        </fa-icon>
+        <fa-icon
+          [icon]="this.icons.faTrashCan"
+          class="icon-style my-1 mx-1"
+          size="lg"
+          (click)="openDeleteDialog()"
+          title="Eliminar">
+        </fa-icon>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="float-end me-1" *ngIf="isLoggedIn">
+    <fa-icon
+      [icon]="this.icons.faSquareCaretDown"
+      class="icon-style d-flex"
+      size="lg"
+      (click)="editSocialMedia()"
+      title="{{this.activeEdit ? 'Cancelar' : 'Editar'}}"
+    ></fa-icon>
+  </div>
+
+</div>

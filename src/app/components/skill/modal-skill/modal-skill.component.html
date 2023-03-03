@@ -1,0 +1,89 @@
+<!--Los botones dentro de un formulario deben ser del type=button, de lo contrario-->
+<!--se envia el formulario al dar click en el boton, y se pierde el evento click del boton -->
+
+<form class="form mat-typography  px-lg-5 px-1 container-modal d-flex flex-column justify-content-evenly "
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()">
+
+  <h2 class="text-center py-3 text-light">
+    {{isEditing ? 'Editar habilidad' : 'Agregar habilidad'}}
+  </h2>
+
+  <mat-form-field appearance="fill" [hideRequiredMarker]="true">
+    <input matInput
+           type="text"
+           formControlName="name"
+           placeholder="Ingrese el nombre de la habilidad"
+    />
+    <mat-label>Nombre</mat-label>
+    <mat-error *ngIf="form.get('name')?.hasError('required')">
+      El nombre es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <app-select-file [previewFile]="this.previewFileUrl"
+                   [hasRequiredError]="this.iconHasRequiredError"
+                   (onChooseFile)="setSvgFile($event)"
+  >
+  </app-select-file>
+
+  <!--  <div class="d-flex flex-column">
+      <input
+        style="display: none"
+        type="file"
+        (change)="onFileSelected($event)"
+        accept="image/svg+xml"
+        #fileInput
+      />
+      <div class="py-2 d-flex flex-rows justify-content-around align-items-center">
+        <button type='button' mat-fab (click)="fileInput.click()"
+                style="background-color:#fff"
+                title="Agregar imagen">
+          <mat-icon>add_photo_alternate</mat-icon>
+        </button>
+        &lt;!&ndash; No es necesario sanitizar url &ndash;&gt;
+        <img
+          [src]="previewFileUrl | safe: 'url'"
+          alt=alt class="img-fluid" width="56" height="56"
+        />
+      </div>
+      <mat-error class="mat-caption mt-1" [hidden]="this.invalidFormatError">El archivo debe ser un svg</mat-error>
+      <mat-error class="mat-caption mt-1" [hidden]="this.iconRequiredError">El icono es requerido</mat-error>
+    </div>-->
+
+  <div class="w-100">
+    <span class="mat-subtitle-2 text-light">Seleccione el nivel de la habilidad</span>
+    <mat-slider
+      class="w-100"
+      color="primary"
+      [max]="5"
+      [min]="0"
+      [step]="1"
+      [discrete]="true"
+      [showTickMarks]="true">
+      <input matSliderThumb formControlName="level">
+    </mat-slider>
+  </div>
+
+  <div class="w-100">
+
+    <button type='button' mat-fab extended (click)="onClose()" style="background-color:#fff"
+            class="w-100">
+      Cancelar
+    </button>
+    <div class="d-flex flex-column">
+      <div [ngSwitch]="isLoading" style="display: contents">
+        <button mat-fab extended color="primary" type="submit" *ngSwitchCase="false">
+          {{isEditing ? 'Actualizar' : 'Agregar'}}
+        </button>
+        <button mat-fab extended color="primary" disabled="true" type="submit" *ngSwitchCase="true">
+          <mat-spinner [diameter]="20" [strokeWidth]="3" class="d-inline-block" color="warn"></mat-spinner>
+          {{isEditing ? 'Actualizando' : 'Agregando'}}
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</form>
+

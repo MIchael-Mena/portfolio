@@ -1,0 +1,23 @@
+<div class="d-inline-block w-100">
+  <input
+    style="display: none"
+    type="file"
+    (change)="onFileSelected($event)"
+    accept="image/svg+xml"
+    #fileInput
+  />
+  <div class="py-2 d-flex flex-rows justify-content-around align-items-center">
+    <button type='button' mat-fab (click)="fileInput.click()"
+            style="background-color:#fff"
+            title="Agregar archivo">
+      <mat-icon>add_photo_alternate</mat-icon>
+    </button>
+    <!-- No es necesario sanitizar url, src recibe un string que puede ser una url o una imagen en base64 -->
+    <img
+      [src]="previewFile | safe: 'url'"
+      alt=alt class="img-fluid" width="56" height="56"
+    />
+  </div>
+  <mat-error class="mat-caption mt-1" [hidden]="!this.invalidFormatError">El archivo debe ser un svg</mat-error>
+  <mat-error class="mat-caption mt-1" [hidden]="!this.hasRequiredError">El icono es requerido</mat-error>
+</div>

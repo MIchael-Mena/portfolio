@@ -52,20 +52,14 @@
         <label
           *ngIf="error"
           class="error mat-caption my-2"
-          [ngStyle]="{'borderRadius':'5px'}">
+          style="border-radius: 5px">
           Contraseña o Email invalido.
         </label>
-
-        <div class="d-flex justify-content-end" [ngSwitch]="isLoading">
-          <button mat-fab extended color="primary" disabled *ngSwitchCase="true">
-            <mat-spinner [diameter]="20" [strokeWidth]="3" class="d-inline-block" color="warn"></mat-spinner>
-            Cargando...
-          </button>
-          <button type="SUBMIT" mat-fab extended color="primary" *ngSwitchCase="false">
-            <mat-icon svgIcon="start" aria-hidden="false" aria-label="start"></mat-icon>
-            Ingresar
-          </button>
-        </div>
+        <app-button-confirm [isWaiting]="this.isLoading"
+                            [buttonSettings]="{onConfirmText: 'Ingresar', onWaitingText: 'Cargando...'}"
+                            [icon]="'start'"
+                            class="d-flex justify-content-end">
+        </app-button-confirm>
 
       </form>
     </mat-card-content>

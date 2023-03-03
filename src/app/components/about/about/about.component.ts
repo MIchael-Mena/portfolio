@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {faPenToSquare, faImagePortrait} from "@fortawesome/free-solid-svg-icons";
-import {AboutService} from "../../../service/about.service";
+import {faPenToSquare, faImagePortrait, faSquareCaretDown} from "@fortawesome/free-solid-svg-icons";
+import {AboutService} from "../service/about.service";
 import {StorageSessionService} from "../../../service/storage-session.service";
-import {AboutMeData} from "../../shared/AboutMeData";
+import {AboutMeData} from "../AboutMeData";
 import {MatIconRegistry} from "@angular/material/icon";
 import {DomSanitizer} from "@angular/platform-browser";
 import {EditData} from "../EditData";
@@ -21,9 +21,10 @@ const imageTest = 'url(\'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEBLAEsAAD/4QBW
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
-  faPenToSquare = faPenToSquare;
-  faImagePortrait = faImagePortrait;
-  public aboutMe: AboutMeData = {} as AboutMeData;
+  public faSquareCaretDown = faSquareCaretDown;
+  // faPenToSquare = faPenToSquare;
+  public faImagePortrait = faImagePortrait;
+  public aboutMe: AboutMeData = <AboutMeData>{}
   public isLoading = true;
   public isLoggedIn = false;
   public nameData: EditData = <EditData>{};
@@ -41,12 +42,12 @@ export class AboutComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.aboutService.data.subscribe(data => {
+    this.aboutService.data.subscribe((result: AboutMeData) => {
       this.isLoading = false;
-      this.aboutMe = data;
+      this.aboutMe = result;
       this.prepareData();
       this.setPhoto();
-      this.aboutMe.social.forEach(social => {
+      this.aboutMe.socialMedia.forEach(social => {
         this.iconRegistry.addSvgIconLiteral(social.name, this.domSanitizer.bypassSecurityTrustHtml(social.icon));
       })
     });

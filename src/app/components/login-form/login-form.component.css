@@ -1,5 +1,9 @@
-/* Para cambiar el background del input solo en este componente */
+/* Para cambiar el background del input solo en este componente si el input es fill*/
 /*:host ::ng-deep .mdc-text-field {
+  background-color: #FFEBB7
+}*/
+/* Si el input es outline */
+/*.mdc-text-field {
   background-color: #FFEBB7
 }*/
 

@@ -1,5 +1,5 @@
 import {Observable} from "rxjs";
-import {AboutMeData} from "../shared/AboutMeData";
+import {AboutMeData} from "./AboutMeData";
 
 export interface EditData {
   content: string;

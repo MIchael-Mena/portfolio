@@ -3,7 +3,7 @@ import {ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot, UrlTree} fro
 import {Observable} from 'rxjs';
 import {
   ExperienceAndEducationComponent
-} from "../components/experience-and-education/experience-and-education.component";
+} from "../components/experience/experience-and-education/experience-and-education.component";
 import {AboutComponent} from "../components/about/about/about.component";
 
 @Injectable({
@@ -15,7 +15,6 @@ export class UnsavedChangesGuard implements CanDeactivate<ExperienceAndEducation
     currentRoute: ActivatedRouteSnapshot,
     currentState: RouterStateSnapshot,
     nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    console.log('UnsavedChangesGuard');
     return component.canDeactivate();
   }
 

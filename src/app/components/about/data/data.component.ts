@@ -19,7 +19,7 @@ export class DataComponent implements OnChanges {
   public faSquareCaretDown = faSquareCaretDown;
   public isWaitingResponse: boolean = false;
   public isLoggedIn: boolean = false;
-  public activeEditData: boolean = false;
+  public activeEdit: boolean = false;
   public newData: FormControl = new FormControl('', [Validators.required]);
 
   constructor(private storageService: StorageSessionService, private dialog: MatDialog) {
@@ -41,7 +41,7 @@ export class DataComponent implements OnChanges {
     this.data.update(this.newData.value).subscribe({
       next: () => {
         this.isWaitingResponse = false;
-        this.activeEditData = false;
+        this.activeEdit = false;
         this.dataChange.emit(this.newData.value);
       },
       error: () => {
@@ -52,7 +52,7 @@ export class DataComponent implements OnChanges {
   }
 
   public editData(): void {
-    if (this.activeEditData && this.newData.value !== this.data.content) {
+    if (this.activeEdit && this.newData.value !== this.data.content) {
       const data = <DialogContent>{
         title: 'Descartar cambios',
         message: `Tienes cambios sin guardar.
@@ -67,12 +67,12 @@ export class DataComponent implements OnChanges {
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.activeEditData = false;
+          this.activeEdit = false;
           this.newData.setValue(this.data.content);
         }
       });
     } else {
-      this.activeEditData = !this.activeEditData;
+      this.activeEdit = !this.activeEdit;
     }
   }
 

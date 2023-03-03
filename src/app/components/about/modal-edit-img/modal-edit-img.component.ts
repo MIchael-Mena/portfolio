@@ -1,10 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {FormBuilder} from "@angular/forms";
-import {StorageSessionService} from "../../../service/storage-session.service";
-import {AboutService} from "../../../service/about.service";
 import {EditData} from "../EditData";
-import {ModalResponse} from "../../shared/ModalResponse";
 
 const preview = 'assets/icon/png/profile-preview-alt.jpg';
 
@@ -21,10 +17,7 @@ export class ModalEditImgComponent {
   public isLoading: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<ModalEditImgComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: EditData,
-              private fb: FormBuilder,
-              private aboutService: AboutService,
-              private storageSession: StorageSessionService) {
+              @Inject(MAT_DIALOG_DATA) public data: EditData) {
     this.previewFileUrl = this.data.content;
   }
 
@@ -56,7 +49,7 @@ export class ModalEditImgComponent {
     this.data.update(this.previewFileUrl).subscribe({
       next: (response) => {
         this.isLoading = false;
-        this.dialogRef.close({state: true, content: response.photo} as ModalResponse);
+        this.dialogRef.close({state: true, content: response.photo});
       },
       error: (error) => {
         this.isLoading = false;

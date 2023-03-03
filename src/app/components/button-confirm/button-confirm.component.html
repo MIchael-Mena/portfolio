@@ -1,0 +1,11 @@
+<div style="display: contents" [ngSwitch]="this.isWaiting">
+  <button mat-fab extended color="primary" type="submit" *ngSwitchCase="false">
+    <mat-icon svgIcon="start" aria-hidden="false" aria-label="start" *ngIf="icon">
+    </mat-icon>
+    {{this.buttonSettings.onConfirmText}}
+  </button>
+  <button mat-fab extended color="primary" disabled="true" *ngSwitchCase="true">
+    <mat-spinner [diameter]="20" [strokeWidth]="3" class="d-inline-block" color="warn"></mat-spinner>
+    {{this.buttonSettings.onWaitingText}}
+  </button>
+</div>

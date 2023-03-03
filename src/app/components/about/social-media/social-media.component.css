@@ -1,0 +1,13 @@
+.social-icon {
+  transition: 0.1s;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+  color: rgb(255, 110, 49);
+}
+
+:host .mat-icon {
+  height: 28px;
+  width: 28px;
+}
