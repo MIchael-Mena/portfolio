@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SpinnerComponent } from './spinner.component';
+import { ButtonModalComponent } from './button-modal.component';
 
-describe('SpinnerComponent', () => {
-  let component: SpinnerComponent;
-  let fixture: ComponentFixture<SpinnerComponent>;
+describe('ButtonModalComponent', () => {
+  let component: ButtonModalComponent;
+  let fixture: ComponentFixture<ButtonModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SpinnerComponent ]
+      declarations: [ ButtonModalComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SpinnerComponent);
+    fixture = TestBed.createComponent(ButtonModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

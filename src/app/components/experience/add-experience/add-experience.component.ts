@@ -1,17 +1,17 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ExperienceData} from '../ExperienceData';
-import {DatePicker} from '../../shared/DatePicker';
+import {DatePicker} from '../../shared/date-picker/DatePicker';
 import {MatDialog} from '@angular/material/dialog';
 
 import {UiEditFormService} from 'src/app/components/experience/service/uiEditForm.service';
 import {FormExperience} from '../FormExperience';
 import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
-import {DialogContent} from "../../shared/DialogContent";
+import {DialogContent} from "../../dialog-card/DialogContent";
 import {UnsavedChangesService} from "../../../service/unsaved-changes.service";
 import {StorageSessionService} from "../../../service/storage-session.service";
 import {ExperienceService} from "../service/experience.service";
-import {ButtonSettings} from "../../button-confirm/ButtonSettings";
+import {ButtonSettings} from "../../shared/button-confirm/ButtonSettings";
 
 
 const datePickerClean = <DatePicker>{

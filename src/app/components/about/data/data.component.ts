@@ -3,7 +3,7 @@ import {StorageSessionService} from "../../../service/storage-session.service";
 import {faSquareCaretDown} from "@fortawesome/free-solid-svg-icons";
 import {FormControl, Validators} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
-import {DialogContent} from "../../shared/DialogContent";
+import {DialogContent} from "../../dialog-card/DialogContent";
 import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
 import {EditData} from "../EditData";
 
@@ -13,7 +13,7 @@ import {EditData} from "../EditData";
   styleUrls: ['./data.component.css'],
 })
 export class DataComponent implements OnChanges {
-
+  @Input() isVisible: boolean = false;
   @Input() data: EditData = <EditData>{};
   @Output() dataChange = new EventEmitter<string>();
   public faSquareCaretDown = faSquareCaretDown;
@@ -29,8 +29,14 @@ export class DataComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.newData.setValue(this.data.content);
-    changes['data'].currentValue.canDeactivate = () => this.newData.value === this.data.content;
+    if (changes['isVisible'] !== undefined && changes['isVisible'].currentValue === true) {
+      this.newData.setValue(this.data.content);
+    }
+    if (changes['data'] !== undefined && changes['data'].currentValue) {
+      // changes['data'].currentValue.canDeactivate = () => this.newData.value === this.data.content;
+      // TODO: Se modifica el objeto de entrada, no es buena práctica. Usar el servicio unsavedChangesService
+      this.data.canDeactivate = () => this.newData.value === this.data.content;
+    }
   }
 
   public saveData(): void {

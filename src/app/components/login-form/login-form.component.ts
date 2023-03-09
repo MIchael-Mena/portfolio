@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../service/auth.service";
 import {StorageSessionService} from "../../service/storage-session.service";
 import {Router} from "@angular/router";
-import {ButtonSettings} from "../button-confirm/ButtonSettings";
+import {ButtonSettings} from "../shared/button-confirm/ButtonSettings";
 
 
 @Component({
@@ -17,7 +17,7 @@ export class LoginFormComponent implements OnInit {
   public hide = true;
   public form: FormGroup;
   public isLoading = false;
-  
+
   constructor(private fb: FormBuilder,
               private authService: AuthService,
               private storageService: StorageSessionService,

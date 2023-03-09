@@ -10,7 +10,7 @@ import {MatDatepicker} from '@angular/material/datepicker';
 import * as _moment from 'moment';
 // @ts-ignore
 import {default as _rollupMoment, Moment} from 'moment';
-import {DatePicker} from '../shared/DatePicker';
+import {DatePicker} from './DatePicker';
 
 const moment = _rollupMoment || _moment;
 

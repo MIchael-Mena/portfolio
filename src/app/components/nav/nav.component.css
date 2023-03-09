@@ -1,7 +1,12 @@
 .icon-display {
-  transform: scale(1.8);
   cursor: pointer;
-  color: #AD8E70;
+  color: #243763;
+  /*color: #ad8e70;*/
+}
+
+:host .mat-icon {
+  height: 48px;
+  width: 48px;
 }
 
 /*Le asigno un tamaño para evitar que se desplace*/

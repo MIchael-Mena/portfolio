@@ -1,17 +1,17 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {SocialNetwork} from "../social-network/SocialNetwork";
 import {ModalResponse} from "../../shared/ModalResponse";
 import {ButtonSettings} from "../../shared/button-confirm/ButtonSettings";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActionForShipment} from "../../shared/ActionForShipment";
-import {SkillData} from "../SkillData";
 
 @Component({
-  selector: 'app-modal-skill',
-  templateUrl: './modal-skill.component.html',
-  styleUrls: ['./modal-skill.component.css']
+  selector: 'app-modal-social-network',
+  templateUrl: './modal-social-network.component.html',
+  styleUrls: ['./modal-social-network.component.css']
 })
-export class ModalSkillComponent {
+export class ModalSocialNetworkComponent {
 
   public form: FormGroup;
   public preview: string | null = null;
@@ -22,41 +22,26 @@ export class ModalSkillComponent {
     onWaitingText: 'Guardando...',
   }
 
-  constructor(public dialogRef: MatDialogRef<ModalSkillComponent>,
+  constructor(public dialogRef: MatDialogRef<ModalSocialNetworkComponent>,
               @Inject(MAT_DIALOG_DATA) public action: ActionForShipment,
               private fb: FormBuilder) {
-    // TODO: skill es pasado por referencia, no se puede modificar
     this.form = this.fb.group({
       id: [''],
       name: ['', Validators.required],
-      level: [0, [Validators.max(5), Validators.min(0)]],
+      link: ['', Validators.required],
       icon: ['', Validators.required],
     });
-    action.setDataToForm((skill: SkillData) => {
-      this.form.patchValue(skill);
-      this.preview = skill.icon;
+    action.setDataToForm((social: SocialNetwork) => {
+      this.form.patchValue(social);
+      this.preview = social.icon;
     });
-  }
-
-  public setSvg(svg: string): void {
-    this.form.controls['icon'].setValue(svg);
-  }
-
-  public onClose(): void {
-    this.dialogRef.close(<ModalResponse>{state: false});
   }
 
   public onSubmit(): void {
-    // Usar FormData para enviar archivos y datos en un solo request (multipart/form-data)
-    /*    const fd = new FormData();
-        fd.append('id', this.form.value.id);
-        fd.append('name', this.form.value.name);
-        fd.append('level', this.form.value.level);
-        fd.append('icon', this.fileSelected, this.fileSelected?.name);*/
     if (this.form.valid) {
       this.isLoading = true;
-      this.action.onAction(this.form.value as SkillData).subscribe({
-          next: (response: SkillData) => {
+      this.action.onAction(this.form.value as SocialNetwork).subscribe({
+          next: (response: SocialNetwork) => {
             this.isLoading = false;
             this.dialogRef.close(<ModalResponse>{
                 state: true,
@@ -65,7 +50,7 @@ export class ModalSkillComponent {
             );
           },
           error: (error: any) => {
-            alert(`Error al ${this.action.action.toLowerCase()} la habilidad`);
+            alert(`Error al ${this.action.action.toLowerCase()} la red social`);
             this.isLoading = false;
           }
         }
@@ -73,6 +58,17 @@ export class ModalSkillComponent {
     } else {
       this.iconHasRequiredError = true;
     }
+  }
+
+  public onClose(): void {
+    this.dialogRef.close(<ModalResponse>{
+        state: false,
+      }
+    );
+  }
+
+  public setSvg(svg: string): void {
+    this.form.controls['icon'].setValue(svg);
   }
 
 }

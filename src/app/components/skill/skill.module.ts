@@ -4,14 +4,16 @@ import {SkillsComponent} from "./skills/skills.component";
 import {SharedModule} from "../../shared/shared.module";
 import {SkillBarComponent} from "./skill-bar/skill-bar.component";
 import {ModalSkillComponent} from "./modal-skill/modal-skill.component";
-import {SelectFileComponent} from "../select-file/select-file.component";
-
+import {ButtonModalModule} from "../shared/button-modal/button-modal.module";
+import {SelectFileModule} from "../shared/select-file/select-file.module";
 
 @NgModule({
-  declarations: [SkillsComponent, SkillBarComponent, ModalSkillComponent, SelectFileComponent],
+  declarations: [SkillsComponent, SkillBarComponent, ModalSkillComponent],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    ButtonModalModule,
+    SelectFileModule
   ],
   exports: [SkillsComponent]
 })

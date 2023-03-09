@@ -1,4 +1,4 @@
-<div class="d-flex align-items-center py-2 mb-3"
+<div class="d-flex align-items-center py-2 mb-3" *ngIf="this.isVisible"
      [ngClass]="{'style-container-form py-3':this.activeEdit}">
 
   <div class="float-start ms-1" *ngIf="this.activeEdit">
@@ -12,9 +12,9 @@
   </div>
 
   <div class="w-100 d-inline-flex justify-content-center align-items-center gap-1 flex-wrap">
-    <div *ngFor="let social of this.socialMedia" class="mx-3">
-      <a href="{{social.url}}" class=" text-decoration-none">
-        <mat-icon svgIcon="{{social.name}}" aria-hidden="false" aria-label="SVG icon"
+    <div *ngFor="let social of this.socialNetworks" class="mx-3">
+      <a href="{{social.link}}" class=" text-decoration-none">
+        <mat-icon svgIcon="{{social.id}}" aria-hidden="false" aria-label="SVG icon"
                   color="primary" class="social-icon "></mat-icon>
       </a>
 
@@ -23,14 +23,14 @@
           [icon]="this.icons.faPenToSquare"
           class="icon-style my-1 mx-1"
           size="lg"
-          (click)="openEditModal()"
+          (click)="openEditModal(social)"
           title="Editar">
         </fa-icon>
         <fa-icon
           [icon]="this.icons.faTrashCan"
           class="icon-style my-1 mx-1"
           size="lg"
-          (click)="openDeleteDialog()"
+          (click)="openDeleteDialog(social)"
           title="Eliminar">
         </fa-icon>
       </div>
@@ -44,7 +44,7 @@
       [icon]="this.icons.faSquareCaretDown"
       class="icon-style d-flex"
       size="lg"
-      (click)="editSocialMedia()"
+      (click)="editSocialNetwork()"
       title="{{this.activeEdit ? 'Cancelar' : 'Editar'}}"
     ></fa-icon>
   </div>

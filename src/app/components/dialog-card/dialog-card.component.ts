@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {DialogContent} from "../shared/DialogContent";
+import {DialogContent} from "./DialogContent";
+import {ModalResponse} from "../shared/ModalResponse";
 
 @Component({
   selector: 'app-dialog-card',
@@ -20,12 +21,18 @@ export class DialogCardComponent {
       this.dialog.payload().subscribe({
         next: (result) => {
           this.isLoading = false;
-          this.dialogRef.close(true);
+          this.dialogRef.close(<ModalResponse>{
+            state: true,
+            content: result,
+          });
         },
         error: (err) => {
           this.isLoading = false;
-          // Delego la gestión de errores al componente que llama al dialogo
-          this.dialogRef.close(err);
+          // Delego la gestión de errores al componente que llama al diálogo
+          this.dialogRef.close(<ModalResponse>{
+            state: false,
+            error: err,
+          });
         }
       });
     } else {

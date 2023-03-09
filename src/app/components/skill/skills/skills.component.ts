@@ -6,6 +6,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {StorageSessionService} from "../../../service/storage-session.service";
 import {ModalSkillComponent} from "../modal-skill/modal-skill.component";
 import {ModalResponse} from "../../shared/ModalResponse";
+import {ActionForShipment} from "../../shared/ActionForShipment";
 
 @Component({
   selector: 'app-skills',
@@ -29,8 +30,14 @@ export class SkillsComponent {
   }
 
   public addSkill() {
+    const data = <ActionForShipment>{
+      action: 'Agregar',
+      onAction: (skill: SkillData) => this.skillService.addSkill(skill, this.storageSession.token),
+      setDataToForm: (callback: (skill: SkillData) => void) => {
+      },
+    }
     const dialogRef = this.dialog.open(ModalSkillComponent, {
-      data: null,
+      data,
       disableClose: true,
       autoFocus: true,
       width: '450px',

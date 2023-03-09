@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output} from '@angular/core';
 import {faPenToSquare} from '@fortawesome/free-solid-svg-icons';
 import {faTrashCan} from '@fortawesome/free-regular-svg-icons';
-import {DialogContent} from "../../shared/DialogContent";
+import {DialogContent} from "../../dialog-card/DialogContent";
 import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalSkillComponent} from "../modal-skill/modal-skill.component";
@@ -13,6 +13,7 @@ import {StorageSessionService} from "../../../service/storage-session.service";
 import {SkillService} from "../service/skill.service";
 import {Observable, Subscription} from "rxjs";
 import {ModalResponse} from "../../shared/ModalResponse";
+import {ActionForShipment} from "../../shared/ActionForShipment";
 
 @Component({
   selector: 'app-skill-bar',
@@ -20,7 +21,7 @@ import {ModalResponse} from "../../shared/ModalResponse";
   styleUrls: ['./skill-bar.component.css']
 })
 export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
-  @Input() skill: SkillData = <SkillData>{id: 0, name: 'Skill', level: 0, icon: {name: '', content: ''}};
+  @Input() skill: SkillData = <SkillData>{};
   @Output() onDeleteSkill = new EventEmitter<SkillData>();
   @Output() onUpdateSkill = new EventEmitter<SkillData>();
   public isLoggedIn: boolean = false;
@@ -45,7 +46,7 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.iconRegistry.addSvgIconLiteral(this.skill.icon.name, this.domSanitizer.bypassSecurityTrustHtml(this.skill.icon.content));
+    this.iconRegistry.addSvgIconLiteral((this.skill.id!).toString(), this.domSanitizer.bypassSecurityTrustHtml(this.skill.icon));
   }
 
   private setLevelSkill() {
@@ -55,8 +56,13 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   public editSkill() {
+    const data = <ActionForShipment>{
+      action: 'Editar',
+      onAction: (skill: SkillData) => this.skillService.updateSkill(skill, this.storageSession.token),
+      setDataToForm: (callback: (skill: SkillData) => void) => callback(this.skill),
+    }
     const dialogRef = this.dialog.open(ModalSkillComponent, {
-      data: this.skill,
+      data,
       disableClose: true,
       autoFocus: true,
       restoreFocus: true,
@@ -73,7 +79,7 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
     });
   }
 
-  openDeleteDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  openDeleteDialog(): void {
     const data = <DialogContent>{
       title: 'Eliminar habilidad ' + this.skill.name,
       message: '¿Estás seguro de que quieres eliminar esta habilidad?',
@@ -85,15 +91,14 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
     const dialogRef = this.dialog.open(DialogCardComponent, {
       data,
       width: '350px',
-      enterAnimationDuration,
-      exitAnimationDuration,
+      enterAnimationDuration: '200ms',
+      exitAnimationDuration: '200ms',
     });
-    dialogRef.afterClosed().subscribe(result => {
-      // TODO: castear result a ModalResponse
-      if (result === true) {
-        // si se acepta
+    dialogRef.afterClosed().subscribe((result: ModalResponse) => {
+      if (result.state) {
         this.onDeleteSkill.emit(this.skill);
-      } else if (result?.error) {
+      } else {
+        console.log(result.error);
         // si ocurre un error
         alert('Error al eliminar la habilidad');
       }

@@ -1,7 +1,7 @@
 <div class="d-flex my-4 flex-lg-row flex-column align-items-center justify-content-center">
   <div class=" d-flex flex-column justify-content-center align-items-center container-figure">
     <span class="mat-subtitle-2 mb-1">{{this.skill.name}}</span>
-    <mat-icon svgIcon="{{this.skill.icon.name}}" aria-hidden="false"
+    <mat-icon svgIcon="{{this.skill.id}}" aria-hidden="false"
               aria-label="Example home icon"
               color="accent"
               class="mb-1"
@@ -51,7 +51,7 @@
       [icon]="faTrashCan"
       class="icon-style my-1 ms-1"
       size="lg"
-      (click)="openDeleteDialog('200ms','100ms')"
+      (click)="openDeleteDialog()"
       title="Eliminar"
     >
     </fa-icon>

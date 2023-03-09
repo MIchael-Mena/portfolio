@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
-import {LoaderService} from "../../service/loader.service";
+import {LoaderService} from "../../../service/loader.service";
 
 @Component({
-  selector: 'app-spinner',
-  templateUrl: './spinner.component.html',
-  styleUrls: ['./spinner.component.css']
+  selector: 'app-global-spinner',
+  templateUrl: './global-spinner.component.html',
+  styleUrls: ['./global-spinner.component.css']
 })
-export class SpinnerComponent {
+export class GlobalSpinnerComponent {
 
   public isLoading = false;
 

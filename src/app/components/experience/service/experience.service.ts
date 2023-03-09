@@ -27,20 +27,12 @@ export class ExperienceService {
   addExperience(experience: ExperienceData, token: String): Observable<ExperienceData> {
     httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
     return this.http.post<ExperienceData>(this.apiUrl, experience, httpOptions);
-    /*    return this.http.post<ExperienceData>(this.apiUrl, experience, {
-          headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          })
-        });*/
-    // return this.http.post<ExperienceData>(this.apiUrl, experience, httpOptions);
   }
 
   deleteExperience(experience: ExperienceData, token: String): Observable<ExperienceData> {
     const url = `${this.apiUrl}/${experience.id}`;
     httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
     return this.http.delete<ExperienceData>(url, httpOptions);
-    // return this.http.delete<ExperienceData>(url)
   }
 
   updateExperience(experience: ExperienceData, token: String): Observable<ExperienceData> {
@@ -57,8 +49,8 @@ export class ExperienceService {
     this.apiUrl = 'http://localhost:5000/Educations';
   }
 
-  public get databaseName() {
-    return this.apiUrl;
-  }
+  /* public get databaseName() {
+     return this.apiUrl;
+   }*/
 
 }

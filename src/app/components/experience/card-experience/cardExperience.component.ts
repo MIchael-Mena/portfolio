@@ -7,7 +7,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {Input} from '@angular/core';
 import {StorageSessionService} from "../../../service/storage-session.service";
 import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
-import {DialogContent} from "../../shared/DialogContent";
+import {DialogContent} from "../../dialog-card/DialogContent";
 import {Observable} from "rxjs";
 import {ExperienceService} from "../service/experience.service";
 

@@ -1,9 +1,4 @@
-export interface SocialMedia {
-  id?: number;
-  name: string;
-  url: string;
-  icon: string;
-}
+import {SocialNetwork} from "./social-network/SocialNetwork";
 
 export interface AboutMeData {
   id?: number;
@@ -11,6 +6,5 @@ export interface AboutMeData {
   title: string;
   photo: string;
   description: string;
-  socialMedia: SocialMedia[];
 
 }

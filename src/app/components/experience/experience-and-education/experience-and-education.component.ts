@@ -3,7 +3,7 @@ import {Education} from "../Education";
 import {Work} from "../Work";
 import {UnsavedChangesService} from "../../../service/unsaved-changes.service";
 import {MatDialog} from "@angular/material/dialog";
-import {DialogContent} from "../../shared/DialogContent";
+import {DialogContent} from "../../dialog-card/DialogContent";
 import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
 import {firstValueFrom} from "rxjs";
 

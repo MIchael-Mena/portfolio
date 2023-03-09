@@ -1,6 +1,6 @@
-export interface SkillData {
+export interface SocialNetwork {
   id?: number;
   name: string;
-  level: number;
+  link: string;
   icon: string;
 }

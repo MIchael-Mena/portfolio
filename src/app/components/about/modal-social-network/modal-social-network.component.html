@@ -1,23 +1,32 @@
-<!--Los botones dentro de un formulario deben ser del type=button, de lo contrario-->
-<!--se envia el formulario al dar click en el boton, y se pierde el evento click del boton -->
-
 <form class="form mat-typography  px-lg-5 px-1 container-modal d-flex flex-column justify-content-evenly "
       [formGroup]="form"
       (ngSubmit)="onSubmit()">
 
   <h2 class="text-center py-3 text-light">
-    {{action.action + ' habilidad'}}
+    {{this.action.action + ' red social'}}
   </h2>
 
   <mat-form-field appearance="fill" [hideRequiredMarker]="true">
     <input matInput
            type="text"
            formControlName="name"
-           placeholder="Ingrese el nombre de la habilidad"
+           placeholder="Ingrese el nombre de la red social"
     />
     <mat-label>Nombre</mat-label>
     <mat-error *ngIf="form.get('name')?.hasError('required')">
       El nombre es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" [hideRequiredMarker]="true">
+    <input matInput
+           type="text"
+           formControlName="link"
+           placeholder="Ingrese el enlace a la red social"
+    />
+    <mat-label>Enlace</mat-label>
+    <mat-error *ngIf="form.get('link')?.hasError('required')">
+      El enlace es requerido
     </mat-error>
   </mat-form-field>
 
@@ -27,24 +36,9 @@
                    (onChooseFileToString)="setSvg($event)">
   </app-select-file>
 
-  <div class="w-100">
-    <span class="mat-subtitle-2 text-light">Seleccione el nivel de la habilidad</span>
-    <mat-slider
-      class="w-100"
-      color="primary"
-      [max]="5"
-      [min]="0"
-      [step]="1"
-      [discrete]="true"
-      [showTickMarks]="true">
-      <input matSliderThumb formControlName="level">
-    </mat-slider>
-  </div>
-
   <app-button-modal [isWaiting]="this.isLoading"
                     (onClickCancel)="this.onClose()"
                     [buttonSettings]="this.buttonSettings">
   </app-button-modal>
 
 </form>
-

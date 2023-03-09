@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent {
-
+  
   public routeAboutActive: boolean = false;
   public routeExpAndEduActive: boolean = false;
   public routeSkillsActive: boolean = false;

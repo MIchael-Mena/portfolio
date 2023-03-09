@@ -1,0 +1,10 @@
+<div class="w-100">
+  <button type='button' mat-fab extended (click)="onClick()" style="background-color:#fff"
+          class="w-100">
+    Cancelar
+  </button>
+  <app-button-confirm class="d-flex flex-column"
+                      [buttonSettings]="this.buttonSettings"
+                      [isWaiting]="this.isWaiting">
+  </app-button-confirm>
+</div>

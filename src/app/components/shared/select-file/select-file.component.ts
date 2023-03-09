@@ -1,25 +1,24 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {IconData} from "../skill/SkillData";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-select-file',
   templateUrl: './select-file.component.html',
   styleUrls: ['./select-file.component.css']
 })
-export class SelectFileComponent implements OnChanges {
-
-  @Input() previewFile: string = '';
-  @Output() onChooseFile: EventEmitter<IconData> = new EventEmitter<IconData>();
+export class SelectFileComponent implements OnInit {
+  //TODO: No modificar previewFileString porque es pasado por referencia
+  @Input() previewFileString: string | null = null;
+  @Output() onChooseFileToString: EventEmitter<string> = new EventEmitter<string>();
+  public previewFile: string = '/assets/icon/png/preview.jpg';
   public invalidFormatError: boolean = false;
   @Input() hasRequiredError: boolean = false;
 
   constructor() {
   }
 
-  public ngOnChanges(): void {
-    // TODO: mejorar código
-    if (this.previewFile.includes('<svg')) {
-      this.previewSvgInBase64 = this.previewFile;
+  ngOnInit(): void {
+    if (this.previewFileString && !(this.previewFileString.includes('data:image/svg+xml;base64,'))) {
+      this.previewSvgInBase64 = this.previewFileString;
     }
   }
 
@@ -27,7 +26,6 @@ export class SelectFileComponent implements OnChanges {
     // TODO: SVG sin viewBox no se visualiza bien en mat-icon
     // Contiene los binarios del archivo, el nombre y el tipo
     const file = <File>event.target.files[0];
-
     if (file.type === 'image/svg+xml') {
       const fileReader = new FileReader();
       fileReader.readAsText(file);
@@ -44,6 +42,7 @@ export class SelectFileComponent implements OnChanges {
   }
 
   private setUpFile(fileReader: FileReader, file: File): void {
+    // Obtengo el svg como string, lo convierto a base64 y lo muestro en la vista
     const result = fileReader.result as string;
     if (this.checkMaliciousSvg(result)) {
       return;
@@ -51,10 +50,7 @@ export class SelectFileComponent implements OnChanges {
     this.previewSvgInBase64 = result;
     this.hasRequiredError = false;
     this.invalidFormatError = false;
-    this.onChooseFile.emit({
-      name: file.name,
-      content: result,
-    });
+    this.onChooseFileToString.emit(result);
   }
 
   private checkMaliciousSvg(svg: string): boolean {
@@ -70,6 +66,7 @@ export class SelectFileComponent implements OnChanges {
   }
 
   set previewSvgInBase64(svg: string) {
+    // Necesario para mostrarlo en la etiqueta img a través de la propiedad src
     this.previewFile = 'data:image/svg+xml;base64,' + window.btoa(svg);
   }
 

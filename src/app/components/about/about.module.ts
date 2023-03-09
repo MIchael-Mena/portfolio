@@ -4,16 +4,19 @@ import {AboutComponent} from "./about/about.component";
 import {SharedModule} from "../../shared/shared.module";
 import {DataComponent} from "./data/data.component";
 import {ModalEditImgComponent} from './modal-edit-img/modal-edit-img.component';
-import {SocialMediaComponent} from './social-media/social-media.component';
-import { ModalSocialMediaComponent } from './modal-social-media/modal-social-media.component';
+import {SocialNetworkComponent} from './social-network/social-network.component';
+import {ModalSocialNetworkComponent} from './modal-social-network/modal-social-network.component';
+import {ButtonModalModule} from "../shared/button-modal/button-modal.module";
+import {SelectFileModule} from "../shared/select-file/select-file.module";
 
-// error si importo safe pipe que también esta en app.module.ts
 
 @NgModule({
-  declarations: [AboutComponent, DataComponent, ModalEditImgComponent, SocialMediaComponent, ModalSocialMediaComponent],
+  declarations: [AboutComponent, DataComponent, ModalEditImgComponent, SocialNetworkComponent, ModalSocialNetworkComponent],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    ButtonModalModule,
+    SelectFileModule
   ],
   exports: [AboutComponent]
 })

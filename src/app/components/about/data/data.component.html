@@ -1,6 +1,6 @@
 <!-- hay que usar m-x-auto para centrar objetos si uso la opcion solo con d-flex-->
 <!--<div class="d-flex align-items-center justify-content-center w-auto position-relative"-->
-<div class="d-flex align-items-center "
+<div class="d-flex align-items-center" *ngIf="this.isVisible"
      [ngClass]="{'style-container-form py-3':this.activeEdit}">
   <div [ngSwitch]="this.activeEdit" class="w-100">
 

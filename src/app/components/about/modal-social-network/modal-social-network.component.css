@@ -4,3 +4,7 @@
   background-color: #0000007F;
   overflow: hidden;
 }
+
+:host ::ng-deep .mdc-text-field--filled {
+  background-color: #FFEBB7
+}
