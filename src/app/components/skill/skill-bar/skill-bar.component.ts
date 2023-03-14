@@ -97,9 +97,8 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe((result: ModalResponse) => {
       if (result.state) {
         this.onDeleteSkill.emit(this.skill);
-      } else {
+      } else if (result.error) {
         console.log(result.error);
-        // si ocurre un error
         alert('Error al eliminar la habilidad');
       }
     });

@@ -1,0 +1,9 @@
+/*:host .mat-icon {
+  height: 48px !important;
+  width: 48px !important;
+}*/
+
+.icon-button {
+  display: inline-flex;
+  transform: scale(1.3);
+}

@@ -10,6 +10,7 @@ import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
 import {DialogContent} from "../../dialog-card/DialogContent";
 import {Observable} from "rxjs";
 import {ExperienceService} from "../service/experience.service";
+import {ModalResponse} from "../../shared/ModalResponse";
 
 @Component({
   selector: 'app-card-experience',
@@ -55,8 +56,8 @@ export class CardExperienceComponent {
       enterAnimationDuration,
       exitAnimationDuration,
     });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === true) {
+    dialogRef.afterClosed().subscribe((result: ModalResponse) => {
+      if (result.state) {
         this.onDeleteExperience.emit(this.experience);
       } else if (result.error) {
         alert('Error al eliminar la tarjeta');

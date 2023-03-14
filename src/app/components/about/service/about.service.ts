@@ -6,7 +6,8 @@ import {SocialNetwork} from "../social-network/SocialNetwork";
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, HEAD',
   })
 }
 
@@ -16,7 +17,6 @@ const httpOptions = {
 export class AboutService {
 
   private apiUrlAboutMe = 'http://localhost:5000/AboutMe';
-  private apiUrlSocialNetworks = 'http://localhost:5000/SocialNetworks';
 
   constructor(private http: HttpClient) {
   }
@@ -30,28 +30,6 @@ export class AboutService {
     httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
     return this.http.put<AboutMeData>(this.apiUrlAboutMe, aboutMe, httpOptions);
   }
-
-  get socialNetworks(): Observable<SocialNetwork[]> {
-    return this.http.get<SocialNetwork[]>(this.apiUrlSocialNetworks);
-  }
-
-  public updateSocialNetwork(socialNetwork: SocialNetwork, token: String): Observable<SocialNetwork> {
-    const url = `${this.apiUrlSocialNetworks}/${socialNetwork.id}`;
-    httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
-    return this.http.put<SocialNetwork>(url, socialNetwork, httpOptions);
-  }
-
-  public addSocialNetwork(socialNetwork: SocialNetwork, token: String): Observable<SocialNetwork> {
-    httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
-    return this.http.post<SocialNetwork>(this.apiUrlSocialNetworks, socialNetwork, httpOptions);
-  }
-
-  public deleteSocialNetwork(socialNetwork: SocialNetwork, token: String): Observable<SocialNetwork> {
-    const url = `${this.apiUrlSocialNetworks}/${socialNetwork.id}`;
-    httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
-    return this.http.delete<SocialNetwork>(url, httpOptions);
-  }
-
 
   /*
     public saveImg(img: string, token: String): Observable<string> {

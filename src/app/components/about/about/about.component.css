@@ -31,7 +31,7 @@
 }
 
 .container {
-  margin-top: 8rem;
+  margin-top: 10vh;
 }
 
 .container-profile {
@@ -55,11 +55,11 @@
   z-index: 20;
 }
 
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
   .container {
     margin-top: 4rem;
   }
-}
+}*/
 
 
 

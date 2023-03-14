@@ -28,6 +28,18 @@ body {
   overflow: hidden;
 }
 
+.icon-style-active {
+  color: white !important;
+}
+
+.icon-style-active:hover {
+  color: #FF6E31 !important;
+}
+
+.icon-style-active:before {
+  background-color: rgb(36, 55, 99) !important;
+}
+
 .icon-style {
   color: rgb(36, 55, 99);
   /*  height: 25px;

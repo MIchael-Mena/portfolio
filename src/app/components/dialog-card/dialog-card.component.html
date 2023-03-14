@@ -7,7 +7,7 @@
     <span [innerHTML]="dialog.message | safe: 'html'" class="text-light"></span>
   </div>
   <div mat-dialog-actions>
-    <button mat-raised-button [mat-dialog-close]="false">
+    <button mat-raised-button [mat-dialog-close]="{state:false}">
       {{this.dialog.buttonCancel ? this.dialog.buttonCancel : 'No'}}
     </button>
     <span [ngSwitch]="isLoading" class="ms-2">

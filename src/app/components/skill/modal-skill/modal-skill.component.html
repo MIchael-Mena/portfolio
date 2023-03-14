@@ -1,7 +1,7 @@
 <!--Los botones dentro de un formulario deben ser del type=button, de lo contrario-->
 <!--se envia el formulario al dar click en el boton, y se pierde el evento click del boton -->
 
-<form class="form mat-typography  px-lg-5 px-1 container-modal d-flex flex-column justify-content-evenly "
+<form class="form mat-typography px-sm-4 px-lg-5 px-2 container-modal d-flex flex-column justify-content-evenly "
       [formGroup]="form"
       (ngSubmit)="onSubmit()">
 
@@ -21,13 +21,13 @@
     </mat-error>
   </mat-form-field>
 
-  <app-select-file class="d-inline-block w-100"
+  <app-select-file class="d-block"
                    [previewFileString]="this.preview"
                    [hasRequiredError]="this.iconHasRequiredError"
                    (onChooseFileToString)="setSvg($event)">
   </app-select-file>
 
-  <div class="w-100">
+  <div class="d-block">
     <span class="mat-subtitle-2 text-light">Seleccione el nivel de la habilidad</span>
     <mat-slider
       class="w-100"

@@ -8,6 +8,7 @@ import {SocialNetworkComponent} from './social-network/social-network.component'
 import {ModalSocialNetworkComponent} from './modal-social-network/modal-social-network.component';
 import {ButtonModalModule} from "../shared/button-modal/button-modal.module";
 import {SelectFileModule} from "../shared/select-file/select-file.module";
+import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
 
 
 @NgModule({
@@ -16,7 +17,9 @@ import {SelectFileModule} from "../shared/select-file/select-file.module";
     CommonModule,
     SharedModule,
     ButtonModalModule,
-    SelectFileModule
+    SelectFileModule,
+    CdkDropList,
+    CdkDrag
   ],
   exports: [AboutComponent]
 })

@@ -13,6 +13,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatSliderModule} from "@angular/material/slider";
+import {MatSelectModule} from "@angular/material/select";
 
 const myMaterialModules = [
   MatIconModule,
@@ -28,7 +29,8 @@ const myMaterialModules = [
   MatDialogModule,
   MatProgressSpinnerModule,
   MatMenuModule,
-  MatSliderModule
+  MatSliderModule,
+  MatSelectModule
 ];
 
 @NgModule(

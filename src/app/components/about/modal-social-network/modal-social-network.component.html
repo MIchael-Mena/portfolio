@@ -1,4 +1,4 @@
-<form class="form mat-typography  px-lg-5 px-1 container-modal d-flex flex-column justify-content-evenly "
+<form class="form mat-typography px-sm-4 px-lg-5 px-2 container-modal d-flex flex-column justify-content-evenly "
       [formGroup]="form"
       (ngSubmit)="onSubmit()">
 
@@ -11,6 +11,7 @@
            type="text"
            formControlName="name"
            placeholder="Ingrese el nombre de la red social"
+           maxlength="30"
     />
     <mat-label>Nombre</mat-label>
     <mat-error *ngIf="form.get('name')?.hasError('required')">
@@ -23,11 +24,24 @@
            type="text"
            formControlName="link"
            placeholder="Ingrese el enlace a la red social"
+           maxlength="100"
     />
     <mat-label>Enlace</mat-label>
     <mat-error *ngIf="form.get('link')?.hasError('required')">
       El enlace es requerido
     </mat-error>
+    <mat-error *ngIf="form.get('link')?.hasError('emailOrLinkInvalid')">
+      El enlace debe ser una url válida o un email
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Position</mat-label>
+    <mat-select formControlName="position">
+      <mat-option *ngFor="let position of action.positions" [value]="position">
+        {{position}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
 
   <app-select-file class="d-inline-block w-100"

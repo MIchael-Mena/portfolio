@@ -8,6 +8,7 @@
 
 .mat-mdc-slider {
   --mat-mdc-slider-value-indicator-opacity: 1;
+  margin-inline: 0;
   /*opacity: 1;*/
 }
 
@@ -15,3 +16,4 @@
 :host ::ng-deep .mdc-text-field--filled {
   background-color: #FFEBB7
 }
+
