@@ -56,18 +56,6 @@ export class ModalEditImgComponent {
         alert('Error al guardar la imagen');
       }
     });
-
-    /*    this.aboutService.saveImg(this.previewFileUrl, this.storageSession.token).subscribe({
-          next: (response) => {
-            this.isLoading = false;
-            this.dialogRef.close();
-          },
-          error: (error) => {
-            this.isLoading = false;
-            alert('Error al guardar la imagen');
-          }
-        });*/
-
   }
 
 }

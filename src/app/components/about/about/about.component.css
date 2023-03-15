@@ -53,13 +53,17 @@
   margin: 0 auto;
   box-shadow: 0 2px 15px rgb(58, 54, 54);
   z-index: 20;
+  transition: all 0.3s ease-in-out;
 }
 
-/*@media (max-width: 768px) {
-  .container {
-    margin-top: 4rem;
-  }
-}*/
+.image:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: all 0.3s ease-in-out;
+}
+
+
+
 
 
 

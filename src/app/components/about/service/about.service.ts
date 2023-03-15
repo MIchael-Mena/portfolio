@@ -31,11 +31,24 @@ export class AboutService {
     return this.http.put<AboutMeData>(this.apiUrlAboutMe, aboutMe, httpOptions);
   }
 
-  /*
-    public saveImg(img: string, token: String): Observable<string> {
-      httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
-      return this.http.post<string>(this.apiUrlAboutMe + '/img', img, httpOptions);
-    }
-  */
+  public updateTitle(title: string, token: String): Observable<AboutMeData> {
+    httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
+    return this.http.patch<AboutMeData>(this.apiUrlAboutMe, {title: title}, httpOptions);
+  }
+
+  public updateDescription(description: string, token: String): Observable<AboutMeData> {
+    httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
+    return this.http.patch<AboutMeData>(this.apiUrlAboutMe, {description: description}, httpOptions);
+  }
+
+  public updateName(name: string, token: String): Observable<AboutMeData> {
+    httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
+    return this.http.patch<AboutMeData>(this.apiUrlAboutMe, {name: name}, httpOptions);
+  }
+
+  updatePhoto(photo: string, token: String): Observable<AboutMeData> {
+    httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
+    return this.http.patch<AboutMeData>(this.apiUrlAboutMe, {photo: photo}, httpOptions);
+  }
 
 }

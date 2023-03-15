@@ -31,7 +31,22 @@
   background-color: #dddddd;
   border-radius: 50%;
   overflow: hidden;
+  transition: box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
+
+.circle:hover {
+  box-shadow: 0 0 4px 1px #969696;
+  transform: scale(1.1);
+  transition: box-shadow 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/*.circle:hover .active {
+  box-shadow: 0 0 4px 1px #ff6e31;
+}
+
+.circle:hover .deactivate {
+  box-shadow: 0 0 4px 1px #969696;
+}*/
 
 .skill-animation {
   animation: fillbar 0.4s forwards;
@@ -44,22 +59,41 @@
   height: 40px;
   width: 40px;
   border-radius: 0 50% 50% 0;
+
+}
+
+.active:hover {
+  background-color: #ff6e31;
+  transition: background-color 0.5s ease-in-out;
 }
 
 .active {
   background-color: #243763;
+  transition: background-color 0.5s ease-in-out;
 }
 
 .deactivate {
   background-color: transparent;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.deactivate:hover {
+  background-color: #969696;
+  transition: background-color 0.5s ease-in-out;
 }
 
 :host .mat-icon {
   height: 48px;
   width: 48px;
+  transition: transform 0.4s ease-in-out;
 }
 
 .container-figure {
   height: 75px;
   width: 83px;
+}
+
+.skill-icon:hover {
+  transform: scale(1.1);
+  transition: transform 0.4s ease-in-out;
 }

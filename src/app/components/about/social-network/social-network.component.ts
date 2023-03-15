@@ -101,10 +101,8 @@ export class SocialNetworkComponent implements OnInit {
   }
 
   private updatePositionSocialNetwork(social: SocialNetwork): void {
-    // Mejorar esto, en el backend se puede hacer un update de una sola red social
     this.socialService.updatePosition(social.id!, social.position, this.storageService.token).subscribe({
       next: (social: SocialNetwork) => {
-        // console.log(social);
       },
       error: error => {
         console.log(error);
@@ -172,7 +170,6 @@ export class SocialNetworkComponent implements OnInit {
   }
 
   public openAddModal(): void {
-    // id = 0 porque no se ha creado aún
     this.positions.push(this.positions.length + 1);
     const data = <ActionForShipment>{
       action: 'Agregar',
