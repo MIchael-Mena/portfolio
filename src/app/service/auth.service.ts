@@ -7,7 +7,8 @@ import {Observable} from "rxjs";
 })
 export class AuthService {
 
-  private uri = 'http://localhost:5000';
+  private uri = 'http://localhost:8080/auth';
+  // private uri = 'http://localhost:5000';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -21,12 +22,12 @@ export class AuthService {
     return this.http.post(`${this.uri}/login`, {email, password}, this.httpOptions);
   }
 
-  register(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.uri}/register`, {email, password});
+  register(email: string, password: string, userName: string, name: string): Observable<any> {
+    return this.http.post(`${this.uri}/register`, {email, password, userName, name});
   }
 
-  logout() {
-
+  logout(userId: number): Observable<any> {
+    return this.http.get(`${this.uri}/logout?userId=${userId}`);
   }
 
 }

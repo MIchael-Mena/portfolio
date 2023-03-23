@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
+import {User} from "./User";
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,7 @@ export class StorageSessionService {
     return localStorage.getItem('token') || '';
   }
 
-  public get userValue(): any {
+  public get user(): User {
     return JSON.parse(localStorage.getItem('user') || '{}');
   }
 

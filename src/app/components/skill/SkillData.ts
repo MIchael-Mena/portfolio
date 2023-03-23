@@ -3,4 +3,5 @@ export interface SkillData {
   name: string;
   level: number;
   icon: string;
+  position: number;
 }

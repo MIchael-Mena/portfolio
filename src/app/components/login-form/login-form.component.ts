@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../service/auth.service";
 import {StorageSessionService} from "../../service/storage-session.service";
 import {Router} from "@angular/router";
-import {ButtonSettings} from "../shared/button-confirm/ButtonSettings";
 
 
 @Component({
@@ -52,26 +51,19 @@ export class LoginFormComponent implements OnInit {
           this.form.reset();
           this.isLoading = false;
           this.router.navigate(['/home']);
-          // this.reloadPage();
         },
         error: (error) => {
-          if (error.status === 400) {
+          if (error.status === 400 || error.status === 401) {
             this.error = true;
             setTimeout(() => {
               this.error = false;
             }, 5000);
-          } else {
-            console.log(error.message);
           }
           this.isLoading = false;
         }
       }
     );
 
-  }
-
-  private reloadPage(): void {
-    window.location.reload();
   }
 
 }

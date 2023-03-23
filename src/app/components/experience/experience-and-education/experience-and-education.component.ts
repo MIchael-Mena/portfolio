@@ -50,9 +50,7 @@ export class ExperienceAndEducationComponent {
       enterAnimationDuration: '200ms',
       exitAnimationDuration: '200ms'
     });
-    const test = await firstValueFrom(dialogRef.afterClosed());
-    // result puede ser undefined
-    return test;
+    return await firstValueFrom(dialogRef.afterClosed());
   }
 
   private checkFormsState() {

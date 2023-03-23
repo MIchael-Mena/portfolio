@@ -12,6 +12,8 @@ import {UnsavedChangesService} from "../../../service/unsaved-changes.service";
 import {StorageSessionService} from "../../../service/storage-session.service";
 import {ExperienceService} from "../service/experience.service";
 import {ButtonSettings} from "../../shared/button-confirm/ButtonSettings";
+import {WorkData} from "../WorkData";
+import {EducationData} from "../EducationData";
 
 
 const datePickerClean = <DatePicker>{
@@ -83,8 +85,9 @@ export class AddExperienceComponent implements OnChanges {
       initialDate: ['', Validators.required],
       finalDate: ['', Validators.required],
       presentDate: [false],
-      description: ['', Validators.required],
-      link: ['']
+      description: ['', [Validators.required, Validators.maxLength(400)]],
+      link: [''],
+      position: [0],
     });
   }
 
@@ -97,7 +100,7 @@ export class AddExperienceComponent implements OnChanges {
 
   private formIsEmpty(): boolean {
     return Object.values(this.form.controls).every(control => {
-      if (control.value === false) {
+      if (control.value === false || typeof control.value === "number") {
         // presentDate es un booleano y no me sirve compararlo con ''
         return true;
       }
@@ -211,11 +214,12 @@ export class AddExperienceComponent implements OnChanges {
   }
 
   private updateExperience(experience: ExperienceData): void {
-    this.experienceService.updateExperience(experience, this.storageService.token).subscribe({
-      next: (response: ExperienceData) => {
+    const anExperience = this.formExperience!.reverseParseFromExperienceData(experience)
+    this.experienceService.updateExperience(anExperience, this.storageService.token).subscribe({
+      next: (response) => {
         // Emite el evento onUpdateExperience al componente padre (experience-and-education.component.ts)
         this.isLoading = false;
-        this.onUpdateExperience.emit(response);
+        this.onUpdateExperience.emit(experience);
         this.resetForm();
       },
       error: (error: any) => {
@@ -226,17 +230,17 @@ export class AddExperienceComponent implements OnChanges {
   }
 
   private addExperience(experience: ExperienceData): void {
-    this.experienceService.addExperience(experience, this.storageService.token).subscribe({
-      next: (response: ExperienceData) => {
+    const anExperience = this.formExperience!.reverseParseFromExperienceData(experience)
+    this.experienceService.addExperience(anExperience, this.storageService.token).subscribe({
+      next: (response: WorkData | EducationData) => {
         // Emite el evento onAddExperience al componente padre (experience-and-education.component.ts)
         this.isLoading = false;
-        this.onAddExperience.emit(response);
+        this.onAddExperience.emit(this.formExperience!.parseToExperienceData(response));
         this.resetForm();
       },
       error: (error: any) => {
         this.isLoading = false;
         alert('Error al agregar la experiencia');
-
       }
     });
   }
@@ -258,13 +262,14 @@ export class AddExperienceComponent implements OnChanges {
       initialDate: this.formatDate(this.form.value.initialDate),
       finalDate: this.formatDate(this.form.value.finalDate),
       description: this.form.value.description,
-      link: this.form.value.link
+      link: this.form.value.link,
+      position: this.form.value.position,
       // Se envía en el formato YYYY-MM para que la pipe date lo pueda interpretar
     };
   }
 
   private formatDate(aDate: any): string {
-    return (typeof (aDate === 'string' || aDate === null) ? aDate : aDate.format('YYYY-MM-DD'));
+    return (aDate === 'string' || aDate === null) ? aDate : aDate.format('YYYY-MM-DD');
   }
 
   private resetForm(): void {
