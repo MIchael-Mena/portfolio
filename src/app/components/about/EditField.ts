@@ -1,7 +1,7 @@
 import {Observable} from "rxjs";
 import {AboutMeData} from "./AboutMeData";
 
-export interface EditData {
+export interface EditField {
   content: string;
   html: string;
   inputType: string;

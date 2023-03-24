@@ -62,17 +62,16 @@ export class SocialNetworkComponent implements OnInit {
   }
 
   public drop(event: CdkDragDrop<SocialNetwork[]>): void {
-    // console.log(event);
     //TODO: en media query menor a 600px no funciona el drag and drop, se divide la fila en dos
     moveItemInArray(this.socialNetworks, event.previousIndex, event.currentIndex);
-    this.updatePositionInSocialNetworks();
+    this.updatePositionOfSocialNetworks();
   }
 
-  private updatePositionInSocialNetworks(): void {
+  private updatePositionOfSocialNetworks(): void {
     this.socialNetworks.forEach((social, index) => {
       if (social.position !== index + 1) {
         social.position = index + 1;
-        this.updatePositionSocialNetwork(social);
+        this.updatePositionSocialNetworkInBackend(social);
       }
     });
   }
@@ -92,15 +91,15 @@ export class SocialNetworkComponent implements OnInit {
     this.socialNetworks.forEach(social => {
       if (social.position > oldPosition && social.position <= newPosition) {
         social.position--;
-        this.updatePositionSocialNetwork(social);
+        this.updatePositionSocialNetworkInBackend(social);
       } else if (social.position < oldPosition && social.position >= newPosition) {
         social.position++;
-        this.updatePositionSocialNetwork(social);
+        this.updatePositionSocialNetworkInBackend(social);
       }
     });
   }
 
-  private updatePositionSocialNetwork(social: SocialNetwork): void {
+  private updatePositionSocialNetworkInBackend(social: SocialNetwork): void {
     this.socialService.updatePosition(social.id!, social.position, this.storageService.token).subscribe({
       next: (social: SocialNetwork) => {
       },
@@ -109,6 +108,17 @@ export class SocialNetworkComponent implements OnInit {
       }
     });
 
+  }
+
+  private reorderPositionsOfSocialNetworksOnDelete(target: SocialNetwork): void {
+    // Después de eliminar una red social, las redes sociales que estaban después de la eliminada
+    // tienen que bajar una posición
+    this.socialNetworks.forEach(social => {
+      if (social.position > target.position) {
+        social.position--;
+        this.updatePositionSocialNetworkInBackend(social);
+      }
+    });
   }
 
   public openDeleteDialog(target: SocialNetwork): void {
@@ -130,6 +140,8 @@ export class SocialNetworkComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: ModalResponse) => {
       if (result.state) {
         this.socialNetworks = this.socialNetworks.filter(social => social.id !== target.id);
+        // TODO: debo actualizar las posiciones de las redes sociales
+        this.reorderPositionsOfSocialNetworksOnDelete(target);
       } else if (result.error) {
         console.log(result.error);
         alert('Error al eliminar la red social');

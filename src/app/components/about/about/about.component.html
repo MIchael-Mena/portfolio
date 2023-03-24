@@ -21,20 +21,20 @@
           <mat-spinner diameter="100"></mat-spinner>
         </div>
 
-        <app-data [data]="this.nameData"
-                  (dataChange)="updateName($event)"
-                  [isVisible]="!this.isLoading">
-        </app-data>
+        <app-field [data]="this.nameData"
+                   (dataChange)="updateName($event)"
+                   [isVisible]="!this.isLoading">
+        </app-field>
 
-        <app-data [data]="this.titleData"
-                  [isVisible]="!this.isLoading"
-                  (dataChange)="updateTitle($event)">
-        </app-data>
+        <app-field [data]="this.titleData"
+                   [isVisible]="!this.isLoading"
+                   (dataChange)="updateTitle($event)">
+        </app-field>
 
-        <app-data [data]="this.descriptionData"
-                  [isVisible]="!this.isLoading"
-                  (dataChange)="updateDescription($event)">
-        </app-data>
+        <app-field [data]="this.descriptionData"
+                   [isVisible]="!this.isLoading"
+                   (dataChange)="updateDescription($event)">
+        </app-field>
 
         <!--          <button (click)="test(imageURL)">test</button>-->
 

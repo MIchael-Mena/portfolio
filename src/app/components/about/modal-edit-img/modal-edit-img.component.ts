@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {EditData} from "../EditData";
+import {EditField} from "../EditField";
 
 const preview = 'assets/icon/png/profile-preview-alt.jpg';
 
@@ -17,7 +17,7 @@ export class ModalEditImgComponent {
   public isLoading: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<ModalEditImgComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: EditData) {
+              @Inject(MAT_DIALOG_DATA) public data: EditField) {
     this.previewFileUrl = this.data.content;
   }
 

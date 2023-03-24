@@ -3,7 +3,7 @@ import {faImagePortrait, faSquareCaretDown} from "@fortawesome/free-solid-svg-ic
 import {AboutService} from "../service/about.service";
 import {StorageSessionService} from "../../../service/storage-session.service";
 import {AboutMeData} from "../AboutMeData";
-import {EditData} from "../EditData";
+import {EditField} from "../EditField";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalEditImgComponent} from "../modal-edit-img/modal-edit-img.component";
 import {DialogContent} from "../../dialog-card/DialogContent";
@@ -26,9 +26,9 @@ export class AboutComponent implements OnInit {
   public isLoading: boolean = true;
   private componentsLoading: Map<string, boolean> = new Map<string, boolean>();
   public isLoggedIn = false;
-  public nameData: EditData = <EditData>{};
-  public titleData: EditData = <EditData>{};
-  public descriptionData: EditData = <EditData>{};
+  public nameData: EditField = <EditField>{};
+  public titleData: EditField = <EditField>{};
+  public descriptionData: EditField = <EditField>{};
 
   public canDeactivate: () => Observable<boolean> = () => this.canDeactivateComponent();
 
@@ -161,7 +161,7 @@ export class AboutComponent implements OnInit {
 
   public editProfileImage(): void {
     // TOOD: no enviar todo el aboutMe, solo la foto. Hacerlo cuando se elimine fake-backend
-    const editImg: EditData = {
+    const editImg: EditField = {
       content: this.aboutMe.photo,
       html: '',
       inputType: 'image',

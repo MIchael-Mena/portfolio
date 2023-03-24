@@ -31,6 +31,7 @@ export class ModalSkillComponent {
       name: ['', Validators.required],
       level: [0, [Validators.max(5), Validators.min(0)]],
       icon: ['', Validators.required],
+      position: [0],
     });
     action.setDataToForm((skill: SkillData) => {
       this.form.patchValue(skill);

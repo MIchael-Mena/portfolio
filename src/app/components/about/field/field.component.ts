@@ -5,16 +5,16 @@ import {FormControl, Validators} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogContent} from "../../dialog-card/DialogContent";
 import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
-import {EditData} from "../EditData";
+import {EditField} from "../EditField";
 
 @Component({
-  selector: 'app-data',
-  templateUrl: './data.component.html',
-  styleUrls: ['./data.component.css'],
+  selector: 'app-field',
+  templateUrl: './field.component.html',
+  styleUrls: ['./field.component.css'],
 })
-export class DataComponent implements OnChanges {
+export class FieldComponent implements OnChanges {
   @Input() isVisible: boolean = false;
-  @Input() data: EditData = <EditData>{};
+  @Input() data: EditField = <EditField>{};
   @Output() dataChange = new EventEmitter<string>();
   public faSquareCaretDown = faSquareCaretDown;
   public isWaitingResponse: boolean = false;
