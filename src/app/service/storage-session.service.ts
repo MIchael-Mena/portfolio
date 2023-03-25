@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
-import {User} from "./User";
+import {User} from "../components/util/User";
+
+const USER_KEY = 'auth-user';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +19,22 @@ export class StorageSessionService {
   }
 
   public saveUser(data: any): void {
+    const user: User = {
+      id: data.user.id,
+      username: data.user.username,
+      email: data.user.email,
+      roles: data.user.authorities,
+    }
     this.behaviorSubject.next(true);
-    localStorage.setItem('user', JSON.stringify(data.user));
-    localStorage.setItem('token', data.accessToken);
+    window.sessionStorage.removeItem(USER_KEY);
+    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+    /*    localStorage.setItem('user', JSON.stringify(data.user));
+        localStorage.setItem('token', data.accessToken);*/
   }
 
   public get isLoggedIn(): boolean {
-    return (localStorage.getItem('token') !== null);
+    // return (localStorage.getItem('token') !== null);
+    return window.sessionStorage.getItem(USER_KEY) !== null;
   }
 
   public get token(): string {
@@ -31,12 +42,14 @@ export class StorageSessionService {
   }
 
   public get user(): User {
-    return JSON.parse(localStorage.getItem('user') || '{}');
+    // return JSON.parse(localStorage.getItem('user') || '{}');
+    return JSON.parse(window.sessionStorage.getItem(USER_KEY) || '{}');
   }
 
   public cleanUser(): void {
     this.behaviorSubject.next(false);
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    window.sessionStorage.removeItem(USER_KEY);
+    /*    localStorage.removeItem('user');
+        localStorage.removeItem('token');*/
   }
 }

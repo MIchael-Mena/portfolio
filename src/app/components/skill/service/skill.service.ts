@@ -14,7 +14,8 @@ const httpOptions = {
 })
 export class SkillService {
 
-  private apiUrl = 'http://localhost:5000/Skills';
+  // private apiUrl = 'http://localhost:5000/Skills';
+  private apiUrl = 'http://localhost:8080/skills';
 
   constructor(private http: HttpClient) {
   }
@@ -23,22 +24,20 @@ export class SkillService {
     return this.http.get<SkillData[]>(this.apiUrl);
   }
 
-  public addSkill(skill: any, token: String): Observable<any> {
-    httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
+  public addSkill(skill: SkillData): Observable<any> {
     // usar si skill es un FormData
     // ('Content-Type', 'multipart/form-data') o ('Content-Type', 'application/x-www-form-urlencoded');
-    return this.http.post<any>(this.apiUrl, skill, httpOptions);
+    // httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
+    return this.http.post<SkillData>(this.apiUrl + '/create', skill, httpOptions);
   }
 
-  public deleteSkill(skill: SkillData, token: String): Observable<SkillData> {
-    const url = `${this.apiUrl}/${skill.id}`;
-    httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
+  public deleteSkill(skill: SkillData): Observable<SkillData> {
+    const url = `${this.apiUrl}/delete/${skill.id}`;
     return this.http.delete<SkillData>(url, httpOptions);
   }
 
-  public updateSkill(skill: SkillData, token: String): Observable<SkillData> {
-    const url = `${this.apiUrl}/${skill.id}`;
-    httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
+  public updateSkill(skill: SkillData): Observable<SkillData> {
+    const url = `${this.apiUrl}/edit/${skill.id}`;
     return this.http.put<SkillData>(url, skill, httpOptions);
   }
 

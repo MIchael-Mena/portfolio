@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 
 import {httpInterceptorProviders} from "./interceptors/loading.interceptor";
+import {httpInterceptorRequest} from "./interceptors/http-request.interceptor";
 import {StorageSessionService} from "./service/storage-session.service";
 
 import {UpdateDirective} from './directives/update.directive';
@@ -43,7 +44,7 @@ import {ButtonConfirmModule} from "./components/shared/button-confirm/button-con
     DateLanguageModule,
     ButtonConfirmModule
   ],
-  providers: [AuthService, StorageSessionService, httpInterceptorProviders],
+  providers: [AuthService, StorageSessionService, httpInterceptorProviders, httpInterceptorRequest],
   exports: [
     PageNotFoundComponent
   ],

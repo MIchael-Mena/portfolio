@@ -15,6 +15,7 @@ import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
 import {Observable} from "rxjs";
 import {SocialNetworkService} from "../service/social-network.service";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
+import {PositionController} from "../../util/PositionController";
 
 @Component({
   selector: 'app-social-network',
@@ -30,10 +31,8 @@ export class SocialNetworkComponent implements OnInit {
   public isLoggedIn: boolean = false;
   public activeEdit: boolean = false;
   public activeDragAndDrop: boolean = false;
-  private positions: number[] = [];
-  private reorderPositions = (id: number, newPosition: number, oldPosition: number) => {
-    this.reorderPositionsOfSocialNetworks(id, newPosition, oldPosition);
-  }
+  private positionController!: PositionController;
+
 
   constructor(private storageService: StorageSessionService, private dialog: MatDialog,
               private iconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer,
@@ -52,7 +51,8 @@ export class SocialNetworkComponent implements OnInit {
       this.socialNetworks.forEach(social => {
         this.registerIconSvg((social.id!).toString(), social.icon);
       })
-      this.positions = this.socialNetworks.map(social => social.position);
+      this.positionController = new PositionController(this.socialNetworks,
+        (social: SocialNetwork) => this.updatePositionSocialNetworkInBackend(social));
       this.isLoading.emit({name: 'social-network', isLoading: false});
     });
   }
@@ -64,17 +64,9 @@ export class SocialNetworkComponent implements OnInit {
   public drop(event: CdkDragDrop<SocialNetwork[]>): void {
     //TODO: en media query menor a 600px no funciona el drag and drop, se divide la fila en dos
     moveItemInArray(this.socialNetworks, event.previousIndex, event.currentIndex);
-    this.updatePositionOfSocialNetworks();
+    this.positionController.reorderPositionsBySideMovement()
   }
 
-  private updatePositionOfSocialNetworks(): void {
-    this.socialNetworks.forEach((social, index) => {
-      if (social.position !== index + 1) {
-        social.position = index + 1;
-        this.updatePositionSocialNetworkInBackend(social);
-      }
-    });
-  }
 
   private registerIconSvg(id: string, icon: string): void {
     this.iconRegistry.addSvgIconLiteral(id, this.domSanitizer.bypassSecurityTrustHtml(icon));
@@ -84,23 +76,9 @@ export class SocialNetworkComponent implements OnInit {
     this.activeEdit = !this.activeEdit;
   }
 
-  private reorderPositionsOfSocialNetworks(id: number, newPosition: number, oldPosition: number): void {
-    // Lo puede hacer el backend, pero lo hago aquí para que se vea el cambio en tiempo real
-    // Tengo que asignarle la nueva posición a las redes sociales, menos a la que se está moviendo
-    // el elemento que se inserta desplaza a los demás elementos
-    this.socialNetworks.forEach(social => {
-      if (social.position > oldPosition && social.position <= newPosition) {
-        social.position--;
-        this.updatePositionSocialNetworkInBackend(social);
-      } else if (social.position < oldPosition && social.position >= newPosition) {
-        social.position++;
-        this.updatePositionSocialNetworkInBackend(social);
-      }
-    });
-  }
 
   private updatePositionSocialNetworkInBackend(social: SocialNetwork): void {
-    this.socialService.updatePosition(social.id!, social.position, this.storageService.token).subscribe({
+    this.socialService.updatePosition(social.id!, social.position).subscribe({
       next: (social: SocialNetwork) => {
       },
       error: error => {
@@ -108,17 +86,6 @@ export class SocialNetworkComponent implements OnInit {
       }
     });
 
-  }
-
-  private reorderPositionsOfSocialNetworksOnDelete(target: SocialNetwork): void {
-    // Después de eliminar una red social, las redes sociales que estaban después de la eliminada
-    // tienen que bajar una posición
-    this.socialNetworks.forEach(social => {
-      if (social.position > target.position) {
-        social.position--;
-        this.updatePositionSocialNetworkInBackend(social);
-      }
-    });
   }
 
   public openDeleteDialog(target: SocialNetwork): void {
@@ -129,7 +96,7 @@ export class SocialNetworkComponent implements OnInit {
       buttonConfirm: 'Eliminar',
       buttonCancel: 'Cancelar',
       buttonConfirmLoading: 'Eliminando...',
-      payload: () => this.socialService.delete(target, this.storageService.token)
+      payload: () => this.socialService.delete(target)
     }
     const dialogRef = this.dialog.open(DialogCardComponent, {
       data,
@@ -139,9 +106,8 @@ export class SocialNetworkComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result: ModalResponse) => {
       if (result.state) {
-        this.socialNetworks = this.socialNetworks.filter(social => social.id !== target.id);
-        // TODO: debo actualizar las posiciones de las redes sociales
-        this.reorderPositionsOfSocialNetworksOnDelete(target);
+        this.socialNetworks.splice(target.position - 1, 1);
+        this.positionController.reorderPositionsOnDelete(target.position);
       } else if (result.error) {
         console.log(result.error);
         alert('Error al eliminar la red social');
@@ -150,7 +116,7 @@ export class SocialNetworkComponent implements OnInit {
   }
 
   private updateSocialNetwork(social: SocialNetwork): Observable<SocialNetwork> {
-    return this.socialService.update(social, this.storageService.token)
+    return this.socialService.update(social)
   }
 
   public openEditModal(socialNetwork: SocialNetwork): void {
@@ -159,8 +125,10 @@ export class SocialNetworkComponent implements OnInit {
       action: 'Editar',
       onAction: (social: SocialNetwork) => this.updateSocialNetwork(social),
       setDataToForm: (callback: (social: SocialNetwork) => void) => callback(socialNetwork),
-      reorderPositions: this.reorderPositions,
-      positions: this.positions
+      updatePosition: (itemIsNew, newPosition, oldPosition) => {
+        this.positionController.updatePositionsIfChanged(itemIsNew, newPosition, oldPosition);
+      },
+      positions: this.positionController.getPositions(),
     }
     const dialogRef = this.dialog.open(ModalSocialNetworkComponent, {
       data,
@@ -176,20 +144,22 @@ export class SocialNetworkComponent implements OnInit {
         this.registerIconSvg((result.content.id).toString(), result.content.icon);
         const index = this.socialNetworks.findIndex(social => social.id === socialNetwork.id);
         this.socialNetworks[index] = result.content as SocialNetwork;
-        this.socialNetworks.sort((a, b) => a.position - b.position);
+        this.reorderSocialNetworks();
       }
     });
   }
 
   public openAddModal(): void {
-    this.positions.push(this.positions.length + 1);
+    this.positionController.addPosition();
     const data = <ActionForShipment>{
       action: 'Agregar',
-      onAction: (social: SocialNetwork) => this.socialService.add(social, this.storageService.token),
+      onAction: (social: SocialNetwork) => this.socialService.add(social),
       setDataToForm: (callback: (social: SocialNetwork) => void) => {
       },
-      reorderPositions: this.reorderPositions,
-      positions: this.positions
+      updatePosition: (itemIsNew, newPosition, oldPosition) => {
+        this.positionController.updatePositionsIfChanged(itemIsNew, newPosition, oldPosition);
+      },
+      positions: this.positionController.getPositions(),
     }
     const dialogRef = this.dialog.open(ModalSocialNetworkComponent, {
       data,
@@ -204,10 +174,16 @@ export class SocialNetworkComponent implements OnInit {
       if (result.state) {
         this.registerIconSvg((result.content.id).toString(), result.content.icon);
         this.socialNetworks.push(result.content as SocialNetwork);
+        this.reorderSocialNetworks();
       } else {
-        this.positions.pop();
+        this.positionController.removePosition();
       }
     });
+  }
+
+  private reorderSocialNetworks(): void {
+    // Ordena las redes sociales por posición para que se reflejen en el front
+    this.socialNetworks.sort((a, b) => a.position - b.position);
   }
 
 

@@ -31,8 +31,8 @@ export class ModalSocialNetworkComponent {
       name: ['', [Validators.required, Validators.maxLength(30)]],
       link: ['', [Validators.required, Validators.maxLength(100), this.ValidEmailOrLink(),]],
       icon: ['', Validators.required],
-      // Si es un nuevo registro, la posición será la última posición + 1, que ya está incluida en el array
-      // se remplaza en setDataToForm si es un registro existente
+      // Si es un nuevo registro, la posición será la última posición + 1, que ya está
+      // incluida en el array se remplaza en setDataToForm si es un registro existente
       position: [action.positions.length],
     });
     this.positionInitial = action.positions.length;
@@ -63,7 +63,8 @@ export class ModalSocialNetworkComponent {
       this.action.onAction(this.form.value as SocialNetwork).subscribe({
           next: (response: SocialNetwork) => {
             this.isLoading = false;
-            this.verifyPosition(response);
+            // this.verifyPosition(response);
+            this.action.updatePosition(this.idIsNew(), response.position, this.positionInitial);
             this.dialogRef.close(<ModalResponse>{
                 state: true,
                 content: response,
@@ -81,29 +82,6 @@ export class ModalSocialNetworkComponent {
     }
   }
 
-  private verifyPosition(response: SocialNetwork): void {
-    if (this.positionHasChanged()) {
-      this.action.reorderPositions(response.id!, response.position, this.positionInitial)
-    }
-  }
-
-  private verifyLink(): void {
-    const link = this.form.controls['link'].value;
-    if (link.includes('@') && !link.includes('mailto:')) {
-      this.form.controls['link'].setValue(`mailto:${link}`);
-    }
-  }
-
-  private positionHasChanged(): boolean {
-    const newPosition = this.form.controls['position'].value;
-    const oldPosition = this.positionInitial;
-    const lastPosition = this.action.positions.length;
-    if (lastPosition < 2) {
-      return false;
-    }
-    return this.idIsNew() ? newPosition !== lastPosition : newPosition !== oldPosition;
-  }
-
   private idIsNew(): boolean {
     return this.form.controls['id'].value === null;
   }
@@ -113,6 +91,13 @@ export class ModalSocialNetworkComponent {
         state: false,
       }
     );
+  }
+
+  private verifyLink(): void {
+    const link = this.form.controls['link'].value;
+    if (link.includes('@') && !link.includes('mailto:')) {
+      this.form.controls['link'].setValue(`mailto:${link}`);
+    }
   }
 
   public setSvg(svg: string): void {

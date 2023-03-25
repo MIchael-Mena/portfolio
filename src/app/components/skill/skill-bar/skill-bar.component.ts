@@ -58,7 +58,7 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
   public editSkill() {
     const data = <ActionForShipment>{
       action: 'Editar',
-      onAction: (skill: SkillData) => this.skillService.updateSkill(skill, this.storageSession.token),
+      onAction: (skill: SkillData) => this.skillService.updateSkill(skill),
       setDataToForm: (callback: (skill: SkillData) => void) => callback(this.skill),
     }
     const dialogRef = this.dialog.open(ModalSkillComponent, {
@@ -105,7 +105,7 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   private deleteExperience(): Observable<any> {
-    return this.skillService.deleteSkill(this.skill, this.storageSession.token);
+    return this.skillService.deleteSkill(this.skill);
   }
 
   ngOnDestroy() {

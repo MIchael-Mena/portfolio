@@ -9,7 +9,6 @@ import {FormExperience} from '../FormExperience';
 import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
 import {DialogContent} from "../../dialog-card/DialogContent";
 import {UnsavedChangesService} from "../../../service/unsaved-changes.service";
-import {StorageSessionService} from "../../../service/storage-session.service";
 import {ExperienceService} from "../service/experience.service";
 import {ButtonSettings} from "../../shared/button-confirm/ButtonSettings";
 import {WorkData} from "../WorkData";
@@ -53,7 +52,6 @@ export class AddExperienceComponent implements OnChanges {
               private fb: FormBuilder,
               private dialog: MatDialog,
               private unsavedChangesService: UnsavedChangesService,
-              private storageService: StorageSessionService,
               private experienceService: ExperienceService) {
     this.form = this.getFormGroup();
     this.onToggleEdit();
@@ -215,7 +213,7 @@ export class AddExperienceComponent implements OnChanges {
 
   private updateExperience(experience: ExperienceData): void {
     const anExperience = this.formExperience!.reverseParseFromExperienceData(experience)
-    this.experienceService.updateExperience(anExperience, this.storageService.token).subscribe({
+    this.experienceService.updateExperience(anExperience).subscribe({
       next: (response) => {
         // Emite el evento onUpdateExperience al componente padre (experience-and-education.component.ts)
         this.isLoading = false;
@@ -231,7 +229,7 @@ export class AddExperienceComponent implements OnChanges {
 
   private addExperience(experience: ExperienceData): void {
     const anExperience = this.formExperience!.reverseParseFromExperienceData(experience)
-    this.experienceService.addExperience(anExperience, this.storageService.token).subscribe({
+    this.experienceService.addExperience(anExperience).subscribe({
       next: (response: WorkData | EducationData) => {
         // Emite el evento onAddExperience al componente padre (experience-and-education.component.ts)
         this.isLoading = false;

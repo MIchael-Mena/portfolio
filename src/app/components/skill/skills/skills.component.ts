@@ -32,7 +32,7 @@ export class SkillsComponent {
   public addSkill() {
     const data = <ActionForShipment>{
       action: 'Agregar',
-      onAction: (skill: SkillData) => this.skillService.addSkill(skill, this.storageSession.token),
+      onAction: (skill: SkillData) => this.skillService.addSkill(skill),
       setDataToForm: (callback: (skill: SkillData) => void) => {
       },
     }

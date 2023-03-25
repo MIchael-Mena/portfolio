@@ -6,8 +6,7 @@ import {SocialNetwork} from "../social-network/SocialNetwork";
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, HEAD',
+    'Content-Type': 'application/json'
   })
 }
 
@@ -16,39 +15,35 @@ const httpOptions = {
 })
 export class AboutService {
 
-  private apiUrlAboutMe = 'http://localhost:5000/AboutMe';
+  // private apiUrl = 'http://localhost:5000/AboutMe';
+  private apiUrl = 'http://localhost:8080/aboutMe';
+  private update = '/update';
 
   constructor(private http: HttpClient) {
   }
 
   get aboutMe(): Observable<AboutMeData> {
-    return this.http.get<AboutMeData>(this.apiUrlAboutMe);
+    return this.http.get<AboutMeData>(this.apiUrl);
   }
 
-  public updateAboutMe(aboutMe: AboutMeData, token: String): Observable<AboutMeData> {
-    // const url = `${this.apiUrlAboutMe}/${aboutMe.id}`;
-    httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
-    return this.http.put<AboutMeData>(this.apiUrlAboutMe, aboutMe, httpOptions);
+  public updateAboutMe(aboutMe: AboutMeData): Observable<AboutMeData> {
+    return this.http.put<AboutMeData>(this.apiUrl + this.update, aboutMe, httpOptions);
   }
 
-  public updateTitle(title: string, token: String): Observable<AboutMeData> {
-    httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
-    return this.http.patch<AboutMeData>(this.apiUrlAboutMe, {title: title}, httpOptions);
+  public updateTitle(title: string): Observable<AboutMeData> {
+    return this.http.patch<AboutMeData>(this.apiUrl + this.update, {title}, httpOptions);
   }
 
-  public updateDescription(description: string, token: String): Observable<AboutMeData> {
-    httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
-    return this.http.patch<AboutMeData>(this.apiUrlAboutMe, {description: description}, httpOptions);
+  public updateDescription(description: string): Observable<AboutMeData> {
+    return this.http.patch<AboutMeData>(this.apiUrl + this.update, {description}, httpOptions);
   }
 
-  public updateName(name: string, token: String): Observable<AboutMeData> {
-    httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
-    return this.http.patch<AboutMeData>(this.apiUrlAboutMe, {name: name}, httpOptions);
+  public updateName(name: string): Observable<AboutMeData> {
+    return this.http.patch<AboutMeData>(this.apiUrl + this.update, {name}, httpOptions);
   }
 
-  updatePhoto(photo: string, token: String): Observable<AboutMeData> {
-    httpOptions.headers = httpOptions.headers.set('Authorization', `Bearer ${token}`);
-    return this.http.patch<AboutMeData>(this.apiUrlAboutMe, {photo: photo}, httpOptions);
+  updatePhoto(photo: string): Observable<AboutMeData> {
+    return this.http.patch<AboutMeData>(this.apiUrl + this.update, {photo}, httpOptions);
   }
 
 }

@@ -110,7 +110,7 @@ export class AboutComponent implements OnInit {
       html: `<h2 class="">${this.aboutMe.name}</h2>`,
       inputType: 'text',
       label: 'Nombre',
-      update: (value: string) => this.aboutService.updateName(value, this.storageService.token),
+      update: (value: string) => this.aboutService.updateName(value),
       canDeactivate: () => true
     }
   }
@@ -121,7 +121,7 @@ export class AboutComponent implements OnInit {
       html: `<h2 class="text-muted ">${this.aboutMe.title}</h2>`,
       inputType: 'text',
       label: 'Título',
-      update: (value: string) => this.aboutService.updateTitle(value, this.storageService.token),
+      update: (value: string) => this.aboutService.updateTitle(value),
       canDeactivate: () => true
     }
   }
@@ -132,7 +132,7 @@ export class AboutComponent implements OnInit {
       html: `<p class="lh-lg px-1">${this.aboutMe.description}</p>`,
       inputType: 'textarea',
       label: 'Descripción',
-      update: (value: string) => this.aboutService.updateDescription(value, this.storageService.token),
+      update: (value: string) => this.aboutService.updateDescription(value),
       canDeactivate: () => true
     }
   }
@@ -141,7 +141,7 @@ export class AboutComponent implements OnInit {
     return this.aboutService.updateAboutMe({
       ...this.aboutMe,
       [field]: value
-    }, this.storageService.token);
+    });
   }
 
   public updateName(name: string): void {
@@ -166,7 +166,7 @@ export class AboutComponent implements OnInit {
       html: '',
       inputType: 'image',
       label: 'Imagen de perfil',
-      update: (value: string) => this.aboutService.updatePhoto(value, this.storageService.token),
+      update: (value: string) => this.aboutService.updatePhoto(value),
       canDeactivate: () => true
     }
     const dialogRef = this.dialog.open(ModalEditImgComponent, {

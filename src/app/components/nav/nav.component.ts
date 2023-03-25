@@ -49,9 +49,15 @@ export class NavComponent {
   }
 
   public logOut(): void {
-    this.authService.logout(this.storageService.user.id);
-    this.storageService.cleanUser();
-    this.router.navigate(['/login']);
+    this.authService.logout(this.storageService.user.id).subscribe({
+      next: (data: any) => {
+        this.storageService.cleanUser();
+        this.router.navigate(['/login']);
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    });
   }
 
   prueba() {

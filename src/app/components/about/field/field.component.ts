@@ -33,7 +33,6 @@ export class FieldComponent implements OnChanges {
       this.newData.setValue(this.data.content);
     }
     if (changes['data'] !== undefined && changes['data'].currentValue) {
-      // changes['data'].currentValue.canDeactivate = () => this.newData.value === this.data.content;
       // TODO: Se modifica el objeto de entrada, no es buena práctica. Usar el servicio unsavedChangesService
       this.data.canDeactivate = () => this.newData.value === this.data.content;
     }

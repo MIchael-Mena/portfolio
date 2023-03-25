@@ -34,7 +34,7 @@ export class CardExperienceComponent {
   }
 
   public deleteExperience(): Observable<ExperienceData> {
-    return this.experienceService.deleteExperience(this.experience, this.storageService.token);
+    return this.experienceService.deleteExperience(this.experience);
   }
 
   editExperience() {

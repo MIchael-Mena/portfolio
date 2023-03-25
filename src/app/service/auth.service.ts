@@ -7,8 +7,8 @@ import {Observable} from "rxjs";
 })
 export class AuthService {
 
-  private uri = 'http://localhost:8080/auth';
-  // private uri = 'http://localhost:5000';
+  private apiUrl = 'http://localhost:8080/auth';
+  // private apiUrl = 'http://localhost:5000';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -18,16 +18,16 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  login(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.uri}/login`, {email, password}, this.httpOptions);
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, {username, password}, this.httpOptions);
   }
 
   register(email: string, password: string, userName: string, name: string): Observable<any> {
-    return this.http.post(`${this.uri}/register`, {email, password, userName, name});
+    return this.http.post(`${this.apiUrl}/register`, {email, password, userName, name});
   }
 
   logout(userId: number): Observable<any> {
-    return this.http.get(`${this.uri}/logout?userId=${userId}`);
+    return this.http.get(`${this.apiUrl}/logout?userId=${userId.toString()}`);
   }
 
 }

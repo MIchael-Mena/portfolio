@@ -49,7 +49,7 @@ export class ModalEditImgComponent {
     this.data.update(this.previewFileUrl).subscribe({
       next: (response) => {
         this.isLoading = false;
-        this.dialogRef.close({state: true, content: response.photo});
+        this.dialogRef.close({state: true, content: this.previewFileUrl});
       },
       error: (error) => {
         this.isLoading = false;
