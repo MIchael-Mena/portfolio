@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {faCircleQuestion} from "@fortawesome/free-solid-svg-icons";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-page-not-found',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./page-not-found.component.css']
 })
 export class PageNotFoundComponent {
+
+  public faCircleQuestion = faCircleQuestion;
+
+  constructor(private router: Router) {
+  }
+
 
 }

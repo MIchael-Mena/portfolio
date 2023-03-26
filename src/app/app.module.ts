@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 
 import {httpInterceptorProviders} from "./interceptors/loading.interceptor";
-import {httpInterceptorRequest} from "./interceptors/http-request.interceptor";
+import {AuthInterceptorRequest} from "./interceptors/http-request.interceptor";
 import {StorageSessionService} from "./service/storage-session.service";
 
 import {UpdateDirective} from './directives/update.directive';
@@ -23,6 +23,7 @@ import {AppRoutingModule} from "./shared/app-routing.module";
 import {DateLanguageModule} from "./shared/date-language.module";
 import {BrowserModule} from "@angular/platform-browser";
 import {ButtonConfirmModule} from "./components/shared/button-confirm/button-confirm.module";
+import {HomeComponent} from "./components/home/home.component";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {ButtonConfirmModule} from "./components/shared/button-confirm/button-con
     PageNotFoundComponent,
     IconsComponent,
     DialogCardComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,7 @@ import {ButtonConfirmModule} from "./components/shared/button-confirm/button-con
     DateLanguageModule,
     ButtonConfirmModule
   ],
-  providers: [AuthService, StorageSessionService, httpInterceptorProviders, httpInterceptorRequest],
+  providers: [AuthService, StorageSessionService, httpInterceptorProviders, AuthInterceptorRequest],
   exports: [
     PageNotFoundComponent
   ],

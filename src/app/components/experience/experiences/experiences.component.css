@@ -1,1 +1,24 @@
 
+.withoutExperience {
+  border-radius: 25px;
+  background-color: #0000007F;
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid black;
+  color: white;
+  transform: rotate(-2deg);
+  transition: all 0.5s ease;
+}
+
+.withoutExperience:hover {
+  background-color: #ff6e31;
+  color: white;
+  transform-style: preserve-3d;
+  transform: rotate(4deg);
+  transition: all 0.5s ease;
+}
+
+.withoutExperience h2 {
+  text-shadow: 2px 2px 4px #000000;
+}
+

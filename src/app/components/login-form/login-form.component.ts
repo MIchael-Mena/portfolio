@@ -38,7 +38,7 @@ export class LoginFormComponent implements OnInit {
     return this.form.controls['password'];
   }
 
-  OnSubmit() {
+  login() {
     this.isLoading = true;
     if (this.form.invalid) {
       this.isLoading = false;
@@ -46,8 +46,8 @@ export class LoginFormComponent implements OnInit {
     }
     const {email, password} = this.form.value;
     this.authService.login(email, password).subscribe({
-        next: (data: any) => {
-          this.storageService.saveUser(data);
+        next: (user: any) => {
+          this.storageService.saveUser(user);
           this.form.reset();
           this.isLoading = false;
           this.router.navigate(['/home']);

@@ -84,6 +84,7 @@ export class AboutComponent implements OnInit {
   }
 
   private canDeactivateComponent(): Observable<boolean> {
+    if (this.isLoading) return of(true);
     if (this.nameData.canDeactivate() && this.titleData.canDeactivate() && this.descriptionData.canDeactivate()) {
       return of(true);
     }
@@ -137,13 +138,6 @@ export class AboutComponent implements OnInit {
     }
   }
 
-  private setUpdate(value: string, field: string): Observable<AboutMeData> {
-    return this.aboutService.updateAboutMe({
-      ...this.aboutMe,
-      [field]: value
-    });
-  }
-
   public updateName(name: string): void {
     this.aboutMe.name = name;
     this.prepareNameData();
@@ -160,7 +154,6 @@ export class AboutComponent implements OnInit {
   }
 
   public editProfileImage(): void {
-    // TOOD: no enviar todo el aboutMe, solo la foto. Hacerlo cuando se elimine fake-backend
     const editImg: EditField = {
       content: this.aboutMe.photo,
       html: '',

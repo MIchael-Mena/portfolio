@@ -26,8 +26,8 @@ export class ExperiencesComponent implements OnInit {
     experienceIsNew: true,
   };
 
-  public formExperience?: FormExperience;
-  @Input() experience?: Experience;
+  public formExperience!: FormExperience;
+  @Input() experience!: Experience;
 
   constructor(private uiEditFormService: UiEditFormService,
               private storageService: StorageSessionService,
@@ -38,14 +38,13 @@ export class ExperiencesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.experience?.serviceToUse(this.experienceService);
-    this.formExperience = this.experience!.formToUse();
-
+    this.experience.serviceToUse(this.experienceService);
+    this.formExperience = this.experience.formToUse();
     this.isLoading = true;
-    this.experienceService.getExperiences().subscribe(experiences => {
+    this.experienceService.expOrderByInitialDate.subscribe(experiences => {
         this.isLoading = false;
         this.experiences = experiences.map((experience) => {
-          return this.formExperience!.parseToExperienceData(experience);
+          return this.formExperience.parseToExperienceData(experience);
         });
       }
     );

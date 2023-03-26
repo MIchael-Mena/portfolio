@@ -26,8 +26,16 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/register`, {email, password, userName, name});
   }
 
-  logout(userId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/logout?userId=${userId.toString()}`);
+  logout(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/logout`);
+  }
+
+  getAuthUser(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/details`);
+  }
+
+  refreshToken(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/refresh-token`);
   }
 
 }

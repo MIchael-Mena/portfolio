@@ -10,7 +10,7 @@
             type="text"
             placeholder="{{'Agregar un ' + this.formExperience?.getPrimaryInfoLabel()}}"
             formControlName="primaryInfo"
-            maxlength="40"
+            maxlength="60"
           />
           <mat-error *ngIf="form.get('primaryInfo')?.hasError('required')">
             {{'El campo ' + this.formExperience?.getPrimaryInfoLabel() + ' es requerido'}}
@@ -24,7 +24,7 @@
             type="text"
             placeholder="{{'Agregar una ' + this.formExperience?.getSecondaryInfoLabel()}}"
             formControlName="secondaryInfo"
-            maxlength="40"
+            maxlength="60"
           />
           <mat-error *ngIf="form.get('secondaryInfo')?.hasError('required')">
             {{'El campo ' + this.formExperience?.getSecondaryInfoLabel() + ' es requerido'}}

@@ -21,21 +21,23 @@ export class ModalSkillComponent {
     onConfirmText: 'Guardar',
     onWaitingText: 'Guardando...',
   }
+  private positionInitial: number;
 
   constructor(public dialogRef: MatDialogRef<ModalSkillComponent>,
               @Inject(MAT_DIALOG_DATA) public action: ActionForShipment,
               private fb: FormBuilder) {
-    // TODO: skill es pasado por referencia, no se puede modificar
     this.form = this.fb.group({
       id: [''],
       name: ['', Validators.required],
       level: [0, [Validators.max(5), Validators.min(0)]],
       icon: ['', Validators.required],
-      position: [0],
+      position: [action.positions.length],
     });
+    this.positionInitial = action.positions.length;
     action.setDataToForm((skill: SkillData) => {
       this.form.patchValue(skill);
       this.preview = skill.icon;
+      this.positionInitial = skill.position;
     });
   }
 
@@ -45,6 +47,10 @@ export class ModalSkillComponent {
 
   public onClose(): void {
     this.dialogRef.close(<ModalResponse>{state: false});
+  }
+
+  private idIsNew(): boolean {
+    return this.form.controls['id'].value === null;
   }
 
   public onSubmit(): void {
@@ -59,6 +65,7 @@ export class ModalSkillComponent {
       this.action.onAction(this.form.value as SkillData).subscribe({
           next: (response: SkillData) => {
             this.isLoading = false;
+            this.action.updatePosition(this.idIsNew(), response.position, this.positionInitial);
             this.dialogRef.close(<ModalResponse>{
                 state: true,
                 content: response,
@@ -66,8 +73,16 @@ export class ModalSkillComponent {
             );
           },
           error: (error: any) => {
-            alert(`Error al ${this.action.action.toLowerCase()} la habilidad`);
-            this.isLoading = false;
+            if (error.status !== 401) {
+              alert(`Error al ${this.action.action.toLowerCase()} la habilidad`);
+            } else {
+              this.dialogRef.close(<ModalResponse>{
+                  state: false,
+                  content: error,
+                }
+              );
+              this.isLoading = false;
+            }
           }
         }
       )

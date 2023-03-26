@@ -49,7 +49,7 @@ export class NavComponent {
   }
 
   public logOut(): void {
-    this.authService.logout(this.storageService.user.id).subscribe({
+    this.authService.logout().subscribe({
       next: (data: any) => {
         this.storageService.cleanUser();
         this.router.navigate(['/login']);

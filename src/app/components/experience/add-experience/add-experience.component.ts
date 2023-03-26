@@ -83,7 +83,7 @@ export class AddExperienceComponent implements OnChanges {
       initialDate: ['', Validators.required],
       finalDate: ['', Validators.required],
       presentDate: [false],
-      description: ['', [Validators.required, Validators.maxLength(400)]],
+      description: ['', [Validators.maxLength(400)]],
       link: [''],
       position: [0],
     });
@@ -244,6 +244,7 @@ export class AddExperienceComponent implements OnChanges {
   }
 
   private validateForm(): boolean {
+    console.log(this.form.controls)
     if (this.form.value.presentDate) {
       this.form.controls['finalDate'].setValue(null);
       this.form.controls['finalDate'].setErrors(null);
@@ -267,7 +268,7 @@ export class AddExperienceComponent implements OnChanges {
   }
 
   private formatDate(aDate: any): string {
-    return (aDate === 'string' || aDate === null) ? aDate : aDate.format('YYYY-MM-DD');
+    return ((typeof aDate) === 'string' || aDate === null) ? aDate : aDate.format('YYYY-MM-DD');
   }
 
   private resetForm(): void {

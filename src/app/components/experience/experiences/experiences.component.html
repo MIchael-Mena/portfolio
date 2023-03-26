@@ -1,7 +1,7 @@
 <section class="container" id="experience">
   <div class="d-flex justify-content-between">
     <div class="mx-auto">
-      <h1 class="my-3 mat-h1" #target>{{experience?.title}}</h1>
+      <h1 class="my-3 mat-h1" #target>{{experience.title}}</h1>
     </div>
     <div *ngIf="isLoggedIn" class="d-flex my-auto container-icon-add">
       <fa-icon
@@ -23,21 +23,29 @@
   >
   </app-add-experience>
 
-  <!--    <app-spinner class="d-flex justify-content-center">
-      </app-spinner>-->
   <div class="d-flex justify-content-center align-items-center" *ngIf="isLoading">
     <mat-spinner></mat-spinner>
   </div>
 
-  <div class="row">
-    <app-card-experience
-      *ngFor="let experience of experiences"
-      [experience]="experience"
-      (onEditExperience)="editExperience($event, target)"
-      (onDeleteExperience)="deleteExperience($event)"
-      class="col-12 col-md-6"
-    >
-    </app-card-experience>
-
+  <div [ngSwitch]="this.experiences.length === 0">
+    <div class="col-12" *ngSwitchCase="true">
+      <div class="d-flex justify-content-center align-items-center">
+        <div class="withoutExperience">
+          <h2 class="mat-h2 text-center">Todavía no hay experiencias para mostrar</h2>
+          <img src="assets/icon/png/without-exp.png" alt="Sin experiencia" class="img-fluid">
+        </div>
+      </div>
+    </div>
+    <div *ngSwitchCase="false"
+         class="row">
+      <app-card-experience
+        *ngFor="let experience of experiences"
+        [experience]="experience"
+        (onEditExperience)="editExperience($event, target)"
+        (onDeleteExperience)="deleteExperience($event)"
+        class="col-12 col-md-6"
+      >
+      </app-card-experience>
+    </div>
   </div>
 </section>

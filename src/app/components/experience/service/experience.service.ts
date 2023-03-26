@@ -23,8 +23,13 @@ export class ExperienceService {
   constructor(private http: HttpClient) {
   }
 
-  getExperiences(): Observable<WorkData[] | EducationData[]> {
+  get experiences(): Observable<WorkData[] | EducationData[]> {
     return this.isWorkingDatabase ? this.http.get<WorkData[]>(this.apiUrl) : this.http.get<EducationData[]>(this.apiUrl);
+  }
+
+  get expOrderByInitialDate(): Observable<WorkData[] | EducationData[]> {
+    const url = this.apiUrl + '?_sort=initialDate&_order=desc';
+    return this.isWorkingDatabase ? this.http.get<WorkData[]>(url) : this.http.get<EducationData[]>(url);
   }
 
   addExperience(experience: WorkData | EducationData): Observable<WorkData | EducationData> {

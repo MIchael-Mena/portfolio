@@ -21,6 +21,8 @@ import {ActionForShipment} from "../../shared/ActionForShipment";
   styleUrls: ['./skill-bar.component.css']
 })
 export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
+  @Output() onUpdatePositions = new EventEmitter<any>()
+  @Input() positions: number[] = [];
   @Input() skill: SkillData = <SkillData>{};
   @Output() onDeleteSkill = new EventEmitter<SkillData>();
   @Output() onUpdateSkill = new EventEmitter<SkillData>();
@@ -60,6 +62,13 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
       action: 'Editar',
       onAction: (skill: SkillData) => this.skillService.updateSkill(skill),
       setDataToForm: (callback: (skill: SkillData) => void) => callback(this.skill),
+      positions: this.positions,
+      updatePosition: (itemIsNew, newPosition, oldPosition) => {
+        this.onUpdatePositions.emit({itemIsNew, newPosition, oldPosition});
+      }
+      /*      updatePosition: (itemIsNew, newPosition, oldPosition) => {
+              this.updatePositions(itemIsNew, newPosition, oldPosition);
+            },*/
     }
     const dialogRef = this.dialog.open(ModalSkillComponent, {
       data,
@@ -67,16 +76,22 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
       autoFocus: true,
       restoreFocus: true,
       width: '450px',
-      height: '500px',
+      height: '600px',
       enterAnimationDuration: '200ms',
       exitAnimationDuration: '200ms',
     });
     dialogRef.afterClosed().subscribe((response: ModalResponse) => {
       // Si el backend acepta la modificación (el modal está manejando los errores a diferencia del dialog)
       if (response.state) {
+        this.registerIconSvg((response.content.id).toString(), response.content.icon);
         this.onUpdateSkill.emit(response.content as SkillData);
       }
     });
+  }
+
+  private registerIconSvg(id: string, icon: string) {
+    // TODO: ¿Cómo se puede hacer para que no se repitan los iconos?
+    this.iconRegistry.addSvgIconLiteral(id, this.domSanitizer.bypassSecurityTrustHtml(icon));
   }
 
   openDeleteDialog(): void {

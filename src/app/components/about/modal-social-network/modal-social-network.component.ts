@@ -63,7 +63,6 @@ export class ModalSocialNetworkComponent {
       this.action.onAction(this.form.value as SocialNetwork).subscribe({
           next: (response: SocialNetwork) => {
             this.isLoading = false;
-            // this.verifyPosition(response);
             this.action.updatePosition(this.idIsNew(), response.position, this.positionInitial);
             this.dialogRef.close(<ModalResponse>{
                 state: true,
@@ -72,8 +71,16 @@ export class ModalSocialNetworkComponent {
             );
           },
           error: (error: any) => {
-            alert(`Error al ${this.action.action.toLowerCase()} la red social`);
-            this.isLoading = false;
+            if (error.status !== 401) {
+              alert(`Error al ${this.action.action.toLowerCase()} la red social`);
+            } else {
+              this.dialogRef.close(<ModalResponse>{
+                  state: false,
+                  content: error,
+                }
+              );
+              this.isLoading = false;
+            }
           }
         }
       )

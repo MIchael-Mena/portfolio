@@ -15,7 +15,7 @@ import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
 import {Observable} from "rxjs";
 import {SocialNetworkService} from "../service/social-network.service";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
-import {PositionController} from "../../util/PositionController";
+import {PositionController} from "../../shared/PositionController";
 
 @Component({
   selector: 'app-social-network',
@@ -115,15 +115,11 @@ export class SocialNetworkComponent implements OnInit {
     });
   }
 
-  private updateSocialNetwork(social: SocialNetwork): Observable<SocialNetwork> {
-    return this.socialService.update(social)
-  }
-
   public openEditModal(socialNetwork: SocialNetwork): void {
     if (this.activeDragAndDrop) return;
     const data = <ActionForShipment>{
       action: 'Editar',
-      onAction: (social: SocialNetwork) => this.updateSocialNetwork(social),
+      onAction: (social: SocialNetwork) => this.socialService.update(social),
       setDataToForm: (callback: (social: SocialNetwork) => void) => callback(socialNetwork),
       updatePosition: (itemIsNew, newPosition, oldPosition) => {
         this.positionController.updatePositionsIfChanged(itemIsNew, newPosition, oldPosition);

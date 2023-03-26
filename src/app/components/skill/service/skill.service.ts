@@ -24,6 +24,10 @@ export class SkillService {
     return this.http.get<SkillData[]>(this.apiUrl);
   }
 
+  get SkillsOrder(): Observable<SkillData[]> {
+    return this.http.get<SkillData[]>(`${this.apiUrl}?_sort=position&_order=asc`);
+  }
+
   public addSkill(skill: SkillData): Observable<any> {
     // usar si skill es un FormData
     // ('Content-Type', 'multipart/form-data') o ('Content-Type', 'application/x-www-form-urlencoded');
@@ -39,6 +43,11 @@ export class SkillService {
   public updateSkill(skill: SkillData): Observable<SkillData> {
     const url = `${this.apiUrl}/edit/${skill.id}`;
     return this.http.put<SkillData>(url, skill, httpOptions);
+  }
+
+  public updatePosition(id: number, position: number): Observable<SkillData> {
+    const url = `${this.apiUrl}/update/${id}`;
+    return this.http.patch<SkillData>(url, {position}, httpOptions);
   }
 
 }

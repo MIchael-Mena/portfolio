@@ -1,0 +1,78 @@
+#home {
+  background-color: #243763;
+  padding: 30px;
+  border-radius: 25px;
+  margin: 20px 0;
+  color: #fff;
+  transform: skew(5deg) rotate(1deg);
+  transition: all 0.5s ease;
+}
+
+#home h1 {
+  border-radius: 15px 15px 5px 5px;
+  background-color: #ad8e70;
+  border: 2px solid #fff;
+  text-shadow: 1px 1px 4px #243763;
+  transition: all 0.5s ease;
+}
+
+#home h3 {
+  padding: 10px;
+  border-radius: 5px 5px 15px 15px;
+  background-color: #ad8e70;
+  border: 2px solid #fff;
+  text-shadow: 1px 1px 4px #243763;
+  transition: all 0.5s ease;
+}
+
+#home h1, #home h3 {
+  transform: skew(-5deg) rotate(-1deg);
+}
+
+#home:hover h1, #home:hover h3, #home:hover .banner, #home:hover .admin {
+  transform: skew(5deg) rotate(1deg);
+  background-color: #ff6e31;
+  transition: all 0.5s ease;
+}
+
+#home:hover {
+  transform: skew(-5deg) rotate(-1deg);
+  transition: all 0.5s ease;
+  border: 3px solid #ff6e31;
+}
+
+.banner {
+  border-radius: 25px;
+  margin-bottom: 1rem;
+  width: 100%;
+  overflow: hidden;
+  transform: skew(-5deg) rotate(-1deg);
+  transition: all 0.5s ease;
+  border: 2px solid #fff;
+}
+
+
+.banner img {
+  object-fit: contain;
+  width: 100%;
+  height: auto;
+}
+
+.admin {
+  font-size: 1.2rem;
+  box-shadow: 5px 5px 10px #243763;
+  border: 2px solid #fff;
+  padding: 5px;
+  border-radius: 20px;
+  background-color: #ff6e31;
+  transform: skew(-5deg) rotate(-1deg);
+  transition: all 0.5s ease;
+  position: absolute;
+  right: -15px;
+  top: -25px;
+}
+
+#home:hover .admin {
+  transform: scale(1.1);
+}
+

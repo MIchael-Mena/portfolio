@@ -3,6 +3,8 @@ interface Position {
 }
 
 export class PositionController {
+  // Asigna las posiciones a los items, no los ordena
+  // TODO: hacer que actualize las posiciones de los items cuando se elimina o se añade uno nuevo
 
   private readonly positions: number[];
   private readonly actionOnReorder: (item: any) => void;
@@ -18,14 +20,12 @@ export class PositionController {
   public reorderPositionsOnDelete(target: number): void {
     // Después de eliminar un item, los items que estaban después del eliminado
     // tienen que bajar una posición
-    console.log(this.items);
     this.items.forEach(item => {
       if (item.position > target) {
         item.position--;
         this.actionOnReorder(item);
       }
     });
-    console.log(this.positions);
     this.positions.pop()
   }
 

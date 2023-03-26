@@ -4,7 +4,7 @@
       <mat-card-title class="text-center py-4 text-light">Bienvenido</mat-card-title>
     </div>
     <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="OnSubmit()">
+      <form [formGroup]="form" (ngSubmit)="login()">
         <p>
           <mat-form-field class="input-field prueba" appearance="outline" [hideRequiredMarker]="true">
             <mat-label>Email</mat-label>

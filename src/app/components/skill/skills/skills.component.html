@@ -22,6 +22,8 @@
       [skill]="skill" class="col"
       (onDeleteSkill)="deleteSkill($event)"
       (onUpdateSkill)="updateSkill($event)"
+      (onUpdatePositions)="this.updatePositions($event)"
+      [positions]="this.positionController.getPositions()"
     >
     </app-skill-bar>
 

@@ -27,6 +27,15 @@
                    (onChooseFileToString)="setSvg($event)">
   </app-select-file>
 
+  <mat-form-field appearance="fill">
+    <mat-label>Position</mat-label>
+    <mat-select formControlName="position">
+      <mat-option *ngFor="let position of action.positions" [value]="position">
+        {{position}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <div class="d-block">
     <span class="mat-subtitle-2 text-light">Seleccione el nivel de la habilidad</span>
     <mat-slider

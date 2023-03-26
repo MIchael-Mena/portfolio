@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
-import {User} from "../components/util/User";
+import {User} from "../components/shared/User";
 
 const USER_KEY = 'auth-user';
 
@@ -18,13 +18,7 @@ export class StorageSessionService {
     return this.behaviorSubject.asObservable();
   }
 
-  public saveUser(data: any): void {
-    const user: User = {
-      id: data.user.id,
-      username: data.user.username,
-      email: data.user.email,
-      roles: data.user.authorities,
-    }
+  public saveUser(user: any): void {
     this.behaviorSubject.next(true);
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));

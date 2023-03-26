@@ -26,6 +26,7 @@ export class FormWork implements FormExperience {
       finalDate: experience.finalDate,
       link: experience.link,
       position: experience.position,
+      type: 'work',
     };
   }
 
