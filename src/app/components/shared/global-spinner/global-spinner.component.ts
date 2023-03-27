@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {LoaderService} from "../../../service/loader.service";
 
 @Component({
@@ -8,6 +8,7 @@ import {LoaderService} from "../../../service/loader.service";
 })
 export class GlobalSpinnerComponent {
 
+  @Input() diameter = 100;
   public isLoading = false;
 
   constructor(public loaderService: LoaderService) {

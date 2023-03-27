@@ -125,7 +125,8 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-    this.iconRegistry.ngOnDestroy();
+    // Destruye todos los iconos registrados 'CUIDADO'
+    //this.iconRegistry.ngOnDestroy();
   }
 
 }

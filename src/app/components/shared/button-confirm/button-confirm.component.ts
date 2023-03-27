@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnChanges} from '@angular/core';
 import {ButtonSettings} from "./ButtonSettings";
 
 @Component({
@@ -15,8 +15,9 @@ export class ButtonConfirmComponent {
   @Input() icon: string | null = null;
   @Input() isWaiting: boolean = false;
 
-
   constructor() {
+
   }
+
 
 }

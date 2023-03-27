@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class AuthService {
 
-  private apiUrl = environment.baseURL;
+  private apiUrl = environment.baseURL + '/auth';
 
   constructor(private http: HttpClient) {
   }

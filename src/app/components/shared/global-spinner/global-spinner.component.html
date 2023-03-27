@@ -1,3 +1,9 @@
 <div *ngIf="this.isLoading" class="css-load-container">
-  <mat-spinner class="" mode="indeterminate" color="accent"></mat-spinner>
+  <!--  <span class="spinner"></span>-->
+  <mat-spinner
+    class="spinner-position"
+    diameter="{{this.diameter}}"
+    mode="indeterminate"
+    color="primary">
+  </mat-spinner>
 </div>

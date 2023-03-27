@@ -2,7 +2,7 @@
   <button mat-fab extended color="primary" type="submit" *ngSwitchCase="false">
     <mat-icon svgIcon="{{this.icon}}" aria-hidden="false" aria-label="icon"
               class="icon-button"
-              *ngIf="icon">
+              *ngIf="this.icon">
     </mat-icon>
     {{this.buttonSettings.onConfirmText}}
   </button>

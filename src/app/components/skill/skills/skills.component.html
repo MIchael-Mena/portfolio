@@ -1,9 +1,9 @@
 <div class="container mat-typography">
+  
   <div class="d-flex justify-content-between">
     <div class="mx-auto">
       <h1 class="my-3">Habilidades</h1>
     </div>
-
     <div *ngIf="isLoggedIn" class="d-flex my-auto container-icon-add">
       <fa-icon
         [icon]="faSquarePlus"
@@ -14,8 +14,12 @@
       >
       </fa-icon>
     </div>
-
   </div>
+
+  <div class="spinner-position" *ngIf="this.isLoading">
+    <mat-spinner diameter="200"></mat-spinner>
+  </div>
+
   <div class="row">
     <app-skill-bar
       *ngFor="let skill of skills"
@@ -28,5 +32,6 @@
     </app-skill-bar>
 
   </div>
+
 </div>
 

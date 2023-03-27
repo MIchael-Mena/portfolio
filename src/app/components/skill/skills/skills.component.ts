@@ -19,6 +19,7 @@ export class SkillsComponent implements OnInit {
   public isLoggedIn: boolean = false;
   public skills: SkillData[] = [];
   public positionController!: PositionController;
+  public isLoading: boolean = true;
 
   constructor(private skillService: SkillService,
               private storageSession: StorageSessionService,
@@ -33,6 +34,7 @@ export class SkillsComponent implements OnInit {
       this.skills = skills;
       this.positionController = new PositionController(this.skills,
         (skill: SkillData) => this.updatePositionSkillInBackend(skill));
+      this.isLoading = false;
     });
   }
 

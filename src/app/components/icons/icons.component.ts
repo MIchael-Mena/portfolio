@@ -13,14 +13,14 @@ import {DomSanitizer} from "@angular/platform-browser";
 @Component({
   selector: 'app-icons',
   templateUrl: './icons.component.html',
-  styleUrls: ['./icons.component.css']
+  styleUrls: ['./icons.component.css'],
 })
 export class IconsComponent {
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+    iconRegistry.addSvgIcon('start', sanitizer.bypassSecurityTrustResourceUrl('/assets/icon/svg/start.svg'));
     iconRegistry.addSvgIcon('account', sanitizer.bypassSecurityTrustResourceUrl('/assets/icon/svg/account.svg'));
     iconRegistry.addSvgIcon('no-account', sanitizer.bypassSecurityTrustResourceUrl('/assets/icon/svg/no-account.svg'));
-    iconRegistry.addSvgIcon('start', sanitizer.bypassSecurityTrustResourceUrl('/assets/icon/svg/start.svg'));
   }
 
 }
