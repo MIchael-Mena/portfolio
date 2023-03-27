@@ -16,7 +16,7 @@ const httpOptions = {
 export class AboutService {
 
   // private apiUrl = 'http://localhost:5000/AboutMe';
-  private apiUrl = 'http://localhost:8080/aboutMe';
+  private apiUrl = 'https://portfolio-michael-mena.koyeb.app/aboutMe';
   private update = '/update';
 
   constructor(private http: HttpClient) {

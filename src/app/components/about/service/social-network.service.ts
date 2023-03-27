@@ -15,7 +15,7 @@ const httpOptions = {
 export class SocialNetworkService {
 
   // private apiUrl= 'http://localhost:5000/SocialNetworks';
-  private apiUrl = 'http://localhost:8080/socialNetworks';
+  private apiUrl = 'https://portfolio-michael-mena.koyeb.app/socialNetworks';
 
   constructor(private http: HttpClient) {
   }

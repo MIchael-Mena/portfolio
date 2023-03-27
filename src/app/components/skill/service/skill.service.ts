@@ -15,7 +15,7 @@ const httpOptions = {
 export class SkillService {
 
   // private apiUrl = 'http://localhost:5000/Skills';
-  private apiUrl = 'http://localhost:8080/skills';
+  private apiUrl = 'https://portfolio-michael-mena.koyeb.app/skills';
 
   constructor(private http: HttpClient) {
   }

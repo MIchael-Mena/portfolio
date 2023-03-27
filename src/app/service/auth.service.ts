@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:8080/auth';
+  private apiUrl = 'https://portfolio-michael-mena.koyeb.app';
   // private apiUrl = 'http://localhost:5000';
   private httpOptions = {
     headers: new HttpHeaders({

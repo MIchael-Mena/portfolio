@@ -48,12 +48,12 @@ export class ExperienceService {
 
   useWorkingDatabase() {
     // this.apiUrl = 'http://localhost:5000/Works';
-    this.apiUrl = 'http://localhost:8080/works';
+    this.apiUrl = 'https://portfolio-michael-mena.koyeb.app/works';
   }
 
   useEducationDatabase() {
     // this.apiUrl = 'http://localhost:5000/Educations';
-    this.apiUrl = 'http://localhost:8080/educations';
+    this.apiUrl = 'https://portfolio-michael-mena.koyeb.app/educations';
   }
 
 }
