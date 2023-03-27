@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {SkillData} from "../SkillData";
 import {Observable} from "rxjs";
+import {environment} from "../../../../../enviroment";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,8 +15,7 @@ const httpOptions = {
 })
 export class SkillService {
 
-  // private apiUrl = 'http://localhost:5000/Skills';
-  private apiUrl = 'https://portfolio-michael-mena.koyeb.app/skills';
+  private apiUrl = environment.baseURL + '/skills';
 
   constructor(private http: HttpClient) {
   }

@@ -4,6 +4,7 @@ import {ExperienceData} from '../ExperienceData';
 import {Observable} from 'rxjs';
 import {WorkData} from "../WorkData";
 import {EducationData} from "../EducationData";
+import {environment} from "../../../../../enviroment";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,7 +19,7 @@ export class ExperienceService {
 
   private isWorkingDatabase: boolean = true;
 
-  private apiUrl = '';
+  private apiUrl = environment.baseURL;
 
   constructor(private http: HttpClient) {
   }
@@ -47,13 +48,11 @@ export class ExperienceService {
   }
 
   useWorkingDatabase() {
-    // this.apiUrl = 'http://localhost:5000/Works';
-    this.apiUrl = 'https://portfolio-michael-mena.koyeb.app/works';
+    this.apiUrl = this.apiUrl + '/works';
   }
 
   useEducationDatabase() {
-    // this.apiUrl = 'http://localhost:5000/Educations';
-    this.apiUrl = 'https://portfolio-michael-mena.koyeb.app/educations';
+    this.apiUrl = this.apiUrl + '/educations';
   }
 
 }

@@ -1,25 +1,26 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {environment} from "../../../enviroment";
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apiUrl = 'https://portfolio-michael-mena.koyeb.app';
-  // private apiUrl = 'http://localhost:5000';
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  }
+  private apiUrl = environment.baseURL;
 
   constructor(private http: HttpClient) {
   }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, {username, password}, this.httpOptions);
+    return this.http.post(`${this.apiUrl}/login`, {username, password}, httpOptions);
   }
 
   register(email: string, password: string, userName: string, name: string): Observable<any> {

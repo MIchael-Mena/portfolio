@@ -21,7 +21,6 @@ export class IconsComponent {
     iconRegistry.addSvgIcon('account', sanitizer.bypassSecurityTrustResourceUrl('/assets/icon/svg/account.svg'));
     iconRegistry.addSvgIcon('no-account', sanitizer.bypassSecurityTrustResourceUrl('/assets/icon/svg/no-account.svg'));
     iconRegistry.addSvgIcon('start', sanitizer.bypassSecurityTrustResourceUrl('/assets/icon/svg/start.svg'));
-    iconRegistry.addSvgIcon('owl', sanitizer.bypassSecurityTrustResourceUrl('/assets/icon/svg/owl-malicious.svg'));
   }
 
 }

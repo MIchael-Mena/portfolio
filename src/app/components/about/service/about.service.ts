@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AboutMeData} from "../AboutMeData";
-import {SocialNetwork} from "../social-network/SocialNetwork";
+import {environment} from "../../../../../enviroment";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,8 +15,7 @@ const httpOptions = {
 })
 export class AboutService {
 
-  // private apiUrl = 'http://localhost:5000/AboutMe';
-  private apiUrl = 'https://portfolio-michael-mena.koyeb.app/aboutMe';
+  private apiUrl = environment.baseURL + '/aboutMe';
   private update = '/update';
 
   constructor(private http: HttpClient) {
