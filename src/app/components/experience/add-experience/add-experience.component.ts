@@ -244,7 +244,6 @@ export class AddExperienceComponent implements OnChanges {
   }
 
   private validateForm(): boolean {
-    console.log(this.form.controls)
     if (this.form.value.presentDate) {
       this.form.controls['finalDate'].setValue(null);
       this.form.controls['finalDate'].setErrors(null);
