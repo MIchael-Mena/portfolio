@@ -24,6 +24,8 @@ import {DateLanguageModule} from "./shared/date-language.module";
 import {BrowserModule} from "@angular/platform-browser";
 import {ButtonConfirmModule} from "./components/shared/button-confirm/button-confirm.module";
 import {HomeComponent} from "./components/home/home.component";
+import {ProjectsModule} from "./components/projects/projects.module";
+import {FooterComponent} from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import {HomeComponent} from "./components/home/home.component";
     PageNotFoundComponent,
     IconsComponent,
     DialogCardComponent,
-    HomeComponent
+    HomeComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import {HomeComponent} from "./components/home/home.component";
     ExperienceModule,
     AppRoutingModule,
     DateLanguageModule,
-    ButtonConfirmModule
+    ButtonConfirmModule,
+    ProjectsModule
   ],
   providers: [AuthService, StorageSessionService, httpInterceptorProviders, AuthInterceptorRequest],
   exports: [

@@ -1,16 +1,39 @@
 /* Para que el scroll no se superponga al navbar */
 main {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 18vh);
+  /*min-height: calc(100vh - 18vh);*/
+  height: max-content;
   width: 100%;
-  position: absolute;
-  top: 72px;
-  height: calc(100% - 72px);
-  bottom: 0;
-  overflow-y: auto;
-  padding-top: 0;
 }
 
-@media (min-width: 992px) {
-  main {
-    padding-top: 3rem;
+#mainContainer {
+  position: absolute;
+  top: 8vh;
+  height: calc(100vh - 8vh);
+  width: 100%;
+  overflow-y: auto;
+}
+
+footer {
+  position: relative;
+  height: 10vh;
+  min-height: 50px;
+  width: 100%;
+}
+
+@media (max-height: 900px) {
+
+  #mainContainer {
+    top: 72px;
+    height: calc(100vh - 72px);
   }
+
+  main {
+    min-height: calc(90vh - 72px);
+  }
+
 }

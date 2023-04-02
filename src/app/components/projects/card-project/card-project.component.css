@@ -1,0 +1,72 @@
+.title {
+  width: 100%;
+  border-radius: 0 0 0 5px;
+  border-left: 5px solid #ad8e70;
+  border-bottom: 2px solid #ad8e70;
+  padding-left: 10px;
+  padding-bottom: 5px;
+}
+
+/*#ad8e70  #ff6e31*/
+
+.card-image img {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+}
+
+.card-image {
+  border-radius: 10px;
+  position: relative;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  overflow: hidden;
+}
+
+.card-image:hover img:hover {
+  overflow: visible;
+}
+
+.card-image img:hover {
+  border-radius: 10px;
+  height: 200px;
+  width: auto;
+  object-fit: initial;
+}
+
+
+.card-img-zoom-in img {
+  transition: transform .3s ease-in-out;
+}
+
+.card-img-zoom-in:hover img {
+  transform: scale(1.05);
+}
+
+mat-card {
+  border-left: 4px solid #243763;
+  border-top: 4px solid #243763;
+  border-radius: 20px 0 60%;
+  overflow: hidden;
+  width: 350px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+mat-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border-left: 4px solid #ff6e31;
+  border-top: 4px solid #ff6e31;
+}
+
+.mat-ripple-element {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.mat-ripple-element::after {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+

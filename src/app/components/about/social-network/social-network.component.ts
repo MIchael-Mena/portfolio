@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {faSquareCaretDown, faPenToSquare, faGrip} from '@fortawesome/free-solid-svg-icons';
-import {faTrashCan, faSquarePlus} from '@fortawesome/free-regular-svg-icons';
+import {faSquareCaretDown, faGrip} from '@fortawesome/free-solid-svg-icons';
+import {faSquarePlus} from '@fortawesome/free-regular-svg-icons';
 import {StorageSessionService} from "../../../service/storage-session.service";
 import {MatDialog} from "@angular/material/dialog";
 import {SocialNetwork} from "./SocialNetwork";
@@ -27,7 +27,7 @@ export class SocialNetworkComponent implements OnInit {
   @Input() isVisible: boolean = false;
   @Output() isLoading: EventEmitter<ComponentState> = new EventEmitter();
   public socialNetworks: SocialNetwork[] = [];
-  public icons = {faSquareCaretDown, faPenToSquare, faTrashCan, faSquarePlus, faGrip}
+  public icons = {faSquareCaretDown, faSquarePlus, faGrip}
   public isLoggedIn: boolean = false;
   public activeEdit: boolean = false;
   public activeDragAndDrop: boolean = false;

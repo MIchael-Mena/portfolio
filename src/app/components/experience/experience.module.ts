@@ -7,6 +7,7 @@ import {ExperiencesComponent} from "./experiences/experiences.component";
 import {AddExperienceComponent} from "./add-experience/add-experience.component";
 import {ButtonConfirmModule} from "../shared/button-confirm/button-confirm.module";
 import {DatePickerModule} from "../shared/date-picker/date-picker.module";
+import {MenuEditionModule} from "../shared/menu-edition/menu-edition.module";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {DatePickerModule} from "../shared/date-picker/date-picker.module";
     CommonModule,
     SharedModule,
     ButtonConfirmModule,
-    DatePickerModule
+    DatePickerModule,
+    MenuEditionModule
   ],
   exports: [ExperienceAndEducationComponent, ExperiencesComponent]
 })

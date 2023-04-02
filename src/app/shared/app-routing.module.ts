@@ -10,6 +10,7 @@ import {PageNotFoundComponent} from "../components/page-not-found/page-not-found
 import {PermissionGuard} from "../guards/permission-guard.service";
 import {UnsavedChangesGuard} from "../guards/unsaved-changes.guard";
 import {SkillsComponent} from "../components/skill/skills/skills.component";
+import {ProjectsComponent} from "../components/projects/projects/projects.component";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -17,6 +18,7 @@ const appRoutes: Routes = [
   {path: 'about', component: AboutComponent, canDeactivate: [UnsavedChangesGuard]},
   {path: 'experience&education', component: ExperienceAndEducationComponent, canDeactivate: [UnsavedChangesGuard]},
   {path: 'skills', component: SkillsComponent},
+  {path: 'projects', component: ProjectsComponent},
   {path: 'login', component: LoginFormComponent, canActivate: [PermissionGuard]},
   {path: '**', component: PageNotFoundComponent}
 ]

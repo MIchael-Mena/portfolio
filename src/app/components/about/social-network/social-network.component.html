@@ -22,7 +22,7 @@
   <div class="w-100 d-inline-flex justify-content-center align-items-center gap-1 flex-wrap"
        cdkDropList cdkDropListOrientation="horizontal"
        (cdkDropListDropped)="drop($event)">
-    <div *ngFor="let social of this.socialNetworks" class="" cdkDrag
+    <div *ngFor="let social of this.socialNetworks" cdkDrag
          [cdkDragDisabled]="!this.activeDragAndDrop"
          [ngClass]="{'dragging':this.activeDragAndDrop&&this.activeEdit,
          'mx-3':!this.activeEdit, 'mx-1':this.activeEdit}">
@@ -34,23 +34,28 @@
                   color="primary"></mat-icon>
       </a>
 
-      <div class="d-flex" *ngIf="this.activeEdit">
-        <fa-icon
-          [icon]="this.icons.faPenToSquare"
-          class="m-1"
-          [ngClass]="{'icon-style':!this.activeDragAndDrop, 'icon-style-drag':this.activeDragAndDrop}"
-          size="lg"
-          (click)="openEditModal(social)"
-          title="Editar">
-        </fa-icon>
-        <fa-icon
-          [icon]="this.icons.faTrashCan"
-          class="m-1"
-          [ngClass]="{'icon-style':!this.activeDragAndDrop, 'icon-style-drag':this.activeDragAndDrop}"
-          size="lg"
-          (click)="openDeleteDialog(social)"
-          title="Eliminar">
-        </fa-icon>
+      <div class="" *ngIf="this.activeEdit">
+        <app-menu-edition
+          [disabled]="this.activeDragAndDrop"
+          (onEdit)="openEditModal(social)"
+          (onDelete)="openDeleteDialog(social)">
+        </app-menu-edition>
+        <!--        <fa-icon
+                  [icon]="this.icons.faPenToSquare"
+                  class="m-1"
+                  [ngClass]="{'icon-style':!this.activeDragAndDrop, 'icon-style-drag':this.activeDragAndDrop}"
+                  size="lg"
+                  (click)="openEditModal(social)"
+                  title="Editar">
+                </fa-icon>
+                <fa-icon
+                  [icon]="this.icons.faTrashCan"
+                  class="m-1"
+                  [ngClass]="{'icon-style':!this.activeDragAndDrop, 'icon-style-drag':this.activeDragAndDrop}"
+                  size="lg"
+                  (click)="openDeleteDialog(social)"
+                  title="Eliminar">
+                </fa-icon>-->
       </div>
 
     </div>

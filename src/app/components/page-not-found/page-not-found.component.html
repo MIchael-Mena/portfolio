@@ -1,15 +1,21 @@
-<div class="mainbox">
-  <div class="err">4</div>
-  <fa-icon
-    class="far fa-spin"
-    [icon]="this.faCircleQuestion"
-  ></fa-icon>
-  <div class="err2">4</div>
-  <div class="msg">
-    Esta página no se encuentra disponible.
+<div class="main-box">
+  <div class="erro-not-found d-flex justify-content-evenly">
+    <div class="err">4</div>
+    <fa-icon
+      class="far fa-spin"
+      [icon]="this.faCircleQuestion"
+    ></fa-icon>
+    <div class="err2">4</div>
+  </div>
+  <div class="mat-body-2 msg">
     <p>
-      Si escribes la dirección manualmente, comprueba que esté bien escrita.
-      <br>
-      Ir a la <a routerLink="/">página de inicio</a> e intentarlo de nuevo.
+      Esta página no se encuentra disponible.
+    </p>
+    <p class="d-inline-flex">
+      Si escribiste la dirección manualmente, comprueba que esté bien escrita.
+    </p>
+    <p>
+      Ir a la <a routerLink="/">página de inicio</a>.
+    </p>
   </div>
 </div>

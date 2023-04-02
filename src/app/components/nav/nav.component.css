@@ -1,6 +1,7 @@
 .icon-display {
   cursor: pointer;
-  color: #243763;
+  color: white;
+  /*color: #243763;*/
   /*color: #ad8e70;*/
 }
 
@@ -15,16 +16,21 @@
 }
 
 #mainNav {
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  background-color: rgb(241, 246, 245);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
+  /*background-color: #ad8e70;*/
+  /*background-color: rgb(241, 246, 245);*/
+  background-color: #243763;
   /*background-color: transparent;*/
   transition: 0.4s ease;
   z-index: 1000 !important;
-  height: 72px;
+  height: 8vh;
+  min-height: 72px;
 }
 
 .nav-link, .navbar-brand {
-  color: rgb(36, 55, 99);
+  /*color: rgb(36, 55, 99);*/
+  color: white;
+  /*color: #f1f6f5;*/
   /*padding: 0 1rem;*/
 }
 
@@ -44,6 +50,16 @@
   background-color: #FF6E31;
 }
 
+.navbar-toggler:focus {
+  outline: none;
+  border: none;
+  box-shadow: 0 0 0 0.2rem #fff;
+}
+
+.navbar-toggler:hover {
+  box-shadow: 0 0 0 0.2rem #FF6E31;
+}
+
 @media (max-width: 992px) {
 
   .nav-item {
@@ -56,7 +72,9 @@
   }
 
   #mainNav {
+    min-height: 8vh;
     height: auto;
+    max-height: max-content;
   }
 
 

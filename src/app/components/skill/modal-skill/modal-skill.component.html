@@ -14,6 +14,7 @@
            type="text"
            formControlName="name"
            placeholder="Ingrese el nombre de la habilidad"
+           maxlength="12"
     />
     <mat-label>Nombre</mat-label>
     <mat-error *ngIf="form.get('name')?.hasError('required')">

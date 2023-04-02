@@ -1,6 +1,6 @@
-<div class="d-flex my-4 flex-lg-row flex-column align-items-center justify-content-center">
-  <div class=" d-flex flex-column justify-content-center align-items-center container-figure">
-    <span class="mat-subtitle-2 mb-1">{{this.skill.name}}</span>
+<div class="d-flex my-4 flex-lg-row flex-column   align-items-center justify-content-center">
+  <div class=" d-flex flex-column justify-content-center align-items-center" id="label-skill">
+    <span class="mat-subtitle-2 mb-1 text-center">{{this.skill.name}}</span>
     <mat-icon svgIcon="{{this.skill.id}}" aria-hidden="false"
               aria-label="Example home icon"
               color="accent"
@@ -37,24 +37,30 @@
     </span>
   </div>
 
-  <div class="d-flex flex-lg-column flex-row align-self-stretch justify-content-around"
-       *ngIf="this.isLoggedIn">
-    <fa-icon
-      [icon]="faPenToSquare"
-      class="icon-style my-1 ms-1"
-      size="lg"
-      (click)="editSkill()"
-      title="Editar"
-    >
-    </fa-icon>
-    <fa-icon
-      [icon]="faTrashCan"
-      class="icon-style my-1 ms-1"
-      size="lg"
-      (click)="openDeleteDialog()"
-      title="Eliminar"
-    >
-    </fa-icon>
+  <div *ngIf="this.isLoggedIn">
+    <app-menu-edition (onEdit)="editSkill()"
+                      (onDelete)="openDeleteDialog()">
+    </app-menu-edition>
   </div>
+
+  <!--  <div class="d-flex flex-lg-column flex-row align-self-stretch justify-content-around"
+         *ngIf="this.isLoggedIn">
+      <fa-icon
+        [icon]="faPenToSquare"
+        class="icon-style my-1 ms-1"
+        size="lg"
+        (click)="editSkill()"
+        title="Editar"
+      >
+      </fa-icon>
+      <fa-icon
+        [icon]="faTrashCan"
+        class="icon-style my-1 ms-1"
+        size="lg"
+        (click)="openDeleteDialog()"
+        title="Eliminar"
+      >
+      </fa-icon>
+    </div>-->
 
 </div>

@@ -1,4 +1,4 @@
-.mainbox {
+.main-box {
   /*background-color: #95c2de;*/
   margin: auto;
   height: 600px;
@@ -9,37 +9,40 @@
 .err {
   color: #243763;
   font-family: 'Nunito Sans', sans-serif;
+  /*font-family: 'Oswald', sans-serif;*/
   font-size: 11rem;
-  position: absolute;
-  left: 20%;
-  top: 8%;
+  position: relative;
+  transition: 0.3s;
 }
 
 .far {
-  position: absolute;
+  position: relative;
   font-size: 8.5rem;
-  left: 42%;
-  top: 15%;
   color: #243763;
+  transition: 0.3s;
 }
 
 .err2 {
   color: #243763;
   font-family: 'Nunito Sans', sans-serif;
   font-size: 11rem;
-  position: absolute;
-  left: 68%;
-  top: 8%;
+  position: relative;
+  transition: 0.3s;
+}
+
+.err:hover, .err2:hover, .far:hover {
+  color: #ff6e31;
+  transform: scale(1.1);
+  transition: 0.3s;
 }
 
 .msg {
   text-align: center;
-  font-family: 'Nunito Sans', sans-serif;
+  /*font-family: 'Nunito Sans', sans-serif;*/
   font-size: 1.6rem;
-  position: absolute;
-  left: 16%;
-  top: 45%;
+  position: relative;
   width: 75%;
+  margin-inline: auto;
 }
 
 a {
@@ -50,4 +53,31 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 500px) {
+
+  .main-box {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+  }
+
+
+  .err {
+    font-size: 9rem;
+  }
+
+  .far {
+    font-size: 7rem;
+  }
+
+  .err2 {
+    font-size: 9rem;
+  }
+
+  .msg {
+    font-size: 1.2rem;
+  }
+
 }
