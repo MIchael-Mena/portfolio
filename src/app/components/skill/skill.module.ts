@@ -6,6 +6,7 @@ import {SkillBarComponent} from "./skill-bar/skill-bar.component";
 import {ModalSkillComponent} from "./modal-skill/modal-skill.component";
 import {ButtonModalModule} from "../shared/button-modal/button-modal.module";
 import {SelectFileModule} from "../shared/select-file/select-file.module";
+import {MenuEditionModule} from "../shared/menu-edition/menu-edition.module";
 
 @NgModule({
   declarations: [SkillsComponent, SkillBarComponent, ModalSkillComponent],
@@ -13,7 +14,8 @@ import {SelectFileModule} from "../shared/select-file/select-file.module";
     CommonModule,
     SharedModule,
     ButtonModalModule,
-    SelectFileModule
+    SelectFileModule,
+    MenuEditionModule
   ],
   exports: [SkillsComponent]
 })

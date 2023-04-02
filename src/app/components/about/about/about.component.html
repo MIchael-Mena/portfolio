@@ -1,50 +1,52 @@
-<div class="container mb-3">
-  <div class="container-profile mat-typography">
+<section id="about">
+  <div class="container py-3">
+    <div class="container-profile mat-typography">
 
-    <div class="semicircle">
-      <div class="image" #imageURL id="imageURL">
-        <fa-icon
-          [icon]="faImagePortrait"
-          class="icon-style position-portrait"
-          size="xl"
-          (click)="editProfileImage()"
-          title="Editar"
-          *ngIf="isLoggedIn"
-        ></fa-icon>
-      </div>
-
-    </div>
-
-    <div class="row justify-content-center align-items-center px-2">
-      <div class="col col-12 col-md-10 col-lg-8 text-center">
-        <div *ngIf="this.isLoading" class="py-5 d-flex justify-content-center">
-          <mat-spinner diameter="100"></mat-spinner>
+      <div class="semicircle">
+        <div class="image" #imageURL id="imageURL">
+          <fa-icon
+            [icon]="faImagePortrait"
+            class="icon-style position-portrait"
+            size="xl"
+            (click)="editProfileImage()"
+            title="Editar"
+            *ngIf="isLoggedIn"
+          ></fa-icon>
         </div>
 
-        <app-field [data]="this.nameData"
-                   (dataChange)="updateName($event)"
-                   [isVisible]="!this.isLoading">
-        </app-field>
-
-        <app-field [data]="this.titleData"
-                   [isVisible]="!this.isLoading"
-                   (dataChange)="updateTitle($event)">
-        </app-field>
-
-        <app-field [data]="this.descriptionData"
-                   [isVisible]="!this.isLoading"
-                   (dataChange)="updateDescription($event)">
-        </app-field>
-
-        <!--          <button (click)="test(imageURL)">test</button>-->
-
-        <app-social-network (isLoading)="this.childrenIsLoading($event)"
-                            [isVisible]="!this.isLoading">
-        </app-social-network>
-
-
       </div>
-    </div>
 
+      <div class="row justify-content-center align-items-center px-2">
+        <div class="col col-12 col-md-10 col-lg-8 text-center">
+          <div *ngIf="this.isLoading" class="py-5 d-flex justify-content-center">
+            <mat-spinner diameter="100"></mat-spinner>
+          </div>
+
+          <app-field [data]="this.nameData"
+                     (dataChange)="updateName($event)"
+                     [isVisible]="!this.isLoading">
+          </app-field>
+
+          <app-field [data]="this.titleData"
+                     [isVisible]="!this.isLoading"
+                     (dataChange)="updateTitle($event)">
+          </app-field>
+
+          <app-field [data]="this.descriptionData"
+                     [isVisible]="!this.isLoading"
+                     (dataChange)="updateDescription($event)">
+          </app-field>
+
+          <!--          <button (click)="test(imageURL)">test</button>-->
+
+          <app-social-network (isLoading)="this.childrenIsLoading($event)"
+                              [isVisible]="!this.isLoading">
+          </app-social-network>
+
+
+        </div>
+      </div>
+
+    </div>
   </div>
-</div>
+</section>

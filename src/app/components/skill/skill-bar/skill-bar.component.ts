@@ -1,6 +1,4 @@
 import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output} from '@angular/core';
-import {faPenToSquare} from '@fortawesome/free-solid-svg-icons';
-import {faTrashCan} from '@fortawesome/free-regular-svg-icons';
 import {DialogContent} from "../../dialog-card/DialogContent";
 import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
 import {MatDialog} from "@angular/material/dialog";
@@ -27,8 +25,6 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
   @Output() onDeleteSkill = new EventEmitter<SkillData>();
   @Output() onUpdateSkill = new EventEmitter<SkillData>();
   public isLoggedIn: boolean = false;
-  public faPenToSquare = faPenToSquare;
-  public faTrashCan = faTrashCan;
   private subscription: Subscription = new Subscription();
 
   public skillLevel: [boolean, boolean, boolean, boolean, boolean] = [false, false, false, false, false];

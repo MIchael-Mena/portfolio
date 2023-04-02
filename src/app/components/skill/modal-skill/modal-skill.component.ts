@@ -28,7 +28,7 @@ export class ModalSkillComponent {
               private fb: FormBuilder) {
     this.form = this.fb.group({
       id: [''],
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(12)]],
       level: [0, [Validators.max(5), Validators.min(0)]],
       icon: ['', Validators.required],
       position: [action.positions.length],

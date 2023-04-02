@@ -1,6 +1,4 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {faPenToSquare} from '@fortawesome/free-solid-svg-icons';
-import {faTrashCan} from '@fortawesome/free-regular-svg-icons';
 import {ExperienceData} from '../ExperienceData';
 import {MatDialog} from "@angular/material/dialog";
 
@@ -23,8 +21,6 @@ export class CardExperienceComponent {
   @Output() onEditExperience: EventEmitter<ExperienceData> = new EventEmitter();
 
   public isLoggedIn: boolean = false;
-  faPenToSquare = faPenToSquare;
-  faTrashCan = faTrashCan;
 
   constructor(private dialog: MatDialog, public storageService: StorageSessionService,
               private experienceService: ExperienceService) {

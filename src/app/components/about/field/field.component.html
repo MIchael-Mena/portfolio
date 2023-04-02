@@ -4,7 +4,8 @@
      [ngClass]="{'style-container-form py-3':this.activeEdit}">
   <div [ngSwitch]="this.activeEdit" class="w-100">
 
-    <div *ngSwitchCase="false" [innerHTML]="this.data.html | safe: 'html'" class="d-inline-flex justify-content-center">
+    <div *ngSwitchCase="false" [innerHTML]="this.data.html | safe: 'html'"
+         class="d-inline-flex justify-content-center">
     </div>
 
     <div *ngSwitchCase="true"
@@ -17,7 +18,8 @@
           <textarea matInput *ngSwitchCase="'textarea'" class=""
                     [formControl]="this.newData"
                     rows="5"
-                    maxlength="400"></textarea>
+                    maxlength="400">
+          </textarea>
         </div>
         <mat-error *ngIf="this.newData.hasError('required')">
           {{'El campo es requerido'}}

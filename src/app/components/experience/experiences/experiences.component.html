@@ -28,12 +28,11 @@
   </div>
 
   <div [ngSwitch]="!this.isLoading && this.experiences.length === 0">
-    <div class="col-12" *ngSwitchCase="true">
-      <div class="d-flex justify-content-center align-items-center">
-        <div class="withoutExperience">
-          <h2 class="mat-h2 text-center">Todavía no hay experiencias para mostrar</h2>
-          <img src="assets/icon/png/without-exp.png" alt="Sin experiencia" class="img-fluid">
-        </div>
+    <div class="col-lg-8 col-12 mx-auto"
+         *ngSwitchCase="true">
+      <div class="withoutExperience">
+        <h2 class="mat-h2 text-center">Todavía no hay experiencias para mostrar</h2>
+        <img src="assets/icon/png/without-exp.png" alt="Sin experiencia" class="img-fluid">
       </div>
     </div>
     <div *ngSwitchCase="false"

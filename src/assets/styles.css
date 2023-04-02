@@ -132,6 +132,22 @@ body {
   transform: translate(-50%, -50%);
 }
 
+/*mat-card {
+  border-left: 4px solid #243763;
+  border-top: 4px solid #243763;
+  border-radius: 20px 0 60%;
+  overflow: hidden;
+  width: 300px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+mat-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border-left: 4px solid #ff6e31;
+  border-top: 4px solid #ff6e31;
+}*/
+
 
 /*.mat-icon {
   height: 48px !important;

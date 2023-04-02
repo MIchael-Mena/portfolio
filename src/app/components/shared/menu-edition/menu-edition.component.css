@@ -1,0 +1,62 @@
+.button-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  background-color: #243763;
+  border-radius: 50%;
+  color: #fff;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  border: 2px solid #fff;
+}
+
+.icon-more {
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  transform: scale(1.3);
+  transition: all 0.4s ease;
+}
+
+.button-more:hover {
+  /*background-color: #3c5ea6;*/
+  background-color: #144083;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+  transition: all 0.4s ease;
+}
+
+::ng-deep .mat-menu-container {
+  border-radius: 20px;
+  /*padding: 4px 4px;*/
+}
+
+::ng-deep .mat-mdc-menu-content {
+  padding: 4px 4px;
+}
+
+.mat-menu {
+  border: 2px solid #243763;
+  border-radius: 15px;
+}
+
+.icon {
+  display: flex;
+  position: relative;
+  color: #243763;
+  transition: all 0.4s ease;
+}
+
+.button-edit:hover .icon {
+  color: #ff6e31;
+  transition: all 0.4s ease;
+  transform: scale(1.2);
+}
+
+.button-delete:hover .icon {
+  color: #ff6e31;
+  transition: all 0.4s ease;
+  transform: scale(1.2);
+}
+

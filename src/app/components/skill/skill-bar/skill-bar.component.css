@@ -82,18 +82,20 @@
   transition: background-color 0.5s ease-in-out;
 }
 
-:host .mat-icon {
+
+.skill-icon {
   height: 48px;
   width: 48px;
   transition: transform 0.4s ease-in-out;
 }
 
-.container-figure {
-  height: 75px;
-  width: 83px;
-}
-
 .skill-icon:hover {
   transform: scale(1.1);
   transition: transform 0.4s ease-in-out;
+}
+
+
+#label-skill {
+  height: auto;
+  width: 80px
 }

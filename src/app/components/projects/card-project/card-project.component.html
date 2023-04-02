@@ -1,0 +1,30 @@
+<mat-card class="my-4 mx-4 mat-typography" matRipple>
+  <mat-card-header class="d-block">
+    <div class="d-flex justify-content-between align-items-center">
+      <h3 class="title">{{project.name}}</h3>
+      <ng-container *ngIf="this.isLogged">
+        <app-menu-edition (onEdit)="editProject()"
+                          (onDelete)="deleteProject()">
+        </app-menu-edition>
+      </ng-container>
+    </div>
+
+    <div class="card-image">
+      <div class="card-img-top card-img-zoom-in"
+           *ngFor="let image of project.images">
+        <!--      <a href="{{image.href}}">-->
+        <img [src]="image.thumbnail" alt="{{project.name}}">
+        <!--      </a>-->
+      </div>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <p class="my-3">{{project.description}}</p>
+    <button mat-fab extended color="primary" type="submit">
+      Ver proyecto
+    </button>
+    <!--    <a class="btn btn-primary" href="{{project.link}}" target="_blank">Ver proyecto</a>-->
+  </mat-card-content>
+
+
+</mat-card>

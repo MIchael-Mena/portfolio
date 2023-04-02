@@ -1,0 +1,32 @@
+<mat-card-actions>
+  <button mat-icon-button [matMenuTriggerFor]="menu"
+          color="primary"
+          class="button-more"
+          [disabled]="this.disabled">
+    <mat-icon class="icon-more">more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu" class="mat-menu-container">
+    <div class="mat-menu d-flex flex-row">
+      <button mat-menu-item (click)="edit()" class="button-edit">
+        <fa-icon
+          [icon]="faPenToSquare"
+          class="icon m-1"
+          size="lg"
+          title="Editar"
+        >
+        </fa-icon>
+        <span class="mat-caption">Editar</span>
+      </button>
+      <button mat-menu-item (click)="delete()" class="button-delete">
+        <fa-icon
+          [icon]="faTrashCan"
+          class="icon m-1"
+          size="lg"
+          title="Eliminar"
+        >
+        </fa-icon>
+        <span class="mat-caption">Eliminar</span>
+      </button>
+    </div>
+  </mat-menu>
+</mat-card-actions>

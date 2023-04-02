@@ -2,6 +2,12 @@
   --image-url: url('https://xp.io/storage/15pewlWA.jpg');
 }*/
 
+/* Necesario para evitar un error de visualización al activar la edición del
+textarea, con el display flex en el main*/
+#about {
+  width: 100vw;
+}
+
 .position-portrait {
   position: absolute;
   bottom: 0;
@@ -30,9 +36,6 @@
   bottom: -32px;
 }
 
-.container {
-  margin-top: 10vh;
-}
 
 .container-profile {
   box-shadow: 0 2px 4px #243763;
@@ -62,7 +65,12 @@
   transition: all 0.3s ease-in-out;
 }
 
-
+@media (max-height: 700px) {
+  /*Para que la foto se pueda seguir viendo*/
+  .container {
+    margin-top: 4rem;
+  }
+}
 
 
 
