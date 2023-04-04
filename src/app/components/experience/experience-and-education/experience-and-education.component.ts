@@ -6,6 +6,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {DialogContent} from "../../dialog-card/DialogContent";
 import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
 import {firstValueFrom} from "rxjs";
+import {MatTabChangeEvent} from "@angular/material/tabs";
+import {StorageSessionService} from "../../../service/storage-session.service";
 
 @Component({
   selector: 'app-experience-and-education',
@@ -18,8 +20,55 @@ export class ExperienceAndEducationComponent {
   private formWorkIsEmpty = false;
   public education = new Education()
   public work = new Work()
+  public isLoggedIn: boolean = false;
+  private actualTab = 0;
+  public activeTab: boolean[] = [true, false, false];
+  public tabs = [
+    {label: 'Educación', icon: 'school'},
+    {label: 'Idiomas', icon: 'language'},
+    {label: 'Experiencia', icon: 'work'},
+  ];
 
-  constructor(private unsavedChanges: UnsavedChangesService, private dialog: MatDialog) {
+  constructor(private unsavedChanges: UnsavedChangesService, private dialog: MatDialog,
+              private storageService: StorageSessionService) {
+    this.storageService.onToggleSignUp().subscribe((result: boolean) => {
+      this.isLoggedIn = result;
+    });
+  }
+
+  public tabChanged(tavEvent: MatTabChangeEvent): void {
+    // Todavía no utilizo la segunda posición del array '1' en su lugar está el botón de agregar
+    this.actualTab = tavEvent.index;
+    this.markTabAsActive();
+  }
+
+  private markTabAsActive(): void {
+    switch (this.actualTab) {
+      case 0:
+        this.activeTab = [true, false, false];
+        break;
+      case 2:
+        this.activeTab = [false, false, true];
+        break;
+    }
+  }
+
+  public addEducation(): void {
+    this.education.toggleAdd()
+  }
+
+  public add(): void {
+    switch (this.actualTab) {
+      case 0:
+        this.addEducation();
+        break;
+      case 2:
+        this.addWork();
+    }
+  }
+
+  public addWork(): void {
+    this.work.toggleAdd()
   }
 
   private async canDeactivateForm(): Promise<boolean> {

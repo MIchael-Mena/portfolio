@@ -21,6 +21,10 @@ export class IconsComponent {
     iconRegistry.addSvgIcon('start', sanitizer.bypassSecurityTrustResourceUrl('/assets/icon/svg/start.svg'));
     iconRegistry.addSvgIcon('account', sanitizer.bypassSecurityTrustResourceUrl('/assets/icon/svg/account.svg'));
     iconRegistry.addSvgIcon('no-account', sanitizer.bypassSecurityTrustResourceUrl('/assets/icon/svg/no-account.svg'));
+    iconRegistry.addSvgIcon('education', sanitizer.bypassSecurityTrustResourceUrl('/assets/icon/svg/education.svg'));
+    iconRegistry.addSvgIcon('work', sanitizer.bypassSecurityTrustResourceUrl('/assets/icon/svg/work.svg'));
+    iconRegistry.addSvgIcon('skill-bar', sanitizer.bypassSecurityTrustResourceUrl('/assets/icon/svg/skill-bar.svg'));
+    iconRegistry.addSvgIcon('project', sanitizer.bypassSecurityTrustResourceUrl('/assets/icon/svg/project.svg'));
   }
 
 }

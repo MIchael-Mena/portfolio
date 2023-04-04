@@ -12,10 +12,10 @@ import {ActionForShipment} from "../../shared/ActionForShipment";
 import {ComponentState} from "../../shared/ComponentState";
 import {DialogContent} from "../../dialog-card/DialogContent";
 import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
-import {Observable} from "rxjs";
 import {SocialNetworkService} from "../service/social-network.service";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 import {PositionController} from "../../shared/PositionController";
+import {LoaderComponentService} from "../service/loader-component.service";
 
 @Component({
   selector: 'app-social-network',
@@ -24,8 +24,7 @@ import {PositionController} from "../../shared/PositionController";
 })
 export class SocialNetworkComponent implements OnInit {
 
-  @Input() isVisible: boolean = false;
-  @Output() isLoading: EventEmitter<ComponentState> = new EventEmitter();
+  public isVisible: boolean = false;
   public socialNetworks: SocialNetwork[] = [];
   public icons = {faSquareCaretDown, faSquarePlus, faGrip}
   public isLoggedIn: boolean = false;
@@ -36,16 +35,20 @@ export class SocialNetworkComponent implements OnInit {
 
   constructor(private storageService: StorageSessionService, private dialog: MatDialog,
               private iconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer,
-              private socialService: SocialNetworkService) {
+              private socialService: SocialNetworkService,
+              private loaderComponentService: LoaderComponentService) {
     this.storageService.onToggleSignUp().subscribe(() => {
       this.isLoggedIn = storageService.isLoggedIn;
     });
+    this.loaderComponentService.onToggleLoading().subscribe((status: boolean) => {
+      this.isVisible = !status;
+    })
   }
 
 
   ngOnInit(): void {
     // OnInit se ejecuta después de OnChanges
-    this.isLoading.emit({name: 'social-network', isLoading: true});
+    this.loaderComponentService.toggleLoad(true, 'social-network');
     this.socialService.socialNetworksOrder.subscribe((socialNetworks: SocialNetwork[]) => {
       this.socialNetworks = socialNetworks;
       this.socialNetworks.forEach(social => {
@@ -53,7 +56,7 @@ export class SocialNetworkComponent implements OnInit {
       })
       this.positionController = new PositionController(this.socialNetworks,
         (social: SocialNetwork) => this.updatePositionSocialNetworkInBackend(social));
-      this.isLoading.emit({name: 'social-network', isLoading: false});
+      this.loaderComponentService.toggleLoad(false, 'social-network');
     });
   }
 

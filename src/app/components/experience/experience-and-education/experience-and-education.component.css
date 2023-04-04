@@ -1,16 +1,29 @@
-.divider {
-  border: 0;
-  height: 3px;
-  text-align: center;
-  background-image: linear-gradient(to left, #fff, #000, #fff);
+::ng-deep .mat-mdc-tab.mdc-tab {
+  height: auto !important;
+  padding: 0;
+  opacity: 1 !important;
 }
 
-.fill-nav {
-  /*padding-top: 3rem;*/
+::ng-deep .mdc-tab__content {
+  pointer-events: all !important;
 }
 
-@media (min-width: 992px) {
-  .fill-nav {
-    padding-top: 3rem;
-  }
+::ng-deep .mdc-tab__content, ::ng-deep .mdc-tab__text-label {
+  width: 100% !important;
 }
+
+
+::ng-deep .mdc-tab:first-child, ::ng-deep .mdc-tab:last-child {
+  flex-grow: 10 !important;
+}
+
+.container-button {
+  background-image: linear-gradient(
+    to bottom,
+    rgb(36, 55, 99, 1),
+    rgb(36, 55, 99, 0.8)
+  );
+  border-bottom: 3px solid #243763;
+  height: 100px;
+}
+

@@ -27,7 +27,7 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
   public isLoggedIn: boolean = false;
   private subscription: Subscription = new Subscription();
 
-  public skillLevel: [boolean, boolean, boolean, boolean, boolean] = [false, false, false, false, false];
+  public skillLevel: boolean[] = [false, false, false, false, false];
 
   constructor(private dialog: MatDialog, private iconRegistry: MatIconRegistry,
               private domSanitizer: DomSanitizer, private storageSession: StorageSessionService,

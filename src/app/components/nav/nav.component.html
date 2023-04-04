@@ -1,25 +1,24 @@
 <nav class="navbar mb-0 navbar-shrink navbar-expand-lg navbar-dark fixed-top py-3" id="mainNav">
   <div class="container px-4 px-lg-5">
     <a
-      class="navbar-brand"
+      class="navbar-brand logo"
       routerLink="home"
-      routerLinkActive="home-button-active"
+      routerLinkActive="home-button-active "
     >
-      <span class="mat-subtitle-1">
+      <span class="mat-subtitle-1 ">
       Portfolio
       </span>
     </a>
 
     <!--    button visible cuando media < 996px-->
-    <button class="navbar-toggler navbar-toggler-right"
+    <button mat-icon-button class="navbar-toggler navbar-toggler-right"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarResponsive"
             aria-controls="navbarResponsive"
             aria-expanded="false"
             aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon">
-      </span>
+      <mat-icon class="menu">menu</mat-icon>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarResponsive">

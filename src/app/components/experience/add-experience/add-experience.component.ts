@@ -13,6 +13,7 @@ import {ExperienceService} from "../service/experience.service";
 import {ButtonSettings} from "../../shared/button-confirm/ButtonSettings";
 import {WorkData} from "../WorkData";
 import {EducationData} from "../EducationData";
+import {ModalResponse} from "../../shared/ModalResponse";
 
 
 const datePickerClean = <DatePicker>{
@@ -58,6 +59,19 @@ export class AddExperienceComponent implements OnChanges {
     this.unsavedChangesService.onDismissChanges().subscribe(setFormState => {
       setFormState(this.formIsEmpty(), this.formExperience?.name);
     });
+  }
+
+  public cancelForm(): void {
+    if (this.form.dirty) {
+      if (this.formIsEmpty()) {
+        this.setFormState(false);
+      } else {
+        this.formSettings.showForm = true;
+        this.OpenDiscardChangesDialog();
+      }
+    } else {
+      this.setFormState(false);
+    }
   }
 
   private onToggleEdit() {
@@ -143,13 +157,11 @@ export class AddExperienceComponent implements OnChanges {
       enterAnimationDuration,
       exitAnimationDuration
     });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
+    dialogRef.afterClosed().subscribe((result: ModalResponse) => {
+      if (result.state) {
         this.formIsVisible = false;
         this.formSettings.showForm = false;
         this.resetForm();
-      } else {
-        this.formIsVisible = true;
       }
     });
   }

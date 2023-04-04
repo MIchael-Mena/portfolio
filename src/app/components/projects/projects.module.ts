@@ -3,8 +3,8 @@ import {CommonModule} from '@angular/common';
 import {ProjectsComponent} from './projects/projects.component';
 import {CardProjectComponent} from './card-project/card-project.component';
 import {SharedModule} from "../../shared/shared.module";
-import {MatRippleModule} from "@angular/material/core";
 import {MenuEditionModule} from "../shared/menu-edition/menu-edition.module";
+import {MainHeaderModule} from "../shared/main-header/main-header.module";
 
 @NgModule({
   declarations: [
@@ -14,8 +14,8 @@ import {MenuEditionModule} from "../shared/menu-edition/menu-edition.module";
   imports: [
     CommonModule,
     SharedModule,
-    MatRippleModule,
-    MenuEditionModule
+    MenuEditionModule,
+    MainHeaderModule
   ],
   exports: [
     ProjectsComponent

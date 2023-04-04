@@ -1,1 +1,9 @@
-<app-card-project></app-card-project>
+<section class="main">
+  <app-main-header [title]="'Proyectos'"
+                   [icon]="'project'"
+                   (onAdd)="this.addProject()">
+  </app-main-header>
+  <div class="d-flex justify-content-center">
+    <app-card-project></app-card-project>
+  </div>
+</section>

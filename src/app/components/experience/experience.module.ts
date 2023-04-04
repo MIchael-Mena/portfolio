@@ -8,6 +8,9 @@ import {AddExperienceComponent} from "./add-experience/add-experience.component"
 import {ButtonConfirmModule} from "../shared/button-confirm/button-confirm.module";
 import {DatePickerModule} from "../shared/date-picker/date-picker.module";
 import {MenuEditionModule} from "../shared/menu-edition/menu-edition.module";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MainHeaderModule} from "../shared/main-header/main-header.module";
+import {AddButtonModule} from "../shared/add-button/add-button.module";
 
 
 @NgModule({
@@ -20,7 +23,10 @@ import {MenuEditionModule} from "../shared/menu-edition/menu-edition.module";
     SharedModule,
     ButtonConfirmModule,
     DatePickerModule,
-    MenuEditionModule
+    MenuEditionModule,
+    MatTabsModule,
+    MainHeaderModule,
+    AddButtonModule
   ],
   exports: [ExperienceAndEducationComponent, ExperiencesComponent]
 })

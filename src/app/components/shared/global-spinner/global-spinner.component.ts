@@ -9,12 +9,12 @@ import {LoaderService} from "../../../service/loader.service";
 export class GlobalSpinnerComponent {
 
   @Input() diameter = 100;
-  public isLoading = false;
+  @Input() isLoading = false;
 
   constructor(public loaderService: LoaderService) {
-    this.loaderService.onToggleLoading().subscribe((status) => {
-      this.isLoading = status;
-    });
+    /*    this.loaderService.onToggleLoading().subscribe((status) => {
+          this.isLoading = status;
+        });*/
   }
 
 }

@@ -16,7 +16,7 @@ export class UiEditFormService {
     this.subject.next(experience);
   }
 
-  onToggle(): Observable<any> {
+  onToggle(): Observable<ExperienceData> {
     return this.subject.asObservable();
   }
 

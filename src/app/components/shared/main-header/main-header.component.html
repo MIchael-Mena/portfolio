@@ -1,0 +1,16 @@
+<div class="header-banner">
+  <div class="container-banner" [ngClass]="{'active': this.active}">
+    <span
+      class="mat-headline-6 m-1 main-title d-flex justify-content-center
+      w-100 align-items-center flex-sm-row flex-column ">
+      <ng-container *ngIf="this.icon">
+      <mat-icon [svgIcon]="this.icon" class="icon-header me-3" color="accent"></mat-icon>
+
+      </ng-container>
+      {{this.title}}
+    </span>
+    <ng-container *ngIf="!this.hideButton">
+      <app-add-button (onAdd)="emitAdd()" class="me-3"></app-add-button>
+    </ng-container>
+  </div>
+</div>

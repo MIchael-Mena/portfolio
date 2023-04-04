@@ -37,12 +37,7 @@
                      (dataChange)="updateDescription($event)">
           </app-field>
 
-          <!--          <button (click)="test(imageURL)">test</button>-->
-
-          <app-social-network (isLoading)="this.childrenIsLoading($event)"
-                              [isVisible]="!this.isLoading">
-          </app-social-network>
-
+          <app-social-network></app-social-network>
 
         </div>
       </div>

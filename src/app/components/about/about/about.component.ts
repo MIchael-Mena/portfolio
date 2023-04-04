@@ -10,14 +10,13 @@ import {DialogContent} from "../../dialog-card/DialogContent";
 import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
 import {Observable, of} from "rxjs";
 import {ModalResponse} from "../../shared/ModalResponse";
-import {ComponentState} from "../../shared/ComponentState";
-
-const imageTest = 'url(\'data:image/jpeg;base64, ..........)'
+import {LoaderComponentService} from "../service/loader-component.service";
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css'],
+  providers: [LoaderComponentService]
 })
 export class AboutComponent implements OnInit {
   public faSquareCaretDown = faSquareCaretDown;
@@ -34,40 +33,24 @@ export class AboutComponent implements OnInit {
 
   constructor(private aboutService: AboutService,
               private storageService: StorageSessionService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private loaderComponentService: LoaderComponentService) {
     this.storageService.onToggleSignUp().subscribe(() => {
       this.isLoggedIn = storageService.isLoggedIn;
     });
+    this.loaderComponentService.onToggleLoading().subscribe((status: boolean) => {
+      this.isLoading = status;
+    })
   }
 
   ngOnInit(): void {
-    this.setStatusComponents('about-me', true);
+    this.loaderComponentService.toggleLoad(true, 'about-me');
     this.aboutService.aboutMe.subscribe((result: AboutMeData) => {
       this.aboutMe = result;
       this.prepareData();
       this.setPhoto();
-      this.setStatusComponents('about-me', false);
+      this.loaderComponentService.toggleLoad(false, 'about-me');
     });
-  }
-
-  public childrenIsLoading(component: ComponentState): void {
-    // Componente hijo que carga datos desde el servidor y que se muestra en el componente padre
-    this.setStatusComponents(component.name, component.isLoading);
-  }
-
-  private setStatusComponents(component: string, status: boolean): void {
-    this.componentsLoading.set(component, status);
-    this.checkStatusComponents()
-  }
-
-  private checkStatusComponents(): void {
-    let loading = false;
-    this.componentsLoading.forEach((value: boolean) => {
-      if (value) {
-        loading = true;
-      }
-    })
-    if (loading !== this.isLoading) this.isLoading = loading;
   }
 
   private setPhoto(): void {
@@ -84,8 +67,11 @@ export class AboutComponent implements OnInit {
   }
 
   private canDeactivateComponent(): Observable<boolean> {
-    if (this.isLoading) return of(true);
-    if (this.nameData.canDeactivate() && this.titleData.canDeactivate() && this.descriptionData.canDeactivate()) {
+    if (this.isLoading ||
+      (this.nameData.canDeactivate() &&
+        this.titleData.canDeactivate() &&
+        this.descriptionData.canDeactivate())
+    ) {
       return of(true);
     }
     const data = <DialogContent>{
@@ -179,10 +165,5 @@ export class AboutComponent implements OnInit {
       }
     });
   }
-
-  test(element: HTMLElement) {
-    element.style.setProperty('--image-url', `${imageTest}`);
-  }
-
 
 }

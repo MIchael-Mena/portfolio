@@ -1,5 +1,5 @@
 <div *ngIf="this.formIsVisible">
-  <div class="row justify-content-md-center px-sm-5 px-lg-0 px-1">
+  <div class="row justify-content-md-center px-sm-5 px-lg-0 px-1 my-3">
     <div class="col-lg-6 style-container-form">
       <form class="mat-typography" [formGroup]="form" (ngSubmit)="onSubmit()">
 
@@ -74,11 +74,19 @@
           </mat-error>
         </mat-form-field>
 
-        <app-button-confirm
-          [buttonSettings]="this.buttonSettings"
-          [isWaiting]="this.isLoading"
-          class="row justify-content-center my-3">
-        </app-button-confirm>
+        <div class="d-flex justify-content-center align-items-center my-3">
+          <button mat-stroked-button color="warn"
+                  (click)="cancelForm()"
+                  class="mx-3 cancel-button" type="button">
+            Cancelar
+          </button>
+          <app-button-confirm
+            [buttonSettings]="this.buttonSettings"
+            [isWaiting]="this.isLoading"
+            class="mx-3">
+          </app-button-confirm>
+
+        </div>
 
       </form>
     </div>
