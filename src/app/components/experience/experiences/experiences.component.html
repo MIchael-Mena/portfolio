@@ -1,3 +1,5 @@
+<app-global-spinner [isLoading]="this.isLoading" [diameter]="200">
+</app-global-spinner>
 <section class="container" id="experience" #target>
 
   <app-add-experience
@@ -7,10 +9,6 @@
     [formExperience]="formExperience"
   >
   </app-add-experience>
-
-  <div class="d-flex justify-content-center align-items-center" *ngIf="this.isLoading">
-    <mat-spinner diameter="200"></mat-spinner>
-  </div>
 
   <div [ngSwitch]="!this.isLoading && this.experiences.length === 0">
     <div class="col-lg-8 col-12 mx-auto"
