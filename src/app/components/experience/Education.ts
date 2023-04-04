@@ -1,9 +1,11 @@
 import {ExperienceService} from "src/app/components/experience/service/experience.service";
-import {Experience} from "./Experience";
+import {IExperience} from "./IExperience";
 import {FormEducation} from "./FormEducation";
 import {FormExperience} from "./FormExperience";
+import {ExperienceServiceForAdd} from "./ExperienceServiceForAdd";
 
-export class Education implements Experience {
+
+export class Education extends ExperienceServiceForAdd implements IExperience {
 
   title: string = "Educación";
 
@@ -14,4 +16,5 @@ export class Education implements Experience {
   formToUse(): FormExperience {
     return new FormEducation();
   }
+
 }

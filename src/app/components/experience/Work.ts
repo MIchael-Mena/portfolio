@@ -1,9 +1,10 @@
 import {ExperienceService} from "src/app/components/experience/service/experience.service";
-import {Experience} from "./Experience";
+import {IExperience} from "./IExperience";
 import {FormExperience} from "./FormExperience";
 import {FormWork} from "./FormWork";
+import {ExperienceServiceForAdd} from "./ExperienceServiceForAdd";
 
-export class Work implements Experience {
+export class Work extends ExperienceServiceForAdd implements IExperience {
 
   title: string = "Experiencia Laboral";
 

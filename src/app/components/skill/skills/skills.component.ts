@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SkillData} from "../SkillData";
 import {SkillService} from "../service/skill.service";
-import {faSquarePlus} from '@fortawesome/free-regular-svg-icons';
 import {MatDialog} from "@angular/material/dialog";
-import {StorageSessionService} from "../../../service/storage-session.service";
 import {ModalSkillComponent} from "../modal-skill/modal-skill.component";
 import {ModalResponse} from "../../shared/ModalResponse";
 import {ActionForShipment} from "../../shared/ActionForShipment";
@@ -15,18 +13,12 @@ import {PositionController} from "../../shared/PositionController";
   styleUrls: ['./skills.component.css']
 })
 export class SkillsComponent implements OnInit {
-  faSquarePlus = faSquarePlus;
-  public isLoggedIn: boolean = false;
   public skills: SkillData[] = [];
   public positionController!: PositionController;
   public isLoading: boolean = true;
 
   constructor(private skillService: SkillService,
-              private storageSession: StorageSessionService,
               private dialog: MatDialog) {
-    this.storageSession.onToggleSignUp().subscribe((result: boolean) => {
-      this.isLoggedIn = result;
-    });
   }
 
   ngOnInit() {

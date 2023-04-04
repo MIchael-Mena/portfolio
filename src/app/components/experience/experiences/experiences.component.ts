@@ -4,7 +4,7 @@ import {faSquarePlus} from '@fortawesome/free-regular-svg-icons';
 import {ExperienceData} from 'src/app/components/experience/ExperienceData';
 
 import {UiEditFormService} from 'src/app/components/experience/service/uiEditForm.service';
-import {Experience} from '../Experience';
+import {IExperience} from '../IExperience';
 import {FormExperience} from '../FormExperience';
 import {StorageSessionService} from "../../../service/storage-session.service";
 
@@ -27,7 +27,7 @@ export class ExperiencesComponent implements OnInit {
   };
 
   public formExperience!: FormExperience;
-  @Input() experience!: Experience;
+  @Input() experience!: IExperience;
 
   constructor(private uiEditFormService: UiEditFormService,
               private storageService: StorageSessionService,
@@ -39,6 +39,11 @@ export class ExperiencesComponent implements OnInit {
 
   ngOnInit(): void {
     this.experience.serviceToUse(this.experienceService);
+    this.experience.onToggleAdd().subscribe((result: boolean) => {
+      // El formulario se muestra cuando se pulsa el botón de añadir experiencia
+      // que está en el componente padre
+      this.showForm();
+    });
     this.formExperience = this.experience.formToUse();
     this.isLoading = true;
     this.experienceService.expOrderByInitialDate.subscribe(experiences => {

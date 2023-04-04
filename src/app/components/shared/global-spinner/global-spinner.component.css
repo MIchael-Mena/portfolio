@@ -1,16 +1,19 @@
-.css-load-container {
-  position: absolute;
-  min-height: 100%;
-  min-width: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
-  z-index: 9999;
-}
-
 .spinner-position {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  color: #FF6E31;
+  font-weight: bold;
+  font-family: 'Nunito', sans-serif;
 }
 
 .spinner {

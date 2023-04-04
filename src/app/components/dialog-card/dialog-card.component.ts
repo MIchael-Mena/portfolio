@@ -36,7 +36,10 @@ export class DialogCardComponent {
         }
       });
     } else {
-      this.dialogRef.close(true);
+      this.dialogRef.close(<ModalResponse>{
+        state: true,
+        content: null,
+      });
     }
   }
 

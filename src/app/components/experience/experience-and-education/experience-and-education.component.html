@@ -1,5 +1,40 @@
-<app-experiences [experience]="education"></app-experiences>
+<section class="main">
+  <mat-tab-group dynamicHeight (selectedTabChange)="tabChanged($event)">
 
-<hr class="divider">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <app-main-header [title]="'Educación'"
+                         [active]="this.activeTab[0]"
+                         [icon]="'education'"
+                         class="w-100"
+                         [hideButton]="true">
+        </app-main-header>
+      </ng-template>
+      <app-experiences [experience]="education"></app-experiences>
+    </mat-tab>
 
-<app-experiences [experience]="work"></app-experiences>
+    <mat-tab disabled>
+      <ng-template mat-tab-label>
+        <div class="d-flex justify-content-center align-items-center w-100 container-button">
+          <ng-container *ngIf="this.isLoggedIn">
+            <app-add-button (click)="add()"></app-add-button>
+
+          </ng-container>
+        </div>
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab label="Experiencias">
+      <ng-template mat-tab-label>
+        <app-main-header [title]="'Experiencia'"
+                         [active]="this.activeTab[2]"
+                         [icon]="'work'"
+                         class="w-100"
+                         [hideButton]="true">
+        </app-main-header>
+      </ng-template>
+      <app-experiences [experience]="work"></app-experiences>
+    </mat-tab>
+
+  </mat-tab-group>
+</section>

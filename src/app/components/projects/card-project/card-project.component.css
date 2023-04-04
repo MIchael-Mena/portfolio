@@ -18,6 +18,7 @@
 }
 
 .card-image {
+  outline: 2px solid #ad8e70;
   border-radius: 10px;
   position: relative;
   width: 100%;

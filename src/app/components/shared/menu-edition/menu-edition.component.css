@@ -28,7 +28,7 @@
 }
 
 ::ng-deep .mat-menu-container {
-  border-radius: 20px;
+  border-radius: 20px !important;
   /*padding: 4px 4px;*/
 }
 

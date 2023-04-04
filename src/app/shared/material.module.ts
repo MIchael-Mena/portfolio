@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatNativeDateModule} from "@angular/material/core";
+import {MatNativeDateModule, MatRippleModule} from "@angular/material/core";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
@@ -30,7 +30,8 @@ const myMaterialModules = [
   MatProgressSpinnerModule,
   MatMenuModule,
   MatSliderModule,
-  MatSelectModule
+  MatSelectModule,
+  MatRippleModule,
 ];
 
 @NgModule(

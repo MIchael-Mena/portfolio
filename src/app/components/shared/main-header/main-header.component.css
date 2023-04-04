@@ -1,0 +1,58 @@
+.header-banner {
+  background-image: linear-gradient(
+    to bottom,
+    rgb(36, 55, 99, 1),
+    rgb(36, 55, 99, 0.8)
+  );
+  /*  background-size: contain;
+    background-position: center;
+    background-repeat: repeat;
+    overflow: hidden;*/
+  height: 100px;
+  width: 100%;
+  border-bottom: 3px solid #243763;
+  padding: 1rem 2rem;
+}
+
+.container-banner {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  border-radius: 25px;
+  border: 2px solid #ffebb7;
+}
+
+.active {
+  text-shadow: 0 0 6px #ffebb7;
+  background-color: #243763;
+  transition: 0.5s;
+}
+
+.main-title {
+  text-align: center;
+  color: #ffebb7;
+}
+
+.icon-header {
+  height: 36px;
+  width: 36px;
+  overflow: initial;
+}
+
+@media (max-width: 576px) {
+  .icon-header {
+    height: 30px;
+    width: 30px;
+  }
+
+  .header-banner {
+    padding: 1rem 0.2rem 0.5rem 0.2rem;
+  }
+
+  .main-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+}

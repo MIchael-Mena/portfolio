@@ -6,6 +6,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {DialogContent} from "../../dialog-card/DialogContent";
 import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
 import {EditField} from "../EditField";
+import {ModalResponse} from "../../shared/ModalResponse";
 
 @Component({
   selector: 'app-field',
@@ -70,8 +71,8 @@ export class FieldComponent implements OnChanges {
         enterAnimationDuration: 200,
         exitAnimationDuration: 200,
       });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
+      dialogRef.afterClosed().subscribe((result: ModalResponse) => {
+        if (result.state) {
           this.activeEdit = false;
           this.newData.setValue(this.data.content);
         }

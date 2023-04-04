@@ -110,7 +110,7 @@ $subtitle-1-level: mat.define-typography-level(
   $font-weight: 600,
   $font-size: 24px,
   $line-height: 1,
-  $letter-spacing: normal,
+  $letter-spacing: 0.04em,
 );
 
 $body-1-level: mat.define-typography-level(
