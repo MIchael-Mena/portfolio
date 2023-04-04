@@ -18,6 +18,9 @@
 
       <div class="row justify-content-center align-items-center px-2">
         <div class="col col-12 col-md-10 col-lg-8 text-center">
+          <app-global-spinner [isLoading]="this.isLoading"
+                              [diameter]="200">
+          </app-global-spinner>
           <div *ngIf="this.isLoading" class="py-5 d-flex justify-content-center">
             <mat-spinner diameter="100"></mat-spinner>
           </div>
