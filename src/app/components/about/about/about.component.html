@@ -21,9 +21,6 @@
           <app-global-spinner [isLoading]="this.isLoading"
                               [diameter]="200">
           </app-global-spinner>
-          <div *ngIf="this.isLoading" class="py-5 d-flex justify-content-center">
-            <mat-spinner diameter="100"></mat-spinner>
-          </div>
 
           <app-field [data]="this.nameData"
                      (dataChange)="updateName($event)"
