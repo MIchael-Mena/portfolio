@@ -1,4 +1,7 @@
 <section class="main">
+  <app-global-spinner [isLoading]="this.isLoading" [diameter]="200">
+  </app-global-spinner>
+
   <mat-tab-group dynamicHeight (selectedTabChange)="tabChanged($event)">
 
     <mat-tab>
