@@ -7,6 +7,7 @@ import {UiEditFormService} from 'src/app/components/experience/service/uiEditFor
 import {IExperience} from '../IExperience';
 import {FormExperience} from '../FormExperience';
 import {StorageSessionService} from "../../../service/storage-session.service";
+import {LoaderComponentService} from "../../../service/loader-component.service";
 
 @Component({
   selector: 'app-experiences',
@@ -25,19 +26,20 @@ export class ExperiencesComponent implements OnInit {
     showForm: false,
     experienceIsNew: true,
   };
-
   public formExperience!: FormExperience;
   @Input() experience!: IExperience;
 
   constructor(private uiEditFormService: UiEditFormService,
               private storageService: StorageSessionService,
-              private experienceService: ExperienceService) {
+              private experienceService: ExperienceService,
+              private loaderService: LoaderComponentService) {
     this.storageService.onToggleSignUp().subscribe((result: boolean) => {
       this.isLoggedIn = result;
     });
   }
 
   ngOnInit(): void {
+    this.loaderService.toggleLoad(true, this.experience.title);
     this.experience.serviceToUse(this.experienceService);
     this.experience.onToggleAdd().subscribe((result: boolean) => {
       // El formulario se muestra cuando se pulsa el botón de añadir experiencia
@@ -51,6 +53,7 @@ export class ExperiencesComponent implements OnInit {
         this.experiences = experiences.map((experience) => {
           return this.formExperience.parseToExperienceData(experience);
         });
+        this.loaderService.toggleLoad(false, this.experience.title);
       }
     );
   }

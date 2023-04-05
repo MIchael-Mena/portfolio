@@ -11,9 +11,12 @@
 
     <div class="card-image">
       <div class="card-img-top card-img-zoom-in"
-           *ngFor="let image of project.images">
+           *ngFor="let image of project.images; let i = index">
         <!--      <a href="{{image.href}}">-->
-        <img [src]="image.thumbnail" alt="{{project.name}}">
+        <img [src]="image.thumbnail"
+             class="img-clickable"
+             (click)="this.lightbox.open(i);"
+             alt="{{project.name}">
         <!--      </a>-->
       </div>
     </div>

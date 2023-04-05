@@ -10,7 +10,7 @@ import {DialogContent} from "../../dialog-card/DialogContent";
 import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
 import {Observable, of} from "rxjs";
 import {ModalResponse} from "../../shared/ModalResponse";
-import {LoaderComponentService} from "../service/loader-component.service";
+import {LoaderComponentService} from "../../../service/loader-component.service";
 
 @Component({
   selector: 'app-about',

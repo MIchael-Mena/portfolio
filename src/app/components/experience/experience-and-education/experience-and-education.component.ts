@@ -8,16 +8,19 @@ import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
 import {firstValueFrom} from "rxjs";
 import {MatTabChangeEvent} from "@angular/material/tabs";
 import {StorageSessionService} from "../../../service/storage-session.service";
+import {LoaderComponentService} from "../../../service/loader-component.service";
 
 @Component({
   selector: 'app-experience-and-education',
   templateUrl: './experience-and-education.component.html',
-  styleUrls: ['./experience-and-education.component.css']
+  styleUrls: ['./experience-and-education.component.css'],
+  providers: [LoaderComponentService]
 })
 export class ExperienceAndEducationComponent {
   public canDeactivate: () => Promise<boolean> = () => this.canDeactivateForm();
   private formEducationIsEmpty = false;
   private formWorkIsEmpty = false;
+  public isLoading: boolean = true;
   public education = new Education()
   public work = new Work()
   public isLoggedIn: boolean = false;
@@ -30,9 +33,13 @@ export class ExperienceAndEducationComponent {
   ];
 
   constructor(private unsavedChanges: UnsavedChangesService, private dialog: MatDialog,
-              private storageService: StorageSessionService) {
+              private storageService: StorageSessionService,
+              private loaderComponentService: LoaderComponentService) {
     this.storageService.onToggleSignUp().subscribe((result: boolean) => {
       this.isLoggedIn = result;
+    });
+    this.loaderComponentService.onToggleLoading().subscribe((result: boolean) => {
+      this.isLoading = result;
     });
   }
 

@@ -15,7 +15,7 @@ import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
 import {SocialNetworkService} from "../service/social-network.service";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 import {PositionController} from "../../shared/PositionController";
-import {LoaderComponentService} from "../service/loader-component.service";
+import {LoaderComponentService} from "../../../service/loader-component.service";
 
 @Component({
   selector: 'app-social-network',
