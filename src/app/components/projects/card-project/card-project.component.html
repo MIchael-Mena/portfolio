@@ -1,7 +1,12 @@
-<mat-card class="my-4 mx-4 mat-typography" matRipple>
+<mat-card class="mat-typography m-0 " matRipple>
   <mat-card-header class="d-block">
-    <div class="d-flex justify-content-between align-items-center">
-      <h3 class="title">{{project.name}}</h3>
+    <div class="d-flex justify-content-between">
+      <span class="date mb-2">{{project.date | date:'dd/MM/yyyy'}}</span>
+      <fa-icon [icon]="faShare" size="xl" class="share-icon">
+      </fa-icon>
+    </div>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h3 class="title my-0">{{project.name}}</h3>
       <ng-container *ngIf="this.isLogged">
         <app-menu-edition (onEdit)="editProject()"
                           (onDelete)="deleteProject()">
@@ -21,11 +26,10 @@
       </div>
     </div>
   </mat-card-header>
-  <mat-card-content>
-    <p class="my-3 me-3">{{project.description}}</p>
-    <button mat-fab extended color="primary" type="submit">
-      Ver proyecto
-    </button>
+  <mat-card-content class="my-2">
+    <p class="description">{{project.description}}</p>
   </mat-card-content>
-
+  <mat-card-footer class="card-footer">
+    <fa-icon [icon]="faGithub" size="2x" class="icon-footer"></fa-icon>
+  </mat-card-footer>
 </mat-card>

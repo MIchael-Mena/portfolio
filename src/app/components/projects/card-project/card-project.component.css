@@ -1,13 +1,30 @@
-.title {
-  width: 100%;
-  border-radius: 0 0 0 5px;
-  border-left: 5px solid #ad8e70;
-  border-bottom: 2px solid #ad8e70;
-  padding-left: 10px;
-  padding-bottom: 5px;
+.description {
+  color: #243763;
+  font-size: 18px;
+  line-height: 1.5;
+  margin: 10px 0;
 }
 
-/*#ad8e70  #ff6e31*/
+.title {
+  width: 100%;
+  background-color: #243763;
+  border: 2px solid #AD8E70;
+  /*border-radius: 10px;*/
+  padding: 10px;
+  margin-bottom: 10px;
+  color: #FFEBB7;
+}
+
+.date {
+  display: inline-block;
+  background-color: #fff;
+  border: 2px solid #243763;
+  color: #243763;
+  font-weight: bold;
+  padding: 5px 10px;
+  margin-right: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 .card-image img {
   flex-shrink: 0;
@@ -32,7 +49,7 @@
 }
 
 .card-image img:hover {
-  border-radius: 10px;
+  /*border-radius: 10px;*/
   height: 200px;
   width: auto;
   object-fit: initial;
@@ -49,19 +66,15 @@
 }
 
 mat-card {
-  border-left: 4px solid #243763;
-  border-top: 4px solid #243763;
-  border-radius: 20px 0 60%;
+  border: 4px double #243763;
   overflow: hidden;
-  max-width: 350px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
 }
 
 mat-card:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  border-left: 4px solid #ff6e31;
-  border-top: 4px solid #ff6e31;
+  border: 4px double #ff6e31;
 }
 
 .mat-ripple-element {
@@ -71,3 +84,54 @@ mat-card:hover {
 .mat-ripple-element::after {
   background-color: rgba(255, 255, 255, 0.2);
 }
+
+.card-footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  background-color: #243763;
+  color: #FFEBB7;
+  border-top: 2px solid #AD8E70;
+}
+
+.card-footer p {
+  margin: 0;
+}
+
+.card-footer a {
+  color: #FFEBB7;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.card-footer a:hover {
+  color: #ff6e31;
+}
+
+.share-icon {
+  color: #243763;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.share-icon:hover {
+  transform: scale(1.06);
+  color: #ff6e31;
+}
+
+.icon-footer {
+  border-radius: 50%;
+  padding: 2px;
+  border: 2px solid #fff;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.icon-footer:hover {
+  border: 2px solid #ff6e31;
+  color: #fff;
+}
+
+

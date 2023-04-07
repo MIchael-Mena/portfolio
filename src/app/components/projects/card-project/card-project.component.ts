@@ -1,6 +1,8 @@
 import {Component, ChangeDetectionStrategy, OnInit} from '@angular/core';
 import {Image, Project} from "../projects/Project";
 import {StorageSessionService} from "../../../service/storage-session.service";
+import {faShare} from "@fortawesome/free-solid-svg-icons";
+import {faGithub} from "@fortawesome/free-brands-svg-icons";
 
 import {Gallery, GalleryItem, ImageItem, ThumbnailsPosition, ImageSize} from 'ng-gallery';
 import {Lightbox} from 'ng-gallery/lightbox';
@@ -35,6 +37,8 @@ const images: Image[] = [
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardProjectComponent implements OnInit {
+  public faShare = faShare;
+  public faGithub = faGithub;
 
   public isLogged: boolean = false;
   private items!: GalleryItem[];
