@@ -1,8 +1,16 @@
 .description {
   color: #243763;
-  font-size: 18px;
+  /*font-size: 18px;*/
   line-height: 1.5;
-  margin: 10px 0;
+  /*margin: 10px 0;*/
+}
+
+.description:first-of-type:first-letter {
+  font-family: 'Lobster', cursive;
+  font-size: 2em;
+  font-weight: 700;
+  margin-right: 4px;
+  margin-left: 4px;
 }
 
 .title {
