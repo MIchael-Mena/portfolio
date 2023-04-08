@@ -48,7 +48,7 @@ export class CardProjectComponent implements OnInit {
     date: '2015-01-01',
     description: 'Realización de una mecedora para facultad de diseño de la UBA. El proyecto consistió en la realización de un prototipo de mecedora, el cual fue realizado en madera y plástico. El diseño fue realizado en Rhino y el prototipo fue presentado para la materia Diseño Industrial.',
     images: images,
-    link: 'Project Link'
+    github: 'Project Link'
   }
 
   constructor(private storageSession: StorageSessionService,
@@ -66,13 +66,17 @@ export class CardProjectComponent implements OnInit {
     // Creat gallery items
     this.items = this.project.images.map(item => new ImageItem({src: item.original, thumb: item.thumbnail}));
 
+    /*    this.lightbox.setConfig({
+          panelClass: 'fullscreen',
+        })*/
+
     // Get a lightbox gallery ref
     const lightboxRef = this.gallery.ref('lightbox');
 
     // Add custom gallery config to the lightbox (optional)
     lightboxRef.setConfig({
       imageSize: ImageSize.Cover,
-      thumbPosition: ThumbnailsPosition.Top
+      thumbPosition: ThumbnailsPosition.Top,
     });
 
     // Load items into the lightbox gallery ref

@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseURL: 'https://portfolio-michael-mena.koyeb.app',
+  baseURL: 'http://localhost:8080',
 }
 
 // 'https://portfolio-michael-mena.koyeb.app'
