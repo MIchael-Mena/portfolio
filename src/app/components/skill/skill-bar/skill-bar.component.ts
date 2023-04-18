@@ -62,9 +62,6 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
       updatePosition: (itemIsNew, newPosition, oldPosition) => {
         this.onUpdatePositions.emit({itemIsNew, newPosition, oldPosition});
       }
-      /*      updatePosition: (itemIsNew, newPosition, oldPosition) => {
-              this.updatePositions(itemIsNew, newPosition, oldPosition);
-            },*/
     }
     const dialogRef = this.dialog.open(ModalSkillComponent, {
       data,
@@ -73,6 +70,7 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
       restoreFocus: true,
       width: '450px',
       height: '600px',
+      maxWidth: '95vw',
       enterAnimationDuration: '200ms',
       exitAnimationDuration: '200ms',
     });
@@ -102,6 +100,7 @@ export class SkillBarComponent implements OnChanges, OnInit, OnDestroy {
     const dialogRef = this.dialog.open(DialogCardComponent, {
       data,
       width: '350px',
+      maxWidth: '95vw',
       enterAnimationDuration: '200ms',
       exitAnimationDuration: '200ms',
     });

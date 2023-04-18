@@ -28,6 +28,11 @@ export class SkillService {
     return this.http.get<SkillData[]>(`${this.apiUrl}?_sort=position&_order=asc`);
   }
 
+  get SkillNames(): Observable<{ name: string }[]> {
+    // Devuelve un array de la forma: [{name: 'skill1'}, {name: 'skill2'}, ...]
+    return this.http.get<{ name: string }[]>(`${this.apiUrl}/names`);
+  }
+
   public addSkill(skill: SkillData): Observable<any> {
     // usar si skill es un FormData
     // ('Content-Type', 'multipart/form-data') o ('Content-Type', 'application/x-www-form-urlencoded');

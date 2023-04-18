@@ -64,6 +64,7 @@ export class SkillsComponent implements OnInit {
       autoFocus: true,
       width: '450px',
       height: '600px',
+      maxWidth: '95vw',
       enterAnimationDuration: '200ms',
       exitAnimationDuration: '200ms',
     });

@@ -6,9 +6,15 @@
 
   <div class="d-flex justify-content-center container my-0 my-md-3 my-lg-5">
     <div class="row">
-      <app-card-project class="col p-0"></app-card-project>
-      <app-card-project class="col p-0"></app-card-project>
-      <app-card-project class="col p-0"></app-card-project>
+      <ng-container *ngFor="let project of projects">
+        <app-card-project class="col p-0"
+                          [project]="project"
+                          (onEdit)="this.editProject($event)"
+                          (onDelete)="this.deleteProject($event)">
+        </app-card-project>
+      </ng-container>
+      <!--      <app-card-project class="col p-0"></app-card-project>
+            <app-card-project class="col p-0"></app-card-project>-->
     </div>
   </div>
 

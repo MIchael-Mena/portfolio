@@ -67,6 +67,7 @@ export class FieldComponent implements OnChanges {
       }
       const dialogRef = this.dialog.open(DialogCardComponent, {
         width: '400px',
+        maxWidth: '95vw',
         data,
         enterAnimationDuration: 200,
         exitAnimationDuration: 200,

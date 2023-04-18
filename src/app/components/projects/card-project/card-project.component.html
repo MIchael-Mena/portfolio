@@ -1,4 +1,5 @@
 <mat-card class="mat-typography m-0 mx-auto" matRipple>
+
   <mat-card-header class="d-block">
     <div class="d-flex justify-content-between align-items-center mb-2">
       <span class="date">{{project.date | date:'dd/MM/yyyy'}}</span>
@@ -16,48 +17,27 @@
     <div class="card-image">
       <div class="card-img-top card-img-zoom-in"
            *ngFor="let image of project.images; let i = index">
-        <!--      <a href="{{image.href}}">-->
         <img [src]="image.thumbnail"
              class="img-clickable"
              (click)="this.lightbox.open(i);"
              alt="{{project.name}">
-        <!--      </a>-->
       </div>
     </div>
   </mat-card-header>
-  <mat-card-content class="my-3">
-    <div id="carouselExampleControls" class="carousel text-center slide" data-bs-ride="carousel"
-         style="background-color: #000; color: #fff; padding: 1rem 0; border-radius: 5px">
-      <span></span>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <!--          <img src="..." class="d-block w-100" alt="...">-->
-          1
-        </div>
-        <div class="carousel-item">
-          <!--          <img src="..." class="d-block w-100" alt="...">-->
-          2
-        </div>
-        <div class="carousel-item">
-          <!--          <img src="..." class="d-block w-100" alt="...">-->
-          3
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-              data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-              data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
 
+  <mat-card-content class="my-3">
     <p class="description">{{project.description}}</p>
+    <mat-chip-listbox aria-label="Project Technologies">
+      <mat-chip *ngFor="let technology of project.technologies"
+                color="primary">
+        <mat-icon matChipAvatar color="primary">label_important</mat-icon>
+        {{technology}}
+      </mat-chip>
+    </mat-chip-listbox>
   </mat-card-content>
+
   <mat-card-footer class="card-footer">
     <fa-icon [icon]="faGithub" size="2x" class="icon-footer"></fa-icon>
   </mat-card-footer>
+
 </mat-card>

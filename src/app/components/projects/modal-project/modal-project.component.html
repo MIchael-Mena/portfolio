@@ -1,0 +1,47 @@
+<form class="form mat-typography px-sm-4 px-lg-5 px-2 container-modal d-flex flex-column justify-content-evenly "
+      [formGroup]="this.form"
+      (ngSubmit)="onSubmit()">
+
+  <h2 class="text-center py-3 text-light">
+    {{action.action + ' proyecto'}}
+  </h2>
+
+  <mat-form-field appearance="fill" [hideRequiredMarker]="true">
+    <input matInput
+           type="text"
+           formControlName="name"
+           placeholder="Ingrese el nombre del proyecto"
+           maxlength="100"
+    />
+    <mat-label>Proyecto</mat-label>
+    <mat-error *ngIf="form.get('name')?.hasError('required')">
+      El nombre es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" [hideRequiredMarker]="true">
+    <textarea matInput
+              type="text"
+              formControlName="description"
+              placeholder="Ingrese una descripción"
+              maxlength="400"
+              style="resize: none"
+    ></textarea>
+    <mat-label>Descripción</mat-label>
+    <mat-error *ngIf="form.get('description')?.hasError('required')">
+      La descripción es requerida
+    </mat-error>
+  </mat-form-field>
+
+  <app-carousel [(slides)]="this.images">
+  </app-carousel>
+
+  <app-chips [skills]="this.skillNames">
+  </app-chips>
+
+  <app-button-modal [isWaiting]="this.isLoading"
+                    (onClickCancel)="this.onClose()"
+                    [buttonSettings]="this.buttonSettings">
+  </app-button-modal>
+
+</form>

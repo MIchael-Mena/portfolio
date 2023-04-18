@@ -50,7 +50,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
       }),
       catchError((error) => {
         if (error.status === 401) {
-          console.log('401');
           // Si recibo un error (401), es porque el refresh token ha expirado
           this.authService.logout().subscribe({
             next: (res) => {

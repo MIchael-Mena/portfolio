@@ -7,11 +7,22 @@ import {MenuEditionModule} from "../shared/menu-edition/menu-edition.module";
 import {MainHeaderModule} from "../shared/main-header/main-header.module";
 import {GalleryModule} from "ng-gallery";
 import {LightboxModule} from 'ng-gallery/lightbox';
+import {ModalProjectComponent} from './modal-project/modal-project.component';
+import {ButtonModalModule} from "../shared/button-modal/button-modal.module";
+import {AddButtonModule} from "../shared/add-button/add-button.module";
+import {CarouselModule} from 'ngx-bootstrap/carousel';
+import {MatChipsModule} from "@angular/material/chips";
+import {CarouselComponent} from './carousel/carousel.component';
+import {ChipsComponent} from './chips/chips.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 @NgModule({
   declarations: [
     ProjectsComponent,
-    CardProjectComponent
+    CardProjectComponent,
+    ModalProjectComponent,
+    CarouselComponent,
+    ChipsComponent,
   ],
   imports: [
     CommonModule,
@@ -19,7 +30,12 @@ import {LightboxModule} from 'ng-gallery/lightbox';
     MenuEditionModule,
     MainHeaderModule,
     GalleryModule,
-    LightboxModule
+    LightboxModule,
+    ButtonModalModule,
+    AddButtonModule,
+    CarouselModule.forRoot(),
+    MatChipsModule,
+    MatAutocompleteModule
   ],
   exports: [
     ProjectsComponent

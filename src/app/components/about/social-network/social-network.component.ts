@@ -9,7 +9,6 @@ import {ModalSocialNetworkComponent} from "../modal-social-network/modal-social-
 import {MatIconRegistry} from "@angular/material/icon";
 import {DomSanitizer} from "@angular/platform-browser";
 import {ActionForShipment} from "../../shared/ActionForShipment";
-import {ComponentState} from "../../shared/ComponentState";
 import {DialogContent} from "../../dialog-card/DialogContent";
 import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
 import {SocialNetworkService} from "../service/social-network.service";
@@ -104,6 +103,7 @@ export class SocialNetworkComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogCardComponent, {
       data,
       width: '350px',
+      maxWidth: '95vw',
       enterAnimationDuration: '200ms',
       exitAnimationDuration: '200ms',
     });
@@ -135,6 +135,7 @@ export class SocialNetworkComponent implements OnInit {
       autoFocus: true,
       width: '450px',
       height: '600px',
+      maxWidth: '95vw',
       enterAnimationDuration: '200ms',
       exitAnimationDuration: '200ms',
     });
@@ -166,6 +167,7 @@ export class SocialNetworkComponent implements OnInit {
       autoFocus: true,
       width: '450px',
       height: '600px',
+      maxWidth: '95vw',
       enterAnimationDuration: '200ms',
       exitAnimationDuration: '200ms',
     });

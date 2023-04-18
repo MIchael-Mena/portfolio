@@ -1,0 +1,27 @@
+.button-delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 50%;
+  background-color: #243763;
+  color: #fff;
+  border: 2px solid #fff;
+  /*padding: 5px;*/
+  cursor: pointer;
+  height: 48px;
+  width: 48px;
+}
+
+.button-delete:hover {
+  background-color: #ff6e31;
+  transform: scale(1.1);
+}
+
+.carousel-style {
+  display: block;
+  background-color: #000;
+  color: #fff;
+  padding: 1rem 0;
+  border-radius: 5px
+}

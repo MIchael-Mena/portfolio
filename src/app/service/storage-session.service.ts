@@ -20,29 +20,32 @@ export class StorageSessionService {
 
   public saveUser(user: any): void {
     this.behaviorSubject.next(true);
-    window.sessionStorage.removeItem(USER_KEY);
-    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+
+    localStorage.setItem('isLogged', 'true');
+
+    /*    window.sessionStorage.removeItem(USER_KEY);
+        window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));*/
+
     /*    localStorage.setItem('user', JSON.stringify(data.user));
         localStorage.setItem('token', data.accessToken);*/
   }
 
   public get isLoggedIn(): boolean {
     // return (localStorage.getItem('token') !== null);
-    return window.sessionStorage.getItem(USER_KEY) !== null;
+    // return window.sessionStorage.getItem(USER_KEY) !== null;
+    return localStorage.getItem('isLogged') === 'true';
   }
 
   public get token(): string {
     return localStorage.getItem('token') || '';
   }
 
-  public get user(): User {
-    // return JSON.parse(localStorage.getItem('user') || '{}');
-    return JSON.parse(window.sessionStorage.getItem(USER_KEY) || '{}');
-  }
-
   public cleanUser(): void {
     this.behaviorSubject.next(false);
-    window.sessionStorage.removeItem(USER_KEY);
+    localStorage.removeItem('isLogged');
+    localStorage.setItem('isLogged', 'false');
+    // window.sessionStorage.removeItem(USER_KEY);
+
     /*    localStorage.removeItem('user');
         localStorage.removeItem('token');*/
   }

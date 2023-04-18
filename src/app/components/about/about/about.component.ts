@@ -151,6 +151,7 @@ export class AboutComponent implements OnInit {
     const dialogRef = this.dialog.open(ModalEditImgComponent, {
       width: '350px',
       height: '300px',
+      maxWidth: '95vw',
       data: editImg,
       autoFocus: true,
       restoreFocus: true,

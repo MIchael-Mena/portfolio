@@ -100,6 +100,7 @@ export class ExperienceAndEducationComponent {
     }
     const dialogRef = this.dialog.open(DialogCardComponent, {
       width: '400px',
+      maxWidth: '95vw',
       data,
       disableClose: true,
       autoFocus: false,
