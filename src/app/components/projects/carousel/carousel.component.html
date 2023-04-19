@@ -1,32 +1,29 @@
-<div>
-  <carousel [(activeSlide)]="activeSlideIndex"
-            [isAnimated]="true"
-            class="carousel-style text-center">
-    <slide *ngFor="let slide of slides; let index=index">
-      <!--      {{index + 1}}-->
-      <img [src]="slide.thumbnail" alt="image slide" class="img-thumbnail p-0">
+<div class="d-flex align-items-center justify-content-around">
 
-      <!--            <img [src]="slide.image" alt="image slide" style="display: block; width: 100%;">-->
-
-      <!--      <div class="carousel-caption">
-              <h4>Slide {{index}}</h4>
-              <p>{{slide.text}}</p>
-            </div>-->
-    </slide>
-  </carousel>
-
-  <div class="w-100 d-flex justify-content-around my-2">
+  <div class="d-flex flex-column">
     <button type='button' mat-fab (click)="this.addImage()"
             style="background-color:#fff"
+            class="my-3"
             title="Agregar imagen">
       <mat-icon>add_photo_alternate</mat-icon>
     </button>
 
     <button type="button" mat-fab
             style="background-color:#fff"
+            class="my-3"
             title="Eliminar imagen actual"
             (click)="this.removeCurrentImage()">
       <mat-icon>delete</mat-icon>
     </button>
   </div>
+
+  <carousel [(activeSlide)]="activeSlideIndex"
+            [showIndicators]="true"
+            [isAnimated]="true"
+            class="carousel-style text-center">
+    <slide *ngFor="let slide of slides; let index=index">
+      <img [src]="slide.thumbnail" alt="image slide" class="img-thumbnail p-0">
+    </slide>
+  </carousel>
+
 </div>

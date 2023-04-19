@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {ButtonSettings} from "./ButtonSettings";
 
 @Component({
@@ -8,6 +8,7 @@ import {ButtonSettings} from "./ButtonSettings";
 })
 export class ButtonConfirmComponent {
 
+  @Output() onClickConfirm: EventEmitter<void> = new EventEmitter<void>();
   @Input() buttonSettings: ButtonSettings = {
     onConfirmText: 'Agregar',
     onWaitingText: 'Agregando...'
@@ -17,6 +18,11 @@ export class ButtonConfirmComponent {
 
   constructor() {
 
+  }
+  
+  public onConfirm(): void {
+    // En caso de que el botón no esté dentro de un formulario, se puede emitir el evento
+    this.onClickConfirm.emit();
   }
 
 

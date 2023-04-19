@@ -21,20 +21,11 @@
     <mat-error class="mat-caption mt-1" [hidden]="!imgHasRequiredError">El icono es requerido</mat-error>
   </div>
 
-  <div class="d-flex flex-column">
-    <button type='button' mat-fab extended [mat-dialog-close]="{state:false}" style="background-color:#fff">
-      Cancelar
-    </button>
-    <span [ngSwitch]="this.isLoading">
-      <button mat-fab extended color="primary" type="submit"
-              *ngSwitchCase="false" class="w-100" (click)="saveImg()">
-        Guardar
-      </button>
-      <button mat-fab extended color="primary" disabled="true" type="submit" *ngSwitchCase="true" class=" w-100">
-        <mat-spinner [diameter]="20" [strokeWidth]="3" class="d-inline-block" color="warn"></mat-spinner>
-        Guardando...
-      </button>
-    </span>
-  </div>
+  <app-button-modal [isWaiting]="this.isLoading"
+                    (onClickCancel)="this.onClose()"
+                    (onClickConfirm)="this.saveImg()"
+                    class="mb-2"
+                    [buttonSettings]="this.buttonSettings">
+  </app-button-modal>
 
 </div>

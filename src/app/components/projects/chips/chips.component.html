@@ -9,7 +9,7 @@
         </button>
       </mat-chip-row>
     </mat-chip-grid>
-    <input placeholder="Agregar más..." #fruitInput [formControl]="technologyCtrl"
+    <input placeholder="Agregar más..." #technologyInput [formControl]="technologyCtrl"
            [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
            (matChipInputTokenEnd)="add($event)"/>

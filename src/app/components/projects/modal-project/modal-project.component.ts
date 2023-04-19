@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ActionForShipment} from "../../shared/ActionForShipment";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ButtonSettings} from "../../shared/button-confirm/ButtonSettings";
 import {ModalResponse} from "../../shared/ModalResponse";
 import {Image, ProjectData} from "../projects/ProjectData";
@@ -16,6 +16,7 @@ export class ModalProjectComponent implements OnInit {
 
   public images: Image[] = [];
   public skillNames: string[] = [];
+  public technologies: string[] = [];
   public form: FormGroup;
   public isLoading: boolean = false;
   public buttonSettings: ButtonSettings = <ButtonSettings>{
@@ -29,15 +30,16 @@ export class ModalProjectComponent implements OnInit {
               private fb: FormBuilder) {
     this.form = this.fb.group({
       id: [''],
-      name: [''],
-      description: [''],
+      name: ['', Validators.required],
+      description: ['', Validators.required],
       link: [''],
       githubLink: [''],
       date: [''],
       technologies: [''],
     });
     action.setDataToForm((project: ProjectData) => {
-      this.images = project.images;
+      this.technologies = project.technologies.slice();
+      this.images = project.images.slice();
       this.form.patchValue(project);
     });
   }

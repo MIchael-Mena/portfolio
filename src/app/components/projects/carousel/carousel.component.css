@@ -19,9 +19,10 @@
 }
 
 .carousel-style {
-  display: block;
+  display: inline-block;
   background-color: #000;
   color: #fff;
   padding: 1rem 0;
-  border-radius: 5px
+  border-radius: 5px;
+  width: 280px;
 }

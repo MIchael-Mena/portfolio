@@ -1,6 +1,8 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {EditField} from "../EditField";
+import {ButtonSettings} from "../../shared/button-confirm/ButtonSettings";
+import {ModalResponse} from "../../shared/ModalResponse";
 
 const preview = 'assets/icon/png/profile-preview-alt.jpg';
 
@@ -15,10 +17,21 @@ export class ModalEditImgComponent {
   public isValidFormat: boolean = true;
   public imgHasRequiredError: boolean = false;
   public isLoading: boolean = false;
+  public buttonSettings: ButtonSettings = <ButtonSettings>{
+    onConfirmText: 'Guardar',
+    onWaitingText: 'Guardando...',
+  }
 
   constructor(public dialogRef: MatDialogRef<ModalEditImgComponent>,
               @Inject(MAT_DIALOG_DATA) public data: EditField) {
     this.previewFileUrl = this.data.content;
+  }
+
+  public onClose(): void {
+    this.dialogRef.close(<ModalResponse>{
+        state: false,
+      }
+    );
   }
 
   public onFileSelected(event: any) {

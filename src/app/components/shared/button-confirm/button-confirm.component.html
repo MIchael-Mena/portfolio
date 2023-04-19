@@ -1,5 +1,5 @@
 <div style="display: contents" [ngSwitch]="this.isWaiting">
-  <button mat-fab extended color="primary" type="submit" *ngSwitchCase="false">
+  <button mat-fab extended color="primary" type="submit" *ngSwitchCase="false" (click)="this.onConfirm()">
     <mat-icon svgIcon="{{this.icon}}" aria-hidden="false" aria-label="icon"
               class="icon-button"
               *ngIf="this.icon">

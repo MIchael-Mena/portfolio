@@ -2,9 +2,41 @@
       [formGroup]="this.form"
       (ngSubmit)="onSubmit()">
 
-  <h2 class="text-center py-3 text-light">
+  <h2 class="text-center py-3 text-light my-0">
     {{action.action + ' proyecto'}}
   </h2>
+
+  <div class="d-flex justify-content-center  justify-content-sm-between flex-wrap">
+    <mat-form-field appearance="fill" [hideRequiredMarker]="true"
+                    floatLabel="always"
+                    class="double-input">
+      <input matInput
+             type="text"
+             formControlName="name"
+             placeholder="Ingrese el nombre del proyecto"
+             maxlength="100"
+      />
+      <mat-label>Proyecto</mat-label>
+      <mat-error *ngIf="form.get('name')?.hasError('required')">
+        El nombre es requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" [hideRequiredMarker]="true"
+                    floatLabel="always"
+                    class="double-input">
+      <input matInput
+             type="text"
+             formControlName="githubLink"
+             placeholder="Ingrese un enlace a github"
+             maxlength="100"
+      />
+      <mat-label>Enlace a github</mat-label>
+      <mat-error *ngIf="form.get('githubLink')?.hasError('required')">
+        El enlace es requerido
+      </mat-error>
+    </mat-form-field>
+  </div>
 
   <mat-form-field appearance="fill" [hideRequiredMarker]="true">
     <input matInput
@@ -33,13 +65,16 @@
     </mat-error>
   </mat-form-field>
 
-  <app-carousel [(slides)]="this.images">
+  <app-carousel class="mb-2"
+                [(slides)]="this.images">
   </app-carousel>
 
-  <app-chips [skills]="this.skillNames">
+  <app-chips [technologies]="this.technologies"
+             [skills]="this.skillNames">
   </app-chips>
 
   <app-button-modal [isWaiting]="this.isLoading"
+                    class="mb-2 mx-auto button-modal"
                     (onClickCancel)="this.onClose()"
                     [buttonSettings]="this.buttonSettings">
   </app-button-modal>

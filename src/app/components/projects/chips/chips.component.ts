@@ -1,9 +1,9 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
-import {Observable} from 'rxjs';
+import {Observable, timeout} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 
 @Component({
@@ -11,23 +11,27 @@ import {map, startWith} from 'rxjs/operators';
   templateUrl: './chips.component.html',
   styleUrls: ['./chips.component.css']
 })
-export class ChipsComponent implements OnInit {
+export class ChipsComponent implements OnChanges {
   @Input() skills: string[] = [];
+  @Input() technologies: string[] = [];
   separatorKeysCodes: number[] = [ENTER, COMMA];
   technologyCtrl = new FormControl('');
-  filteredSkills: Observable<string[]>;
-  technologies: string[] = [];
+  filteredSkills!: Observable<string[]>;
 
-  @ViewChild('fruitInput') fruitInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('technologyInput') technologyInput!: ElementRef<HTMLInputElement>
 
   constructor() {
-    this.filteredSkills = this.technologyCtrl.valueChanges.pipe(
-      startWith(null),
-      map((technology: string | null) => (technology ? this._filter(technology) : this.skills.slice())),
-    );
   }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges) {
+    // Cuando cambia el valor de skills, se actualiza el valor de filteredSkills
+    // Si no se hace esto, el autocomplete no funciona al abrir el modal. Solo funciona después de escribir algo
+    if (changes['skills']) {
+      this.filteredSkills = this.technologyCtrl.valueChanges.pipe(
+        startWith(null),
+        map((technology: string | null) => (technology ? this._filter(technology) : this.skills.slice())),
+      );
+    }
   }
 
   add(event: MatChipInputEvent): void {
@@ -54,7 +58,7 @@ export class ChipsComponent implements OnInit {
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.technologies.push(event.option.viewValue);
-    this.fruitInput.nativeElement.value = '';
+    this.technologyInput.nativeElement.value = '';
     this.technologyCtrl.setValue(null);
   }
 
