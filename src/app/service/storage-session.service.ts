@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
-import {User} from "../components/shared/User";
+import {ApiKey, User} from "../components/shared/User";
 
 const USER_KEY = 'auth-user';
 
@@ -9,6 +9,7 @@ const USER_KEY = 'auth-user';
 })
 export class StorageSessionService {
 
+  private user: User | null = null;
   private behaviorSubject = new BehaviorSubject<boolean>(this.isLoggedIn);
 
   constructor() {
@@ -18,9 +19,9 @@ export class StorageSessionService {
     return this.behaviorSubject.asObservable();
   }
 
-  public saveUser(user: any): void {
+  public saveUser(user: User): void {
+    this.user = user;
     this.behaviorSubject.next(true);
-
     localStorage.setItem('isLogged', 'true');
 
     /*    window.sessionStorage.removeItem(USER_KEY);
@@ -28,6 +29,18 @@ export class StorageSessionService {
 
     /*    localStorage.setItem('user', JSON.stringify(data.user));
         localStorage.setItem('token', data.accessToken);*/
+  }
+
+  get currentUser(): User | null {
+    return this.user;
+  }
+
+  public getApiKey(apiName: string): string {
+    let api = <ApiKey>{name: '', apiKey: ''};
+    if (this.user) {
+      api = this.user.apiKeys.find((key: ApiKey) => key.name === apiName) || <ApiKey>{name: '', apiKey: ''};
+    }
+    return api.apiKey;
   }
 
   public get isLoggedIn(): boolean {
@@ -41,8 +54,8 @@ export class StorageSessionService {
   }
 
   public cleanUser(): void {
+    this.user = null;
     this.behaviorSubject.next(false);
-    localStorage.removeItem('isLogged');
     localStorage.setItem('isLogged', 'false');
     // window.sessionStorage.removeItem(USER_KEY);
 

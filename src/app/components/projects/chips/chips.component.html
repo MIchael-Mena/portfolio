@@ -14,8 +14,8 @@
            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
            (matChipInputTokenEnd)="add($event)"/>
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-      <mat-option *ngFor="let fruit of filteredSkills | async" [value]="fruit">
-        {{fruit}}
+      <mat-option *ngFor="let skill of filteredSkills | async" [value]="skill">
+        {{skill}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>

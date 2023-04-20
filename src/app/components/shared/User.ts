@@ -1,6 +1,13 @@
 export interface User {
-  id: number;
+  id?: number;
   email: string;
   username: string;
-  roles: any[];
+  roles: { authority: string }[];
+  apiKeys: ApiKey[];
+}
+
+export interface ApiKey {
+  id?: number;
+  name: string;
+  apiKey: string;
 }

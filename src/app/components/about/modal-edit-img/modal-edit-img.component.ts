@@ -36,6 +36,7 @@ export class ModalEditImgComponent {
 
   public onFileSelected(event: any) {
     const file = <File>event.target.files[0];
+
     if (file.type === 'image/png' || file.type === 'image/jpeg' || file.type === 'image/jpg') {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);

@@ -32,8 +32,7 @@ export const MY_FORMATS = {
   selector: 'app-date-picker',
   templateUrl: './date-picker.component.html',
   styleUrls: ['./date-picker.component.css'],
-  providers: [{provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
-  ],
+  providers: [{provide: MAT_DATE_FORMATS, useValue: MY_FORMATS}]
 })
 
 export class DatePickerComponent {

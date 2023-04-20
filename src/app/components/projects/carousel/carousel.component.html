@@ -1,14 +1,25 @@
 <div class="d-flex align-items-center justify-content-around">
 
   <div class="d-flex flex-column">
-    <button type='button' mat-fab (click)="this.addImage()"
+    <input type="file" #fileInput
+           (change)="this.addImage($event)"
+           accept="image/*"
+           style="display: none">
+    <button type='button' mat-fab (click)="fileInput.click()"
+            [disabled]="this.imgLoading"
             style="background-color:#fff"
             class="my-3"
             title="Agregar imagen">
-      <mat-icon>add_photo_alternate</mat-icon>
+      <ng-container [ngSwitch]="this.imgLoading">
+        <mat-spinner [diameter]="20" [strokeWidth]="3" *ngSwitchCase="true"
+                     class="d-inline-block" color="warn">
+        </mat-spinner>
+        <mat-icon *ngSwitchCase="false">add_photo_alternate</mat-icon>
+      </ng-container>
     </button>
 
     <button type="button" mat-fab
+            [disabled]="!this.slides.length || this.imgLoading"
             style="background-color:#fff"
             class="my-3"
             title="Eliminar imagen actual"
