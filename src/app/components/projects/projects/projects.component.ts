@@ -36,7 +36,7 @@ export class ProjectsComponent {
       autoFocus: true,
       restoreFocus: true,
       width: '600px',
-      height: '850px',
+      height: '900px',
       maxWidth: '95vw',
       enterAnimationDuration: '200ms',
       exitAnimationDuration: '200ms',

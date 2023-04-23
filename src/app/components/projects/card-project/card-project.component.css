@@ -134,7 +134,6 @@ mat-card:hover {
 }
 
 .share-icon:hover {
-  transform: scale(1.06);
   color: #ff6e31;
 }
 

@@ -1,7 +1,7 @@
 import {Component, ChangeDetectionStrategy, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {ProjectData} from "../projects/ProjectData";
 import {StorageSessionService} from "../../../service/storage-session.service";
-import {faShare, faExpand} from "@fortawesome/free-solid-svg-icons";
+import {faShare, faExpand, faExternalLinkSquareAlt} from "@fortawesome/free-solid-svg-icons";
 import {faGithub} from "@fortawesome/free-brands-svg-icons";
 
 import {Gallery, GalleryItem, ImageItem, ThumbnailsPosition, ImageSize} from 'ng-gallery';
@@ -29,6 +29,7 @@ export class CardProjectComponent implements OnInit {
     faShare,
     faExpand,
     faGithub,
+    faExternalLinkSquareAlt,
   }
 
   public isLogged: boolean = false;
@@ -39,6 +40,7 @@ export class CardProjectComponent implements OnInit {
     thumb: false,
     dots: false,
   }
+  public playerInterval = Math.floor(Math.random() * (10000 - 5000 + 1) + 2000);
 
   constructor(private storageSession: StorageSessionService,
               public gallery: Gallery, public lightbox: Lightbox,
@@ -102,7 +104,7 @@ export class CardProjectComponent implements OnInit {
       autoFocus: true,
       restoreFocus: true,
       width: '600px',
-      height: '850px',
+      height: '900px',
       maxWidth: '95vw',
       enterAnimationDuration: '200ms',
       exitAnimationDuration: '200ms',

@@ -14,7 +14,7 @@
              type="text"
              formControlName="name"
              placeholder="Ingrese el nombre del proyecto"
-             maxlength="100"
+             maxlength="255"
       />
       <mat-label>Proyecto</mat-label>
       <mat-error *ngIf="form.get('name')?.hasError('required')">
@@ -43,10 +43,24 @@
            type="text"
            formControlName="githubLink"
            placeholder="Ingrese un enlace a github"
-           maxlength="100"
+           maxlength="255"
     />
     <mat-label>Enlace a github</mat-label>
     <mat-error *ngIf="form.get('githubLink')?.hasError('required')">
+      El enlace es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" [hideRequiredMarker]="true"
+                  floatLabel="always">
+    <input matInput
+           type="text"
+           formControlName="link"
+           placeholder="Ingrese un enlace a la web"
+           maxlength="255"
+    />
+    <mat-label>Enlace a la web</mat-label>
+    <mat-error *ngIf="form.get('webLink')?.hasError('required')">
       El enlace es requerido
     </mat-error>
   </mat-form-field>

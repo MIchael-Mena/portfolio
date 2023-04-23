@@ -31,7 +31,10 @@ export class CarouselComponent {
           deleteUrl: data['delete_url']
         });
         this.slidesChange.emit(this.slides);
-        this.activeSlideIndex = this.slides.length - 1;
+        setTimeout(() => {
+          this.activeSlideIndex = this.slides.length - 1;
+        }, 500);
+        // this.activeSlideIndex = this.slides.length - 1;
         this.imgLoading = false;
       },
       error: (err: any) => {
