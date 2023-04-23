@@ -1,31 +1,45 @@
-<mat-card class="mat-typography m-0 mx-auto" matRipple>
+<mat-card class="mat-typography m-0 mx-auto h-100" matRipple>
 
   <mat-card-header class="d-block">
     <div class="d-flex justify-content-between align-items-center mb-2">
       <span class="date">{{project.date | date:'dd/MM/yyyy'}}</span>
       <div class="d-flex align-items-center">
-        <fa-icon [icon]="faShare" size="xl" class="share-icon">
-        </fa-icon>
+        <!--        TODO: Implementar share
+                <fa-icon [icon]="this.icons.faShare" size="xl" class="share-icon">
+                </fa-icon>-->
         <ng-container *ngIf="this.isLogged">
           <app-menu-edition (onEdit)="editProject()"
-                            (onDelete)="deleteProject()">
+                            (onDelete)="openDeleteDialog()">
           </app-menu-edition>
         </ng-container>
       </div>
     </div>
     <h3 class="title mb-3">{{project.name}}</h3>
     <div class="card-image">
-      <div class="card-img-top card-img-zoom-in"
-           *ngFor="let image of project.images; let i = index">
-        <img [src]="image.thumbnail"
-             class="img-clickable"
-             (click)="this.lightbox.open(i);"
-             alt="{{project.name}">
-      </div>
+
+      <gallery id="{{project.id}}" class="gallery" [autoHeight]="false" [thumbHeight]="90" [thumbWidth]="90"
+               [nav]="false"
+               [dotsPosition]="'bottom'"
+               [counter]="false"
+               [thumb]="this.galleryConfig.thumb"
+               [dots]="this.galleryConfig.dots"
+               [loop]="false"
+               (indexChange)="this.currentIndex = $event.currIndex!"
+               imageSize="cover"
+               thumbImageSize="contain"
+               [thumbAutosize]="false"
+               [itemAutosize]="false"
+               [items]="this.itemsCard"
+               thumbPosition="left">
+      </gallery>
+      <fa-icon class="expand-icon" [icon]="this.icons.faExpand" size="xl"
+               (click)="this.lightbox.open(this.currentIndex, this.project.name)">
+      </fa-icon>
+
     </div>
   </mat-card-header>
 
-  <mat-card-content class="my-3">
+  <mat-card-content class="my-3 d-flex flex-column justify-content-between h-100">
     <p class="description">{{project.description}}</p>
     <mat-chip-listbox aria-label="Project Technologies">
       <mat-chip *ngFor="let technology of project.technologies"
@@ -35,9 +49,11 @@
       </mat-chip>
     </mat-chip-listbox>
   </mat-card-content>
-
   <mat-card-footer class="card-footer">
-    <fa-icon [icon]="faGithub" size="2x" class="icon-footer"></fa-icon>
+    <fa-icon [ngClass]="{'icon-footer':this.project.githubLink, 'icon-footer-disabled':!this.project.githubLink}"
+             (click)="this.openLink(this.project.githubLink!)"
+             [icon]="this.icons.faGithub" size="2x">
+    </fa-icon>
   </mat-card-footer>
 
 </mat-card>

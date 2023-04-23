@@ -31,7 +31,7 @@
   <carousel [(activeSlide)]="activeSlideIndex"
             [showIndicators]="true"
             [isAnimated]="true"
-            class="carousel-style text-center">
+            class="carousel-style text-center ms-2">
     <slide *ngFor="let slide of slides; let index=index">
       <img [src]="slide.thumbnail" alt="image slide" class="img-thumbnail p-0">
     </slide>

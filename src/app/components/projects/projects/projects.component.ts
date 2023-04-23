@@ -14,9 +14,13 @@ import {MatDialog} from "@angular/material/dialog";
 export class ProjectsComponent {
 
   public projects: ProjectData[] = [];
+  public isLoading: boolean = true;
 
   constructor(private projectService: ProjectService, private dialog: MatDialog) {
-    this.projectService.projectsOrder.subscribe(projects => this.projects = projects);
+    this.projectService.projectsOrder.subscribe(projects => {
+      this.projects = projects
+      this.isLoading = false;
+    });
   }
 
   public addProject() {
@@ -45,11 +49,12 @@ export class ProjectsComponent {
   }
 
   public deleteProject(project: ProjectData) {
+    this.projects.splice(this.projects.indexOf(project), 1);
   }
 
-  public editProject(project: ProjectData) {
-
-
+  public updateProject(project: ProjectData) {
+    const index = this.projects.findIndex(p => p.id === project.id);
+    this.projects[index] = project;
   }
 
 }

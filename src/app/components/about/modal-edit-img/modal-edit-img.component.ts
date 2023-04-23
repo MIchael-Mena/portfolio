@@ -35,8 +35,12 @@ export class ModalEditImgComponent {
   }
 
   public onFileSelected(event: any) {
+    // Se limita le tamaño de la imagen a 1MB que son 1048576 bytes
     const file = <File>event.target.files[0];
-
+    if (file.size > 1048576) {
+      alert('La imagen no puede ser mayor a 1MB')
+      return;
+    }
     if (file.type === 'image/png' || file.type === 'image/jpeg' || file.type === 'image/jpg') {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);

@@ -1,7 +1,7 @@
 import {Component, ChangeDetectionStrategy, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import {Image, ProjectData} from "../projects/ProjectData";
+import {ProjectData} from "../projects/ProjectData";
 import {StorageSessionService} from "../../../service/storage-session.service";
-import {faShare} from "@fortawesome/free-solid-svg-icons";
+import {faShare, faExpand} from "@fortawesome/free-solid-svg-icons";
 import {faGithub} from "@fortawesome/free-brands-svg-icons";
 
 import {Gallery, GalleryItem, ImageItem, ThumbnailsPosition, ImageSize} from 'ng-gallery';
@@ -11,28 +11,8 @@ import {ModalResponse} from "../../shared/ModalResponse";
 import {MatDialog} from "@angular/material/dialog";
 import {ProjectService} from "../service/project.service";
 import {ModalProjectComponent} from "../modal-project/modal-project.component";
-
-
-/*const images: Image[] = [
-  {
-    thumbnail: 'https://i.ibb.co/KyKpvsz/Prueba-render-10-alt.png',
-    original: 'https://i.ibb.co/ZT2pDg1/Prueba-render-10-alt.png',
-    deleteUrl: ''
-    // original: 'https://i.ibb.co/12ztWXJ/Prueba-render-10-alt.png'
-  },
-  {
-    thumbnail: 'https://i.ibb.co/FDV8BpV/Prueba-render-12.png',
-    original: 'https://i.ibb.co/KrwV9nw/Prueba-render-12.png',
-    deleteUrl: ''
-    // original: 'https://i.ibb.co/fxvrCJv/Prueba-render-12.png'
-  },
-  {
-    thumbnail: 'https://i.ibb.co/V9m9xJp/mecedora.jpg',
-    original: 'https://i.ibb.co/XL8LDjk/mecedora.jpg',
-    deleteUrl: ''
-    // original: 'https://i.ibb.co/LR5RrYh/mecedora.jpg'
-  }
-]*/
+import {DialogContent} from "../../dialog-card/DialogContent";
+import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
 
 
 @Component({
@@ -45,18 +25,20 @@ export class CardProjectComponent implements OnInit {
   @Input() project!: ProjectData;
   @Output() onEdit: EventEmitter<ProjectData> = new EventEmitter<ProjectData>();
   @Output() onDelete: EventEmitter<ProjectData> = new EventEmitter<ProjectData>();
-  public faShare = faShare;
-  public faGithub = faGithub;
-  public isLogged: boolean = false;
-  private items!: GalleryItem[];
+  public icons = {
+    faShare,
+    faExpand,
+    faGithub,
+  }
 
-  /*  public project: ProjectData = {
-      name: 'Mecedora',
-      date: '2015-01-01',
-      description: 'Realización de una mecedora para facultad de diseño de la UBA. El proyecto consistió en la realización de un prototipo de mecedora, el cual fue realizado en madera y plástico. El prototipo fue presentado para la materia Diseño Industrial.',
-      images: images,
-      technologies: ['Rhinoceros 3D', 'Adobe Illustrator'],
-    }*/
+  public isLogged: boolean = false;
+  public currentIndex = 0;
+  private items!: GalleryItem[];
+  public itemsCard!: GalleryItem[];
+  public galleryConfig = {
+    thumb: false,
+    dots: false,
+  }
 
   constructor(private storageSession: StorageSessionService,
               public gallery: Gallery, public lightbox: Lightbox,
@@ -66,24 +48,41 @@ export class CardProjectComponent implements OnInit {
     });
   }
 
+  public openLink(link: string): void {
+    if (link) {
+      window.open(link, '_blank');
+    }
+  }
+
   ngOnInit(): void {
     this.loadGallery();
+    this.setupGallery();
+  }
+
+  private setupGallery(): void {
+    if (this.project.images.length > 1) {
+      this.galleryConfig = {
+        thumb: true,
+        dots: true,
+      }
+    }
   }
 
   private loadGallery(): void {
     // Creat gallery items
     this.items = this.project.images.map(item => new ImageItem({src: item.original, thumb: item.thumbnail}));
+    this.itemsCard = this.project.images.map(item => new ImageItem({src: item.medium, thumb: item.thumbnail}));
 
     /*    this.lightbox.setConfig({
           panelClass: 'fullscreen',
         })*/
 
     // Get a lightbox gallery ref
-    const lightboxRef = this.gallery.ref('lightbox');
+    const lightboxRef = this.gallery.ref(this.project.name);
 
     // Add custom gallery config to the lightbox (optional)
     lightboxRef.setConfig({
-      imageSize: ImageSize.Cover,
+      imageSize: ImageSize.Contain,
       thumbPosition: ThumbnailsPosition.Top,
     });
 
@@ -115,8 +114,30 @@ export class CardProjectComponent implements OnInit {
     });
   }
 
-  public deleteProject(): void {
-
+  public openDeleteDialog(): void {
+    const data = <DialogContent>{
+      title: 'Eliminar habilidad ' + this.project.name,
+      message: '¿Estás seguro de que quieres eliminar esta habilidad?',
+      buttonConfirm: 'Eliminar',
+      buttonCancel: 'Cancelar',
+      buttonConfirmLoading: 'Eliminando...',
+      payload: () => this.projectService.deleteProject(this.project),
+    }
+    const dialogRef = this.dialog.open(DialogCardComponent, {
+      data,
+      width: '350px',
+      maxWidth: '95vw',
+      enterAnimationDuration: '200ms',
+      exitAnimationDuration: '200ms',
+    });
+    dialogRef.afterClosed().subscribe((result: ModalResponse) => {
+      if (result.state) {
+        this.onDelete.emit(this.project);
+      } else if (result.error) {
+        console.log(result.error);
+        alert('Error al eliminar la habilidad');
+      }
+    });
   }
 
 }

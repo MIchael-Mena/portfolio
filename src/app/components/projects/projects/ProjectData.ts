@@ -1,6 +1,7 @@
 export interface Image {
   id?: number;
   thumbnail: string;
+  medium: string;
   original: string;
   description?: string;
   position?: number;

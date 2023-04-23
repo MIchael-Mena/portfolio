@@ -1,8 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Image} from "../projects/ProjectData";
-import {AuthService} from "../../../service/auth.service";
 import {StorageSessionService} from "../../../service/storage-session.service";
-import {ApiKey} from "../../shared/User";
 import {ImgBBService} from "../../../service/imgBB.service";
 
 @Component({
@@ -24,16 +22,23 @@ export class CarouselComponent {
   public addImage(event: any): void {
     this.imgLoading = true;
     const file = <File>event.target.files[0];
-    this.imgBBService.upload(file, this.imgBBKey).subscribe((data: any) => {
-      console.log(data);
-      this.slides.push(<Image>{
-        thumbnail: data.thumb.url,
-        original: data.image.url,
-        deleteUrl: data['delete_url'],
-      });
-      this.slidesChange.emit(this.slides);
-      this.activeSlideIndex = this.slides.length - 1;
-      this.imgLoading = false;
+    this.imgBBService.upload(file, this.imgBBKey).subscribe({
+      next: (data: any) => {
+        this.slides.push(<Image>{
+          thumbnail: data.thumb.url,
+          medium: (data.medium.url === undefined) ? data.image.url : data.medium.url,
+          original: data.image.url,
+          deleteUrl: data['delete_url']
+        });
+        this.slidesChange.emit(this.slides);
+        this.activeSlideIndex = this.slides.length - 1;
+        this.imgLoading = false;
+      },
+      error: (err: any) => {
+        console.error(err);
+        alert('Error al subir la imagen')
+        this.imgLoading = false;
+      }
     });
   }
 

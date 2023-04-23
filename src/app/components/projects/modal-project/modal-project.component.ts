@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ActionForShipment} from "../../shared/ActionForShipment";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ButtonSettings} from "../../shared/button-confirm/ButtonSettings";
 import {ModalResponse} from "../../shared/ModalResponse";
 import {Image, ProjectData} from "../projects/ProjectData";
@@ -50,14 +50,11 @@ export class ModalProjectComponent implements OnInit {
   }
 
   public onClose(): void {
+    // TODO: eliminar las imágenes subidas
     this.dialogRef.close(<ModalResponse>{state: false});
   }
 
   public onSubmit(): void {
-    // console.log(this.technologies);
-    // console.log(this.form.get('date')?.value.format('YYYY-MM-DD'));
-    // console.log(this.images);
-
     this.isLoading = true;
     if (this.form.invalid || this.images.length === 0) {
       this.isLoading = false;
@@ -66,7 +63,7 @@ export class ModalProjectComponent implements OnInit {
     const project = this.prepareProject();
     this.action.onAction(project).subscribe({
       next: (response: ProjectData) => {
-        this.dialogRef.close(<ModalResponse>{state: true, data: response});
+        this.dialogRef.close(<ModalResponse>{state: true, content: response});
         this.isLoading = false;
       },
       error: (error: any) => {
@@ -75,7 +72,6 @@ export class ModalProjectComponent implements OnInit {
         console.log(error);
       }
     });
-
   }
 
   private prepareProject(): ProjectData {
@@ -85,10 +81,15 @@ export class ModalProjectComponent implements OnInit {
       description: this.form.get('description')?.value,
       link: this.form.get('link')?.value,
       githubLink: this.form.get('githubLink')?.value,
-      date: this.form.get('date')?.value.format('YYYY-MM-DD'),
+      date: this.formatDate,
       technologies: this.technologies,
       images: this.images
     }
+  }
+
+  private get formatDate(): string {
+    const date = this.form.get('date')?.value;
+    return (typeof date === 'string') ? date : date.format('YYYY-MM-DD');
   }
 
 
