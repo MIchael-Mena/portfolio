@@ -23,6 +23,7 @@ export class ModalProjectComponent implements OnInit {
     onConfirmText: 'Guardar',
     onWaitingText: 'Guardando...',
   }
+  public imageRequired: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<ModalProjectComponent>,
               private skillsService: SkillService,
@@ -57,6 +58,8 @@ export class ModalProjectComponent implements OnInit {
   public onSubmit(): void {
     this.isLoading = true;
     if (this.form.invalid || this.images.length === 0) {
+      this.imageRequired = this.images.length === 0;
+      console.log(this.imageRequired);
       this.isLoading = false;
       return;
     }
