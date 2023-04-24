@@ -9,6 +9,7 @@ import {ImgBBService} from "../../../service/imgBB.service";
   styleUrls: ['./carousel.component.css']
 })
 export class CarouselComponent {
+  @Input() imageRequired: boolean = false;
   @Input() slides: Image[] = [];
   @Output() slidesChange: EventEmitter<Image[]> = new EventEmitter<Image[]>();
   public activeSlideIndex: number = 0;
@@ -35,6 +36,7 @@ export class CarouselComponent {
           this.activeSlideIndex = this.slides.length - 1;
         }, 500);
         // this.activeSlideIndex = this.slides.length - 1;
+        this.imageRequired = false;
         this.imgLoading = false;
       },
       error: (err: any) => {

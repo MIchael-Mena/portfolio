@@ -31,12 +31,16 @@
   <carousel [(activeSlide)]="activeSlideIndex"
             [interval]="0"
             [noPause]="true"
-            [showIndicators]="true"
+            [showIndicators]="false"
             [isAnimated]="true"
             class="carousel-style text-center ms-2">
-    <slide *ngFor="let slide of slides; let index=index">
+    <mat-error *ngIf="this.imageRequired" class="mat-caption">
+      Debe agregar al menos una imagen
+    </mat-error>
+    <slide *ngFor="let slide of slides">
       <img [src]="slide.thumbnail" alt="image slide" class="img-thumbnail p-0">
     </slide>
   </carousel>
+
 
 </div>
