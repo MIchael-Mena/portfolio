@@ -5,7 +5,7 @@ import {UnsavedChangesService} from "../../../service/unsaved-changes.service";
 import {MatDialog} from "@angular/material/dialog";
 import {MatTabChangeEvent} from "@angular/material/tabs";
 import {StorageSessionService} from "../../../service/storage-session.service";
-import {LoaderComponentService} from "../../../service/loader-component.service";
+// import {LoaderComponentService} from "../../../service/loader-component.service";
 
 // return await firstValueFrom(dialogRef.afterClosed()) para devolver un observable como promesa
 //   public canDeactivate: () => Promise<boolean> = async () => true; para devolver una promesa
@@ -31,8 +31,7 @@ export class ExperienceAndEducationComponent {
   ];
 
   constructor(private unsavedChanges: UnsavedChangesService, private dialog: MatDialog,
-              private storageService: StorageSessionService,
-              private loaderComponentService: LoaderComponentService) {
+              private storageService: StorageSessionService) {
     this.storageService.onToggleSignUp().subscribe((result: boolean) => {
       this.isLoggedIn = result;
     });
