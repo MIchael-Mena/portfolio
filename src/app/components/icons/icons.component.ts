@@ -25,6 +25,7 @@ export class IconsComponent {
     iconRegistry.addSvgIcon('work', sanitizer.bypassSecurityTrustResourceUrl('/assets/icon/svg/work.svg'));
     iconRegistry.addSvgIcon('skill-bar', sanitizer.bypassSecurityTrustResourceUrl('/assets/icon/svg/skill-bar.svg'));
     iconRegistry.addSvgIcon('project', sanitizer.bypassSecurityTrustResourceUrl('/assets/icon/svg/project.svg'));
+    iconRegistry.addSvgIcon('michael-logo', sanitizer.bypassSecurityTrustResourceUrl('/assets/icon/svg/michael-logo.svg'));
   }
 
 }

@@ -3,6 +3,7 @@ import {Component} from '@angular/core';
 import {StorageSessionService} from "../../service/storage-session.service";
 import {AuthService} from "../../service/auth.service";
 import {Router} from "@angular/router";
+import {faUserSecret, faArrowRightFromBracket, faArrowRightToBracket} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-nav',
@@ -12,11 +13,16 @@ import {Router} from "@angular/router";
 export class NavComponent {
 
   public routeAboutActive: boolean = false;
-  public routeExpAndEduActive: boolean = false;
   public routeSkillsActive: boolean = false;
   public routeProjectsActive: boolean = false;
   public routeLoginActive: boolean = false;
-
+  public icon = {
+    faUserSecret,
+    faArrowRightFromBracket,
+    faArrowRightToBracket
+  }
+  // public faUserSecret = faUserSecret;
+  // public faArrowRightFromBracket = faArrowRightFromBracket;
   public isLoggedIn: boolean = false;
 
   constructor(public storageService: StorageSessionService,
@@ -32,9 +38,6 @@ export class NavComponent {
     switch (route) {
       case 'about':
         this.routeAboutActive = state;
-        break;
-      case 'expAndEdu':
-        this.routeExpAndEduActive = state;
         break;
       case 'skills':
         this.routeSkillsActive = state;

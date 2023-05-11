@@ -7,18 +7,19 @@
     <span [innerHTML]="dialog.message | safe: 'html'" class="text-light"></span>
   </div>
   <div mat-dialog-actions>
-    <button mat-raised-button [mat-dialog-close]="{state:false}">
+    <!--    <button mat-raised-button [mat-dialog-close]="{state:false}">-->
+    <button mat-raised-button (click)="onCancel()" cdkFocusInitial>
       {{this.dialog.buttonCancel ? this.dialog.buttonCancel : 'No'}}
     </button>
     <span [ngSwitch]="isLoading" class="ms-2">
-          <button *ngSwitchCase="false" mat-raised-button (click)="onClose()" cdkFocusInitial color="warn">
-            {{this.dialog.buttonConfirm ? this.dialog.buttonConfirm : 'Ok'}}
-          </button>
-          <button *ngSwitchCase="true" mat-raised-button disabled="true">
-            <mat-spinner [diameter]="20" [strokeWidth]="3" class="d-inline-block" color="warn"></mat-spinner>
-            {{this.dialog.buttonConfirmLoading ? this.dialog.buttonConfirmLoading : 'Cargando...'}}
-          </button>
-        </span>
+      <button *ngSwitchCase="false" mat-raised-button (click)="onConfirm()" color="warn">
+        {{this.dialog.buttonConfirm ? this.dialog.buttonConfirm : 'Ok'}}
+      </button>
+      <button *ngSwitchCase="true" mat-raised-button disabled="true">
+        <mat-spinner [diameter]="20" [strokeWidth]="3" class="d-inline-block" color="warn"></mat-spinner>
+        {{this.dialog.buttonConfirmLoading ? this.dialog.buttonConfirmLoading : 'Procesando...'}}
+      </button>
+    </span>
   </div>
 
 </div>

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ExperienceData} from '../ExperienceData';
 import {DatePicker} from '../../shared/date-picker/DatePicker';
@@ -13,8 +13,6 @@ import {ExperienceService} from "../service/experience.service";
 import {ButtonSettings} from "../../shared/button-confirm/ButtonSettings";
 import {WorkData} from "../WorkData";
 import {EducationData} from "../EducationData";
-import {ModalResponse} from "../../shared/ModalResponse";
-
 
 const datePickerClean = <DatePicker>{
   disable: false,
@@ -26,7 +24,8 @@ const datePickerClean = <DatePicker>{
 
 const buttonSettingsAdd: ButtonSettings = {
   onConfirmText: 'Agregar',
-  onWaitingText: 'Agregando...'
+  onWaitingText: 'Agregando...',
+  color: 'primary'
 }
 
 @Component({
@@ -34,12 +33,12 @@ const buttonSettingsAdd: ButtonSettings = {
   templateUrl: './add-experience.component.html',
   styleUrls: ['./add-experience.component.css']
 })
-export class AddExperienceComponent implements OnChanges {
+export class AddExperienceComponent implements OnChanges, OnInit {
   @Input() formSettings: { showForm: boolean, experienceIsNew: boolean } = {
     showForm: false,
     experienceIsNew: true,
   };
-  @Input() formExperience?: FormExperience;
+  @Input() formExperience: FormExperience = <FormExperience>{};
   @Output() onAddExperience: EventEmitter<ExperienceData> = new EventEmitter();
   @Output() onUpdateExperience: EventEmitter<ExperienceData> = new EventEmitter();
   public buttonSettings: ButtonSettings = buttonSettingsAdd;
@@ -56,9 +55,21 @@ export class AddExperienceComponent implements OnChanges {
               private experienceService: ExperienceService) {
     this.form = this.getFormGroup();
     this.onToggleEdit();
-    this.unsavedChangesService.onDismissChanges().subscribe(setFormState => {
-      setFormState(this.formIsEmpty(), this.formExperience?.name);
-    });
+  }
+
+  ngOnInit() {
+    this.unsavedChangesService.onDismissChanges().subscribe(
+      (setComponentState: (component: string, canDeactivate: boolean) => void) => {
+        setComponentState(this.formExperience.name, this.formIsEmpty());
+      }
+    );
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    // Se ejecuta cuando cambia el valor de un input (si hace click en el botón de agregar)
+    // solo si se cambia el objeto del input al que hace tiene como referencia por otro
+    const {showForm} = changes['formSettings'].currentValue;
+    this.verifyFormVisibility(showForm);
   }
 
   public cancelForm(): void {
@@ -81,7 +92,8 @@ export class AddExperienceComponent implements OnChanges {
       // se puede usar set-value si experience tuviera todos los campos del formulario (No está presentDate)
       this.buttonSettings = {
         onConfirmText: 'Actualizar',
-        onWaitingText: 'Actualizando...'
+        onWaitingText: 'Actualizando...',
+        color: 'primary'
       }
       this.form.patchValue(experience);
       this.form.markAsDirty()
@@ -103,12 +115,6 @@ export class AddExperienceComponent implements OnChanges {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    // Se ejecuta cuando cambia el valor de un input (si hace click en el botón de agregar)
-    // solo si se cambia el objeto del input al que hace tiene como referencia por otro
-    const {showForm} = changes['formSettings'].currentValue;
-    this.verifyFormVisibility(showForm);
-  }
 
   private formIsEmpty(): boolean {
     return Object.values(this.form.controls).every(control => {
@@ -157,8 +163,8 @@ export class AddExperienceComponent implements OnChanges {
       enterAnimationDuration,
       exitAnimationDuration
     });
-    dialogRef.afterClosed().subscribe((result: ModalResponse) => {
-      if (result.state) {
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
         this.formIsVisible = false;
         this.formSettings.showForm = false;
         this.resetForm();

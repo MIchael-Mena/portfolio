@@ -1,12 +1,9 @@
 #home {
   position: relative;
-  /*background-color: #FFEBB7;*/
   background: linear-gradient(to bottom, #243763, #2F6690);
   padding: 30px;
   text-align: center;
-  border: 2px solid #243763;
-  border-radius: 25px;
-  /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);*/
+  border: 4px double #243763;
   transition: all 1s ease-in-out;
   /*animation: slideHome 7s infinite;*/
   opacity: 0;
@@ -14,8 +11,13 @@
   animation: fadeIn 1s ease-in-out forwards, pulse 3s infinite;
 }
 
+.logo-home {
+  width: auto;
+  min-height: 300px;
+  color: #ffebb7;
+}
+
 #home:hover {
-  background: linear-gradient(to bottom, #FFEBB7, #fdfdfd);
   border-color: #FFEBB7;
 }
 
@@ -25,27 +27,21 @@
 
 #home h1 {
   margin-bottom: 0;
-  border-radius: 15px 15px 0 0;
-  /*background-color: #ad8e70;*/
   color: #FFEBB7;
-  background-color: #243763;
   border: 2px solid #fff;
+  border-bottom: 0;
   text-shadow: 1px 1px 4px #243763;
   transition: all 0.5s ease-in-out;
-
   /*animation: slideColor 7s infinite;*/
 }
 
 #home h3 {
   padding: 10px;
-  border-radius: 0 0 15px 15px;
-  /*background-color: #ad8e70;*/
   color: #FFEBB7;
-  background-color: #243763;
   border: 2px solid #fff;
+  border-top: 0;
   text-shadow: 1px 1px 4px #243763;
   transition: all 0.5s ease-in-out;
-
   /*animation: slideColor 7s infinite;*/
 }
 
@@ -57,7 +53,6 @@
   overflow: hidden;
   transition: all 0.5s ease-in-out;
   border: 2px solid #fff;
-
   /*animation: slideColor 7s infinite;*/
 }
 
@@ -68,23 +63,24 @@
   height: auto;
 }
 
-.admin {
-  font-size: 1.2rem;
-  font-weight: 600;
-  box-shadow: 5px 5px 10px #243763;
-  border: 2px solid #fff;
-  padding: 5px;
-  border-radius: 20px;
-  background-color: #ff6e31;
-  transform: skew(-5deg) rotate(-1deg);
-  transition: all 0.5s ease;
-  position: absolute;
-  right: -15px;
-  top: -25px;
-}
+@media (max-width: 576px) {
+  #home {
+    padding: 10px;
+  }
 
-#home:hover .admin {
-  transform: scale(1.1);
+  #home h1 {
+    font-size: 1.5rem;
+  }
+
+  #home h3 {
+    font-size: 1.2rem;
+  }
+
+  .logo-home {
+    width: 100%;
+    height: auto;
+    min-height: auto;
+  }
 }
 
 @keyframes pulse {

@@ -10,6 +10,7 @@ import {ButtonModalModule} from "../shared/button-modal/button-modal.module";
 import {SelectFileModule} from "../shared/select-file/select-file.module";
 import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
 import {MenuEditionModule} from "../shared/menu-edition/menu-edition.module";
+import {ExperienceModule} from "../experience/experience.module";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {MenuEditionModule} from "../shared/menu-edition/menu-edition.module";
     SelectFileModule,
     CdkDropList,
     CdkDrag,
-    MenuEditionModule
+    MenuEditionModule,
+    ExperienceModule
   ],
   exports: [AboutComponent]
 })

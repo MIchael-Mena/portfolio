@@ -22,6 +22,7 @@ export class ModalProjectComponent implements OnInit {
   public buttonSettings: ButtonSettings = <ButtonSettings>{
     onConfirmText: 'Guardar',
     onWaitingText: 'Guardando...',
+    color: 'primary'
   }
   public imageRequired: boolean = false;
 

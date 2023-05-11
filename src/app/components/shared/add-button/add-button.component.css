@@ -1,0 +1,14 @@
+.icon-add {
+  box-sizing: content-box;
+  border-radius: 50%;
+  background-color: #243763;
+  padding: 2px;
+  border: 2px solid white;
+  transition: all 0.4s ease;
+}
+
+.icon-add:hover {
+  background-color: #144083;
+  border-color: #ff6e31;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+}

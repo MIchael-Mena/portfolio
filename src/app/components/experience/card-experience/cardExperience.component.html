@@ -1,4 +1,4 @@
-<mat-card class="d-flex flex-column flex-md-row justify-content-between my-4 p-3" mat-ripple>
+<!--<mat-card class="d-flex flex-column flex-md-row justify-content-between my-4 p-3" mat-ripple>
   <div class="flex-grow-1">
     <mat-card-title class="title mb-2">{{this.experience.primaryInfo}}</mat-card-title>
     <mat-card-title-group>
@@ -23,4 +23,35 @@
       (onDelete)="openDeleteDialog('200ms','100ms')">
     </app-menu-edition>
   </div>
-</mat-card>
+</mat-card>-->
+
+<mat-expansion-panel class="accordion">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <span style="color: #243763">
+        {{this.experience.primaryInfo}}
+      </span>
+    </mat-panel-title>
+    <mat-panel-description class="justify-content-between align-content-center align-items-center">
+      <span class="text-capitalize">
+          {{this.experience.initialDate | date: 'MMMM y'}}
+        - {{this.experience.finalDate == null ?
+        (this.experience.type === 'education' ? 'Cursando' : 'Presente')
+        : (experience.finalDate | date: 'MMMM y')}}
+      </span>
+      <ng-container *ngIf="this.isLoggedIn">
+        <app-menu-edition
+          (click)="$event.stopPropagation()"
+          (onEdit)="editExperience()"
+          (onDelete)="openDeleteDialog('200ms','100ms')">
+        </app-menu-edition>
+      </ng-container>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <span class="mat-caption" style="color: #ad8e70; font-size: 18px">
+    {{this.experience.secondaryInfo}}
+  </span>
+  <mat-divider class="custom-divider"></mat-divider>
+  <p class="mat-body-2">{{this.experience.description}}</p>
+</mat-expansion-panel>
+

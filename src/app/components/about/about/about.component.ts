@@ -11,19 +11,19 @@ import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
 import {Observable, of} from "rxjs";
 import {ModalResponse} from "../../shared/ModalResponse";
 import {LoaderComponentService} from "../../../service/loader-component.service";
+import {UnsavedChangesService} from "../../../service/unsaved-changes.service";
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css'],
-  providers: [LoaderComponentService]
+  providers: [LoaderComponentService, UnsavedChangesService]
 })
 export class AboutComponent implements OnInit {
   public faSquareCaretDown = faSquareCaretDown;
   public faImagePortrait = faImagePortrait;
   public aboutMe: AboutMeData = <AboutMeData>{}
   public isLoading: boolean = true;
-  private componentsLoading: Map<string, boolean> = new Map<string, boolean>();
   public isLoggedIn = false;
   public nameData: EditField = <EditField>{};
   public titleData: EditField = <EditField>{};
@@ -34,7 +34,8 @@ export class AboutComponent implements OnInit {
   constructor(private aboutService: AboutService,
               private storageService: StorageSessionService,
               private dialog: MatDialog,
-              private loaderComponentService: LoaderComponentService) {
+              private loaderComponentService: LoaderComponentService,
+              private unsavedChangesService: UnsavedChangesService) {
     this.storageService.onToggleSignUp().subscribe(() => {
       this.isLoggedIn = storageService.isLoggedIn;
     });
@@ -67,11 +68,7 @@ export class AboutComponent implements OnInit {
   }
 
   private canDeactivateComponent(): Observable<boolean> {
-    if (this.isLoading ||
-      (this.nameData.canDeactivate() &&
-        this.titleData.canDeactivate() &&
-        this.descriptionData.canDeactivate())
-    ) {
+    if (this.isLoading || this.unsavedChangesService.canDeactivate()) {
       return of(true);
     }
     const data = <DialogContent>{
@@ -97,8 +94,7 @@ export class AboutComponent implements OnInit {
       html: `<h2 class="">${this.aboutMe.name}</h2>`,
       inputType: 'text',
       label: 'Nombre',
-      update: (value: string) => this.aboutService.updateName(value),
-      canDeactivate: () => true
+      update: (value: string) => this.aboutService.updateName(value)
     }
   }
 
@@ -108,8 +104,7 @@ export class AboutComponent implements OnInit {
       html: `<h2 class="text-muted ">${this.aboutMe.title}</h2>`,
       inputType: 'text',
       label: 'Título',
-      update: (value: string) => this.aboutService.updateTitle(value),
-      canDeactivate: () => true
+      update: (value: string) => this.aboutService.updateTitle(value)
     }
   }
 
@@ -119,8 +114,7 @@ export class AboutComponent implements OnInit {
       html: `<p class="lh-lg px-1">${this.aboutMe.description}</p>`,
       inputType: 'textarea',
       label: 'Descripción',
-      update: (value: string) => this.aboutService.updateDescription(value),
-      canDeactivate: () => true
+      update: (value: string) => this.aboutService.updateDescription(value)
     }
   }
 
@@ -145,8 +139,7 @@ export class AboutComponent implements OnInit {
       html: '',
       inputType: 'image',
       label: 'Imagen de perfil',
-      update: (value: string) => this.aboutService.updatePhoto(value),
-      canDeactivate: () => true
+      update: (value: string) => this.aboutService.updatePhoto(value)
     }
     const dialogRef = this.dialog.open(ModalEditImgComponent, {
       width: '350px',

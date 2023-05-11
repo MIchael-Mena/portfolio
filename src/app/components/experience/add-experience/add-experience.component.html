@@ -3,31 +3,31 @@
     <div class="col-lg-6 style-container-form p-3">
       <form class="mat-typography" [formGroup]="form" (ngSubmit)="onSubmit()">
 
-        <label class="p-2">{{ formExperience?.getPrimaryInfoLabel() }}</label>
+        <label class="p-2">{{ formExperience.getPrimaryInfoLabel() }}</label>
         <mat-form-field appearance="outline" [hideRequiredMarker]="true">
           <input
             matInput
             type="text"
-            placeholder="{{'Agregar un ' + this.formExperience?.getPrimaryInfoLabel()}}"
+            placeholder="{{'Agregar un ' + this.formExperience.getPrimaryInfoLabel()}}"
             formControlName="primaryInfo"
             maxlength="60"
           />
           <mat-error *ngIf="form.get('primaryInfo')?.hasError('required')">
-            {{'El campo ' + this.formExperience?.getPrimaryInfoLabel() + ' es requerido'}}
+            {{'El campo ' + this.formExperience.getPrimaryInfoLabel() + ' es requerido'}}
           </mat-error>
         </mat-form-field>
 
-        <label class="p-2">{{ this.formExperience?.getSecondaryInfoLabel() }}</label>
+        <label class="p-2">{{ this.formExperience.getSecondaryInfoLabel() }}</label>
         <mat-form-field appearance="outline" [hideRequiredMarker]="true">
           <input
             matInput
             type="text"
-            placeholder="{{'Agregar una ' + this.formExperience?.getSecondaryInfoLabel()}}"
+            placeholder="{{'Agregar una ' + this.formExperience.getSecondaryInfoLabel()}}"
             formControlName="secondaryInfo"
             maxlength="60"
           />
           <mat-error *ngIf="form.get('secondaryInfo')?.hasError('required')">
-            {{'El campo ' + this.formExperience?.getSecondaryInfoLabel() + ' es requerido'}}
+            {{'El campo ' + this.formExperience.getSecondaryInfoLabel() + ' es requerido'}}
           </mat-error>
         </mat-form-field>
 

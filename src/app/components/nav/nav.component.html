@@ -1,13 +1,15 @@
-<nav class="navbar mb-0 navbar-shrink navbar-expand-lg navbar-dark fixed-top py-3" id="mainNav">
+<nav class="navbar mb-0 navbar-shrink navbar-expand-lg navbar-dark fixed-top py-0" id="mainNav">
   <div class="container px-4 px-lg-5">
     <a
       class="navbar-brand logo"
       routerLink="home"
       routerLinkActive="home-button-active "
     >
-      <span class="mat-subtitle-1 ">
-      Portfolio
-      </span>
+      <mat-icon svgIcon="michael-logo" class="icon-home">
+      </mat-icon>
+      <!--      <span class="mat-subtitle-1 ">
+            Portfolio
+            </span>-->
     </a>
 
     <!--    button visible cuando media < 996px-->
@@ -39,19 +41,6 @@
 
         <li class="nav-item">
           <a class="nav-link"
-             routerLink="/experience&education"
-             routerLinkActive
-             (isActiveChange)="this.routerActive($event, 'expAndEdu')"
-          >
-            <span class="mat-subtitle-2">
-            Experiencia & Educación
-            </span>
-            <div [ngClass]="{'active-link mt-1': this.routeExpAndEduActive}"></div>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link"
              routerLink="/skills"
              routerLinkActive
              (isActiveChange)="this.routerActive($event, 'skills')"
@@ -78,25 +67,31 @@
 
         <li class="nav-item ms-lg-3">
           <div [matMenuTriggerFor]="menu" class="d-grid">
-            <mat-icon svgIcon="account" aria-hidden="false"
-                      aria-label="account"
-                      class="icon-display"
-            >
-            </mat-icon>
+            <fa-icon [icon]="this.icon.faUserSecret" class="icon-display" size="2xl"></fa-icon>
+            <!--            <mat-icon svgIcon="account" aria-hidden="false"
+                                  aria-label="account"
+                                  class="icon-display"
+                        >
+                        </mat-icon>-->
             <div [ngClass]="{'active-link mt-1':routeLoginActive ,'':!routeLoginActive }"></div>
           </div>
-          <mat-menu #menu="matMenu">
-            <a class="nav-link"
+          <mat-menu #menu="matMenu" class="mat-menu-container">
+            <a class="nav-link mat-menu"
                routerLink="/login"
                routerLinkActive
                (isActiveChange)="this.routerActive($event, 'login')"
                mat-menu-item *ngIf="!this.isLoggedIn">
+              <fa-icon [icon]="this.icon.faArrowRightToBracket"
+                       size="xl" style="color:#243763"></fa-icon>
               Iniciar Sesión
             </a>
             <button mat-menu-item
+                    class="mat-menu"
                     *ngIf="this.isLoggedIn"
                     (click)="this.logOut()"
             >
+              <fa-icon [icon]="this.icon.faArrowRightFromBracket"
+                       size="xl" style="color:#243763"></fa-icon>
               Cerrar Sesión
             </button>
 

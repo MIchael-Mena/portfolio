@@ -11,6 +11,7 @@ import {MenuEditionModule} from "../shared/menu-edition/menu-edition.module";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MainHeaderModule} from "../shared/main-header/main-header.module";
 import {AddButtonModule} from "../shared/add-button/add-button.module";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {AddButtonModule} from "../shared/add-button/add-button.module";
     MenuEditionModule,
     MatTabsModule,
     MainHeaderModule,
-    AddButtonModule
+    AddButtonModule,
+    MatExpansionModule
   ],
   exports: [ExperienceAndEducationComponent, ExperiencesComponent]
 })

@@ -7,11 +7,11 @@ import {ButtonSettings} from "./ButtonSettings";
   styleUrls: ['./button-confirm.component.css']
 })
 export class ButtonConfirmComponent {
-
   @Output() onClickConfirm: EventEmitter<void> = new EventEmitter<void>();
   @Input() buttonSettings: ButtonSettings = {
     onConfirmText: 'Agregar',
-    onWaitingText: 'Agregando...'
+    onWaitingText: 'Agregando...',
+    color: 'primary'
   }
   @Input() icon: string | null = null;
   @Input() isWaiting: boolean = false;
@@ -19,7 +19,7 @@ export class ButtonConfirmComponent {
   constructor() {
 
   }
-  
+
   public onConfirm(): void {
     // En caso de que el botón no esté dentro de un formulario, se puede emitir el evento
     this.onClickConfirm.emit();

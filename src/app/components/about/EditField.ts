@@ -6,6 +6,5 @@ export interface EditField {
   html: string;
   inputType: string;
   label: string;
-  update: (value: string) => Observable<AboutMeData>
-  canDeactivate: () => boolean;
+  update: (value: string) => Observable<AboutMeData>;
 }
