@@ -49,16 +49,17 @@ export class AboutComponent implements OnInit {
     this.aboutService.aboutMe.subscribe((result: AboutMeData) => {
       this.aboutMe = result;
       this.prepareData();
-      this.setPhoto();
+      // this.setPhoto();
       this.loaderComponentService.toggleLoad(false, 'about-me');
     });
   }
 
   private setPhoto(): void {
     // TODO: se puede usar img en vez de un div con background-image, y cambiarles el [src] al img
-    document.getElementById('imageURL')?.style.setProperty(
-      '--image-url', `url(${this.aboutMe.photo})`
-    );
+    // El codigo de abajo solo funciona en firefox
+    /*    document.getElementById('imageURL')?.style.setProperty(
+          '--image-url', `url(${this.aboutMe.photo})`
+        );*/
   }
 
   private prepareData(): void {
@@ -139,7 +140,7 @@ export class AboutComponent implements OnInit {
       html: '',
       inputType: 'image',
       label: 'Imagen de perfil',
-      update: (value: string) => this.aboutService.updatePhoto(value)
+      update: (image: string) => this.aboutService.updatePhoto(image)
     }
     const dialogRef = this.dialog.open(ModalEditImgComponent, {
       width: '350px',
@@ -155,7 +156,7 @@ export class AboutComponent implements OnInit {
     dialogRef.afterClosed().subscribe((response: ModalResponse) => {
       if (response.state) {
         this.aboutMe.photo = response.content;
-        this.setPhoto();
+        // this.setPhoto();
       }
     });
   }
