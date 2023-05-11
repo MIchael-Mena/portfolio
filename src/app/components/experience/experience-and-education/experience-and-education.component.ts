@@ -14,7 +14,7 @@ import {LoaderComponentService} from "../../../service/loader-component.service"
   selector: 'app-experience-and-education',
   templateUrl: './experience-and-education.component.html',
   styleUrls: ['./experience-and-education.component.css'],
-  providers: [LoaderComponentService]
+  // providers: [LoaderComponentService]
 })
 export class ExperienceAndEducationComponent {
 
@@ -36,9 +36,9 @@ export class ExperienceAndEducationComponent {
     this.storageService.onToggleSignUp().subscribe((result: boolean) => {
       this.isLoggedIn = result;
     });
-    this.loaderComponentService.onToggleLoading().subscribe((result: boolean) => {
-      this.isLoading = result;
-    });
+    /*    this.loaderComponentService.onToggleLoading().subscribe((result: boolean) => {
+          this.isLoading = result;
+        });*/
   }
 
   public tabChanged(tavEvent: MatTabChangeEvent): void {

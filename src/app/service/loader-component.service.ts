@@ -18,8 +18,8 @@ export class LoaderComponentService {
   }
 
   public toggleLoad(statusLoading: boolean, component: string) {
+    console.log('toggleLoad', statusLoading, component);
     this.componentsLoading.set(component, statusLoading);
-    this.checkStatusComponents();
   }
 
   private checkStatusComponents(): void {
