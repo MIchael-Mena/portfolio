@@ -2,9 +2,9 @@
   --image-url: url('https://xp.io/storage/15pewlWA.jpg');
 }*/
 
-/* Necesario para evitar un error de visualización al activar la edición del
-textarea, con el display flex en el main*/
 #about {
+  /* Necesario para evitar un error de visualización al activar la edición del
+  textarea, con el display flex en el main*/
   width: 100vw;
 }
 
@@ -38,11 +38,13 @@ textarea, con el display flex en el main*/
 
 
 .container-profile {
+  box-sizing: border-box;
   box-shadow: 0 2px 4px #243763;
-  border-radius: 0 0 15px 15px;
-  background-size: cover;
+  /*border-radius: 0 0 15px 15px;*/
+  /*background-size: cover;*/
   overflow: visible;
   min-height: 400px;
+  margin-top: 4rem;
 }
 
 .image {
@@ -66,13 +68,11 @@ textarea, con el display flex en el main*/
   transition: all 0.3s ease-in-out;
 }
 
-@media (max-height: 700px) {
-  /*Para que la foto se pueda seguir viendo*/
-  .container {
-    margin-top: 4rem;
+@media (max-width: 576px) {
+  .container-profile {
+    margin-top: 3rem;
   }
 }
-
 
 
 

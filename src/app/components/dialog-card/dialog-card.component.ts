@@ -2,6 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {DialogContent} from "./DialogContent";
 import {ModalResponse} from "../shared/ModalResponse";
+import {ButtonSettings} from "../shared/button-confirm/ButtonSettings";
 
 @Component({
   selector: 'app-dialog-card',
@@ -15,7 +16,18 @@ export class DialogCardComponent {
   constructor(public dialogRef: MatDialogRef<DialogCardComponent>, @Inject(MAT_DIALOG_DATA) public dialog: DialogContent) {
   }
 
-  onClose(): void {
+  onCancel(): void {
+    if (this.dialog.payload === undefined) {
+      this.dialogRef.close(false)
+    } else {
+      this.dialogRef.close(<ModalResponse>{
+        state: false,
+        error: null,
+      });
+    }
+  }
+
+  onConfirm(): void {
     if (this.dialog.payload !== undefined) {
       this.isLoading = true;
       this.dialog.payload().subscribe({
@@ -36,10 +48,7 @@ export class DialogCardComponent {
         }
       });
     } else {
-      this.dialogRef.close(<ModalResponse>{
-        state: true,
-        content: null,
-      });
+      this.dialogRef.close(true);
     }
   }
 

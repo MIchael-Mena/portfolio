@@ -49,7 +49,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         return next.handle(request);
       }),
       catchError((error) => {
-        if (error.status === 401) {
+        if (error.status === 401 || error.status === 403) {
           // Si recibo un error (401), es porque el refresh token ha expirado
           this.authService.logout().subscribe({
             next: (res) => {

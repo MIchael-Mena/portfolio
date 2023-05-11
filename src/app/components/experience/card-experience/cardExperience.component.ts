@@ -19,7 +19,6 @@ export class CardExperienceComponent {
   @Input() experience!: ExperienceData;
   @Output() onDeleteExperience: EventEmitter<ExperienceData> = new EventEmitter();
   @Output() onEditExperience: EventEmitter<ExperienceData> = new EventEmitter();
-
   public isLoggedIn: boolean = false;
 
   constructor(private dialog: MatDialog, public storageService: StorageSessionService,

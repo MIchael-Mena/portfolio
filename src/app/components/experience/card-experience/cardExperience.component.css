@@ -1,4 +1,4 @@
-mat-card {
+/*mat-card {
   border-left: 4px solid #243763;
   border-top: 4px solid #243763;
   border-radius: 20px 0 60%;
@@ -11,7 +11,7 @@ mat-card:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   border-left: 4px solid #ff6e31;
   border-top: 4px solid #ff6e31;
-}
+}*/
 
 .title {
   width: 100%;
@@ -30,3 +30,37 @@ mat-card:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
+.accordion {
+  border-left: 4px solid #243763;
+  border-top: 4px solid #243763;
+  transition: all 0.5s ease-in-out;
+}
+
+.accordion:hover {
+  border-left: 4px double #ff6e31;
+  border-top: 4px double #ff6e31;
+}
+
+.mat-expansion-panel-header {
+  height: auto;
+  min-height: 54px;
+}
+
+.custom-divider {
+  height: 2px;
+  border-style: groove;
+  border-color: #243763;
+  margin-top: 0.7rem;
+  margin-bottom: 1rem;
+}
+
+/* Para evitar que la sombra del boton agregar no sea vea correctamente (se corta)*/
+:host ::ng-deep .mat-content {
+  overflow: visible;
+}
+
+@media (max-width: 576px) {
+  .mat-expansion-panel-header {
+    padding: 0.3rem 1rem;
+  }
+}

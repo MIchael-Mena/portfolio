@@ -1,12 +1,14 @@
 <div style="display: contents" [ngSwitch]="this.isWaiting">
-  <button mat-fab extended color="primary" type="submit" *ngSwitchCase="false" (click)="this.onConfirm()">
+  <!-- cdkFocusInitial en button para que se active el focus al abrir el dialog -->
+  <button mat-fab extended type="submit" *ngSwitchCase="false" [color]="this.buttonSettings.color"
+          (click)="this.onConfirm()">
     <mat-icon svgIcon="{{this.icon}}" aria-hidden="false" aria-label="icon"
               class="icon-button"
               *ngIf="this.icon">
     </mat-icon>
     {{this.buttonSettings.onConfirmText}}
   </button>
-  <button mat-fab extended color="primary" disabled="true" *ngSwitchCase="true">
+  <button mat-fab extended disabled="true" *ngSwitchCase="true" [color]="this.buttonSettings.color">
     <mat-spinner [diameter]="20" [strokeWidth]="3" class="d-inline-block" color="warn"></mat-spinner>
     {{this.buttonSettings.onWaitingText}}
   </button>

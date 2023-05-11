@@ -20,6 +20,7 @@ export class ModalEditImgComponent {
   public buttonSettings: ButtonSettings = <ButtonSettings>{
     onConfirmText: 'Guardar',
     onWaitingText: 'Guardando...',
+    color: 'primary'
   }
 
   constructor(public dialogRef: MatDialogRef<ModalEditImgComponent>,

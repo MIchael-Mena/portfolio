@@ -1,3 +1,14 @@
+.icon-home {
+  width: auto;
+  height: 50px;
+  /*background-color: white;*/
+  transition: all 0.4s ease;
+}
+
+/*.icon-home:hover {
+  box-shadow: 0 0 0.3rem 0.2rem #ffebb7;
+}*/
+
 .logo {
   text-shadow: 0 0 1px #ffebb7, 0 0 1px #ffebb7, 0 0 1px #ffebb7,
   0 0 3px #ffebb7;
@@ -18,8 +29,9 @@
 .icon-display {
   cursor: pointer;
   color: #FFEBB7;
-  height: 48px;
-  width: 48px;
+  transition: all 0.4s ease;
+  /*  height: 48px;
+    width: 48px;*/
 }
 
 .menu {
@@ -70,6 +82,20 @@
 
 .navbar-toggler:hover {
   box-shadow: 0 0 0 0.2rem #FF6E31;
+}
+
+::ng-deep .mat-menu-container {
+  border-radius: 20px !important;
+  /*padding: 4px 4px;*/
+}
+
+::ng-deep .mat-mdc-menu-content {
+  padding: 4px 4px !important;
+}
+
+.mat-menu {
+  border: 2px solid #243763;
+  border-radius: 15px;
 }
 
 @media (max-width: 992px) {

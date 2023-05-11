@@ -20,6 +20,7 @@ export class ModalSkillComponent {
   public buttonSettings: ButtonSettings = <ButtonSettings>{
     onConfirmText: 'Guardar',
     onWaitingText: 'Guardando...',
+    color: 'primary'
   }
   private positionInitial: number;
 

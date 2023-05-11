@@ -46,8 +46,6 @@ body {
 
 .icon-style-active {
   color: white !important;
-
-  transition: 0.3s;
 }
 
 .icon-style-active:hover {
@@ -79,7 +77,6 @@ body {
   border-radius: 20%;
   background-color: rgb(241, 246, 245);
   z-index: -1;
-
 }
 
 .icon-style:hover {
@@ -89,42 +86,6 @@ body {
 }
 
 .icon-style:active {
-  transform: translateY(1px);
-}
-
-
-/*.container-icon-add {
-  max-height: 21px;
-  max-width: 21px;
-  overflow: inherit;
-}*/
-
-
-.icon-add-active {
-  /*  filter: drop-shadow(1px 1px 2px #6c757d);
-    border-radius: 30%;
-    cursor: pointer;*/
-  color: rgb(241, 246, 245);
-  background: rgb(36, 55, 99);
-  transition: 0.3s;
-}
-
-.icon-add-deactivate {
-  /*  filter: drop-shadow(1px 1px 2px #6c757d);
-    border-radius: 30%;
-    cursor: pointer;*/
-  background: rgb(241, 246, 245);
-  color: rgb(36, 55, 99);
-  transition: 0.3s;
-}
-
-.icon-add-active:hover, .icon-add-deactivate:hover {
-  color: #FF6E31;
-  /*  transform: scale(1.1);
-    filter: drop-shadow(4px 4px 4px #6c757d);*/
-}
-
-.icon-add-active:active, .icon-add-deactivate:active {
   transform: translateY(1px);
 }
 

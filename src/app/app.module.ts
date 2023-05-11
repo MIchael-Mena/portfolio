@@ -18,7 +18,6 @@ import {DialogCardComponent} from './components/dialog-card/dialog-card.componen
 import {AboutModule} from "./components/about/about.module";
 import {SharedModule} from "./shared/shared.module";
 import {SkillModule} from "./components/skill/skill.module";
-import {ExperienceModule} from "./components/experience/experience.module";
 import {AppRoutingModule} from "./shared/app-routing.module";
 import {DateLanguageModule} from "./shared/date-language.module";
 import {BrowserModule} from "@angular/platform-browser";
@@ -44,7 +43,6 @@ import {FooterComponent} from './components/footer/footer.component';
     SharedModule,
     AboutModule,
     SkillModule,
-    ExperienceModule,
     AppRoutingModule,
     DateLanguageModule,
     ButtonConfirmModule,

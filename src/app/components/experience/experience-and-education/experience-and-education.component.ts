@@ -3,12 +3,12 @@ import {Education} from "../Education";
 import {Work} from "../Work";
 import {UnsavedChangesService} from "../../../service/unsaved-changes.service";
 import {MatDialog} from "@angular/material/dialog";
-import {DialogContent} from "../../dialog-card/DialogContent";
-import {DialogCardComponent} from "../../dialog-card/dialog-card.component";
-import {firstValueFrom} from "rxjs";
 import {MatTabChangeEvent} from "@angular/material/tabs";
 import {StorageSessionService} from "../../../service/storage-session.service";
 import {LoaderComponentService} from "../../../service/loader-component.service";
+
+// return await firstValueFrom(dialogRef.afterClosed()) para devolver un observable como promesa
+//   public canDeactivate: () => Promise<boolean> = async () => true; para devolver una promesa
 
 @Component({
   selector: 'app-experience-and-education',
@@ -17,9 +17,7 @@ import {LoaderComponentService} from "../../../service/loader-component.service"
   providers: [LoaderComponentService]
 })
 export class ExperienceAndEducationComponent {
-  public canDeactivate: () => Promise<boolean> = () => this.canDeactivateForm();
-  private formEducationIsEmpty = false;
-  private formWorkIsEmpty = false;
+
   public isLoading: boolean = true;
   public education = new Education()
   public work = new Work()
@@ -78,58 +76,4 @@ export class ExperienceAndEducationComponent {
     this.work.toggleAdd()
   }
 
-  private async canDeactivateForm(): Promise<boolean> {
-    const formState = (state: boolean, formName: string) => this.setFormIsEmpty(state, formName);
-    this.unsavedChanges.emitCanDismissChanges(formState);
-    if (!(this.formEducationIsEmpty && this.formWorkIsEmpty)) {
-      return await this.OpenDiscardChangesDialog();
-    } else {
-      return true;
-    }
-  }
-
-  private async OpenDiscardChangesDialog(): Promise<boolean> {
-    const formWithUnsavedChanges = this.checkFormsState();
-    const data = <DialogContent>{
-      title: 'Cambios sin guardar',
-      message: `Tienes cambios sin guardar en el formulario de <strong>${formWithUnsavedChanges}</strong>.
-                <br>
-                Si continúas perderás los cambios.`,
-      buttonCancel: 'Cancelar',
-      buttonConfirm: 'Continuar',
-    }
-    const dialogRef = this.dialog.open(DialogCardComponent, {
-      width: '400px',
-      maxWidth: '95vw',
-      data,
-      disableClose: true,
-      autoFocus: false,
-      enterAnimationDuration: '200ms',
-      exitAnimationDuration: '200ms'
-    });
-    return await firstValueFrom(dialogRef.afterClosed());
-  }
-
-  private checkFormsState() {
-    let formWithUnsavedChanges;
-    if (!this.formEducationIsEmpty && !this.formWorkIsEmpty) {
-      formWithUnsavedChanges = 'Educación y Experiencia laboral';
-    } else if (!this.formEducationIsEmpty) {
-      formWithUnsavedChanges = 'Educación';
-    } else if (!this.formWorkIsEmpty) {
-      formWithUnsavedChanges = 'Experiencia laboral';
-    }
-    return formWithUnsavedChanges;
-  }
-
-  private setFormIsEmpty(state: boolean, formName: string): void {
-    switch (formName) {
-      case 'education':
-        this.formEducationIsEmpty = state;
-        break;
-      case 'work':
-        this.formWorkIsEmpty = state;
-        break;
-    }
-  }
 }
