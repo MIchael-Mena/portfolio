@@ -1,5 +1,28 @@
 .footer {
   background-color: #243763;
-  /*background-color: #332d2d;*/
   color: #ffebb7;
+}
+
+.icon-code {
+  color: #243763;
+  background-color: #ffebb7;
+  border-radius: 100%;
+  padding: 0.1rem;
+  border: 2px solid #243763;
+  outline: 2px solid white;
+  transition: all 0.3s ease-in-out;
+}
+
+.src-code {
+  color: #ffebb7;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.src-code:hover {
+  color: #ff6e31;
+}
+
+.src-code:hover .icon-code {
+  outline: 2px solid #ff6e31;
 }

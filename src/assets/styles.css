@@ -5,6 +5,30 @@
   box-sizing: border-box;
 }
 
+main {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#mainContainer {
+  position: absolute;
+  top: 8vh;
+  height: calc(100vh - 8vh);
+  width: 100vw;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+footer {
+  position: relative;
+  height: 10vh;
+  min-height: 80px;
+  width: 100vw;
+
+}
+
 .main {
   min-height: calc(100vh - 18vh);
   height: max-content;
@@ -12,9 +36,31 @@
 }
 
 
-@media (max-height: 900px) {
+@media (max-height: 900px) and (min-width: 992px) {
+  /* Se activa cuando el ancho de la pantalla es mayor a 992px (desktop) y
+  el alto es menor a 900px que es cuando el nav de 8vh llego a su tamaño mínimo,
+  72 pixels para desktop*/
+  #mainContainer {
+    top: 72px;
+    height: calc(100vh - 72px);
+  }
+
   .main {
     min-height: calc(90vh - 72px);
+  }
+}
+
+@media (max-height: 832px) and (max-width: 992px) {
+  /* Se activa cuando el ancho de la pantalla es menor a 992px (mobile) y
+  el alto es menor a 832px que es cuando el nav de 8vh llego a su tamaño mínimo,
+  66,5 pixels para mobile */
+  #mainContainer {
+    top: 67px;
+    height: calc(100vh - 67px);
+  }
+
+  .main {
+    min-height: calc(90vh - 67px);
   }
 }
 

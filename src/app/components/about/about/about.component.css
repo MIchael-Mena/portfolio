@@ -51,7 +51,7 @@
   height: 130px;
   width: 130px;
   /*background-image: var(--image-url, url('/assets/icon/png/profile-preview-alt.jpg'));*/
-  background-size: cover;
+  /*background-size: cover;*/
   border-radius: 50%;
   border: 8px solid #FFEBB7;
   position: relative;
@@ -61,6 +61,13 @@
   box-shadow: 0 2px 15px rgb(58, 54, 54);
   z-index: 20;
   transition: all 0.3s ease-in-out;
+}
+
+.image-portrait {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .image:hover {
