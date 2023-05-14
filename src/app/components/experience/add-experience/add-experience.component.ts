@@ -172,8 +172,9 @@ export class AddExperienceComponent implements OnChanges, OnInit {
     });
   }
 
-  private setDate(experience: any): void {
-    if (experience.finalDate === null) {
+  private setDate(experience: ExperienceData): void {
+    console.log(experience.finalDate);
+    if (experience.finalDate === null || experience.finalDate === undefined) {
       this.finalDateSettings = {
         ...datePickerClean,
         dateToSet: experience.finalDate,
@@ -190,15 +191,16 @@ export class AddExperienceComponent implements OnChanges, OnInit {
   }
 
   public setInitialControlDate(controlDate: FormControl<any>): void {
-    // TODO: mejorar la forma de setear el valor del control
     // El dato emitido por el date picker es un objeto de tipo FormControl
     this.form.setControl('initialDate', controlDate);
+    this.form.markAsDirty();
     this.initialDateSettings = {...this.initialDateSettings, dateToSet: controlDate.value};
     this.finalDateSettings = {...this.finalDateSettings, minDate: controlDate.value};
   }
 
   public setFinalControlDate(controlDate: FormControl<any>): void {
     this.form.setControl('finalDate', controlDate);
+    this.form.markAsDirty();
     this.initialDateSettings = {...this.initialDateSettings, maxDate: controlDate.value};
     this.finalDateSettings = {...this.finalDateSettings, dateToSet: controlDate.value};
   }
@@ -206,9 +208,11 @@ export class AddExperienceComponent implements OnChanges, OnInit {
   public setPresentDate(checkBox: any): void {
     if (checkBox.checked) {
       this.finalDateSettings = {...this.finalDateSettings, disable: true};
+      this.initialDateSettings = {...this.initialDateSettings, maxDate: null};
       return;
     }
     this.finalDateSettings = {...this.finalDateSettings, disable: false};
+    this.initialDateSettings = {...this.initialDateSettings, maxDate: this.form.controls['finalDate'].value};
   }
 
   public onSubmit(): void {

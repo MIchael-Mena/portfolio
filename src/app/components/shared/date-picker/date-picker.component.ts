@@ -39,13 +39,9 @@ export class DatePickerComponent {
   @Input() dateSettings?: DatePicker;
   @Output() onDateChange: EventEmitter<FormControl> = new EventEmitter();
 
-  minDate?: Moment;
-  maxDate?: Moment;
-  // minDateValid y maxDateValid son las fechas que se le asignan a los validadores
   minDateValid?: Moment;
   maxDateValid?: Moment;
 
-  private currentYear: any;
   private dateValidators = [Validators.required, this.minDateValidator(), this.maxDateValidator()];
   date: FormControl<any>;
   /*   date: FormControl<any> = new FormControl('', this.dateValidators); */
@@ -54,7 +50,6 @@ export class DatePickerComponent {
 
   constructor() {
     this.date = new FormControl({value: '', disabled: false}, this.dateValidators);
-    this.currentYear = moment().year();
     this.setMinDate();
     this.setMaxDate();
   }
@@ -84,11 +79,7 @@ export class DatePickerComponent {
         this.minDateValid = this.stringToMoment(this.dateSettings.minDate);
       } else {
         // Si es un objeto moment
-        this.minDateValid = this.dateSettings.minDate;
-        if (this.dateSettings.disableRangeSelector) {
-          // Se desactiva el rango de fechas seleccionables si esta en true
-          this.setMinDate();
-        }
+        this.minDateValid = moment(this.dateSettings.minDate._d);
       }
     } else {
       this.setMinDate();
@@ -99,11 +90,7 @@ export class DatePickerComponent {
         this.maxDateValid = this.stringToMoment(this.dateSettings.maxDate);
       } else {
         // Si es un objeto moment
-        this.maxDateValid = this.dateSettings.maxDate;
-        if (this.dateSettings.disableRangeSelector) {
-          // Se desactiva el rango de fechas seleccionables si esta en true
-          this.setMaxDate();
-        }
+        this.maxDateValid = moment(this.dateSettings.maxDate._d);
       }
     } else {
       this.setMaxDate();
@@ -113,7 +100,6 @@ export class DatePickerComponent {
 
   changeDateInput(aDate: any) {
     // Se ejecuta cuando se cambia el valor del input, aDate.value es un moment
-    /*     console.log(aDate.value); */
     if (aDate.value) {
       this.emitDate(aDate.value);
     } else {
@@ -170,11 +156,11 @@ export class DatePickerComponent {
   }
 
   private setMinDate() {
-    this.minDate = moment([this.currentYear - 50, 0, 1]);
+    this.minDateValid = moment([1993, 0, 1]);
   }
 
   private setMaxDate() {
-    this.maxDate = moment([this.currentYear + 0, 0, 31]);
+    this.maxDateValid = moment([moment().year(), moment().month(), moment().date()]);
   }
 
   private stringToMoment(aDate: string): Moment {
@@ -184,12 +170,4 @@ export class DatePickerComponent {
     return moment([parseInt(year), parseInt(month) - 1, 1]);
   }
 
-  /*  onClickeable() {
-      console.log(this.date.valid);
-      console.log(this.minDateValid);
-      console.log(this.maxDateValid);
-      console.log(this.date.errors)
-      console.log("Fecha min es invalida: " + this.date.hasError('matDatepickerMinInvalid'));
-      console.log("Fecha max es invalida:" + this.date.hasError('matDatepickerMaxInvalid'));
-    }*/
 }
