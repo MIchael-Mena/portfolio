@@ -4,8 +4,8 @@
     matInput
     [matDatepicker]="dp"
     [formControl]="date"
-    [min]="minDate"
-    [max]="maxDate"
+    [min]="this.minDateValid"
+    [max]="this.maxDateValid"
     (dateChange)="changeDateInput($event)"
     placeholder="Ingresar una fecha"
   >
@@ -20,4 +20,3 @@
   <mat-error *ngIf="date.touched && date.invalid">Fecha requerida.</mat-error>
 </mat-form-field>
 
-<!-- <button (click)="onClickeable()">Imprimir</button> -->
