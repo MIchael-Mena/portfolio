@@ -173,7 +173,6 @@ export class AddExperienceComponent implements OnChanges, OnInit {
   }
 
   private setDate(experience: ExperienceData): void {
-    console.log(experience.finalDate);
     if (experience.finalDate === null || experience.finalDate === undefined) {
       this.finalDateSettings = {
         ...datePickerClean,
