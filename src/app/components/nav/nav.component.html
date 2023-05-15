@@ -7,9 +7,6 @@
     >
       <mat-icon svgIcon="michael-logo" class="icon-home">
       </mat-icon>
-      <!--      <span class="mat-subtitle-1 ">
-            Portfolio
-            </span>-->
     </a>
 
     <!--    button visible cuando media < 996px-->
@@ -68,11 +65,6 @@
         <li class="nav-item ms-lg-3">
           <div [matMenuTriggerFor]="menu" class="d-grid">
             <fa-icon [icon]="this.icon.faUserSecret" class="icon-display" size="2xl"></fa-icon>
-            <!--            <mat-icon svgIcon="account" aria-hidden="false"
-                                  aria-label="account"
-                                  class="icon-display"
-                        >
-                        </mat-icon>-->
             <div [ngClass]="{'active-link mt-1':routeLoginActive ,'':!routeLoginActive }"></div>
           </div>
           <mat-menu #menu="matMenu" class="mat-menu-container">

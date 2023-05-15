@@ -1,13 +1,8 @@
 .icon-home {
   width: auto;
   height: 50px;
-  /*background-color: white;*/
   transition: all 0.4s ease;
 }
-
-/*.icon-home:hover {
-  box-shadow: 0 0 0.3rem 0.2rem #ffebb7;
-}*/
 
 .logo {
   text-shadow: 0 0 1px #ffebb7, 0 0 1px #ffebb7, 0 0 1px #ffebb7,
@@ -30,8 +25,6 @@
   cursor: pointer;
   color: #FFEBB7;
   transition: all 0.4s ease;
-  /*  height: 48px;
-    width: 48px;*/
 }
 
 .menu {

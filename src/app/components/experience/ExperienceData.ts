@@ -6,6 +6,5 @@ export interface ExperienceData {
   finalDate: string | null;
   description: string;
   link: string;
-  position: number;
   type: string;
 }
