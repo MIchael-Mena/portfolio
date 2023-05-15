@@ -111,7 +111,6 @@ export class AddExperienceComponent implements OnChanges, OnInit {
       presentDate: [false],
       description: ['', [Validators.maxLength(400)]],
       link: [''],
-      position: [0],
     });
   }
 
@@ -281,8 +280,7 @@ export class AddExperienceComponent implements OnChanges, OnInit {
       initialDate: this.formatDate(this.form.value.initialDate),
       finalDate: this.formatDate(this.form.value.finalDate),
       description: this.form.value.description,
-      link: this.form.value.link,
-      position: this.form.value.position,
+      link: this.form.value.link
       // Se envía en el formato YYYY-MM para que la pipe date lo pueda interpretar
     };
   }

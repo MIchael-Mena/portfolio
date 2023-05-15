@@ -24,7 +24,6 @@ export class FormEducation implements FormExperience {
       initialDate: experience.initialDate,
       finalDate: experience.finalDate,
       link: experience.link,
-      position: experience.position,
       type: 'education'
     };
   }
@@ -37,8 +36,7 @@ export class FormEducation implements FormExperience {
       description: experience.description,
       initialDate: experience.initialDate,
       finalDate: experience.finalDate,
-      link: experience.link,
-      position: experience.position,
+      link: experience.link
     };
   }
 
