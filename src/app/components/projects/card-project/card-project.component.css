@@ -26,13 +26,13 @@
   line-height: 1.5;
 }
 
-.description:first-of-type:first-letter {
-  font-family: 'Lobster', cursive;
+/*.description:first-of-type:first-letter {
+  font-family: 'Oswald', cursive;
   font-size: 2em;
   font-weight: 700;
   margin-right: 4px;
   margin-left: 4px;
-}
+}*/
 
 .title {
   width: 100%;

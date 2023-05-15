@@ -13,7 +13,7 @@ main {
 }
 
 #mainContainer {
-  position: absolute;
+  position: relative;
   top: 8vh;
   height: calc(100vh - 8vh);
   width: 100vw;
