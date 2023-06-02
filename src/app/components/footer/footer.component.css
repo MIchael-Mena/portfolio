@@ -25,5 +25,9 @@
 }
 
 .src-code:hover .icon-code {
+  background-color: #fff;
+}
+
+.src-code:hover .icon-code {
   outline: 2px solid #ff6e31;
 }
