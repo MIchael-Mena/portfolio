@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {MatButtonModule} from '@angular/material/button';
 
-import { ButtonConfirmComponent } from './button-confirm.component';
+import {ButtonConfirmComponent} from './button-confirm.component';
 
 describe('ButtonConfirmComponent', () => {
   let component: ButtonConfirmComponent;
@@ -8,9 +9,9 @@ describe('ButtonConfirmComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ButtonConfirmComponent ]
-    })
-    .compileComponents();
+      declarations: [ButtonConfirmComponent],
+      imports: [MatButtonModule]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ButtonConfirmComponent);
     component = fixture.componentInstance;
