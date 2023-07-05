@@ -1,30 +1,3 @@
-<!--<mat-card class="d-flex flex-column flex-md-row justify-content-between my-4 p-3" mat-ripple>
-  <div class="flex-grow-1">
-    <mat-card-title class="title mb-2">{{this.experience.primaryInfo}}</mat-card-title>
-    <mat-card-title-group>
-      <mat-card-subtitle class="mb-2">
-        {{this.experience.secondaryInfo}}
-        <span class="text-capitalize">
-          <br>
-          {{this.experience.initialDate | date: 'MMMM y'}}
-          - {{this.experience.finalDate === null ?
-          (this.experience.type === 'education' ? 'Cursando' : 'Presente')
-          : (experience.finalDate | date: 'MMMM y')}}
-            </span>
-      </mat-card-subtitle>
-    </mat-card-title-group>
-    <mat-card-content>
-      <p class="mat-body-2">{{this.experience.description}}</p>
-    </mat-card-content>
-  </div>
-  <div class="flex-shrink-0" *ngIf="this.isLoggedIn">
-    <app-menu-edition
-      (onEdit)="editExperience()"
-      (onDelete)="openDeleteDialog('200ms','100ms')">
-    </app-menu-edition>
-  </div>
-</mat-card>-->
-
 <mat-expansion-panel class="accordion">
   <mat-expansion-panel-header>
     <mat-panel-title>

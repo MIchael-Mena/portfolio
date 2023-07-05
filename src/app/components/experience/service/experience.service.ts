@@ -4,7 +4,7 @@ import {ExperienceData} from '../ExperienceData';
 import {Observable} from 'rxjs';
 import {WorkData} from "../WorkData";
 import {EducationData} from "../EducationData";
-import {environment} from "../../../../../enviroment";
+import {environment} from "../../../../enviroment/enviroment";
 
 const httpOptions = {
   headers: new HttpHeaders({

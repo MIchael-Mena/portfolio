@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {SocialNetwork} from "../social-network/SocialNetwork";
-import {environment} from "../../../../../enviroment";
+import {environment} from "../../../../enviroment/enviroment";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,7 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class SocialNetworkService {
-  
+
   private apiUrl = `${environment.baseURL}/socialNetworks`;
 
   constructor(private http: HttpClient) {

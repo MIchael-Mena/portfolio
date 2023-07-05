@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+body, html {
+  height: 100%;
+}
+
 main {
   position: relative;
   display: flex;
@@ -70,7 +74,6 @@ footer {
   border-radius: 4px;
   margin-top: 0.2rem;
   padding: 0.2rem 0.5rem;
-
 }
 
 mat-form-field {

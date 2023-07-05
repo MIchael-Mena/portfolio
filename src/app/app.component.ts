@@ -3,6 +3,7 @@ import {StorageSessionService} from "./service/storage-session.service";
 import {AuthService} from "./service/auth.service";
 import {Router} from "@angular/router";
 import {User} from "./components/shared/User";
+import {IconRegistryService} from "./service/icon-registry.service";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,9 @@ export class AppComponent implements OnInit {
   title = 'portfolio';
 
   constructor(private storageSession: StorageSessionService,
-              private authService: AuthService, private router: Router) {
+              private authService: AuthService,
+              private router: Router,
+              private iconRegistry: IconRegistryService) {
   }
 
   ngOnInit() {

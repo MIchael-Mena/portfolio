@@ -12,7 +12,6 @@ import {NavComponent} from './components/nav/nav.component';
 import {LoginFormComponent} from './components/login-form/login-form.component';
 import {AuthService} from "./service/auth.service";
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
-import {IconsComponent} from './components/icons/icons.component';
 import {DialogCardComponent} from './components/dialog-card/dialog-card.component';
 
 import {AboutModule} from "./components/about/about.module";
@@ -25,6 +24,7 @@ import {ButtonConfirmModule} from "./components/shared/button-confirm/button-con
 import {HomeComponent} from "./components/home/home.component";
 import {ProjectsModule} from "./components/projects/projects.module";
 import {FooterComponent} from './components/footer/footer.component';
+import {IconRegistryService} from "./service/icon-registry.service";
 
 @NgModule({
   declarations: [
@@ -33,7 +33,6 @@ import {FooterComponent} from './components/footer/footer.component';
     UpdateDirective,
     LoginFormComponent,
     PageNotFoundComponent,
-    IconsComponent,
     DialogCardComponent,
     HomeComponent,
     FooterComponent
@@ -48,7 +47,11 @@ import {FooterComponent} from './components/footer/footer.component';
     ButtonConfirmModule,
     ProjectsModule
   ],
-  providers: [AuthService, StorageSessionService, httpInterceptorProviders, AuthInterceptorRequest],
+  providers: [AuthService,
+    StorageSessionService,
+    httpInterceptorProviders,
+    AuthInterceptorRequest,
+    IconRegistryService],
   exports: [
     PageNotFoundComponent
   ],
