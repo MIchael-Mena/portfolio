@@ -2,7 +2,6 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {DialogContent} from "./DialogContent";
 import {ModalResponse} from "../shared/ModalResponse";
-import {ButtonSettings} from "../shared/button-confirm/ButtonSettings";
 
 @Component({
   selector: 'app-dialog-card',

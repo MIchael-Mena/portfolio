@@ -22,7 +22,7 @@ import {UnsavedChangesService} from "../../../service/unsaved-changes.service";
 export class AboutComponent implements OnInit {
   public faSquareCaretDown = faSquareCaretDown;
   public faImagePortrait = faImagePortrait;
-  public aboutMe: AboutMeData = <AboutMeData>{}
+  public aboutMe: AboutMeData = <AboutMeData>{photo: '/assets/icon/png/profile-preview-alt.jpg'}
   public isLoading: boolean = true;
   public isLoggedIn = false;
   public nameData: EditField = <EditField>{};
