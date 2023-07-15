@@ -7,8 +7,6 @@
   transition: all 1s ease-in-out;
   /*animation: slideHome 7s infinite;*/
   opacity: 0;
-
-  animation: fadeIn 1s ease-in-out forwards, pulse 3s infinite;
 }
 
 .logo-home {
@@ -80,27 +78,6 @@
     width: 100%;
     height: auto;
     min-height: auto;
-  }
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 5px 5px rgba(121, 121, 121, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 10px 10px rgba(121, 121, 121, 0.7);
-  }
-  100% {
-    box-shadow: 0 0 5px 5px rgba(121, 121, 121, 0.3);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }
 
