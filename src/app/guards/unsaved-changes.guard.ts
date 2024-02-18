@@ -19,9 +19,9 @@ export class UnsavedChangesGuard implements CanDeactivate<AboutComponent> {
 
   canDeactivate(
     component: AboutComponent,
-    currentRoute: ActivatedRouteSnapshot,
-    currentState: RouterStateSnapshot,
-    nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    _currentRoute: ActivatedRouteSnapshot,
+    _currentState: RouterStateSnapshot,
+    _nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     return !this.storageSessionService.isLoggedIn ? of(true) : component.canDeactivate();
   }
