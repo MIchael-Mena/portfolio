@@ -10,6 +10,7 @@ import {catchError, Observable, switchMap, throwError} from 'rxjs';
 import {StorageSessionService} from "../service/storage-session.service";
 import {AuthService} from "../service/auth.service";
 import {Router} from "@angular/router";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
@@ -20,6 +21,9 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (req.url.includes(environment.baseURL)) {
+      return next.handle(req);
+    }
     req = req.clone({
       withCredentials: true,
     });

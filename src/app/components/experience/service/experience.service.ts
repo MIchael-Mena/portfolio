@@ -19,7 +19,7 @@ export class ExperienceService {
 
   private isWorkingDatabase: boolean = true;
 
-  private apiUrl = environment.baseURL;
+  private apiUrl = environment.backendURL;
 
   constructor(private http: HttpClient) {
   }

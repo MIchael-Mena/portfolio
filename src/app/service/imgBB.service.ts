@@ -2,14 +2,14 @@ import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
+import {environment} from "../../environments/environment"
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImgBBService {
-
-  // private readonly apiKey: string = '';
-  private baseURL = 'https://api.imgbb.com/1';
+  
+  private imageBBURL = environment.imgBBurl;
 
   constructor(private readonly http: HttpClient) {
   }
@@ -18,7 +18,7 @@ export class ImgBBService {
     const formData = new FormData();
     formData.append('image', file);
     return this.http
-      .post(this.baseURL + '/upload', formData, {params: {key: apiKey}})
+      .post(this.imageBBURL + '/upload', formData, {params: {key: apiKey}})
       .pipe(map((response: any) => response['data']));
     // map transforma la respuesta del servidor para devolver solo la data
   }

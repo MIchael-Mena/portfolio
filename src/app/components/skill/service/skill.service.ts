@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class SkillService {
 
-  private apiUrl = environment.baseURL + '/skills';
+  private apiUrl = environment.backendURL + '/skills';
 
   constructor(private http: HttpClient) {
   }

@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class ProjectService {
 
-  private apiUrl = environment.baseURL + '/projects';
+  private apiUrl = environment.backendURL + '/projects';
 
   constructor(private http: HttpClient) {
   }

@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class AboutService {
 
-  private apiUrl = environment.baseURL + '/aboutMe';
+  private apiUrl = environment.backendURL + '/aboutMe';
   private update = '/update';
 
   constructor(private http: HttpClient) {

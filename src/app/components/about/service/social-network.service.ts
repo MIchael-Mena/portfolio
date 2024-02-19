@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class SocialNetworkService {
 
-  private apiUrl = `${environment.baseURL}/socialNetworks`;
+  private apiUrl = `${environment.backendURL}/socialNetworks`;
 
   constructor(private http: HttpClient) {
   }
