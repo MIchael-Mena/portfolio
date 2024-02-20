@@ -16,6 +16,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18.x'
+      - name: Create Environment directory
+        run: mkdir -p ./src/environments
       - name: Create Environment file
         run: |
           echo "export const environment = {" >> ./src/environments/environment.ts
