@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot, UrlTree} from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {AboutComponent} from "../components/about/about/about.component";
 import {StorageSessionService} from "../service/storage-session.service";
@@ -12,7 +12,7 @@ import {StorageSessionService} from "../service/storage-session.service";
 @Injectable({
   providedIn: 'root'
 })
-export class UnsavedChangesGuard implements CanDeactivate<AboutComponent> {
+export class UnsavedChangesGuard  {
 
   constructor(private storageSessionService: StorageSessionService) {
   }
