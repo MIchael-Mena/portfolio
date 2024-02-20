@@ -19,12 +19,11 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       # Refer to repos in https://github.com/actions for more
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
         with:
           node-version: '18.x'
       # Set up the environment variables for the app
-
       - name: Create Environment directory
         run: mkdir -p ./src/environments
       - name: Create Environment file
