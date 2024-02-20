@@ -35,9 +35,6 @@ jobs:
           echo "  imgBBurl: '${{ secrets.IMGBB_URL }}'," >> ./src/environments/environment.ts
           echo "  baseURL: '${{ secrets.BASE_URL }}'" >> ./src/environments/environment.ts
           echo "};" >> ./src/environments/environment.ts
-      # Install the Angular CLI
-      - name: Install Angular CLI
-        run: npm install -g @angular/cli
       # Install node modules that need to build the app. Then build the app using prod env vars.
       - run: npm install
       - run: npm run build:prod
