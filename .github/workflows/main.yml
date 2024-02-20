@@ -39,7 +39,7 @@ jobs:
         run: npm install -g @angular/cli
       # Install node modules that need to build the app. Then build the app using prod env vars.
       - run: npm install
-      - run: ng build --prod
+      - run: ng build --configuration=production
       # Deploy the app artifact to firebase
       - uses: w9jds/firebase-action@master
         with:
