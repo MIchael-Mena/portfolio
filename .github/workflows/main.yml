@@ -1,21 +1,29 @@
-name: CI/CD
+name: Build and Deploy
+
+# Triggers the workflow whenever you push commits to the main branch
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
-    name: Build
+  # Here we have a single job called 'firebase-deploy'
+  firebase-deploy:
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-      - name: Setup node
-        uses: actions/setup-node@v4
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Refer to repos in https://github.com/actions for more
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '18.x'
+      # Set up the environment variables for the app
       - name: Create Environment directory
         run: mkdir -p ./src/environments
       - name: Create Environment file
@@ -26,32 +34,13 @@ jobs:
           echo "  imgBBurl: '${{ secrets.IMGBB_URL }}'," >> ./src/environments/environment.ts
           echo "  baseURL: '${{ secrets.BASE_URL }}'" >> ./src/environments/environment.ts
           echo "};" >> ./src/environments/environment.ts
-      - name: Install Dependencies
-        run: npm install
-      - name: Build
-        run: npm run build --prod
-      - name: Archive Production Artifact
-        uses: actions/upload-artifact@v4
+      # Install node modules that need to build the app. Then build the app using prod env vars.
+      - run: npm install
+      - run: npm run build:prod
+      # Deploy the app artifact to firebase
+      - uses: w9jds/firebase-action@v4
         with:
-          name: dist
-          path: ./dist/portfolio
-
-  deploy:
-    name: Deploy to firebase
-    runs-on: ubuntu-latest
-    needs: [ build ]
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-      - name: Download Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: ./dist/portfolio
-      - name: Deploy angular app to Firebase
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_TOKEN }}'
-          channelId: live
-          projectId: portfolio-99e5b
+          args: deploy --only hosting
+        env:
+          # Here we use the actions secret we set earlier
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
