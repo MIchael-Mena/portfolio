@@ -38,7 +38,7 @@ jobs:
       - run: npm install
       - run: npm run build:prod
       # Deploy the app artifact to firebase
-      - uses: w9jds/firebase-action@v4
+      - uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
         env:
