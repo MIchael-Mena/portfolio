@@ -16,6 +16,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18.x'
+      - name: Create Environment file
+        run: |
+          echo "export const environment = {" >> ./src/environments/environment.ts
+          echo "  production: true," >> ./src/environments/environment.ts
+          echo "  backendURL: '${{ secrets.BACKEND_URL }}'," >> ./src/environments/environment.ts
+          echo "  imgBBurl: '${{ secrets.IMGBB_URL }}'," >> ./src/environments/environment.ts
+          echo "  baseURL: '${{ secrets.BASE_URL }}'" >> ./src/environments/environment.ts
+          echo "};" >> ./src/environments/environment.ts
       - name: Install Dependencies
         run: npm install
       - name: Build
