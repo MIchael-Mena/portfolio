@@ -1,46 +1,82 @@
 <div class="d-flex align-items-center justify-content-around">
-
   <div class="d-flex flex-column">
-    <input type="file" #fileInput
-           (change)="this.addImage($event)"
-           accept="image/*"
-           style="display: none">
-    <button type='button' mat-fab (click)="fileInput.click()"
-            [disabled]="this.imgLoading"
-            style="background-color:#fff"
-            class="my-3"
-            title="Agregar imagen">
+    <input
+      type="file"
+      #fileInput
+      (change)="this.addImage($event)"
+      accept="image/*"
+      style="display: none"
+    />
+    <button
+      type="button"
+      mat-fab
+      (click)="fileInput.click()"
+      [disabled]="this.imgLoading"
+      style="background-color: #fff"
+      class="my-3"
+      title="Agregar imagen"
+    >
       <ng-container [ngSwitch]="this.imgLoading">
-        <mat-spinner [diameter]="20" [strokeWidth]="3" *ngSwitchCase="true"
-                     class="d-inline-block" color="warn">
+        <mat-spinner
+          [diameter]="20"
+          [strokeWidth]="3"
+          *ngSwitchCase="true"
+          class="d-inline-block"
+          color="warn"
+        >
         </mat-spinner>
         <mat-icon *ngSwitchCase="false">add_photo_alternate</mat-icon>
       </ng-container>
     </button>
 
-    <button type="button" mat-fab
-            [disabled]="!this.slides.length || this.imgLoading"
-            style="background-color:#fff"
-            class="my-3"
-            title="Eliminar imagen actual"
-            (click)="this.removeCurrentImage()">
+    <button
+      type="button"
+      mat-fab
+      [disabled]="!this.slides.length || this.imgLoading"
+      style="background-color: #fff"
+      class="my-3"
+      title="Eliminar imagen actual"
+      (click)="this.removeCurrentImage()"
+    >
       <mat-icon>delete</mat-icon>
     </button>
   </div>
 
-  <carousel [(activeSlide)]="activeSlideIndex"
-            [interval]="0"
-            [noPause]="true"
-            [showIndicators]="false"
-            [isAnimated]="true"
-            class="carousel-style text-center ms-2">
+  <div [style.position]="'relative'">
+    <owl-carousel-o
+      [options]="customOptions"
+      #owlCarouselO
+      (changed)="this.handleChanged($event)"
+    >
+      <ng-container *ngFor="let slide of slides; let i = index">
+        <ng-template carouselSlide [id]="i.toString()">
+          <div class="slide">
+            <img [src]="slide.medium" [alt]="slide.id" [title]="slide.id" />
+          </div>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
     <mat-error *ngIf="this.imageRequired" class="mat-caption">
       Debe agregar al menos una imagen
     </mat-error>
-    <slide *ngFor="let slide of slides">
-      <img [src]="slide.thumbnail" alt="image slide" class="img-thumbnail p-0">
-    </slide>
-  </carousel>
-
-
+    <button
+      mat-icon-button
+      (click)="prevSlide()"
+      class="prev"
+      type="button"
+      color="primary"
+    >
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      (click)="nextSlide()"
+      class="next"
+      type="button"
+      color="primary"
+    >
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </div>
+  
 </div>

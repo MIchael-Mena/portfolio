@@ -1,29 +1,33 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HTTP_INTERCEPTORS, HttpErrorResponse
+  HTTP_INTERCEPTORS,
+  HttpErrorResponse,
 } from '@angular/common/http';
-import {catchError, Observable, switchMap, throwError} from 'rxjs';
-import {StorageSessionService} from "../service/storage-session.service";
-import {AuthService} from "../service/auth.service";
-import {Router} from "@angular/router";
-import {environment} from "../../environments/environment";
+import { catchError, Observable, switchMap, throwError } from 'rxjs';
+import { StorageSessionService } from '../service/storage-session.service';
+import { AuthService } from '../service/auth.service';
+import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
+  constructor(
+    private storageService: StorageSessionService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
-  constructor(private storageService: StorageSessionService,
-              private authService: AuthService,
-              private router: Router) {
-  }
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    const isBackendUrl = req.url.includes(environment.backendURL);
+    if (!isBackendUrl) return next.handle(req); // imgBB que lanza un error si le paso el token
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.url.includes(environment.baseURL)) {
-      return next.handle(req);
-    }
     req = req.clone({
       withCredentials: true,
     });
@@ -58,17 +62,16 @@ export class HttpRequestInterceptor implements HttpInterceptor {
           this.authService.logout().subscribe({
             next: (res) => {
               this.storageService.cleanUser();
-              this.router.navigate(['/login']);
-            }
+              this.router.navigate(['/login']).then((_r) => _r);
+            },
           });
         }
         return throwError(() => error);
       })
     );
   }
-
 }
 
 export const AuthInterceptorRequest = [
-  {provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true}
-]
+  { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
+];

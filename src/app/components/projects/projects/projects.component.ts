@@ -5,6 +5,7 @@ import {ActionForShipment} from "../../shared/ActionForShipment";
 import {ModalProjectComponent} from "../modal-project/modal-project.component";
 import {ModalResponse} from "../../shared/ModalResponse";
 import {MatDialog} from "@angular/material/dialog";
+import {OwlOptions} from "ngx-owl-carousel-o";
 
 @Component({
   selector: 'app-projects',

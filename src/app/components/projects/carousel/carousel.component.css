@@ -13,17 +13,87 @@
   width: 48px;
 }
 
+:host {
+  --carousel-height: 214px;
+  --carousel-width: 280px;
+  --carousel-color: #fff;
+  --carousel-bg-color: #000;
+}
+
 .button-delete:hover {
   background-color: #ff6e31;
   transform: scale(1.1);
 }
 
-.carousel-style {
+owl-carousel-o {
   display: inline-block;
-  background-color: #000;
-  color: #fff;
-  padding: 1rem 0;
+  background-color: var(--carousel-bg-color);
+  color: var(--carousel-color);
   border-radius: 5px;
-  width: 280px;
-  height: 214px;
 }
+
+owl-carousel-o,
+.slide {
+  height: var(--carousel-height);
+  width: var(--carousel-width);
+}
+
+:host ::ng-deep .owl-dots {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  display: flex;
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+:host ::ng-deep .owl-dot.active span {
+  background: #ff6e31 !important;
+}
+
+.slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide img {
+  max-height: var(--carousel-height);
+  max-width: var(--carousel-width);
+  object-fit: contain;
+}
+
+.prev {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.next {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  z-index: 1000;
+  /*background-color: #243763;*/
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* :host ::ng-deep .owl-prev,
+:host ::ng-deep .owl-next {
+  position: absolute;
+  top: 50%;
+}
+
+:host ::ng-deep .owl-prev {
+  left: 5px;
+}
+
+:host ::ng-deep .owl-next {
+  right: 5px;
+}
+ */
