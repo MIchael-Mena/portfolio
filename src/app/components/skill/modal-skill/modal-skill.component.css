@@ -13,7 +13,7 @@
 }
 
 /*tambien .mdc-text-field*/
-:host ::ng-deep .mdc-text-field--filled {
+/*:host ::ng-deep .mdc-text-field--filled {
   background-color: #FFEBB7
-}
+}*/
 

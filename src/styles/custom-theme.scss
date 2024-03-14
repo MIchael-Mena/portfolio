@@ -33,7 +33,7 @@ $portfolio-theme: mat.define-light-theme((
     primary: $portfolio-primary,
     accent: $portfolio-accent,
     warn: $portfolio-warn,
-  )
+  ),
 ));
 
 @include mat.all-component-themes($portfolio-theme);
