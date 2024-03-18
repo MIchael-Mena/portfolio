@@ -4,8 +4,7 @@
   padding: 30px;
   text-align: center;
   border: 4px double #243763;
-  transition: all 1s ease-in-out;
-  /*animation: slideHome 7s infinite;*/
+  transition: all 1s ease-in-out;g
   opacity: 0;
   animation: fadeIn 1s ease-in-out forwards;
 }
@@ -31,7 +30,6 @@
   border-bottom: 0;
   text-shadow: 1px 1px 4px #243763;
   transition: all 0.5s ease-in-out;
-  /*animation: slideColor 7s infinite;*/
 }
 
 #home h3 {
@@ -41,7 +39,6 @@
   border-top: 0;
   text-shadow: 1px 1px 4px #243763;
   transition: all 0.5s ease-in-out;
-  /*animation: slideColor 7s infinite;*/
 }
 
 
@@ -52,7 +49,6 @@
   overflow: hidden;
   transition: all 0.5s ease-in-out;
   border: 2px solid #fff;
-  /*animation: slideColor 7s infinite;*/
 }
 
 
@@ -91,32 +87,4 @@
     opacity: 1;
   }
 }
-
-
-/*@keyframes slideHome {
-  0% {
-    transform: skew(-5deg) rotate(-1deg);
-  }
-  50% {
-    transform: skew(5deg) rotate(1deg);
-  }
-  100% {
-    transform: skew(-5deg) rotate(-1deg);
-  }
-
-}
-
-@keyframes slideColor {
-  0% {
-    transform: skew(5deg) rotate(1deg);
-  }
-  50% {
-    transform: skew(-5deg) rotate(-1deg);
-    !*background-color: #ad8e70;*!
-  }
-  100% {
-    transform: skew(5deg) rotate(1deg);
-  }
-
-}*/
 
