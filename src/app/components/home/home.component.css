@@ -4,7 +4,7 @@
   padding: 30px;
   text-align: center;
   border: 4px double #243763;
-  transition: all 1s ease-in-out;g
+  transition: all 1s ease-in-out;
   opacity: 0;
   animation: fadeIn 1s ease-in-out forwards;
 }
