@@ -8,11 +8,16 @@
   </app-add-experience>
 
   <div [ngSwitch]="!this.isLoading && this.experiences.length === 0">
-    <div class="col-lg-8 col-12 mx-auto"
-         *ngSwitchCase="true">
+    <div class="col-lg-8 col-12 mx-auto" *ngSwitchCase="true">
       <div class="withoutExperience my-lg-5 my-3">
-        <h2 class="mat-h2 text-center">Todavía no hay experiencias para mostrar</h2>
-        <img src="assets/icon/png/without-exp.png" alt="Sin experiencia" class="img-fluid">
+        <h2 class="mat-h2 text-center">
+          Todavía no hay experiencias para mostrar
+        </h2>
+        <img
+          src="assets/icon/png/without-exp.png"
+          alt="Sin experiencia"
+          class="img-fluid"
+        />
       </div>
     </div>
     <!--    <div *ngSwitchCase="false"
@@ -24,11 +29,9 @@
           [experience]="experience"
           (onEditExperience)="editExperience($event, target)"
           (onDeleteExperience)="deleteExperience($event)"
-          class="col-12 col-md-6"
         >
         </app-card-experience>
       </mat-accordion>
     </ng-container>
   </div>
-
 </section>

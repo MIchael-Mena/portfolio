@@ -1,0 +1,100 @@
+<header>
+  <nav
+    class="navbar navbar-shrink navbar-expand-lg fixed-top py-0"
+    id="mainNav"
+  >
+    <!--Uso min-height inherit ya que el elemento header es el que tiene asignado un alto-->
+    <div class="container px-4 px-lg-5" style="min-height: inherit">
+      <div
+        class="d-flex align-items-center justify-content-between w-100"
+        style="min-height: inherit"
+      >
+        <a
+          class="navbar-brand"
+          routerLink="home"
+          routerLinkActive="home-button-active "
+        >
+          <mat-icon svgIcon="michael-logo" class="logo"> </mat-icon>
+        </a>
+
+        <!--    button visible cuando media < 996px-->
+        <button
+          mat-icon-button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <mat-icon class="menu">menu</mat-icon>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav text-nowrap">
+          @for (item of this.navItems; track item.title) {
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                routerLink="{{ item.route }}"
+                routerLinkActive
+                (isActiveChange)="this.routerActive($event, item.route)"
+              >
+                <span class="mat-subtitle-2"> {{ item.title }} </span>
+                <div [ngClass]="{ 'active-link mt-1': item.isActive }"></div>
+              </a>
+            </li>
+          }
+
+          <li class="nav-item ms-lg-3">
+            <div [matMenuTriggerFor]="menu" class="d-grid">
+              <fa-icon
+                [icon]="this.icon.faUserSecret"
+                class="icon-user"
+                size="2xl"
+              />
+              <div
+                [ngClass]="{
+                  'active-link mt-1': routeLoginActive,
+                  '': !routeLoginActive
+                }"
+              ></div>
+            </div>
+            <mat-menu #menu="matMenu" class="mat-menu-container">
+              <a
+                class="nav-link mat-menu"
+                routerLink="/login"
+                routerLinkActive
+                (isActiveChange)="this.routerActive($event, 'login')"
+                mat-menu-item
+                *ngIf="!this.isLoggedIn"
+              >
+                <fa-icon
+                  [icon]="this.icon.faArrowRightToBracket"
+                  size="xl"
+                  style="color: #243763"
+                />
+                Iniciar Sesión
+              </a>
+              <button
+                mat-menu-item
+                class="mat-menu"
+                *ngIf="this.isLoggedIn"
+                (click)="this.logOut()"
+              >
+                <fa-icon
+                  [icon]="this.icon.faArrowRightFromBracket"
+                  size="xl"
+                  style="color: #243763"
+                />
+                Cerrar Sesión
+              </button>
+            </mat-menu>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

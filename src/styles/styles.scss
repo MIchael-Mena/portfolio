@@ -5,68 +5,43 @@
   box-sizing: border-box;
 }
 
-main {
+// Se selecciona el elemento siguiente al router-outlet (que es el componente que se carga en el router-outlet)
+router-outlet + * {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  min-height: inherit;
+}
+
+header {
+  min-height: 80px;
 }
 
 #mainContainer {
   position: relative;
-  top: 8vh;
-  height: calc(100vh - 8vh);
-  width: 100vw;
+  height: calc(100vh - 80px);
   overflow-y: auto;
   overflow-x: hidden;
 }
 
+main {
+  min-height: calc(100vh - 180px);
+  position: relative;
+}
+
 footer {
   position: relative;
-  height: 10vh;
-  min-height: 80px;
-  width: 100vw;
-
+  min-height: 100px;
 }
 
-.main {
-  min-height: calc(100vh - 18vh);
-  height: max-content;
-  width: 100vw;
+/***************************************/
+
+.cdk-overlay-container {
+  z-index: 1100 !important;
 }
 
-
-@media (max-height: 900px) and (min-width: 992px) {
-  /* Se activa cuando el ancho de la pantalla es mayor a 992px (desktop) y
-  el alto es menor a 900px que es cuando el nav de 8vh llego a su tamaño mínimo,
-  72 pixels para desktop*/
-  #mainContainer {
-    top: 72px;
-    height: calc(100vh - 72px);
-  }
-
-  .main {
-    min-height: calc(90vh - 72px);
-  }
-}
-
-@media (max-height: 832px) and (max-width: 992px) {
-  /* Se activa cuando el ancho de la pantalla es menor a 992px (mobile) y
-  el alto es menor a 832px que es cuando el nav de 8vh llego a su tamaño mínimo,
-  66,5 pixels para mobile */
-  #mainContainer {
-    top: 67px;
-    height: calc(100vh - 67px);
-  }
-
-  .main {
-    min-height: calc(90vh - 67px);
-  }
-}
-
-mat-error{
+mat-error {
   --mat-form-field-error-text-color: white;
-  background-color: #FF6E31;
+  background-color: #ff6e31;
   border-radius: 4px;
   margin-top: 0.2rem;
   padding: 0.2rem 0.5rem;
@@ -78,21 +53,17 @@ mat-form-field {
 
   &:not(:not(.mat-form-field-appearance-outline)) {
     --mdc-outlined-text-field-container-shape: 25px;
-    & .mdc-text-field{
-      background-color: #FFEBB7;
+    & .mdc-text-field {
+      background-color: #ffebb7;
       border-radius: var(--mdc-outlined-text-field-container-shape);
     }
   }
   &:not(:not(.mat-form-field-appearance-fill)) {
-    & .mdc-text-field--filled{
-      --mdc-filled-text-field-container-color: #FFEBB7;
+    & .mdc-text-field--filled {
+      --mdc-filled-text-field-container-color: #ffebb7;
       border-radius: 4px;
     }
   }
-}
-
-body {
-  overflow: hidden;
 }
 
 .icon-style-active {
@@ -100,7 +71,7 @@ body {
 }
 
 .icon-style-active:hover {
-  color: #FF6E31 !important;
+  color: #ff6e31 !important;
 }
 
 .icon-style-active:before {
@@ -131,7 +102,7 @@ body {
 }
 
 .icon-style:hover {
-  color: #FF6E31;
+  color: #ff6e31;
   transform: scale(1.1);
   filter: drop-shadow(4px 4px 4px #6c757d);
 }
@@ -147,9 +118,7 @@ body {
   border-radius: 10px;
 }
 
-
 /*.mat-icon {
   height: 48px !important;
   width: 48px !important;
 }*/
-

@@ -1,29 +1,26 @@
-<app-global-spinner [isLoading]="this.isLoading" [diameter]="200">
-</app-global-spinner>
-
-<ng-container *ngIf="!this.isLoading">
-  <section class="main">
+<ng-container [ngSwitch]="this.isLoading">
+  <app-global-spinner *ngSwitchCase="true" [diameter]="200">
+  </app-global-spinner>
+  <section *ngSwitchCase="false">
     <app-main-header
       [icon]="'skill-bar'"
       [title]="'Habilidades'"
-      (onAdd)="addSkill()">
+      (onAdd)="addSkill()"
+    >
     </app-main-header>
     <div class="container mat-typography">
-
       <div class="row">
         <app-skill-bar
           *ngFor="let skill of skills"
-          [skill]="skill" class="col"
+          [skill]="skill"
+          class="col"
           (onDeleteSkill)="deleteSkill($event)"
           (onUpdateSkill)="updateSkill($event)"
           (onUpdatePositions)="this.updatePositions($event)"
           [positions]="this.positionController.getPositions()"
         >
         </app-skill-bar>
-
       </div>
-
     </div>
   </section>
 </ng-container>
-

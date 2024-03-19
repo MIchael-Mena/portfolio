@@ -1,17 +1,20 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {StorageSessionService} from "../../service/storage-session.service";
-import {AuthService} from "../../service/auth.service";
-import {Router} from "@angular/router";
-import {faUserSecret, faArrowRightFromBracket, faArrowRightToBracket} from "@fortawesome/free-solid-svg-icons";
+import { StorageSessionService } from '../../service/storage-session.service';
+import { AuthService } from '../../service/auth.service';
+import { Router } from '@angular/router';
+import {
+  faUserSecret,
+  faArrowRightFromBracket,
+  faArrowRightToBracket,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css'],
 })
-export class NavComponent {
-
+export class HeaderComponent {
   public routeAboutActive: boolean = false;
   public routeSkillsActive: boolean = false;
   public routeProjectsActive: boolean = false;
@@ -19,15 +22,33 @@ export class NavComponent {
   public icon = {
     faUserSecret,
     faArrowRightFromBracket,
-    faArrowRightToBracket
-  }
-  // public faUserSecret = faUserSecret;
-  // public faArrowRightFromBracket = faArrowRightFromBracket;
+    faArrowRightToBracket,
+  };
+  public navItems = [
+    {
+      title: 'Acerca de mí',
+      route: 'about',
+      isActive: this.routeAboutActive,
+    },
+    {
+      title: 'Habilidades',
+      route: 'skills',
+      isActive: this.routeSkillsActive,
+    },
+    {
+      title: 'Proyectos',
+      route: 'projects',
+      isActive: this.routeProjectsActive,
+    },
+  ];
+
   public isLoggedIn: boolean = false;
 
-  constructor(public storageService: StorageSessionService,
-              private authService: AuthService,
-              private router: Router) {
+  constructor(
+    public storageService: StorageSessionService,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.storageService.onToggleSignUp().subscribe((data: boolean) => {
       this.isLoggedIn = data;
     });
@@ -59,12 +80,11 @@ export class NavComponent {
       },
       error: (error: any) => {
         console.log(error);
-      }
+      },
     });
   }
 
   prueba() {
     console.log('prueba');
   }
-
 }

@@ -1,12 +1,9 @@
-<header>
-  <app-nav></app-nav>
-</header>
+<app-header class="d-flex"></app-header>
 <!-- Se uso 'mainContainer' para que el scroll solo se aplique a la sección principal y no a todo el body -->
 <div id="mainContainer">
-  <main class="main">
+  <main>
     <router-outlet></router-outlet>
   </main>
-  <footer>
-    <app-footer></app-footer>
-  </footer>
+
+  <app-footer></app-footer>
 </div>
