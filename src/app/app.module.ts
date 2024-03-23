@@ -1,29 +1,29 @@
 import { NgModule } from '@angular/core';
 
-import { httpInterceptorProviders } from './interceptors/loading.interceptor';
-import { AuthInterceptorRequest } from './interceptors/http-request.interceptor';
-import { StorageSessionService } from './service/storage-session.service';
+import { httpInterceptorProviders } from './core/interceptors/loading.interceptor';
+import { AuthInterceptorRequest } from './core/interceptors/http-request.interceptor';
+import { StorageSessionService } from './core/services/storage-session.service';
 
-import { UpdateDirective } from './directives/update.directive';
+import { UpdateDirective } from './core/directives/update.directive';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { LoginFormComponent } from './components/login-form/login-form.component';
-import { AuthService } from './service/auth.service';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { DialogCardComponent } from './components/dialog-card/dialog-card.component';
+import { HeaderComponent } from './core/components/header/header.component';
+import { LoginFormComponent } from './pages/auth/login-form/login-form.component';
+import { AuthService } from './core/services/auth.service';
+import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
+import { DialogCardComponent } from './shared/components/dialog-card/dialog-card.component';
 
-import { AboutModule } from './components/about/about.module';
-import { SharedModule } from './shared/shared.module';
-import { SkillModule } from './components/skill/skill.module';
-import { AppRoutingModule } from './shared/app-routing.module';
-import { DateLanguageModule } from './shared/date-language.module';
+import { SharedModule } from './core/shared.module';
+import { SkillModule } from './pages/skills/skill.module';
+import { AppRoutingModule } from './app-routing.module';
+import { DateLanguageModule } from './core/date-language.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { ButtonConfirmModule } from './components/shared/button-confirm/button-confirm.module';
-import { HomeComponent } from './components/home/home.component';
-import { ProjectsModule } from './components/projects/projects.module';
-import { FooterComponent } from './components/footer/footer.component';
-import { IconRegistryService } from './service/icon-registry.service';
+import { ButtonConfirmModule } from './shared/components/button-confirm/button-confirm.module';
+import { HomeComponent } from './pages/home/home.component';
+import { ProjectsModule } from './pages/projects/projects.module';
+import { FooterComponent } from './core/components/footer/footer.component';
+import { IconRegistryService } from './core/services/icon-registry.service';
+import { AboutModule } from './pages/about-me/about.module';
 
 @NgModule({
   declarations: [

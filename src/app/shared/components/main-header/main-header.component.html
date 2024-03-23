@@ -1,0 +1,25 @@
+<section class="header-banner">
+  <div class="container-banner" [ngClass]="{ active: this.active }">
+    <div
+      class="m-1 d-flex justify-content-center align-items-center w-100 align-items-center flex-sm-row flex-column"
+      (mouseover)="onMouseOver()"
+      (mouseout)="onMouseOut()"
+    >
+      <ng-container *ngIf="this.icon">
+        <mat-icon
+          [@shake]="this.hoverState"
+          [svgIcon]="this.icon"
+          class="icon-header me-3"
+          color="accent"
+        >
+        </mat-icon>
+      </ng-container>
+      <span class="mat-headline-6 my-0 main-title">
+        {{ this.title }}
+      </span>
+    </div>
+    <ng-container *ngIf="!this.hideButton">
+      <app-add-button (onAdd)="emitAdd()" class="me-3"></app-add-button>
+    </ng-container>
+  </div>
+</section>
